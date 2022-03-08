@@ -76,7 +76,7 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
     <>
       <Text
         italic
-        color="secondary"
+        type="secondary"
         className="ml-auto mb-half"
         style={{ width: 'fit-content' }}
       >

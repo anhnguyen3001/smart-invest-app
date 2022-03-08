@@ -14,7 +14,7 @@ import {
   TradingData,
 } from 'src/components';
 import { convertTicker } from 'src/helpers';
-import { mockTicker } from 'src/mock';
+import { mockCompany, mockTicker } from 'src/mock';
 import useSWR from 'swr';
 import styles from './Detail.module.scss';
 
@@ -38,6 +38,10 @@ export const Detail: React.FC = ({}) => {
     return mockTicker;
   });
   const ticker = convertTicker(tickerData as ITicker, stockExchangePercent);
+
+  const { data: companyData } = useSWR(['company', stockCode], async () => {
+    return mockCompany;
+  });
 
   const [activeTab, setActiveTab] = useState(CONTENT_TAB_KEY.overview);
   const onGoToAnalysisTab = useCallback(() => {
@@ -86,7 +90,7 @@ export const Detail: React.FC = ({}) => {
       </Row>
 
       <div className={cx('section-wrapper')}>
-        <CompanyOverview />
+        <CompanyOverview company={companyData} />
       </div>
 
       <Tabs

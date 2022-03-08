@@ -56,7 +56,7 @@ export const TickerInfo: React.FC<TickerInfoProps> = ({ ticker }) => {
         </Text>
       </div>
 
-      <Text color="secondary" className="mt-half">
+      <Text type="secondary" className="mt-half">
         {new Date(date).toLocaleString('vi')}
       </Text>
     </div>

@@ -2,7 +2,7 @@ import { IPaper } from '@ah-ticker/common';
 import { Avatar, Button, List } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from 'src/components';
+import { Text, Paragraph } from 'src/components';
 
 interface PaperListProps {
   papers?: IPaper[];
@@ -63,10 +63,14 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
           <Text level={2} fontWeight={700} onClick={() => onOpenPaper(link)}>
             {title}
           </Text>
-          <Text lines={3} color="secondary" className="mb-base">
+          <Paragraph
+            ellipsis={{ rows: 3 }}
+            type="secondary"
+            className="mb-base"
+          >
             {description}
-          </Text>
-          <Text level={4} color="secondary">
+          </Paragraph>
+          <Text level={4} type="secondary">
             {new Date(date).toLocaleString('vi')}
           </Text>
         </div>

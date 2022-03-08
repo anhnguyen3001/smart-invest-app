@@ -21,7 +21,7 @@ export const RankingTable: React.FC<RankingTableProps> = ({ stocks }) => {
         return (
           <>
             <Text level={2}>{name}</Text>
-            <Text color="secondary">{companyName}</Text>
+            <Text type="secondary">{companyName}</Text>
           </>
         );
       },

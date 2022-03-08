@@ -6,6 +6,11 @@
 .ant-tabs {
   &-tab {
     font-weight: $font-weight-700;
+
+    &-btn,
+    &-btn:hover {
+      color: $text-color !important;
+    }
   }
 }
 
