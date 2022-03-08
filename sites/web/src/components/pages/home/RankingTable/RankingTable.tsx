@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
-import { ITicker } from 'src/types';
+import { ITicker } from '@ah-ticker/common';
 
 interface RankingTableProps {
   stocks?: ITicker[];

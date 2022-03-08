@@ -1,4 +1,4 @@
-import { ConvertedTicker, ITicker } from "src/types";
+import { ConvertedTicker, ITicker } from '@ah-ticker/common';
 
 const round2Decimal = (value: number) => {
   return Math.floor(value * 100) / 100;
@@ -6,16 +6,16 @@ const round2Decimal = (value: number) => {
 
 export const convertTicker = (
   ticker: ITicker,
-  stockExchangePercent: number
+  stockExchangePercent: number,
 ): ConvertedTicker | undefined => {
   if (!ticker) return undefined;
   const { openPrice } = ticker;
 
   const ceilingPrice = round2Decimal(
-    (openPrice / 100) * (100 + stockExchangePercent)
+    (openPrice / 100) * (100 + stockExchangePercent),
   );
   const floorPrice = round2Decimal(
-    (openPrice / 100) * (100 + stockExchangePercent)
+    (openPrice / 100) * (100 + stockExchangePercent),
   );
 
   return {
@@ -34,10 +34,10 @@ interface PriceInfo {
 
 export const getPriceColor = (priceInfo: PriceInfo) => {
   const { price, ceilingPrice, floorPrice, openPrice } = priceInfo;
-  if (!price || !openPrice) return "ceil";
-  if (price === ceilingPrice) return "ceil";
-  if (price === floorPrice) return "floor";
-  if (price < openPrice) return "error";
-  if (price > openPrice) return "success";
-  return "stock";
+  if (!price || !openPrice) return 'ceil';
+  if (price === ceilingPrice) return 'ceil';
+  if (price === floorPrice) return 'floor';
+  if (price < openPrice) return 'error';
+  if (price > openPrice) return 'success';
+  return 'stock';
 };

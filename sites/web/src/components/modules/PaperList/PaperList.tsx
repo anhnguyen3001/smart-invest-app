@@ -1,8 +1,8 @@
-import { Avatar, Button, List } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Text } from "src/components/elements";
-import { IPaper } from "src/types";
+import { IPaper } from '@ah-ticker/common';
+import { Avatar, Button, List } from 'antd';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text } from 'src/components';
 
 interface PaperListProps {
   papers?: IPaper[];
@@ -21,7 +21,7 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
   const renderHeader = () => {
     const title = (
       <Text level={1} fontWeight={700}>
-        {t("News")}
+        {t('News')}
       </Text>
     );
 
@@ -36,7 +36,7 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
               onClick={onSeeMore}
               size="small"
             >
-              {t("SeeMore")}
+              {t('SeeMore')}
             </Button>
           )}
         </div>
@@ -67,7 +67,7 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
             {description}
           </Text>
           <Text level={4} color="secondary">
-            {new Date(date).toLocaleString("vi")}
+            {new Date(date).toLocaleString('vi')}
           </Text>
         </div>
       </List.Item>

@@ -1,9 +1,9 @@
+import { IFinancialStatement } from '@ah-ticker/common';
 import { FilePdfTwoTone } from '@ant-design/icons';
 import { Button, Card, Table, TableColumnProps } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
-import { IFinancialStatement } from 'src/types';
 
 interface ReportListProps {
   reports: IFinancialStatement[];

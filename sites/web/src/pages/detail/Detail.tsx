@@ -1,9 +1,11 @@
+import { ITicker } from '@ah-ticker/common';
 import { Col, Row, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  CompanyOverview,
   ExchangeSummary,
   PriceChart,
   TickerAnalysis,
@@ -13,7 +15,6 @@ import {
 } from 'src/components';
 import { convertTicker } from 'src/helpers';
 import { mockTicker } from 'src/mock';
-import { ITicker } from 'src/types';
 import useSWR from 'swr';
 import styles from './Detail.module.scss';
 
@@ -69,6 +70,7 @@ export const Detail: React.FC = ({}) => {
   return (
     <>
       <TickerInfo ticker={ticker} />
+
       <Row
         justify="space-between"
         align="stretch"
@@ -82,6 +84,11 @@ export const Detail: React.FC = ({}) => {
           <ExchangeSummary ticker={ticker} />
         </Col>
       </Row>
+
+      <div className={cx('section-wrapper')}>
+        <CompanyOverview />
+      </div>
+
       <Tabs
         tabPosition="top"
         animated

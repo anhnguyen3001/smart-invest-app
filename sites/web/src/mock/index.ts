@@ -5,7 +5,7 @@ import {
   IPrice,
   ITicker,
   IUser,
-} from "src/types";
+} from "@ah-ticker/common";
 
 export const mockPrice: IPrice = {
   date: new Date().toLocaleString(),

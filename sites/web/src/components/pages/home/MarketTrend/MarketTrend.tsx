@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { mockTickers } from 'src/mock';
-import { ITicker } from 'src/types';
+import { ITicker } from '@ah-ticker/common';
 import useSWR from 'swr';
 import { RankingTable } from '../RankingTable';
 import styles from './MarketTrend.module.scss';

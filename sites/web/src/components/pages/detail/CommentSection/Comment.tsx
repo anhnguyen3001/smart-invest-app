@@ -1,8 +1,8 @@
-import { Avatar, Card, List, Comment } from 'antd';
+import { IComment } from '@ah-ticker/common';
+import { Avatar, Card, Comment, List } from 'antd';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { mockComments } from 'src/mock';
-import { IComment } from 'src/types';
 import useSWR from 'swr';
 
 interface CommentSectionProps {

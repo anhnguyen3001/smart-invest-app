@@ -1,9 +1,9 @@
+import { ITicker } from '@ah-ticker/common';
 import { Card } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { STOCKS_PATH } from 'src/constants';
-import { ITicker } from 'src/types';
 import { PriceLineChart } from './PriceLineChart';
 
 const cx = classNames.bind({});
