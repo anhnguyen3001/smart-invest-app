@@ -1,5 +1,5 @@
 import { Typography } from 'antd';
-import { TextProps as AntdTextProps } from 'antd/lib/typography/Text';
+import { ParagraphProps as AntdParagraphProps } from 'antd/lib/typography/Paragraph';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { getClassname, TypographyProps } from './common';
@@ -7,9 +7,9 @@ import './Typography.scss';
 
 const cx = classNames.bind({});
 
-type TextProps = Omit<AntdTextProps, 'type'> & TypographyProps;
+type ParagraphProps = AntdParagraphProps & TypographyProps;
 
-export const Text: React.FC<TextProps> = ({
+export const Paragraph: React.FC<ParagraphProps> = ({
   level,
   fontWeight,
   type,
@@ -17,12 +17,8 @@ export const Text: React.FC<TextProps> = ({
   ...rest
 }) => {
   return (
-    <Typography.Text
-      className={cx([
-        ...getClassname({ level, fontWeight, type }),
-        className,
-        'd-block',
-      ])}
+    <Typography.Paragraph
+      className={cx([...getClassname({ level, fontWeight, type }), className])}
       {...rest}
     />
   );

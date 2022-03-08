@@ -21,6 +21,7 @@
     "dev:web": "lerna exec --scope @ah-ticker-app/web yarn start",
     "build:web": "lerna exec --scope @ah-ticker-app/web -- yarn build",
     "test:web": "lerna exec --scope @ah-ticker-app/web -- yarn test",
+    "build:common": "lerna exec --scope @ah-ticker/common -- yarn build",
     "build:packages": "lerna exec --ignore @ah-ticker-app/* -- yarn build",
     "test": "jest"
   },

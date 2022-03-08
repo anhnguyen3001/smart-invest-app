@@ -1,9 +1,11 @@
+import { ITicker } from '@ah-ticker/common';
 import { Col, Row, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  CompanyOverview,
   ExchangeSummary,
   PriceChart,
   TickerAnalysis,
@@ -12,8 +14,7 @@ import {
   TradingData,
 } from 'src/components';
 import { convertTicker } from 'src/helpers';
-import { mockTicker } from 'src/mock';
-import { ITicker } from 'src/types';
+import { mockCompany, mockTicker } from 'src/mock';
 import useSWR from 'swr';
 import styles from './Detail.module.scss';
 
@@ -37,6 +38,10 @@ export const Detail: React.FC = ({}) => {
     return mockTicker;
   });
   const ticker = convertTicker(tickerData as ITicker, stockExchangePercent);
+
+  const { data: companyData } = useSWR(['company', stockCode], async () => {
+    return mockCompany;
+  });
 
   const [activeTab, setActiveTab] = useState(CONTENT_TAB_KEY.overview);
   const onGoToAnalysisTab = useCallback(() => {
@@ -69,6 +74,7 @@ export const Detail: React.FC = ({}) => {
   return (
     <>
       <TickerInfo ticker={ticker} />
+
       <Row
         justify="space-between"
         align="stretch"
@@ -82,6 +88,11 @@ export const Detail: React.FC = ({}) => {
           <ExchangeSummary ticker={ticker} />
         </Col>
       </Row>
+
+      <div className={cx('section-wrapper')}>
+        <CompanyOverview company={companyData} />
+      </div>
+
       <Tabs
         tabPosition="top"
         animated

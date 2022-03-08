@@ -1,9 +1,9 @@
-import { Table } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Text } from "src/components";
-import { thousandFormatter } from "src/helpers";
-import { IPrice } from "src/types";
+import { Table } from 'antd';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text } from 'src/components';
+import { thousandFormatter } from 'src/helpers';
+import { IPrice } from '@ah-ticker/common';
 
 interface TradingDataTableProps {
   prices?: IPrice[];
@@ -17,16 +17,16 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
   const columns = [
     {
       title: (data: any) => {
-        return t("Date");
+        return t('Date');
       },
-      dataIndex: "date",
-      key: "date",
-      render: (date: string) => new Date(date).toLocaleDateString("vi"),
+      dataIndex: 'date',
+      key: 'date',
+      render: (date: string) => new Date(date).toLocaleDateString('vi'),
     },
     {
-      title: t("Change"),
-      dataIndex: "priceChange",
-      key: "priceChange",
+      title: t('Change'),
+      dataIndex: 'priceChange',
+      key: 'priceChange',
       render: (priceChange: number, record: IPrice, index: number) => {
         return (
           <div>
@@ -36,38 +36,38 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
       },
     },
     {
-      title: t("OpenPrice"),
-      dataIndex: "openPrice",
-      key: "openPrice",
-      align: "center" as const,
+      title: t('OpenPrice'),
+      dataIndex: 'openPrice',
+      key: 'openPrice',
+      align: 'center' as const,
       render: (openPrice: number) => thousandFormatter(openPrice),
     },
     {
-      title: t("MinPrice"),
-      dataIndex: "minPrice",
-      key: "minPrice",
-      align: "center" as const,
+      title: t('MinPrice'),
+      dataIndex: 'minPrice',
+      key: 'minPrice',
+      align: 'center' as const,
       render: (minPrice: number) => thousandFormatter(minPrice),
     },
     {
-      title: t("MaxPrice"),
-      dataIndex: "maxPrice",
-      key: "maxPrice",
-      align: "center" as const,
+      title: t('MaxPrice'),
+      dataIndex: 'maxPrice',
+      key: 'maxPrice',
+      align: 'center' as const,
       render: (maxPrice: number) => thousandFormatter(maxPrice),
     },
     {
-      title: t("ClosePrice"),
-      dataIndex: "closePrice",
-      key: "closePrice",
-      align: "center" as const,
+      title: t('ClosePrice'),
+      dataIndex: 'closePrice',
+      key: 'closePrice',
+      align: 'center' as const,
       render: (closePrice: number) => thousandFormatter(closePrice),
     },
     {
-      title: t("TotalValue"),
-      dataIndex: "totalValue",
-      key: "totalValue",
-      align: "center" as const,
+      title: t('TotalValue'),
+      dataIndex: 'totalValue',
+      key: 'totalValue',
+      align: 'center' as const,
       render: (totalValue: number) => thousandFormatter(totalValue),
     },
   ];
@@ -76,11 +76,11 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
     <>
       <Text
         italic
-        color="secondary"
+        type="secondary"
         className="ml-auto mb-half"
-        style={{ width: "fit-content" }}
+        style={{ width: 'fit-content' }}
       >
-        {t("Unit")}: {t("dong")}
+        {t('Unit')}: {t('dong')}
       </Text>
       <Table
         rowKey="date"
@@ -88,7 +88,7 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
         columns={columns}
         size="large"
         scroll={{
-          x: "max-content",
+          x: 'max-content',
         }}
       />
     </>

@@ -1,8 +1,8 @@
-import { Avatar, Button, List } from "antd";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Text } from "src/components/elements";
-import { IPaper } from "src/types";
+import { IPaper } from '@ah-ticker/common';
+import { Avatar, Button, List } from 'antd';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text, Paragraph } from 'src/components';
 
 interface PaperListProps {
   papers?: IPaper[];
@@ -21,7 +21,7 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
   const renderHeader = () => {
     const title = (
       <Text level={1} fontWeight={700}>
-        {t("News")}
+        {t('News')}
       </Text>
     );
 
@@ -36,7 +36,7 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
               onClick={onSeeMore}
               size="small"
             >
-              {t("SeeMore")}
+              {t('SeeMore')}
             </Button>
           )}
         </div>
@@ -63,11 +63,15 @@ export const PaperList: React.FC<PaperListProps> = ({ papers, onSeeMore }) => {
           <Text level={2} fontWeight={700} onClick={() => onOpenPaper(link)}>
             {title}
           </Text>
-          <Text lines={3} color="secondary" className="mb-base">
+          <Paragraph
+            ellipsis={{ rows: 3 }}
+            type="secondary"
+            className="mb-base"
+          >
             {description}
-          </Text>
-          <Text level={4} color="secondary">
-            {new Date(date).toLocaleString("vi")}
+          </Paragraph>
+          <Text level={4} type="secondary">
+            {new Date(date).toLocaleString('vi')}
           </Text>
         </div>
       </List.Item>

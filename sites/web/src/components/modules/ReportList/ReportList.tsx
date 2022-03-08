@@ -1,9 +1,9 @@
+import { IFinancialStatement } from '@ah-ticker/common';
 import { FilePdfTwoTone } from '@ant-design/icons';
 import { Button, Card, Table, TableColumnProps } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from 'src/components';
-import { IFinancialStatement } from 'src/types';
+import { Text, Paragraph } from 'src/components';
 
 interface ReportListProps {
   reports: IFinancialStatement[];
@@ -51,9 +51,9 @@ export const ReportList: React.FC<ReportListProps> = ({
       key: 'name',
       render: (name: string) => {
         return (
-          <Text fontWeight={500} lines={2}>
+          <Paragraph fontWeight={500} ellipsis={{ rows: 2 }}>
             {name}
-          </Text>
+          </Paragraph>
         );
       },
     },

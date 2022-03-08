@@ -1,11 +1,11 @@
-import { Card } from "antd";
-import classNames from "classnames/bind";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { getPriceColor } from "src/helpers/ticker";
-import { ConvertedTicker } from "src/types";
-import styles from "./ExchangeSummary.module.scss";
-import { Text } from "src/components";
+import { ConvertedTicker } from '@ah-ticker/common';
+import { Card } from 'antd';
+import classNames from 'classnames/bind';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text } from 'src/components';
+import { getPriceColor } from 'src/helpers/ticker';
+import styles from './ExchangeSummary.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -35,36 +35,36 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
   const displayTexts: { title: string; value?: number; colorClass?: string }[] =
     [
       {
-        title: t("TotalValue"),
+        title: t('TotalValue'),
         value: totalValue,
       },
       {
-        title: t("CeilingPrice"),
+        title: t('CeilingPrice'),
         value: ceilingPrice,
-        colorClass: "ceil-color",
+        colorClass: 'ceil-color',
       },
       {
-        title: t("FloorPrice"),
+        title: t('FloorPrice'),
         value: floorPrice,
-        colorClass: "floor-color",
+        colorClass: 'floor-color',
       },
       {
-        title: t("OpenPrice"),
+        title: t('OpenPrice'),
         value: openPrice,
         colorClass: handleGetColor(openPrice),
       },
       {
-        title: t("ClosePrice"),
+        title: t('ClosePrice'),
         value: closePrice,
         colorClass: handleGetColor(closePrice),
       },
       {
-        title: t("MinPrice"),
+        title: t('MinPrice'),
         value: minPrice,
         colorClass: handleGetColor(minPrice),
       },
       {
-        title: t("MaxPrice"),
+        title: t('MaxPrice'),
         value: maxPrice,
         colorClass: handleGetColor(maxPrice),
       },
@@ -72,30 +72,30 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
 
   return (
     <Card
-      className={cx("h-100")}
+      className={cx('h-100')}
       bodyStyle={{
-        padding: "16px 32px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
+        padding: '16px 32px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%',
       }}
     >
       {displayTexts.map(({ title, value, colorClass }, index) => (
         <div
           key={index}
           className={cx(
-            "d-flex",
-            "justify-content-between",
-            "align-items-center",
-            { "mb-base": index !== displayTexts.length - 1 }
+            'd-flex',
+            'justify-content-between',
+            'align-items-center',
+            { 'mb-base': index !== displayTexts.length - 1 },
           )}
         >
           <Text level={2} fontWeight={500}>
             {title}
           </Text>
           <Text className={colorClass} level={1} fontWeight={700}>
-            {value || "N/A"}
+            {value || 'N/A'}
           </Text>
         </div>
       ))}

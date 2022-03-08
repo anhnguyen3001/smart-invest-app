@@ -1,10 +1,10 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { CandleStickChart, Text } from "src/components";
-import { tradingPrices } from "src/mock";
-import { IPrice } from "src/types";
-import useSWR from "swr";
-import { TradingDataTable } from "./TradingDataTable";
+import { IPrice } from '@ah-ticker/common';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { CandleStickChart, Text } from 'src/components';
+import { tradingPrices } from 'src/mock';
+import useSWR from 'swr';
+import { TradingDataTable } from './TradingDataTable';
 
 interface TradingDataProps {
   id: string;
@@ -18,7 +18,7 @@ const data: Array<any> = [
 
 export const TradingData: React.FC<TradingDataProps> = ({ id }) => {
   const { t } = useTranslation();
-  const { data: priceData } = useSWR(["prices", id], async () => {
+  const { data: priceData } = useSWR(['prices', id], async () => {
     return tradingPrices;
   });
 
@@ -26,7 +26,7 @@ export const TradingData: React.FC<TradingDataProps> = ({ id }) => {
     <>
       <CandleStickChart data={data} />
       <Text level={1} fontWeight={700} className="my-base">
-        {t("TradingData")}
+        {t('TradingData')}
       </Text>
       <TradingDataTable prices={priceData as IPrice[]} />
     </>

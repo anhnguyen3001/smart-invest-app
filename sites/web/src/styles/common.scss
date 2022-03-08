@@ -1,12 +1,14 @@
 /**
  * Common styles for application
- */ // Margin
+ */
+
+// Margin
 $aligns: (
-  "lg" $align-lg,
-  "md" $align-md,
-  "sm" $align-sm,
-  "base" $align-base,
-  "half" $align-half,
+  'lg' $align-lg,
+  'md' $align-md,
+  'sm' $align-sm,
+  'base' $align-base,
+  'half' $align-half,
   0 0,
   auto auto
 );
@@ -93,14 +95,14 @@ $aligns: (
 // Typography
 // Colors
 $colors: (
-  "primary" $primary-color,
-  "secondary" $text-color-secondary,
-  "warning" $warning-color,
-  "success" $green-color,
-  "error" $red-color,
-  "ceil" $ceil-color,
-  "floor" $floor-color,
-  "link" $link-color
+  'primary' $primary-color,
+  'secondary' $text-color-secondary,
+  'warning' $warning-color,
+  'success' $green-color,
+  'error' $red-color,
+  'ceil' $ceil-color,
+  'floor' $floor-color,
+  'link' $link-color
 );
 @each $kvp in $colors {
   $key: nth($kvp, 1);
@@ -113,9 +115,9 @@ $colors: (
 
 // Font-weight
 $fontWeight: (
-  "500" $font-weight-500,
-  "700" $font-weight-700,
-  "900" $font-weight-900
+  '500' $font-weight-500,
+  '700' $font-weight-700,
+  '900' $font-weight-900
 );
 @each $kvp in $fontWeight {
   $key: nth($kvp, 1);
@@ -136,7 +138,7 @@ $lines: (1, 2, 3);
 
 // Alignment
 $textAligns: (left, right, center, justify);
-@include mapValueToClass($textAligns, "text", text-align);
+@include mapValueToClass($textAligns, 'text', text-align);
 
 // Transformation
 .text-uppercase {
@@ -148,11 +150,11 @@ $textAligns: (left, right, center, justify);
 
 // Display
 $display: (flex, block, none, inline, inline-block, inline-flex);
-@include mapValueToClass($display, "d", display);
+@include mapValueToClass($display, 'd', display);
 
 // Flexbox
 $flexLayouts: (row, column);
-@include mapValueToClass($flexLayouts, "flex", flex-direction);
+@include mapValueToClass($flexLayouts, 'flex', flex-direction);
 
 .flex-1 {
   flex: 1 !important;
@@ -184,9 +186,14 @@ $flexLayouts: (row, column);
   align-self: flex-end !important;
 }
 
-// Whitespace
-.white-space-pre {
-  white-space: pre;
+// Border
+$lines: ('-bottom', '');
+
+@each $kvp in $lines {
+  $value: nth($kvp, 1);
+  .border#{$value} {
+    border#{$value}: 1px solid $border-color;
+  }
 }
 
 // Button
