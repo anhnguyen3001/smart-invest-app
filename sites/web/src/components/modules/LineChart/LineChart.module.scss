@@ -1,0 +1,11 @@
+.tooltip {
+  &-title {
+    margin-bottom: $align-half;
+    background: transparent !important;
+    border-bottom: none !important;
+    color: $text-color-secondary;
+  }
+  &-content {
+    @include styled-text($font-size-1, $line-height-1, $font-weight-700);
+  }
+}

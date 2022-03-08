@@ -1,0 +1,164 @@
+/**
+ * Customize styles for AntD components
+ */
+
+//  Tabs
+.ant-tabs {
+  &-tab {
+    font-weight: $font-weight-700;
+  }
+}
+
+// List
+.ant-list {
+  &-header,
+  &-items {
+    background-color: $bg-primary-light;
+  }
+}
+
+// Result
+.ant-result {
+  &.app-result-page {
+    height: 100vh;
+    width: 100vw;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+// Checkbox
+.ant-checkbox-inner {
+  border-radius: 0;
+}
+
+// Date picker
+.ant-picker {
+  width: 100%;
+}
+
+// Input label
+.ant-form-vertical .ant-form-item-label,
+.ant-form-vertical .ant-form-item-label-required {
+  padding: 0 0 4px;
+}
+
+// Change input focus/hover color to $color-link
+.ant-input,
+.ant-select-selection,
+.ant-select-selector,
+.ant-input-number,
+.ant-input-affix-wrapper {
+  &:hover,
+  &:focus-within,
+  &:focus {
+    @include link-border-box-shadow;
+  }
+}
+
+.ant-input {
+  &::placeholder {
+    font-size: $font-size-4;
+    line-height: $line-height-18;
+    color: $color-placeholder;
+  }
+}
+
+.ant-form-item-label > label {
+  display: block;
+}
+
+.ant-form-item-explain {
+  margin-top: 4px;
+}
+
+.ant-input-affix-wrapper > input.ant-input {
+  box-shadow: none !important;
+}
+
+.ant-select:not(.ant-select-disabled):hover,
+.ant-select:not(.ant-select-disabled):focus-within,
+.ant-select-focused.ant-select-multiple {
+  .ant-select-selector {
+    @include link-border-box-shadow;
+  }
+}
+
+.ant-cascader-picker:focus .ant-cascader-input,
+.ant-cascader-picker-label:hover + .ant-cascader-input {
+  @include link-border-box-shadow;
+}
+
+.ant-picker:hover,
+.ant-picker-focused {
+  @include link-border-box-shadow;
+}
+
+.ant-picker-range .ant-picker-active-bar {
+  background: $color-secondary;
+}
+
+// Upload
+.ant-upload.ant-upload-select.ant-upload-select-picture-card {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  border-style: none;
+  border-radius: 8px;
+}
+
+.template-form {
+  .ant-upload.ant-upload-select.ant-upload-select-picture-card {
+    background: #cecece !important;
+  }
+}
+
+.ant-upload-list-picture-card .ant-upload-list-picture-card-container {
+  width: 200px;
+  height: 100px;
+}
+
+// Pagination
+.ant-pagination-options-size-changer.ant-select {
+  margin-right: 0;
+}
+
+.ant-pagination-item-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+// Menu
+.ant-menu {
+  transition: $transition-base;
+}
+
+.ant-dropdown-menu-item-active {
+  color: $primary-color;
+}
+
+.anticon {
+  vertical-align: 0 !important;
+}
+
+// Notification
+.ant-notification {
+  z-index: 10000;
+}
+
+// Spin
+.ant-spin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+// Spining
+.ant-spin-spinning {
+  z-index: 10010 !important;
+}
+.ant-spin-blur {
+  z-index: 10000;
+}

@@ -1,0 +1,15 @@
+.wrapper {
+  margin: $align-md;
+}
+
+@include tablet {
+  .wrapper {
+    margin: $align-sm;
+  }
+}
+
+@include mobile {
+  .wrapper {
+    margin: $align-base;
+  }
+}

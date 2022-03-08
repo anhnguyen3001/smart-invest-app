@@ -1,0 +1,47 @@
+.menu {
+  background-color: transparent;
+  border: none;
+
+  :global {
+    .ant-menu-item {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.drawer {
+  :global {
+    .ant-drawer {
+      &-content {
+        background-color: $bg-primary;
+      }
+
+      &-header {
+        background-color: $bg-primary;
+        padding: $align-base;
+
+        &-title {
+          flex-direction: row-reverse;
+          column-gap: $align-base;
+        }
+      }
+
+      &-close {
+        margin-left: auto;
+        margin-right: 0;
+        color: $text-color;
+      }
+
+      &-body {
+        padding: $align-base 0;
+      }
+
+      &-footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        column-gap: $align-base;
+      }
+    }
+  }
+}

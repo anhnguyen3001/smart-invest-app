@@ -1,0 +1,19 @@
+.wrapper {
+  padding: $align-md $align-lg;
+}
+
+.stock-price {
+  margin-top: $align-sm;
+}
+
+@include tablet {
+  .wrapper {
+    padding: $align-md;
+  }
+}
+
+@include mobile {
+  .wrapper {
+    padding: $align-base;
+  }
+}

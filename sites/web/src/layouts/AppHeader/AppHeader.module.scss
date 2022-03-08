@@ -1,0 +1,24 @@
+.wrapper {
+  border-bottom: 1px solid $border-color;
+  box-shadow: 4px 0 5px 2px $box-shadow-color-base;
+  padding: 0 $align-sm !important;
+
+  :global {
+    .ant-menu-item::after,
+    .ant-menu-overflow-item::after {
+      border-bottom: none !important;
+    }
+
+    .ant-menu-item {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.localization-menu {
+  :global {
+    .ant-dropdown-menu {
+      top: $align-base;
+    }
+  }
+}

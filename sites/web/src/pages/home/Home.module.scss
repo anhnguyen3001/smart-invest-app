@@ -1,0 +1,15 @@
+.section-wrapper {
+  margin: $align-md !important;
+}
+
+@include tablet {
+  .section-wrapper {
+    margin: $align-sm !important;
+  }
+}
+
+@include mobile {
+  .section-wrapper {
+    margin: $align-base !important;
+  }
+}

@@ -1,0 +1,290 @@
+/**
+ * Colors
+ */
+$bg-primary: var(--bg-primary);
+$bg-primary-light: var(--bg-primary-light);
+$bg-secondary: var(--bg-secondary);
+$bg-component: $bg-primary-light;
+
+$text-color: var(--text-color);
+$text-color-secondary: var(--text-color-secondary);
+
+// Price color
+$ceil-color: #ff25ff;
+$floor-color: #1eeeee;
+$green-color: var(--green-color);
+$red-color: var(--red-color);
+$warning-color: #ffaa2a;
+
+$primary-color: var(--primary-color);
+$link-color: var(--link-color);
+$border-color: var(--border-color);
+$box-shadow-color-base: rgba(
+  $color: #000000,
+  $alpha: 0.1,
+);
+$color-disable: #d2d2d2;
+
+// Buttons
+@mixin filled-button($color, $bgColor) {
+  color: $color !important;
+  background-color: $bgColor !important;
+  border: none !important;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+@mixin ghost-button($color) {
+  color: $color !important;
+  border: 1px solid $color !important;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+/**
+ * Typo
+ */
+//  Font family
+$font-family: Roboto, sans-serif;
+
+// Font size
+$font-size-h1: 2.5rem;
+$font-size-h2: 2rem;
+$font-size-h3: 1.7rem;
+
+$font-size-1: 1.28rem;
+$font-size-2: 1.14rem;
+$font-size-4: 0.9rem;
+$font-size-base: 14px;
+
+// Font weight
+$font-weight-500: 500;
+$font-weight-700: 700;
+$font-weight-900: 900;
+
+// Line height
+$line-height-h1: 1.2em;
+$line-height-h2: 1.1em;
+$line-height-h3: 1.35em;
+
+$line-height-1: 1.55em;
+$line-height-2: 1.5em;
+$line-height-4: 1.38em;
+
+$line-height-46: 46px;
+$line-height-40: 40px;
+$line-height-28: 28px;
+$line-height-24: 24px;
+$line-height-22: 22px;
+$line-height-18: 18px;
+
+$font-size-12: 12px;
+
+$line-height-20: 20px;
+$line-height-16: 16px;
+
+@mixin styled-text($fontSize, $lineHeight, $fontWeight: 400) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+}
+
+@mixin max-line($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+// Alignment
+$align-lg: 96px;
+$align-md: 64px;
+$align-sm: 32px;
+$align-base: 16px;
+$align-half: 8px;
+
+// Responsive
+$mobile-width: 600px;
+$tablet-width: 768px;
+
+@mixin mobile {
+  @media screen and (max-width: #{$mobile-width}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: #{$mobile-width + 1px}) and (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+// Funtion
+@mixin mapValueToClass($array, $prefixClass, $property) {
+  @each $kvp in $array {
+    $value: nth($kvp, 1);
+    .#{$prefixClass}-#{$value} {
+      #{$property}: $value !important;
+    }
+  }
+}
+
+// TODO: Remove after
+/**
+ * Colors
+ */
+
+// Branding colors
+$color-primary: #1890ff;
+@mixin primary-select {
+  background-color: #eb1f3a0c !important;
+  border: 1px solid $color-primary;
+}
+@mixin primary-border {
+  background: #ffffff;
+  border: 1px solid $color-primary;
+}
+$color-secondary: #047fff;
+@mixin secondary-select {
+  background: #496ad90c !important;
+  border: 1px solid $color-secondary;
+}
+@mixin secondary-border {
+  background: #ffffff;
+  border: 1px solid $color-secondary;
+}
+
+// Sidebar colors
+$color-sidebar: #1c222b;
+$color-sidebar-focus: #272d36;
+$sidebar-width: 270px;
+$sidebar-collapsed-width: 80px;
+
+// Status colors
+$color-error: #ed1b23;
+$color-error-bg: #fff2f2;
+@mixin error-border {
+  background: $color-error-bg;
+  border: 1px solid #c0171319;
+}
+$color-pending: #f78212;
+$color-pending-bg: #fcf8e3;
+@mixin pending-border {
+  background: $color-pending-bg;
+  border: 1px solid #f7821219;
+}
+$color-success: #53c305;
+$color-success-bg: #f4fff2;
+@mixin success-border {
+  background: $color-success-bg;
+  border: 1px solid #53c30519;
+}
+$color-link: #047fff;
+$color-link-bg: #f0f7ff;
+@mixin link-border {
+  background: $color-link-bg;
+  border: 1px solid #047fff33;
+}
+$color-soft-alert: #f6c005;
+
+// Content colors
+$color-text-primary: #434657;
+$color-text-secondary: #8f9598;
+$color-placeholder: #b4b4b4;
+$color-background: #f8f8fc;
+$color-border: #e4e5f0;
+$color-light: #ffffff;
+@mixin light-border {
+  background: $color-light;
+  border: 1px solid $color-border;
+}
+@mixin light-shadow {
+  background: $color-light;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+// Text input color
+$color-input-helper: #a7a7a7;
+
+// Placeholder color
+$color-placeholder: #a7abc3;
+
+// Background
+$color-background-neutral: #fbfbfd;
+
+/**
+* Transitions
+*/
+
+$transition-base: all 0.2s ease;
+
+// Border
+$border-base: 1px solid $border-color;
+$border-radius-base: 4px;
+$border-radius-8: 8px;
+$border-radius-round: 24px;
+
+// Border and box shadow
+@mixin link-border-box-shadow {
+  border-color: $color-link !important;
+  box-shadow: 0 0 0 2px rgba(4, 127, 255, 0.2) !important;
+}
+
+// Button
+@mixin color-button {
+  color: $color-light !important;
+  border: none;
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+$color-button-border: #bcbfd6;
+@mixin color-button-light {
+  color: $color-light !important;
+  border: 1px solid $color-button-border;
+  &:hover,
+  &:focus {
+    border-color: $color-primary;
+    color: $color-primary !important;
+  }
+}
+
+@mixin color-button-primary {
+  color: $color-light !important;
+  background-color: $color-primary !important;
+  border: none !important;
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+$color-blue: #2f80ed;
+@mixin color-button-blue {
+  color: $color-light !important;
+  background-color: $color-blue !important;
+  border: none !important;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+// Ellipsis
+@mixin line-ellipsis($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}

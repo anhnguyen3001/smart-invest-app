@@ -1,0 +1,15 @@
+.section-wrapper {
+  padding: $align-sm $align-lg $align-base;
+}
+
+@include tablet {
+  .section-wrapper {
+    padding: $align-sm;
+  }
+}
+
+@include mobile {
+  .section-wrapper {
+    padding: $align-base;
+  }
+}
