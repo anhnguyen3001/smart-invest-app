@@ -5,10 +5,6 @@
     "packages": [
       "packages/*",
       "sites/*"
-    ],
-    "nohoist": [
-      "**/jest",
-      "**/jest/**"
     ]
   },
   "engines": {
@@ -23,43 +19,35 @@
     "test:web": "lerna exec --scope @ah-ticker-app/web -- yarn test",
     "build:common": "lerna exec --scope @ah-ticker/common -- yarn build",
     "build:packages": "lerna exec --ignore @ah-ticker-app/* -- yarn build",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@types/jest": "26.0.24",
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "babel-loader": "8.1.0",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^10.2.4",
-    "prettier": "^2.3.2",
-    "tslib": "^2.2.0",
-    "typescript": "4.2.3",
-    "lerna": "^4.0.0",
-    "babel-loader": "8.1.0",
-    "webpack": "4.44.2",
-    "@types/jest": "26.0.24",
+    "husky": "^7.0.0",
+    "lint-staged": "^10.5.4",
     "jest": "26.6.0",
-    "ts-jest": "26.5.6"
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.2",
+    "ts-jest": "26.5.6",
+    "tslib": "^2.2.0",
+    "typescript": "4.2.3"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
       "yarn lint --fix"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
