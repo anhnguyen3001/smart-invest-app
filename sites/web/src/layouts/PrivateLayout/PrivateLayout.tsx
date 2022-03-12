@@ -5,7 +5,7 @@ import { Header } from './Header';
 
 const { Content } = Layout;
 
-export const SiteLayout: React.FC = ({ children }) => {
+export const PrivateLayout: React.FC = ({ children }) => {
   return (
     <Layout>
       <Header />

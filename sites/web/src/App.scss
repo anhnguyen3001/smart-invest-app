@@ -2,22 +2,20 @@
 @import 'styles/customizeAntd.scss';
 @import 'styles/lib.css';
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
 
+  margin: 0 !important;
   font-family: $font-family;
   font-size: 14px;
   line-height: 1.5em;
   color: $text-color;
-}
-
-@include mobile {
-  html,
-  body {
-    font-size: 13px;
-  }
 }
 
 h1,
@@ -39,12 +37,12 @@ h3 {
 
 // Scrollbar
 * {
-  // scrollbar-width: thin;
+  scrollbar-width: thin;
 }
 ::-webkit-scrollbar {
-  // width: 5px;
-  // height: 5px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  // background: $border-color;
+  background: $border-color;
 }

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
-import { CHANGE_PASSWORD_PATH, LOGIN_PATH, REGISTER_PATH } from 'src/constants';
+import { CHANGE_PASSWORD_PATH, SIGNIN_PATH, SIGNUP_PATH } from 'src/constants';
 import { mockUser } from 'src/mock';
 import { SearchForm } from '../SearchForm';
 import { getNavbarLinks } from '../../utils';
@@ -35,7 +35,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
   const footer = useMemo(() => {
     return (
       <>
-        <NavLink to={LOGIN_PATH} className={cx('flex-1')}>
+        <NavLink to={SIGNIN_PATH} className={cx('flex-1')}>
           <Button
             className={cx('text-700', 'w-100')}
             type="ghost"
@@ -45,7 +45,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
           </Button>
         </NavLink>
         <strong className={cx('text-18')}>/</strong>
-        <NavLink to={REGISTER_PATH} className={cx('flex-1')}>
+        <NavLink to={SIGNUP_PATH} className={cx('flex-1')}>
           <Button
             className={cx('text-700', 'w-100')}
             type="primary"

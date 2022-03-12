@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <>
+    <div>
       <OverView />
       <div className={cx('section-md')}>
         <WatchList />
@@ -41,6 +41,6 @@ export const Home: React.FC = () => {
           />
         </Col>
       </Row>
-    </>
+    </div>
   );
 };

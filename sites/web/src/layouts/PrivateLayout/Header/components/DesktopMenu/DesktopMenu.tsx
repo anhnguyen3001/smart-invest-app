@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom';
 import {
   CHANGE_PASSWORD_PATH,
   HOME_PATH,
-  LOGIN_PATH,
-  REGISTER_PATH,
+  SIGNIN_PATH,
+  SIGNUP_PATH,
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
 import { mockUser } from 'src/mock';
@@ -30,17 +30,17 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
     // Unauthorization
     return (
       <>
-        <Menu.Item key="login" className={cx('pr-0')}>
-          <NavLink to={LOGIN_PATH}>
+        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0')}>
+          <NavLink to={SIGNIN_PATH}>
             <Button className={cx('text-700')} type="ghost" shape="round">
-              {t('Login')}
+              {t('Signin')}
             </Button>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key={REGISTER_PATH} className={cx('pr-0', 'pl-8')}>
-          <NavLink to={REGISTER_PATH}>
+        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0', 'pl-8')}>
+          <NavLink to={SIGNUP_PATH}>
             <Button className={cx('text-700')} type="primary" shape="round">
-              {t('Register')}
+              {t('Signup')}
             </Button>
           </NavLink>
         </Menu.Item>
@@ -106,7 +106,6 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
       <Menu.Item key="search" className={cx('ml-auto', 'pr-0')}>
         <SearchForm setDefaultValue />
       </Menu.Item>
-
       {themeMenuItem}
       {localizationMenuItem}
       {authMenuItem}

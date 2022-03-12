@@ -1,16 +1,9 @@
-import { useEffect } from "react";
-import { useThemeSwitcher } from "react-css-theme-switcher";
-import { LOCAL_STORAGE, THEME } from "src/constants";
-import { getLS, setLS } from "src/helpers";
+import { useThemeSwitcher } from 'react-css-theme-switcher';
+import { LOCAL_STORAGE } from 'src/constants';
+import { getLS, setLS } from 'src/helpers';
 
 export const useTheme = () => {
   const { switcher, currentTheme } = useThemeSwitcher();
-
-  useEffect(() => {
-    const defaultTheme = getLS(LOCAL_STORAGE.APP_THEME) || THEME.DARK;
-    changeTheme(defaultTheme);
-    // eslint-disable-next-line
-  }, []);
 
   const changeTheme = (theme: string) => {
     switcher({ theme: theme });

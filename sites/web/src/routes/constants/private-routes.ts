@@ -13,7 +13,7 @@ const Search = lazy(() =>
   import('../../pages/search').then((mod) => ({ default: mod.Search })),
 );
 
-export const routes: IRoute[] = [
+export const privateRoutes: IRoute[] = [
   // App pages
   {
     exact: true,

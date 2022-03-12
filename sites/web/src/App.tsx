@@ -1,33 +1,26 @@
 import { ConfigProvider, Spin } from 'antd';
-import React, { Suspense } from 'react';
-import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
 import 'src/styles/theme.css';
 import './App.scss';
-import { REGIONS } from './constants';
-import { getLanguage } from './helpers';
-import { PrivateRoutes } from './routes';
-import { PublicRoutes } from './routes/PublicRoute';
-
-const themes = {
-  dark: `/css/dark-theme.css`,
-  light: `/css/light-theme.css`,
-};
+import { LOCAL_STORAGE, REGIONS, THEME } from './constants';
+import { getLanguage, getLS } from './helpers';
+import { useTheme } from './hooks';
+import { Routes } from './routes';
 
 const App: React.FC = () => {
+  const { changeTheme } = useTheme();
+
+  useEffect(() => {
+    const defaultTheme = getLS(LOCAL_STORAGE.APP_THEME) || THEME.DARK;
+    changeTheme(defaultTheme);
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <Suspense fallback={<Spin spinning={true} />}>
-      <ThemeSwitcherProvider
-        themeMap={themes}
-        insertionPoint="styles-insertion-point"
-      >
-        <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
-          <Router>
-            <PublicRoutes />
-            <PrivateRoutes />
-          </Router>
-        </ConfigProvider>
-      </ThemeSwitcherProvider>
+      <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
+        <Routes />
+      </ConfigProvider>
     </Suspense>
   );
 };

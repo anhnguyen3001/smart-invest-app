@@ -14,5 +14,6 @@ export const SETTING_PATH = '/setting';
 export const CHANGE_PASSWORD_PATH = '/setting?change-password';
 export const UPDATE_PROFILE_PATH = '/setting?update-profile';
 
-export const LOGIN_PATH = '/login';
-export const REGISTER_PATH = '/register';
+export const SIGNIN_PATH = '/signin';
+export const SIGNUP_PATH = '/signup';
+export const FORGET_PASSWORD_PATH = '/forget-password';
