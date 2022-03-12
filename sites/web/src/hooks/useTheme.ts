@@ -15,7 +15,7 @@ export const useTheme = () => {
   const changeTheme = (theme: string) => {
     switcher({ theme: theme });
 
-    document.body.setAttribute("data-theme", theme);
+    document.body.setAttribute('data-theme', theme);
     if (getLS(LOCAL_STORAGE.APP_THEME) !== theme) {
       setLS(LOCAL_STORAGE.APP_THEME, theme);
     }

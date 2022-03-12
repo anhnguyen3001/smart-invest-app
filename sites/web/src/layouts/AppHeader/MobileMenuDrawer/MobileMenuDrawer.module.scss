@@ -18,11 +18,11 @@
 
       &-header {
         background-color: $bg-primary;
-        padding: $align-base;
+        padding: $align-16;
 
         &-title {
           flex-direction: row-reverse;
-          column-gap: $align-base;
+          column-gap: $align-16;
         }
       }
 
@@ -33,14 +33,14 @@
       }
 
       &-body {
-        padding: $align-base 0;
+        padding: $align-16 0;
       }
 
       &-footer {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        column-gap: $align-base;
+        column-gap: $align-16;
       }
     }
   }

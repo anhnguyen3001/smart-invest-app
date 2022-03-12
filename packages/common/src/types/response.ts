@@ -1,13 +1,17 @@
-import { IFinancialStatement } from "./ticker";
+import { IFinancialStatement, ITicker } from './ticker';
 
-export interface Pagination {
+export interface IPagination {
   currentPage: number;
   pageSize: number;
   totalItems: number;
 }
 
 interface ResponseWithPagination {
-  pagination: Pagination;
+  pagination: IPagination;
+}
+
+export interface SearchTickersResponse extends ResponseWithPagination {
+  tickers: ITicker[];
 }
 
 export interface FinancialStatementsResponse extends ResponseWithPagination {

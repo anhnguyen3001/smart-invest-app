@@ -3,18 +3,22 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
 import { ITicker } from '@ah-ticker/common';
+import classNames from 'classnames/bind';
+import { ColumnsType } from 'antd/lib/table';
+
+const cx = classNames.bind({});
 
 interface RankingTableProps {
-  stocks?: ITicker[];
+  tickers?: ITicker[];
 }
 
-export const RankingTable: React.FC<RankingTableProps> = ({ stocks }) => {
+export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
   const { t } = useTranslation();
-  if (!stocks?.length) return null;
+  if (!tickers?.length) return null;
 
-  const columns = [
+  const columns: ColumnsType<ITicker> = [
     {
-      title: t('Stock'),
+      title: t('Ticker'),
       dataIndex: 'name',
       key: 'name',
       render: (name: string, { companyName }: ITicker) => {
@@ -26,48 +30,48 @@ export const RankingTable: React.FC<RankingTableProps> = ({ stocks }) => {
         );
       },
     },
-    // {
-    //   title: t("Price"),
-    //   dataIndex: "openPrice",
-    //   key: "openPrice",
-    //   align: "center" as const,
-    //   render: (openPrice: number, { percentChange }: ITicker) => {
-    //     return (
-    //       <>
-    //         {openPrice} (
-    //         <span
-    //           className={cx([
-    //             {
-    //               "green-color": percentChange > 0,
-    //               "red-color": percentChange < 0,
-    //             },
-    //           ])}
-    //         >
-    //           {percentChange}%
-    //         </span>
-    //         )
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      title: t('Price'),
+      dataIndex: 'openPrice',
+      key: 'openPrice',
+      align: 'center',
+      render: (openPrice: number, { percentChange }: ITicker) => {
+        return (
+          <>
+            {openPrice} (
+            <span
+              className={cx([
+                {
+                  'success-color': percentChange > 0,
+                  'error-color': percentChange < 0,
+                },
+              ])}
+            >
+              {percentChange}%
+            </span>
+            )
+          </>
+        );
+      },
+    },
     {
       title: t('TotalVolume'),
       dataIndex: 'totalVolume',
       key: 'totalVolume',
-      align: 'center' as const,
+      align: 'center',
     },
     {
       title: t('TotalValue'),
       dataIndex: 'totalValue',
       key: 'totalValue',
-      align: 'center' as const,
+      align: 'center',
     },
   ];
 
   return (
     <Table
-      rowKey="id"
-      dataSource={stocks}
+      rowKey="companyId"
+      dataSource={tickers}
       columns={columns}
       pagination={false}
     />

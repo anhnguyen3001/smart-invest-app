@@ -25,7 +25,7 @@ export const TradingData: React.FC<TradingDataProps> = ({ id }) => {
   return (
     <>
       <CandleStickChart data={data} />
-      <Text level={1} fontWeight={700} className="my-base">
+      <Text level={1} fontWeight={700} className="my-16">
         {t('TradingData')}
       </Text>
       <TradingDataTable prices={priceData as IPrice[]} />

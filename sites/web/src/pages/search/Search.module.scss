@@ -1,0 +1,12 @@
+.tab {
+  :global {
+    .ant-tabs-nav {
+      margin-bottom: $align-32;
+    }
+  }
+}
+
+.total {
+  border-radius: $border-radius-8;
+  background-color: $bg-primary-light;
+}

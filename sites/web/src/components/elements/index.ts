@@ -1,2 +1,3 @@
-export * from "./InputSearch";
-export * from "./Typography";
+export * from './BackTop';
+export * from './InputSearch';
+export * from './Typography';

@@ -7,9 +7,22 @@
   &-tab {
     font-weight: $font-weight-700;
 
-    &-btn,
-    &-btn:hover {
-      color: $text-color !important;
+    &-btn {
+      color: $text-color-secondary;
+
+      &:hover {
+        color: $text-color;
+      }
+    }
+  }
+
+  &-nav {
+    margin-bottom: $align-32 !important;
+  }
+
+  &:not(.ant-tabs-large) {
+    .ant-tabs-tab + .ant-tabs-tab {
+      margin-left: $align-16 !important;
     }
   }
 }
@@ -19,6 +32,21 @@
   &-header,
   &-items {
     background-color: $bg-primary-light;
+  }
+}
+
+// Layout
+.ant-layout {
+  &-content {
+    background: $bg-primary !important;
+  }
+}
+
+// Input
+.ant-input {
+  &::placeholder {
+    @include styled-text($font-size-4, $line-height-4);
+    color: $text-color-secondary;
   }
 }
 
@@ -58,14 +86,6 @@
   &:focus-within,
   &:focus {
     @include link-border-box-shadow;
-  }
-}
-
-.ant-input {
-  &::placeholder {
-    font-size: $font-size-4;
-    line-height: $line-height-18;
-    color: $color-placeholder;
   }
 }
 

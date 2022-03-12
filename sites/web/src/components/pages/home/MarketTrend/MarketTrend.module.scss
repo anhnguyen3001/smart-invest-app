@@ -1,15 +1,15 @@
 .wrapper {
-  margin: $align-md;
+  margin: $align-64;
 }
 
 @include tablet {
   .wrapper {
-    margin: $align-sm;
+    margin: $align-32;
   }
 }
 
 @include mobile {
   .wrapper {
-    margin: $align-base;
+    margin: $align-16;
   }
 }

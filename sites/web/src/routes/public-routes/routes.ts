@@ -5,6 +5,7 @@ import {
   PAGE_403,
   PAGE_404,
   PAGE_500,
+  SEARCH_PATH,
 } from 'src/constants';
 import { IRoute } from 'src/types';
 
@@ -29,8 +30,11 @@ const Page500 = lazy(() =>
 const Home = lazy(() =>
   import('../../pages/home').then((mod) => ({ default: mod.Home })),
 );
-const Dtail = lazy(() =>
+const Detail = lazy(() =>
   import('../../pages/detail').then((mod) => ({ default: mod.Detail })),
+);
+const Search = lazy(() =>
+  import('../../pages/search').then((mod) => ({ default: mod.Search })),
 );
 
 export const routes: IRoute[] = [
@@ -58,6 +62,11 @@ export const routes: IRoute[] = [
   {
     exact: true,
     path: DETAIL_PATH,
-    component: Dtail,
+    component: Detail,
+  },
+  {
+    exact: true,
+    path: SEARCH_PATH,
+    component: Search,
   },
 ];

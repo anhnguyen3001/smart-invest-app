@@ -37,7 +37,7 @@ export const getPriceColor = (priceInfo: PriceInfo) => {
   if (!price || !openPrice) return 'ceil';
   if (price === ceilingPrice) return 'ceil';
   if (price === floorPrice) return 'floor';
-  if (price < openPrice) return 'error';
+  if (price < openPrice) return 'danger';
   if (price > openPrice) return 'success';
-  return 'stock';
+  return undefined;
 };

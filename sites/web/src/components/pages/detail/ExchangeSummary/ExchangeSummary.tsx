@@ -88,7 +88,7 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
             'd-flex',
             'justify-content-between',
             'align-items-center',
-            { 'mb-base': index !== displayTexts.length - 1 },
+            { 'mb-16': index !== displayTexts.length - 1 },
           )}
         >
           <Text level={2} fontWeight={500}>

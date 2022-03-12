@@ -52,11 +52,11 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
 
   return (
     <>
-      <h2 className={cx('mb-sm', 'pb-base', 'border-bottom', 'primary-color')}>
+      <h2 className={cx('mb-32', 'pb-16', 'border-bottom', 'primary-color')}>
         {t('About')} {companyName}
       </h2>
       <Paragraph
-        className={cx('mb-sm')}
+        className={cx('mb-32')}
         ellipsis={{
           rows: 2,
           expandable: true,
