@@ -4,11 +4,10 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
-import { InputSearch } from 'src/components';
-import { CHANGE_PASSWORD_PATH, LOGIN_PATH, SIGNUP_PATH } from 'src/constants';
+import { CHANGE_PASSWORD_PATH, LOGIN_PATH, REGISTER_PATH } from 'src/constants';
 import { mockUser } from 'src/mock';
-import { getNavbarLinks } from '../common';
 import { SearchForm } from '../SearchForm';
+import { getNavbarLinks } from '../../utils';
 import styles from './MobileMenuDrawer.module.scss';
 
 const cx = classNames.bind(styles);
@@ -30,6 +29,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
 
   useEffect(() => {
     setVisible(false);
+    // eslint-disable-next-line
   }, [history.location]);
 
   const footer = useMemo(() => {
@@ -41,17 +41,17 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
             type="ghost"
             shape="round"
           >
-            {t('Signin')}
+            {t('Login')}
           </Button>
         </NavLink>
         <strong className={cx('text-18')}>/</strong>
-        <NavLink to={SIGNUP_PATH} className={cx('flex-1')}>
+        <NavLink to={REGISTER_PATH} className={cx('flex-1')}>
           <Button
             className={cx('text-700', 'w-100')}
             type="primary"
             shape="round"
           >
-            {t('Signup')}
+            {t('Register')}
           </Button>
         </NavLink>
       </>

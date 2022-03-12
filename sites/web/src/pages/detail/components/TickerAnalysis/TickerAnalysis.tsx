@@ -7,7 +7,7 @@ interface TickerAnalysisProps {
   id: string;
 }
 
-export const TickerAnalysis: React.FC<TickerAnalysisProps> = ({}) => {
+export const TickerAnalysis: React.FC<TickerAnalysisProps> = () => {
   return (
     <>
       <Row gutter={[32, 16]}>

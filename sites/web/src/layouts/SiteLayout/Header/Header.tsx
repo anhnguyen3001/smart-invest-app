@@ -12,13 +12,12 @@ import {
   WATCH_LIST_PATH,
 } from 'src/constants';
 import { useLanguage, useTheme, useWindowDimensions } from 'src/hooks';
-import style from './AppHeader.module.scss';
-import { DesktopMenu } from './DesktopMenu/DesktopMenu';
-import { MobileMenu } from './MobileMenu';
+import style from './Header.module.scss';
+import { DesktopMenu, MobileMenu } from './components';
 
 const cx = classNames.bind(style);
 
-export const AppHeader: React.FC = () => {
+export const Header: React.FC = () => {
   const location = useLocation();
   const [activeMenuItem, setActiveMenuItem] = useState('');
   useEffect(() => {

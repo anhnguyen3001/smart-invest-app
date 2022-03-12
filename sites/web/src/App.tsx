@@ -6,8 +6,8 @@ import 'src/styles/theme.css';
 import './App.scss';
 import { REGIONS } from './constants';
 import { getLanguage } from './helpers';
-import { AppLayout } from './layouts';
-import { PublicRoutes } from './routes';
+import { PrivateRoutes } from './routes';
+import { PublicRoutes } from './routes/PublicRoute';
 
 const themes = {
   dark: `/css/dark-theme.css`,
@@ -23,9 +23,8 @@ const App: React.FC = () => {
       >
         <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
           <Router>
-            <AppLayout>
-              <PublicRoutes />
-            </AppLayout>
+            <PublicRoutes />
+            <PrivateRoutes />
           </Router>
         </ConfigProvider>
       </ThemeSwitcherProvider>

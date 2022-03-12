@@ -1,8 +1,8 @@
 import { ICompany } from '@ah-ticker/common';
-import { Button, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 import classNames from 'classnames/bind';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
 
@@ -16,8 +16,6 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
   company,
 }) => {
   const { t } = useTranslation();
-
-  const [isShorted, setIsShorted] = useState(true);
 
   const {
     companyName,
@@ -48,6 +46,7 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
         ))}
       </Row>
     );
+    // eslint-disable-next-line
   }, [JSON.stringify(company)]);
 
   return (

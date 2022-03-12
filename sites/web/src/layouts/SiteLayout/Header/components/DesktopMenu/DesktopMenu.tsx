@@ -7,11 +7,11 @@ import {
   CHANGE_PASSWORD_PATH,
   HOME_PATH,
   LOGIN_PATH,
-  SIGNUP_PATH,
+  REGISTER_PATH,
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
 import { mockUser } from 'src/mock';
-import { getNavbarLinks, MenuHeaderProps } from '../common';
+import { getNavbarLinks, MenuHeaderProps } from '../../utils';
 import { SearchForm } from '../SearchForm';
 import style from './DesktopMenu.module.scss';
 
@@ -30,17 +30,17 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
     // Unauthorization
     return (
       <>
-        <Menu.Item key="signin" className={cx('pr-0')}>
+        <Menu.Item key="login" className={cx('pr-0')}>
           <NavLink to={LOGIN_PATH}>
             <Button className={cx('text-700')} type="ghost" shape="round">
-              {t('Signin')}
+              {t('Login')}
             </Button>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0', 'pl-8')}>
-          <NavLink to={SIGNUP_PATH}>
+        <Menu.Item key={REGISTER_PATH} className={cx('pr-0', 'pl-8')}>
+          <NavLink to={REGISTER_PATH}>
             <Button className={cx('text-700')} type="primary" shape="round">
-              {t('Signup')}
+              {t('Register')}
             </Button>
           </NavLink>
         </Menu.Item>

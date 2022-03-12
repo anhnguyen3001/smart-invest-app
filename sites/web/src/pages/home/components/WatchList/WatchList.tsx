@@ -21,7 +21,7 @@ const cx = classNames.bind(styles);
 
 interface WatchListProps {}
 
-export const WatchList: React.FC<WatchListProps> = ({}) => {
+export const WatchList: React.FC<WatchListProps> = () => {
   const tickers = mockTickers;
 
   const { t } = useTranslation();

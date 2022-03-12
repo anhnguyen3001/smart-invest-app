@@ -18,7 +18,7 @@ const TAB_KEYS = {
 
 interface MarketTrendProps {}
 
-export const MarketTrend: React.FC<MarketTrendProps> = ({}) => {
+export const MarketTrend: React.FC<MarketTrendProps> = () => {
   const { t } = useTranslation();
 
   const { data } = useSWR(['ranking'], async () => {

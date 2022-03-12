@@ -1,14 +1,14 @@
 import { Layout } from 'antd';
 import React from 'react';
 import { BackTop } from 'src/components';
-import { AppHeader } from './AppHeader';
+import { Header } from './Header';
 
 const { Content } = Layout;
 
-export const AppLayout: React.FC = ({ children }) => {
+export const SiteLayout: React.FC = ({ children }) => {
   return (
     <Layout>
-      <AppHeader />
+      <Header />
       <Content>{children}</Content>
       <BackTop />
     </Layout>

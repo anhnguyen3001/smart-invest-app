@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { HOME_PATH } from 'src/constants';
-import { MenuHeaderProps } from '../common';
+import { MenuHeaderProps } from '../../utils';
 import { MobileMenuDrawer } from '../MobileMenuDrawer';
 import styles from './MobileMenu.module.scss';
 
