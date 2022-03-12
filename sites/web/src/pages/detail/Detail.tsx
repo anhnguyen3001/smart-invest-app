@@ -4,6 +4,9 @@ import classNames from 'classnames/bind';
 import { t } from 'i18next';
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { convertTicker } from 'src/helpers';
+import { mockCompany, mockTicker } from 'src/mock';
+import useSWR from 'swr';
 import {
   CompanyOverview,
   ExchangeSummary,
@@ -12,10 +15,7 @@ import {
   TickerInfo,
   TickerOverview,
   TradingData,
-} from 'src/components';
-import { convertTicker } from 'src/helpers';
-import { mockCompany, mockTicker } from 'src/mock';
-import useSWR from 'swr';
+} from './components';
 import styles from './Detail.module.scss';
 
 const cx = classNames.bind(styles);
