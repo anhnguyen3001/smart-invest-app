@@ -2,9 +2,10 @@ import { Col, Row } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { MarketTrend, OverView, NewsList, WatchList } from 'src/components';
+import { NewsList } from 'src/components';
 import { ANALYTICS_PATH } from 'src/constants';
 import { mockNews } from 'src/mock';
+import { MarketTrend, OverView, WatchList } from './components';
 
 const cx = classNames.bind({});
 

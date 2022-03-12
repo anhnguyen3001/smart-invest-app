@@ -1,3 +1,2 @@
-export * from "./elements";
-export * from "./modules";
-export * from "./pages";
+export * from './elements';
+export * from './modules';
