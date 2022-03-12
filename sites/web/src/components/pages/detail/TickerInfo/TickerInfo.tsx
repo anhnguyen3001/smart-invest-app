@@ -36,27 +36,27 @@ export const TickerInfo: React.FC<TickerInfoProps> = ({ ticker }) => {
 
   return (
     <div className={cx('wrapper')}>
-      <h1 className={cx('mb-half', 'primary-color')}>{symbol}</h1>
-      <h3 className={cx('mb-base', 'secondary-color')}>{companyName}</h3>
+      <h1 className={cx('mb-8', 'primary-color')}>{symbol}</h1>
+      <h3 className={cx('mb-16', 'secondary-color')}>{companyName}</h3>
 
       <div
         className={cx(
           'd-flex',
           'align-items-center',
           'stock-price',
-          `${priceColorClass}-color`,
+          priceColorClass && `${priceColorClass}-color`,
         )}
       >
         <h2>
           {isIncreasing ? <ArrowUpOutlined /> : <ArrowDownOutlined />}{' '}
           {closePrice}
         </h2>
-        <Text className={cx('ml-base')}>
+        <Text className={cx('ml-64')} type={priceColorClass}>
           {priceChange} ({percentChange}%)
         </Text>
       </div>
 
-      <Text type="secondary" className="mt-half">
+      <Text type="secondary" className="mt-8">
         {new Date(date).toLocaleString('vi')}
       </Text>
     </div>

@@ -29,7 +29,7 @@ export const MobileMenu: React.FC<MenuHeaderProps> = ({
         )}
         selectedKeys={[activeMenuItem]}
       >
-        <Menu.Item key="brand" className={cx('pl-0', 'pr-base')}>
+        <Menu.Item key="brand" className={cx('pl-0', 'pr-16')}>
           <NavLink to={HOME_PATH}>
             <img
               className={cx('brand')}

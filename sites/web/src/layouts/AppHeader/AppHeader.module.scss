@@ -1,7 +1,10 @@
 .wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1060;
   border-bottom: 1px solid $border-color;
   box-shadow: 4px 0 5px 2px $box-shadow-color-base;
-  padding: 0 $align-sm !important;
+  padding: 0 $align-32 !important;
   background-color: $bg-primary !important;
 
   :global {
@@ -19,7 +22,13 @@
 .localization-menu {
   :global {
     .ant-dropdown-menu {
-      top: $align-base;
+      top: $align-16;
     }
+  }
+}
+
+@include mobile {
+  .wrapper {
+    padding: 0 $align-16 !important;
   }
 }

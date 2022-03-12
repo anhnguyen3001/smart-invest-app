@@ -50,7 +50,7 @@ export interface IFinancialStatement {
   path: string;
 }
 
-export interface IPaper {
+export interface INews {
   id: number;
   title: string;
   description: string;

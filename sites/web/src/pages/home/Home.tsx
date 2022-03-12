@@ -2,12 +2,11 @@ import { Col, Row } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { MarketTrend, OverView, PaperList, WatchList } from 'src/components';
+import { MarketTrend, OverView, NewsList, WatchList } from 'src/components';
 import { ANALYTICS_PATH } from 'src/constants';
-import { mockPapers } from 'src/mock';
-import styles from './Home.module.scss';
+import { mockNews } from 'src/mock';
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind({});
 
 export const Home: React.FC = () => {
   const history = useHistory();
@@ -19,24 +18,24 @@ export const Home: React.FC = () => {
   return (
     <>
       <OverView />
-      <div className={cx('section-wrapper')}>
+      <div className={cx('section-md')}>
         <WatchList />
       </div>
 
-      <div className={cx('section-wrapper')}>
+      <div className={cx('section-md')}>
         <MarketTrend />
       </div>
 
-      <Row className={cx('section-wrapper')} gutter={[16, 16]}>
+      <Row className={cx('section-md')} gutter={[16, 16]}>
         <Col md={12} xs={24}>
-          <PaperList
-            papers={mockPapers}
+          <NewsList
+            news={mockNews}
             onSeeMore={() => onChangePage(ANALYTICS_PATH)}
           />
         </Col>
         <Col md={12} xs={24}>
-          <PaperList
-            papers={mockPapers}
+          <NewsList
+            news={mockNews}
             onSeeMore={() => onChangePage(ANALYTICS_PATH)}
           />
         </Col>

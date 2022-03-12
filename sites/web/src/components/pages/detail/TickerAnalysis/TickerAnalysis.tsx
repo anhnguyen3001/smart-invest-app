@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import { PaperList, ReportList } from 'src/components';
-import { mockPapers, mockReports } from 'src/mock';
+import { NewsList, ReportList } from 'src/components';
+import { mockNews, mockReports } from 'src/mock';
 
 interface TickerAnalysisProps {
   id: string;
@@ -16,7 +16,7 @@ export const TickerAnalysis: React.FC<TickerAnalysisProps> = ({}) => {
           {/* <FinancialInfoTable financialInfo={mockFinancialInfo} /> */}
         </Col>
         <Col md={10} xs={24}>
-          <PaperList papers={mockPapers} />
+          <NewsList news={mockNews} />
         </Col>
       </Row>
     </>

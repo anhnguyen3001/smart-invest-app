@@ -7,13 +7,17 @@ import './Typography.scss';
 
 const cx = classNames.bind({});
 
-type TextProps = Omit<AntdTextProps, 'type'> & TypographyProps;
+type TextProps = Omit<AntdTextProps, 'type'> &
+  TypographyProps & {
+    block?: boolean;
+  };
 
 export const Text: React.FC<TextProps> = ({
   level,
   fontWeight,
   type,
   className,
+  block = true,
   ...rest
 }) => {
   return (
@@ -21,7 +25,7 @@ export const Text: React.FC<TextProps> = ({
       className={cx([
         ...getClassname({ level, fontWeight, type }),
         className,
-        'd-block',
+        { 'd-block': block },
       ])}
       {...rest}
     />

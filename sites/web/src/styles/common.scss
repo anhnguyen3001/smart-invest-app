@@ -4,11 +4,12 @@
 
 // Margin
 $aligns: (
-  'lg' $align-lg,
-  'md' $align-md,
-  'sm' $align-sm,
-  'base' $align-base,
-  'half' $align-half,
+  '96' $align-96,
+  '64' $align-64,
+  '32' $align-32,
+  '16' $align-16,
+  '8' $align-8,
+  '4' $align-4,
   0 0,
   auto auto
 );
@@ -67,10 +68,6 @@ $aligns: (
   }
 }
 
-.mb-4 {
-  margin-bottom: 4px;
-}
-
 // Spacing
 .w-100 {
   width: 100%;
@@ -80,18 +77,6 @@ $aligns: (
   height: 100%;
 }
 
-// Scrollbar
-* {
-  scrollbar-width: thin;
-}
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background: $border-color;
-}
-
 // Typography
 // Colors
 $colors: (
@@ -99,7 +84,7 @@ $colors: (
   'secondary' $text-color-secondary,
   'warning' $warning-color,
   'success' $green-color,
-  'error' $red-color,
+  'danger' $red-color,
   'ceil' $ceil-color,
   'floor' $floor-color,
   'link' $link-color
@@ -111,6 +96,10 @@ $colors: (
   .#{$key}-color {
     color: $value !important;
   }
+}
+
+.inherit-color {
+  color: inherit;
 }
 
 // Font-weight
@@ -187,7 +176,7 @@ $flexLayouts: (row, column);
 }
 
 // Border
-$lines: ('-bottom', '');
+$lines: ('-bottom', '-top', '');
 
 @each $kvp in $lines {
   $value: nth($kvp, 1);
@@ -215,9 +204,19 @@ $lines: ('-bottom', '');
   cursor: pointer;
 }
 
-// Customize style for components
-.app-spin {
-  position: fixed;
-  top: 30%;
-  width: 100%;
+// Layout
+.section-md {
+  margin: $align-64;
+}
+
+@include tablet {
+  .section-md {
+    margin: $align-32;
+  }
+}
+
+@include mobile {
+  .section-md {
+    margin: $align-32 $align-16;
+  }
 }

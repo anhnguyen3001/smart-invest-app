@@ -1,14 +1,15 @@
-import { LogoutOutlined } from "@ant-design/icons";
-import { Avatar, Button, Drawer, Menu } from "antd";
-import classNames from "classnames/bind";
-import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
-import { InputSearch } from "src/components";
-import { CHANGE_PASSWORD_PATH, LOGIN_PATH, SIGNUP_PATH } from "src/constants";
-import { mockUser } from "src/mock";
-import { getNavbarLinks } from "../common";
-import styles from "./MobileMenuDrawer.module.scss";
+import { LogoutOutlined } from '@ant-design/icons';
+import { Avatar, Button, Drawer, Menu } from 'antd';
+import classNames from 'classnames/bind';
+import React, { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { NavLink, useHistory } from 'react-router-dom';
+import { InputSearch } from 'src/components';
+import { CHANGE_PASSWORD_PATH, LOGIN_PATH, SIGNUP_PATH } from 'src/constants';
+import { mockUser } from 'src/mock';
+import { getNavbarLinks } from '../common';
+import { SearchForm } from '../SearchForm';
+import styles from './MobileMenuDrawer.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -23,29 +24,34 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
   visible,
   setVisible,
 }) => {
+  const history = useHistory();
   const { t } = useTranslation();
   const navbarLinks = getNavbarLinks(t);
+
+  useEffect(() => {
+    setVisible(false);
+  }, [history.location]);
 
   const footer = useMemo(() => {
     return (
       <>
-        <NavLink to={LOGIN_PATH} className={cx("flex-1")}>
+        <NavLink to={LOGIN_PATH} className={cx('flex-1')}>
           <Button
-            className={cx("text-700", "w-100")}
+            className={cx('text-700', 'w-100')}
             type="ghost"
             shape="round"
           >
-            {t("Signin")}
+            {t('Signin')}
           </Button>
         </NavLink>
-        <strong className={cx("text-18")}>/</strong>
-        <NavLink to={SIGNUP_PATH} className={cx("flex-1")}>
+        <strong className={cx('text-18')}>/</strong>
+        <NavLink to={SIGNUP_PATH} className={cx('flex-1')}>
           <Button
-            className={cx("text-700", "w-100")}
+            className={cx('text-700', 'w-100')}
             type="primary"
             shape="round"
           >
-            {t("Signup")}
+            {t('Signup')}
           </Button>
         </NavLink>
       </>
@@ -54,16 +60,16 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
     return (
       <div
         className={cx(
-          "d-flex",
-          "align-items-center",
-          "cursor-pointer",
-          "w-100"
+          'd-flex',
+          'align-items-center',
+          'cursor-pointer',
+          'w-100',
         )}
       >
         <Avatar size={32} src={mockUser.avatar} />
-        <div className={cx("ml-base", "flex-1")}>
-          <div className={cx("text-16--bold")}>{mockUser.name}</div>
-          <div className={cx("text-13--bold", "text-secondary", "text-line-1")}>
+        <div className={cx('ml-16', 'flex-1')}>
+          <div className={cx('text-16--bold')}>{mockUser.name}</div>
+          <div className={cx('text-13--bold', 'text-secondary', 'text-line-1')}>
             {mockUser.email}
           </div>
         </div>
@@ -80,9 +86,9 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
   const authMenuItem = useMemo(() => {
     return (
       <>
-        <Menu.Divider className={cx("mb-base")} />
-        <Menu.Item key="changePassword" className={cx("text-700")}>
-          <NavLink to={CHANGE_PASSWORD_PATH}>{t("ChangePassword")}</NavLink>
+        <Menu.Divider className={cx('mb-16')} />
+        <Menu.Item key="changePassword" className={cx('text-700')}>
+          <NavLink to={CHANGE_PASSWORD_PATH}>{t('ChangePassword')}</NavLink>
         </Menu.Item>
       </>
     );
@@ -91,18 +97,18 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
 
   return (
     <Drawer
-      className={cx("drawer")}
+      className={cx('drawer')}
       width="100%"
       closable
       placement="left"
       visible={visible}
       onClose={() => setVisible(false)}
-      title={<InputSearch placeholder={t("SearchStock")} />}
+      title={<SearchForm />}
       footer={footer}
     >
-      <Menu className={cx("menu")} selectedKeys={[activeMenuItem]}>
+      <Menu className={cx('menu')} selectedKeys={[activeMenuItem]}>
         {navbarLinks.map(({ title, to }) => (
-          <Menu.Item key={to} className={cx("text-700")}>
+          <Menu.Item key={to} className={cx('text-700', 'text-1')}>
             <NavLink to={to}>{title}</NavLink>
           </Menu.Item>
         ))}

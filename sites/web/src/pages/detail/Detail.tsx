@@ -79,7 +79,7 @@ export const Detail: React.FC = ({}) => {
         justify="space-between"
         align="stretch"
         gutter={[32, 16]}
-        className={cx('section-wrapper')}
+        className={cx('section')}
       >
         <Col md={16} xs={24}>
           <PriceChart name={stockCode} />
@@ -89,7 +89,7 @@ export const Detail: React.FC = ({}) => {
         </Col>
       </Row>
 
-      <div className={cx('section-wrapper')}>
+      <div className={cx('section')}>
         <CompanyOverview company={companyData} />
       </div>
 
@@ -99,7 +99,7 @@ export const Detail: React.FC = ({}) => {
         size="large"
         activeKey={activeTab}
         onTabClick={(key: string) => setActiveTab(key)}
-        className={cx('section-wrapper')}
+        className={cx('section')}
       >
         {renderTabContent()}
       </Tabs>

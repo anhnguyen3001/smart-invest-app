@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { InputSearch } from 'src/components';
 import {
   CHANGE_PASSWORD_PATH,
   HOME_PATH,
@@ -13,6 +12,7 @@ import {
 } from 'src/constants';
 import { mockUser } from 'src/mock';
 import { getNavbarLinks, MenuHeaderProps } from '../common';
+import { SearchForm } from '../SearchForm';
 import style from './DesktopMenu.module.scss';
 
 const cx = classNames.bind(style);
@@ -37,7 +37,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
             </Button>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0', 'pl-half')}>
+        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0', 'pl-8')}>
           <NavLink to={SIGNUP_PATH}>
             <Button className={cx('text-700')} type="primary" shape="round">
               {t('Signup')}
@@ -89,7 +89,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
       )}
       selectedKeys={[activeMenuItem]}
     >
-      <Menu.Item key="brand" className={cx('pl-0', 'pr-base')}>
+      <Menu.Item key="brand" className={cx('pl-0', 'pr-16')}>
         <NavLink to={HOME_PATH}>
           <img
             className={cx('brand')}
@@ -104,7 +104,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
         </Menu.Item>
       ))}
       <Menu.Item key="search" className={cx('ml-auto', 'pr-0')}>
-        <InputSearch placeholder={t('SearchStockHere')} />
+        <SearchForm setDefaultValue />
       </Menu.Item>
 
       {themeMenuItem}

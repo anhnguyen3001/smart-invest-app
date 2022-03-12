@@ -77,7 +77,7 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
       <Text
         italic
         type="secondary"
-        className="ml-auto mb-half"
+        className="ml-auto mb-8"
         style={{ width: 'fit-content' }}
       >
         {t('Unit')}: {t('dong')}

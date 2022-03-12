@@ -1,15 +1,17 @@
+export type TypographyType =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'ceil'
+  | 'floor'
+  | 'link';
+
 export interface TypographyProps {
   level?: 1 | 2 | 3 | 4;
   fontWeight?: 500 | 700 | 900;
-  type?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'warning'
-    | 'ceil'
-    | 'floor'
-    | 'link';
+  type?: TypographyType;
 }
 
 export const getClassname = ({
@@ -27,6 +29,8 @@ export const getClassname = ({
   }
   if (type) {
     classNames.push(`${type}-color`);
+  } else {
+    classNames.push(`inherit-color`);
   }
 
   return classNames;

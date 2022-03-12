@@ -1,8 +1,8 @@
-import { SearchOutlined } from "@ant-design/icons";
-import { Input, InputProps } from "antd";
-import classnames from "classnames/bind";
-import React from "react";
-import styles from "./InputSearch.module.scss";
+import { SearchOutlined } from '@ant-design/icons';
+import { Input, InputProps } from 'antd';
+import classnames from 'classnames/bind';
+import React from 'react';
+import styles from './InputSearch.module.scss';
 
 const cx = classnames.bind(styles);
 
@@ -14,7 +14,7 @@ export const InputSearch: React.FC<InputSearchProps> = ({
 }) => {
   return (
     <Input
-      className={cx("search", className, "px-base")}
+      className={cx('search', className, 'px-16')}
       size="large"
       prefix={<SearchOutlined />}
       {...rest}

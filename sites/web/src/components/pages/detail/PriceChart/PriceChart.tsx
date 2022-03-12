@@ -39,7 +39,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ name }) => {
         <Button
           key={index}
           shape="round"
-          className="ml-half text-700"
+          className="ml-8 text-700"
           onClick={() => onChangeRangeTime(time)}
           {...(selectedTime === time && {
             type: 'primary',
@@ -68,7 +68,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ name }) => {
 
   return (
     <Spin spinning={isLoading}>
-      <div className="d-flex justify-content-end mb-base">
+      <div className="d-flex justify-content-end mb-16">
         {renderRangeTimes()}
       </div>
       {/* <div
@@ -76,7 +76,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ name }) => {
           "d-flex",
           "justify-content-between",
           "align-items-center",
-          "mb-base"
+          "mb-16"
         )}
       >
         <div className={cx("text-16--bold")}>{t("PriceChart")}</div>

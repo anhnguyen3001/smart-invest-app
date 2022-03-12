@@ -3,7 +3,7 @@
     display: flex;
     column-gap: 12px;
     margin-left: auto;
-    margin-bottom: $align-base;
+    margin-bottom: $align-16;
   }
 }
 
@@ -11,14 +11,14 @@
   .apexcharts-tooltip {
     background: $bg-primary-light !important;
     border: 1px solid $border-color !important;
-    padding: $align-half $align-base;
+    padding: $align-8 $align-16;
     box-shadow: 0px 8px 16px rgba(50, 50, 71, 0.06);
   }
 }
 
 .chart-tooltip {
   &__title {
-    margin-bottom: $align-half;
+    margin-bottom: $align-8;
     background: transparent !important;
     border-bottom: none !important;
     color: $text-color-secondary;

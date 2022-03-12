@@ -23,29 +23,29 @@ export const MarketTrend: React.FC<MarketTrendProps> = ({}) => {
 
   const { data } = useSWR(['ranking'], async () => {
     return {
-      stockGainers: mockTickers,
-      stockLosers: mockTickers,
+      tickerGainers: mockTickers,
+      tickerLosers: mockTickers,
     };
   });
 
   const tabContent = useMemo(() => {
-    const tabPanes: { tabKey: string; tab: string; stocks?: ITicker[] }[] = [
+    const tabPanes: { tabKey: string; tab: string; tickers?: ITicker[] }[] = [
       {
         tabKey: TAB_KEYS.gainers,
         tab: t('Gainers'),
-        stocks: data?.stockGainers,
+        tickers: data?.tickerGainers,
       },
       {
         tabKey: TAB_KEYS.losers,
         tab: t('Losers'),
-        stocks: data?.stockLosers,
+        tickers: data?.tickerLosers,
       },
     ];
 
-    return tabPanes.map(({ stocks, ...rest }) => {
+    return tabPanes.map(({ tickers, ...rest }) => {
       return (
         <TabPane key={rest.tabKey} {...rest}>
-          <RankingTable stocks={stocks} />
+          <RankingTable tickers={tickers} />
         </TabPane>
       );
     });
@@ -54,7 +54,7 @@ export const MarketTrend: React.FC<MarketTrendProps> = ({}) => {
 
   return (
     <>
-      <h2 className={cx('mb-base')}>{t('WatchMarketMove')}</h2>
+      <h2 className={cx('mb-16')}>{t('WatchMarketMove')}</h2>
       <Tabs defaultActiveKey={TAB_KEYS.gainers}>{tabContent}</Tabs>
     </>
   );
