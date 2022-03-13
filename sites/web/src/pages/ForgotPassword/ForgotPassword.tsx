@@ -53,7 +53,7 @@ export const ForgotPassword: React.FC = () => {
       >
         <h2 className="mb-32">{t('ForgotPassword')}</h2>
 
-        <Text className="mb-8">{t('SendConfirmationMail')}</Text>
+        <Text className="mb-16">{t('SendConfirmationMail')}</Text>
 
         <Form.Item
           className="mb-16"

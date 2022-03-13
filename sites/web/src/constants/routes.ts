@@ -13,3 +13,4 @@ export const UPDATE_PROFILE_PATH = '/setting?update-profile';
 export const SIGNIN_PATH = '/signin';
 export const SIGNUP_PATH = '/signup';
 export const FORGOT_PASSWORD_PATH = '/forgot-password';
+export const RESET_PASSWORD_PATH = '/reset-password';

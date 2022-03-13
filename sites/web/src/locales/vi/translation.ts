@@ -12,8 +12,11 @@ export const translations = {
   Signin: 'Đăng nhập',
   Signup: 'Đăng ký',
 
+  Reset: 'Đặt lại',
+
   // Form Field
   Email: 'Email',
+  NewPassword: 'Mật khẩu mới',
   Password: 'Mật khẩu',
   ConfirmPassword: 'Xác nhận mật khẩu',
   Username: 'Tên người dùng',

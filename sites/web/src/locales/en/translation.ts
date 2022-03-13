@@ -12,8 +12,11 @@ export const translations = {
   Signin: 'Sign in',
   Signup: 'Sign up',
 
+  Reset: 'Reset',
+
   // Form Field
   Email: 'Email',
+  NewPassword: 'New password',
   Password: 'Password',
   ConfirmPassword: 'Confirm password',
   Username: 'Username',

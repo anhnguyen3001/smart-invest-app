@@ -8,3 +8,8 @@ export interface IUser {
 export interface SendEmailForgotPassword {
   email: string;
 }
+
+export interface SetNewPassword {
+  password: string;
+  confirmPassword: string;
+}
