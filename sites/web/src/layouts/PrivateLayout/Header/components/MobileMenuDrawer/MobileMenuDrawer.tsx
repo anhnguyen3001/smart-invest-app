@@ -1,13 +1,15 @@
 import { LogoutOutlined } from '@ant-design/icons';
-import { Avatar, Button, Drawer, Menu } from 'antd';
+import { Button, Drawer, Menu } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
+import { UserAvatar } from 'src/components';
 import { CHANGE_PASSWORD_PATH, SIGNIN_PATH, SIGNUP_PATH } from 'src/constants';
+import { useAuth } from 'src/context';
 import { mockUser } from 'src/mock';
-import { SearchForm } from '../SearchForm';
 import { getNavbarLinks } from '../../utils';
+import { SearchForm } from '../SearchForm';
 import styles from './MobileMenuDrawer.module.scss';
 
 const cx = classNames.bind(styles);
@@ -25,6 +27,9 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
 }) => {
   const history = useHistory();
   const { t } = useTranslation();
+
+  const { user } = useAuth();
+
   const navbarLinks = getNavbarLinks(t);
 
   useEffect(() => {
@@ -66,7 +71,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
           'w-100',
         )}
       >
-        <Avatar size={32} src={mockUser.avatar} />
+        <UserAvatar user={user} size={32} />
         <div className={cx('ml-16', 'flex-1')}>
           <div className={cx('text-16--bold')}>{mockUser.name}</div>
           <div className={cx('text-13--bold', 'text-secondary', 'text-line-1')}>

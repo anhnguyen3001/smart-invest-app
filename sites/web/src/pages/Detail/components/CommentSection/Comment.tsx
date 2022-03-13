@@ -1,7 +1,8 @@
 import { IComment } from '@ah-ticker/common';
-import { Avatar, Card, Comment, List } from 'antd';
+import { Card, Comment, List } from 'antd';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { UserAvatar } from 'src/components';
 import { mockComments } from 'src/mock';
 import useSWR from 'swr';
 
@@ -20,7 +21,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ name }) => {
       <Comment
         key={id}
         author={user.name}
-        avatar={<Avatar shape="circle" src={user.avatar} />}
+        avatar={<UserAvatar shape="circle" user={user} />}
         content={<div dangerouslySetInnerHTML={{ __html: content }} />}
         datetime={new Date(date).toLocaleString()}
       />
