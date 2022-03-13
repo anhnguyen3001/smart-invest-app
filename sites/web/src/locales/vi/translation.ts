@@ -1,4 +1,9 @@
-import { homeTranslation, signinTranslation, signupTranslation } from './page';
+import {
+  homeTranslation,
+  signinTranslation,
+  signupTranslation,
+  forgotPasswordTranslation,
+} from './page';
 
 export const translations = {
   BackToHome: 'Về trang chủ',
@@ -7,8 +12,11 @@ export const translations = {
   Signin: 'Đăng nhập',
   Signup: 'Đăng ký',
 
+  Reset: 'Đặt lại',
+
   // Form Field
   Email: 'Email',
+  NewPassword: 'Mật khẩu mới',
   Password: 'Mật khẩu',
   ConfirmPassword: 'Xác nhận mật khẩu',
   Username: 'Tên người dùng',
@@ -27,4 +35,5 @@ export const translations = {
   ...homeTranslation,
   ...signinTranslation,
   ...signupTranslation,
+  ...forgotPasswordTranslation,
 };

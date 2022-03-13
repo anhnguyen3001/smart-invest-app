@@ -7,6 +7,7 @@ import {
   ITicker,
   IUser,
   IPagination,
+  Gender,
 } from '@ah-ticker/common';
 
 export const mockPrice: IPrice = {
@@ -55,6 +56,7 @@ export const mockUser: IUser = {
   avatar: 'https://joeschmoe.io/api/v1/random',
   name: `Anhnh`,
   email: 'nguyenhoanganh12000@gmail.com',
+  gender: Gender.female,
 };
 
 export const mockComments: IComment[] = Array.apply(0, new Array(10)).map(

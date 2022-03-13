@@ -3,14 +3,10 @@ import React, { Suspense, useEffect } from 'react';
 import 'src/styles/theme.css';
 import './App.scss';
 import { LOCAL_STORAGE, REGIONS, THEME } from './constants';
+import { AuthProvider } from './context';
 import { getLanguage, getLS } from './helpers';
 import { useTheme } from './hooks';
 import { Routes } from './routes';
-
-const themes = {
-  dark: `/css/dark-theme.css`,
-  light: `/css/light-theme.css`,
-};
 
 const App: React.FC = () => {
   const { changeTheme } = useTheme();
@@ -24,7 +20,9 @@ const App: React.FC = () => {
   return (
     <Suspense fallback={<Spin spinning={true} />}>
       <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </ConfigProvider>
     </Suspense>
   );

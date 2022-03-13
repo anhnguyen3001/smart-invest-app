@@ -1,8 +1,9 @@
-import { Avatar, Button, Dropdown, Menu } from 'antd';
+import { Button, Dropdown, Menu } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import { UserAvatar } from 'src/components';
 import {
   CHANGE_PASSWORD_PATH,
   HOME_PATH,
@@ -10,6 +11,7 @@ import {
   SIGNUP_PATH,
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
+import { useAuth } from 'src/context';
 import { mockUser } from 'src/mock';
 import { getNavbarLinks, MenuHeaderProps } from '../../utils';
 import { SearchForm } from '../SearchForm';
@@ -23,6 +25,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
   themeMenuItem,
 }) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   const navbarLinks = getNavbarLinks(t);
 
@@ -50,13 +53,13 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
     // Authorization
     const userMenu = (
       <Menu>
-        <Menu.Item key="profile" icon={<Avatar src={mockUser.avatar} />}>
+        <Menu.Item key="profile" icon={<UserAvatar user={user} />}>
           <NavLink to={UPDATE_PROFILE_PATH}>
-            <div className={cx('text-16--bold')}>{mockUser.name}</div>
+            <div className={cx('text-16--bold')}>{user?.name}</div>
             <div
               className={cx('text-13--bold', 'text-secondary', 'text-line-1')}
             >
-              {mockUser.email}
+              {user?.email}
             </div>
           </NavLink>
         </Menu.Item>
@@ -71,7 +74,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
     return (
       <Menu.Item>
         <Dropdown overlay={userMenu}>
-          <Avatar src={mockUser.avatar} size={40} />
+          <UserAvatar user={user} size={40} />
         </Dropdown>
       </Menu.Item>
     );

@@ -1,3 +1,5 @@
+import { IUser } from './user';
+
 export interface IPrice {
   closePrice: number;
   openPrice: number;
@@ -57,4 +59,11 @@ export interface INews {
   image: string;
   date: string;
   link: string;
+}
+
+export interface IComment {
+  id: number;
+  content: string;
+  user: IUser;
+  date: string;
 }

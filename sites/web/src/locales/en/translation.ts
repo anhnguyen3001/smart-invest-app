@@ -1,4 +1,9 @@
-import { homeTranslation, signinTranslation, signupTranslation } from './page';
+import {
+  homeTranslation,
+  signinTranslation,
+  signupTranslation,
+  forgotPasswordTranslation,
+} from './page';
 
 export const translations = {
   BackToHome: 'Back to Home',
@@ -7,8 +12,11 @@ export const translations = {
   Signin: 'Sign in',
   Signup: 'Sign up',
 
+  Reset: 'Reset',
+
   // Form Field
   Email: 'Email',
+  NewPassword: 'New password',
   Password: 'Password',
   ConfirmPassword: 'Confirm password',
   Username: 'Username',
@@ -27,4 +35,5 @@ export const translations = {
   ...homeTranslation,
   ...signinTranslation,
   ...signupTranslation,
+  ...forgotPasswordTranslation,
 };

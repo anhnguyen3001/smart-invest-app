@@ -3,3 +3,4 @@ export * from './InputSearch';
 export * from './LocaleSelection';
 export * from './ThemeSwitcher';
 export * from './Typography';
+export * from './UserAvatar';
