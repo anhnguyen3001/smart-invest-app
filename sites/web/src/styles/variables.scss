@@ -67,9 +67,9 @@ $font-weight-700: 700;
 $font-weight-900: 900;
 
 // Line height
-$line-height-h1: 1.2em;
-$line-height-h2: 1.1em;
-$line-height-h3: 1.35em;
+$line-height-h1: 1.4em;
+$line-height-h2: 1.3em;
+$line-height-h3: 1.2em;
 
 $line-height-1: 1.55em;
 $line-height-2: 1.5em;
@@ -109,7 +109,7 @@ $tablet-width: 768px;
 }
 
 @mixin tablet {
-  @media screen and (min-width: #{$mobile-width + 1px}) and (max-width: #{$tablet-width}) {
+  @media screen and (max-width: #{$tablet-width}) {
     @content;
   }
 }

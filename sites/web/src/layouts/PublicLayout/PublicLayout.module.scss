@@ -1,0 +1,75 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+
+  background: radial-gradient(
+    100% 137.95% at -102.47% -39.75%,
+    #749091 0,
+    #a6c2c1 100%
+  );
+}
+
+.left {
+  position: relative;
+  padding: $align-64;
+}
+
+.welcome {
+  color: #ededed;
+  line-height: 1.5em;
+}
+
+.illustration {
+  position: absolute;
+  bottom: 0;
+  right: 32px;
+  max-width: 90%;
+  width: auto;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.right {
+  position: relative;
+  background-color: $bg-primary;
+  border-radius: $border-radius-round 0 0 $border-radius-round;
+  padding: $align-32 $align-32 $align-16;
+
+  @include tablet {
+    border-radius: 0;
+  }
+}
+
+.menu {
+  background: transparent !important;
+  border-bottom: none !important;
+
+  :global {
+    .ant-menu-item::after {
+      border-bottom: none !important;
+    }
+  }
+}
+
+.form {
+  width: 60%;
+
+  position: absolute;
+  top: $align-32;
+  bottom: $align-16;
+  left: $align-32;
+  right: $align-32;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile {
+    width: unset;
+  }
+}

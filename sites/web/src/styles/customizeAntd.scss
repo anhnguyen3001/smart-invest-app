@@ -48,6 +48,17 @@
     @include styled-text($font-size-4, $line-height-4);
     color: $text-color-secondary;
   }
+
+  &-lg {
+    padding: 8px 16px !important;
+  }
+}
+
+// Input label
+.ant-form-vertical .ant-form-item-label,
+.ant-form-vertical .ant-form-item-label-required {
+  padding: 0 0 4px;
+  font-weight: 500;
 }
 
 // Result
@@ -68,12 +79,6 @@
 // Date picker
 .ant-picker {
   width: 100%;
-}
-
-// Input label
-.ant-form-vertical .ant-form-item-label,
-.ant-form-vertical .ant-form-item-label-required {
-  padding: 0 0 4px;
 }
 
 // Change input focus/hover color to $color-link
