@@ -7,6 +7,11 @@ import { getLanguage, getLS } from './helpers';
 import { useTheme } from './hooks';
 import { Routes } from './routes';
 
+const themes = {
+  dark: `/css/dark-theme.css`,
+  light: `/css/light-theme.css`,
+};
+
 const App: React.FC = () => {
   const { changeTheme } = useTheme();
 

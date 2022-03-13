@@ -1,4 +1,4 @@
-import { homeTranslation, loginTranslation } from './page';
+import { homeTranslation, signinTranslation, signupTranslation } from './page';
 
 export const translations = {
   BackToHome: 'Về trang chủ',
@@ -10,16 +10,21 @@ export const translations = {
   // Form Field
   Email: 'Email',
   Password: 'Mật khẩu',
+  ConfirmPassword: 'Xác nhận mật khẩu',
+  Username: 'Tên người dùng',
 
   // Form placeholder
-  EnterEmail: 'Nhập email',
-  EnterPassword: 'Nhập mật khẩu',
+  EnterField: 'Nhập {{field}}',
 
   // Form Error
   FieldMaxLength: '{{field}} không được vượt quá {{maxLength}} kí tự',
   FieldRequired: 'Vui lòng nhập {{field}}',
   ErrorFormat: '{{field}} không hợp lệ',
+  ErrorPassword:
+    'Mật khẩu cần có ít nhất 8 kí tự, 1 chữ hoa, 1 chữ thường và 1 số',
+  PasswordNotMatch: 'Mật khẩu không khớp',
 
   ...homeTranslation,
-  ...loginTranslation,
+  ...signinTranslation,
+  ...signupTranslation,
 };

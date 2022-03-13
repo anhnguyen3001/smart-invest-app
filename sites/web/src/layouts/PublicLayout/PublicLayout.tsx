@@ -21,18 +21,20 @@ export const PublicLayout: React.FC = ({ children }) => {
       </Col>
 
       <Col className={cx('right')} md={14} xs={24}>
-        <div className={cx('menu')}>
-          <Menu mode="horizontal" className={cx('align-items-center')}>
-            <Menu.Item key="theme" className={cx('px-0')}>
-              <ThemeSwitcher />
-            </Menu.Item>
-            <Menu.Item key="locale" className={cx('pr-0', 'pl-16')}>
-              <LocaleSelection />
-            </Menu.Item>
-          </Menu>
-        </div>
+        <Menu
+          mode="horizontal"
+          className={cx('menu', 'align-items-center', 'justify-content-end')}
+          style={{ position: 'relative' }}
+        >
+          <Menu.Item key="theme" className={cx('px-0')}>
+            <ThemeSwitcher />
+          </Menu.Item>
+          <Menu.Item key="locale" className={cx('pr-0', 'pl-16')}>
+            <LocaleSelection />
+          </Menu.Item>
+        </Menu>
 
-        <div className={cx('m-auto', 'form', 'h-100')}>{children}</div>
+        <div className={cx('form', 'm-auto')}>{children}</div>
       </Col>
     </Row>
   );

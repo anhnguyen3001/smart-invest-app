@@ -45,30 +45,31 @@
 }
 
 .menu {
-  position: absolute;
-  top: $align-32;
-  right: $align-32;
+  background: transparent !important;
+  border-bottom: none !important;
 
   :global {
-    .ant-menu {
-      background: transparent !important;
+    .ant-menu-item::after {
       border-bottom: none !important;
-
-      &-item::after {
-        border-bottom: none !important;
-      }
     }
   }
 }
 
 .form {
   width: 60%;
+
+  position: absolute;
+  top: $align-32;
+  bottom: $align-16;
+  left: $align-32;
+  right: $align-32;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
   @include mobile {
-    width: 100%;
+    width: unset;
   }
 }

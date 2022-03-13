@@ -1,25 +1,30 @@
-import { homeTranslation, loginTranslation } from './page';
+import { homeTranslation, signinTranslation, signupTranslation } from './page';
 
 export const translations = {
   BackToHome: 'Back to Home',
   WelcomeText: 'Look for tickers and make an investigation plan for future',
 
-  Signin: 'Signin',
-  Signup: 'Signup',
+  Signin: 'Sign in',
+  Signup: 'Sign up',
 
   // Form Field
   Email: 'Email',
   Password: 'Password',
+  ConfirmPassword: 'Confirm password',
+  Username: 'Username',
 
   // Form placeholder
-  EnterEmail: 'Enter email',
-  EnterPassword: 'Enter password',
+  EnterField: 'Enter {{field}}',
 
   // Form Error
   FieldMaxLength: '{{field}} can not exceed {{maxLength}} characters',
   FieldRequired: 'Please enter {{field}}',
   ErrorFormat: '{{field}} is not valid',
+  ErrorPassword:
+    'Password must have at least 8 characters, one uppercase letter, one lowercase letter and one number',
+  PasswordNotMatch: 'Passwords do not match',
 
   ...homeTranslation,
-  ...loginTranslation,
+  ...signinTranslation,
+  ...signupTranslation,
 };

@@ -28,7 +28,7 @@ export const Signin: React.FC = () => {
 
           if (value.length > 255) {
             return Promise.reject(
-              t('FieldMaxLength', { field: 'Email', maxLength: 255 }),
+              t('FieldMaxLength', { field: t('Email'), maxLength: 255 }),
             );
           }
 
@@ -67,48 +67,55 @@ export const Signin: React.FC = () => {
         layout="vertical"
         onFinish={onFinish}
       >
-        <h2 className={cx('mb-32')}>{t('LoginToAHTicker')}</h2>
+        <h2 className={cx('mb-32')}>{t('SigninToAHTicker')}</h2>
 
         <Form.Item
           className={cx('mb-16')}
           name="email"
-          required
           label={t('Email')}
           rules={rules.email}
         >
-          <Input size="large" placeholder={t('EnterEmail')} />
+          <Input
+            size="large"
+            placeholder={t('EnterField', {
+              field: t('Email').toLowerCase(),
+            })}
+          />
         </Form.Item>
         <Form.Item
           className={cx('mb-16')}
           name="password"
           label={t('Password')}
           rules={rules.password}
+          required={false}
         >
-          <Input size="large" placeholder={t('EnterPassword')} />
+          <Input.Password
+            size="large"
+            placeholder={t('EnterField', {
+              field: t('Password').toLowerCase(),
+            })}
+          />
         </Form.Item>
-        <Form.Item noStyle>
-          <div
-            className={cx(
-              'd-flex',
-              'justify-content-between',
-              'align-items-center',
-              'mt-16',
-            )}
-          >
-            <NavLink to={FORGET_PASSWORD_PATH} className={cx('text-500')}>
-              {t('ForgetPassword')}
-            </NavLink>
-            <Button type="primary" size="large" shape="round" htmlType="submit">
-              {t('Login')}
-            </Button>
-          </div>
-        </Form.Item>
+        <div
+          className={cx(
+            'd-flex',
+            'justify-content-between',
+            'align-items-center',
+          )}
+        >
+          <NavLink to={FORGET_PASSWORD_PATH} className={cx('text-500')}>
+            {t('ForgetPassword')}
+          </NavLink>
+          <Button type="primary" size="large" shape="round" htmlType="submit">
+            {t('Login')}
+          </Button>
+        </div>
       </Form>
 
       <div className={cx('text-500')}>
         {t('NotHaveAccount')}{' '}
         <NavLink to={SIGNUP_PATH} className={cx('text-500', 'primary-color')}>
-          {t('Signup')}
+          {t('SignupNow')}
         </NavLink>
       </div>
     </PublicLayout>

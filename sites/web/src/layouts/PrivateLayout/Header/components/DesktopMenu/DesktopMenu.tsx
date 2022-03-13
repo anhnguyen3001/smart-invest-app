@@ -30,7 +30,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
     // Unauthorization
     return (
       <>
-        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0')}>
+        <Menu.Item key={SIGNIN_PATH} className={cx('pr-0')}>
           <NavLink to={SIGNIN_PATH}>
             <Button className={cx('text-700')} type="ghost" shape="round">
               {t('Signin')}
