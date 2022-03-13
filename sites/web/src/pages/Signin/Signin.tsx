@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { FORGET_PASSWORD_PATH, SIGNUP_PATH } from 'src/constants';
+import { FORGOT_PASSWORD_PATH, SIGNUP_PATH } from 'src/constants';
 import { PublicLayout } from 'src/layouts';
 
 const cx = classNames.bind({});
@@ -103,8 +103,8 @@ export const Signin: React.FC = () => {
             'align-items-center',
           )}
         >
-          <NavLink to={FORGET_PASSWORD_PATH} className={cx('text-500')}>
-            {t('ForgetPassword')}
+          <NavLink to={FORGOT_PASSWORD_PATH} className={cx('text-500')}>
+            {t('ForgotPassword')}
           </NavLink>
           <Button type="primary" size="large" shape="round" htmlType="submit">
             {t('Login')}

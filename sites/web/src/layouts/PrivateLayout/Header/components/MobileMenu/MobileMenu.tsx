@@ -59,7 +59,7 @@ export const MobileMenu: React.FC<MenuHeaderProps> = ({
           <Button
             type="text"
             icon={<MenuOutlined style={{ fontSize: 18 }} />}
-            onClick={() => setVisibleMenu(true)}
+            onClick={() => setVisibleMenu((prev) => !prev)}
           />
         </Menu.Item>
       </Menu>

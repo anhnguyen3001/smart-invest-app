@@ -41,7 +41,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
             type="ghost"
             shape="round"
           >
-            {t('Login')}
+            {t('Signin')}
           </Button>
         </NavLink>
         <strong className={cx('text-18')}>/</strong>
@@ -51,7 +51,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
             type="primary"
             shape="round"
           >
-            {t('Register')}
+            {t('Signup')}
           </Button>
         </NavLink>
       </>

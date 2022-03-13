@@ -1,4 +1,9 @@
-import { homeTranslation, signinTranslation, signupTranslation } from './page';
+import {
+  homeTranslation,
+  signinTranslation,
+  signupTranslation,
+  forgotPasswordTranslation,
+} from './page';
 
 export const translations = {
   BackToHome: 'Về trang chủ',
@@ -27,4 +32,5 @@ export const translations = {
   ...homeTranslation,
   ...signinTranslation,
   ...signupTranslation,
+  ...forgotPasswordTranslation,
 };

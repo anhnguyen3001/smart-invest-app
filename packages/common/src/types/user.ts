@@ -5,9 +5,6 @@ export interface IUser {
   email: string;
 }
 
-export interface IComment {
-  id: number;
-  content: string;
-  user: IUser;
-  date: string;
+export interface SendEmailForgotPassword {
+  email: string;
 }

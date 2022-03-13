@@ -4,13 +4,13 @@ import { IRoute } from 'src/types';
 
 // App pages
 const Home = lazy(() =>
-  import('../../pages/home').then((mod) => ({ default: mod.Home })),
+  import('src/pages/Home').then((mod) => ({ default: mod.Home })),
 );
 const Detail = lazy(() =>
-  import('../../pages/detail').then((mod) => ({ default: mod.Detail })),
+  import('src/pages/Detail').then((mod) => ({ default: mod.Detail })),
 );
 const Search = lazy(() =>
-  import('../../pages/search').then((mod) => ({ default: mod.Search })),
+  import('src/pages/Search').then((mod) => ({ default: mod.Search })),
 );
 
 export const privateRoutes: IRoute[] = [
