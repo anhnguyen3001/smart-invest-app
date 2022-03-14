@@ -11,7 +11,7 @@ export const LocaleSelection: React.FC = () => {
     <Menu>
       {Object.values(REGIONS).map((el) => (
         <Menu.Item key={el.key} onClick={() => changeLanguage(el.key)}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="d-flex align-items-center">
             {el.flag}
             <span style={{ marginLeft: 10 }}>{el.name}</span>
           </div>
@@ -24,7 +24,6 @@ export const LocaleSelection: React.FC = () => {
     <Dropdown
       overlay={localizationMenu}
       placement="bottomRight"
-      overlayStyle={{ top: 16 }}
       trigger={['click']}
     >
       {currentRegion?.flag}

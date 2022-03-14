@@ -54,7 +54,7 @@ export const mockNews: INews[] = Array.apply(0, new Array(5)).map(
 export const mockUser: IUser = {
   id: 1,
   avatar: 'https://joeschmoe.io/api/v1/random',
-  name: `Anhnh`,
+  username: `Anhnh`,
   email: 'nguyenhoanganh12000@gmail.com',
   gender: Gender.female,
 };

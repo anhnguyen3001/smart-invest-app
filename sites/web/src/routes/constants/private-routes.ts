@@ -1,5 +1,10 @@
 import { lazy } from 'react';
-import { DETAIL_PATH, HOME_PATH, SEARCH_PATH } from 'src/constants';
+import {
+  DETAIL_PATH,
+  HOME_PATH,
+  SEARCH_PATH,
+  SETTING_PATH,
+} from 'src/constants';
 import { IRoute } from 'src/types';
 
 // App pages
@@ -11,6 +16,9 @@ const Detail = lazy(() =>
 );
 const Search = lazy(() =>
   import('src/pages/Search').then((mod) => ({ default: mod.Search })),
+);
+const Setting = lazy(() =>
+  import('src/pages/Setting').then((mod) => ({ default: mod.Setting })),
 );
 
 export const privateRoutes: IRoute[] = [
@@ -29,5 +37,10 @@ export const privateRoutes: IRoute[] = [
     exact: true,
     path: SEARCH_PATH,
     component: Search,
+  },
+  {
+    exact: true,
+    path: SETTING_PATH,
+    component: Setting,
   },
 ];

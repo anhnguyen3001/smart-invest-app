@@ -20,7 +20,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ name }) => {
     return (
       <Comment
         key={id}
-        author={user.name}
+        author={user.username}
         avatar={<UserAvatar shape="circle" user={user} />}
         content={<div dangerouslySetInnerHTML={{ __html: content }} />}
         datetime={new Date(date).toLocaleString()}

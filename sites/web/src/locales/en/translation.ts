@@ -1,8 +1,9 @@
 import {
+  forgotPasswordTranslation,
   homeTranslation,
+  settingTranslation,
   signinTranslation,
   signupTranslation,
-  forgotPasswordTranslation,
 } from './page';
 
 export const translations = {
@@ -11,8 +12,10 @@ export const translations = {
 
   Signin: 'Sign in',
   Signup: 'Sign up',
+  ChangePassword: 'Change password',
 
   Reset: 'Reset',
+  Save: 'Save',
 
   // Form Field
   Email: 'Email',
@@ -36,4 +39,5 @@ export const translations = {
   ...signinTranslation,
   ...signupTranslation,
   ...forgotPasswordTranslation,
+  ...settingTranslation,
 };

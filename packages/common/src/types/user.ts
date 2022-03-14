@@ -5,10 +5,11 @@ export enum Gender {
 
 export interface IUser {
   id: number;
-  name: string;
+  username: string;
   avatar: string;
   email: string;
   gender: Gender;
+  phoneNumber?: string;
 }
 
 export interface SendEmailForgotPassword {
@@ -16,6 +17,12 @@ export interface SendEmailForgotPassword {
 }
 
 export interface SetNewPassword {
+  password: string;
+  confirmPassword: string;
+}
+
+export interface ChangePassword {
+  oldPassword: string;
   password: string;
   confirmPassword: string;
 }

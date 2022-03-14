@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { LocaleSelection, ThemeSwitcher } from 'src/components';
 import { ANALYTICS_PATH, HOME_PATH, WATCH_LIST_PATH } from 'src/constants';
-import { useWindowDimensions } from 'src/hooks';
+import { useWindowResize } from 'src/hooks';
 import { DesktopMenu, MobileMenu } from './components';
 import style from './Header.module.scss';
 
@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
     }
   }, [location.pathname]);
 
-  const { isTabletView } = useWindowDimensions();
+  const { isTabletView } = useWindowResize();
 
   const themeMenuItem = (
     <Menu.Item key="theme">

@@ -12,7 +12,6 @@ import {
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
 import { useAuth } from 'src/context';
-import { mockUser } from 'src/mock';
 import { getNavbarLinks, MenuHeaderProps } from '../../utils';
 import { SearchForm } from '../SearchForm';
 import style from './DesktopMenu.module.scss';
@@ -55,7 +54,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
       <Menu>
         <Menu.Item key="profile" icon={<UserAvatar user={user} />}>
           <NavLink to={UPDATE_PROFILE_PATH}>
-            <div className={cx('text-16--bold')}>{user?.name}</div>
+            <div className={cx('text-16--bold')}>{user?.username}</div>
             <div
               className={cx('text-13--bold', 'text-secondary', 'text-line-1')}
             >
