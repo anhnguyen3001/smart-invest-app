@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { TABLET_WIDTH } from 'src/constants';
-import { getWindowDimensions } from 'src/helpers';
+import { MOBILE_WIDTH, TABLET_WIDTH } from 'src/constants';
 
-export const useWindowDimensions = () => {
-  const [dimensions, setDimensions] = useState(getWindowDimensions);
+export const useWindowResize = () => {
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    const handleResize = () => setDimensions(getWindowDimensions());
+    const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -15,7 +14,10 @@ export const useWindowDimensions = () => {
     };
   }, []);
 
-  return { ...dimensions, isTabletView: dimensions.width <= TABLET_WIDTH };
+  return {
+    isTabletView: width <= TABLET_WIDTH,
+    isMobileView: width <= MOBILE_WIDTH,
+  };
 };
 
 export const useQuery = () => {

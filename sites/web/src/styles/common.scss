@@ -7,6 +7,7 @@ $aligns: (
   '96' $align-96,
   '64' $align-64,
   '32' $align-32,
+  '24' $align-24,
   '16' $align-16,
   '8' $align-8,
   '4' $align-4,
@@ -219,4 +220,8 @@ $lines: ('-bottom', '-top', '');
   .section-md {
     margin: $align-32 $align-16;
   }
+}
+
+.p-relative {
+  position: relative;
 }

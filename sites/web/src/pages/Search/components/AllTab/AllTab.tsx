@@ -7,11 +7,15 @@ import { SectionTitle } from './SectionTitle';
 interface AllTabProps {
   tickerListProps: TickerListProps;
   newsListProps: InfiniteNewListProps;
+  onShowMoreTicker: () => void;
+  onShowMoreNews: () => void;
 }
 
 export const AllTab: React.FC<AllTabProps> = ({
   tickerListProps,
   newsListProps,
+  onShowMoreTicker,
+  onShowMoreNews,
 }) => {
   const { t } = useTranslation();
 
@@ -26,14 +30,18 @@ export const AllTab: React.FC<AllTabProps> = ({
 
   return (
     <>
-      <SectionTitle title={t('Tickers')} onShowMore={() => {}} />
+      <SectionTitle title={t('Tickers')} onShowMore={onShowMoreTicker} />
       <TickerList
         {...tickerListProps}
         tickers={showedTickers}
         hasMore={false}
       />
 
-      <SectionTitle className="pt-32" title={t('News')} onShowMore={() => {}} />
+      <SectionTitle
+        className="pt-32"
+        title={t('News')}
+        onShowMore={onShowMoreNews}
+      />
       <InfiniteNewList {...newsListProps} news={showedNews} hasMore={false} />
     </>
   );

@@ -7,7 +7,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { UserAvatar } from 'src/components';
 import { CHANGE_PASSWORD_PATH, SIGNIN_PATH, SIGNUP_PATH } from 'src/constants';
 import { useAuth } from 'src/context';
-import { mockUser } from 'src/mock';
 import { getNavbarLinks } from '../../utils';
 import { SearchForm } from '../SearchForm';
 import styles from './MobileMenuDrawer.module.scss';
@@ -73,9 +72,9 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
       >
         <UserAvatar user={user} size={32} />
         <div className={cx('ml-16', 'flex-1')}>
-          <div className={cx('text-16--bold')}>{mockUser.name}</div>
+          <div className={cx('text-16--bold')}>{user?.username}</div>
           <div className={cx('text-13--bold', 'text-secondary', 'text-line-1')}>
-            {mockUser.email}
+            {user?.email}
           </div>
         </div>
         <Button

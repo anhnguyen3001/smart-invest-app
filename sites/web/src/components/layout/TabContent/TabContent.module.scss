@@ -1,0 +1,78 @@
+.container {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  padding: $align-64;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.tab {
+  :global {
+    .ant-tabs {
+      &-nav {
+        flex: 1 !important;
+      }
+
+      &-content-holder {
+        flex: 3 !important;
+      }
+
+      &-tab {
+        padding-left: 0 !important;
+
+        &-btn {
+          font-size: 1rem;
+        }
+
+        &-active {
+          .ant-tabs-tab-btn {
+            color: $primary-color !important;
+          }
+        }
+      }
+
+      &-tabpane {
+        padding-left: $align-32 !important;
+        padding-bottom: $align-16;
+      }
+    }
+  }
+}
+
+.content {
+  width: 60%;
+}
+
+@include tablet {
+  .container {
+    padding: $align-32;
+  }
+
+  .content {
+    width: 100%;
+  }
+}
+
+@include mobile {
+  .container {
+    padding: $align-32 $align-16;
+  }
+
+  .tab {
+    :global {
+      .ant-tabs {
+        &-nav {
+          flex: unset !important;
+        }
+
+        &-tabpane {
+          padding-left: 0 !important;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}
