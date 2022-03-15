@@ -1,0 +1,9 @@
+.content {
+  width: 60%;
+}
+
+@include tablet {
+  .content {
+    width: 100%;
+  }
+}

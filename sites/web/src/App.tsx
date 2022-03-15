@@ -18,7 +18,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Suspense fallback={<Spin spinning={true} />}>
+    <Suspense fallback={<Spin className="app-spin" spinning={true} />}>
       <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
         <AuthProvider>
           <Routes />

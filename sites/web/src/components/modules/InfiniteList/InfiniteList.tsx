@@ -1,6 +1,7 @@
 import { Empty } from 'antd';
-import React from 'react';
+import React, { useRef } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useIntersection } from 'src/hooks';
 
 export interface InfiniteListProps {
   dataLength: number;
@@ -20,6 +21,9 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
   children,
   loading,
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersection(ref);
+
   const fetchNextPage = () => {
     setPage(page + 1);
   };
@@ -27,24 +31,26 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
   if (isEmpty) return <Empty />;
 
   return (
-    <InfiniteScroll
-      style={{ overflowX: 'hidden' }}
-      dataLength={dataLength}
-      hasMore={hasMore}
-      loader={page > 1 && <h4>Loading...</h4>}
-      // loader={
-      //   <Spin
-      //     style={{
-      //       position: 'relative',
-      //       left: '50%',
-      //       transform: 'translateX(-50%)',
-      //     }}
-      //     spinning={loading}
-      //   />
-      // }
-      next={fetchNextPage}
-    >
-      {children}
-    </InfiniteScroll>
+    <div ref={ref}>
+      <InfiniteScroll
+        style={{ overflowX: 'hidden' }}
+        dataLength={dataLength}
+        hasMore={isVisible && hasMore}
+        loader={page > 1 && <h4>Loading...</h4>}
+        // loader={
+        //   <Spin
+        //     style={{
+        //       position: 'relative',
+        //       left: '50%',
+        //       transform: 'translateX(-50%)',
+        //     }}
+        //     spinning={loading}
+        //   />
+        // }
+        next={fetchNextPage}
+      >
+        {children}
+      </InfiniteScroll>
+    </div>
   );
 };

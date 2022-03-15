@@ -1,4 +1,4 @@
-import { Locale } from "antd/lib/locale-provider";
+import { Locale } from 'antd/lib/locale-provider';
 
 export interface IRegionItem {
   key: string;
@@ -24,4 +24,8 @@ export interface ITheme {
   successColor: string;
   errorColor: string;
   borderColor: string;
+}
+
+export interface StyleProps {
+  className?: string;
 }
