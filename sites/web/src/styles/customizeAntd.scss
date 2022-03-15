@@ -39,6 +39,8 @@
 
 // Layout
 .ant-layout {
+  min-height: 100%;
+
   &-content {
     background: $bg-primary !important;
   }

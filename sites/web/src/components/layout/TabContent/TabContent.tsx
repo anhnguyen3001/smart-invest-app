@@ -7,7 +7,7 @@ import styles from './TabContent.module.scss';
 const cx = classNames.bind(styles);
 
 export interface TabPaneProps {
-  tab: string;
+  tab: React.ReactNode;
   key: string;
   children: React.ReactNode;
 }
@@ -29,9 +29,7 @@ export const TabContent: React.FC<TabContentProps> = ({
 
   const renderTabContent = () => {
     return tabPanes.map(({ children, ...rest }) => (
-      <Tabs.TabPane {...rest}>
-        <div className={cx('content')}>{children}</div>
-      </Tabs.TabPane>
+      <Tabs.TabPane {...rest}>{children}</Tabs.TabPane>
     ));
   };
 

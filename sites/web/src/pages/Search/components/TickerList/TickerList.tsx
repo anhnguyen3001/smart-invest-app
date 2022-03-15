@@ -9,8 +9,8 @@ export interface TickerListProps extends Omit<InfiniteListProps, 'dataLength'> {
 
 export const TickerList: React.FC<TickerListProps> = ({ tickers, ...rest }) => {
   const renderItems = () => {
-    return tickers?.map((ticker) => (
-      <Col key={ticker.companyId} lg={6} md={8} sm={12} xs={24}>
+    return tickers?.map((ticker, index) => (
+      <Col key={index} xxl={6} lg={8} xs={24}>
         <TickerCard ticker={ticker} />
       </Col>
     ));
@@ -18,7 +18,7 @@ export const TickerList: React.FC<TickerListProps> = ({ tickers, ...rest }) => {
 
   return (
     <InfiniteList dataLength={tickers?.length || 0} {...rest}>
-      <Row gutter={[8, 16]} className="mb-16">
+      <Row gutter={[16, 16]} className="mb-16">
         {renderItems()}
       </Row>
     </InfiniteList>

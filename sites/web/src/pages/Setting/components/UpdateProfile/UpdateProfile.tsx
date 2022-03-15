@@ -8,6 +8,7 @@ import { UploadImage } from 'src/components';
 import { UploadFile } from 'antd/lib/upload/interface';
 import classNames from 'classnames/bind';
 import styles from './UpdateProfile.module.scss';
+import { StyleProps } from 'src/types';
 
 const cx = classNames.bind(styles);
 
@@ -15,7 +16,7 @@ type FormField = Omit<IUser, 'id' | 'avatar'> & {
   avatar: Partial<UploadFile>[];
 };
 
-export const UpdateProfile: React.FC = () => {
+export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { avatar, email, gender, phoneNumber, username } = user || {};
@@ -73,6 +74,7 @@ export const UpdateProfile: React.FC = () => {
 
   return (
     <Form
+      className={className}
       layout="vertical"
       form={form}
       initialValues={initialValues}
@@ -106,6 +108,7 @@ export const UpdateProfile: React.FC = () => {
       </Form.Item>
 
       <Form.Item
+        className={cx('mb-24')}
         name="phoneNumber"
         label={t('PhoneNumber')}
         rules={rules.phoneNumber}
@@ -118,11 +121,15 @@ export const UpdateProfile: React.FC = () => {
         />
       </Form.Item>
 
-      <Form.Item className={cx('mb-0')}>
-        <Button type="primary" size="large" shape="round" htmlType="submit">
-          {t('Save')}
-        </Button>
-      </Form.Item>
+      <Button
+        className={cx('submit-btn')}
+        type="primary"
+        size="large"
+        shape="round"
+        htmlType="submit"
+      >
+        {t('Save')}
+      </Button>
     </Form>
   );
 };

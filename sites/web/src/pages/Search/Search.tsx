@@ -1,17 +1,21 @@
-import { Spin, Tabs } from 'antd';
+import { Spin } from 'antd';
 import classNames from 'classnames/bind';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { InfiniteNewList, Text } from 'src/components';
-import { useInfiniteNews, useQuery } from 'src/hooks';
-import { AllTab, TickerList } from './components';
+import {
+  InfiniteNewList,
+  TabContent,
+  TabPaneProps,
+  Text,
+} from 'src/components';
+import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
+import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
 const TAB_KEY = {
-  all: 'all',
   ticker: 'ticker',
   news: 'news',
 };
@@ -20,7 +24,7 @@ interface SearchProps {}
 
 export const Search: React.FC<SearchProps> = () => {
   const { t } = useTranslation();
-  const [activeKey, setActiveKey] = useState(TAB_KEY.all);
+  const { isMobileView } = useWindowResize();
 
   const query = useQuery();
   const q = query.get('q') || undefined;
@@ -43,10 +47,7 @@ export const Search: React.FC<SearchProps> = () => {
     setPage: setNewsPage,
   } = useInfiniteNews({ q });
 
-  const totalTickers = tickers?.length || 0;
-  const totalNews = news?.length || 0;
-
-  const renderTabContent = () => {
+  const getTabPanes = (): TabPaneProps[] => {
     const renderTabTitle = (name: string, total?: number) => {
       return (
         <>
@@ -62,64 +63,52 @@ export const Search: React.FC<SearchProps> = () => {
       );
     };
 
-    const tickerListProps = {
-      tickers,
-      isEmpty: tickerIsEmpty,
-      hasMore: tickerHasMore,
-      loading: tickerLoading,
-      page: tickerPage,
-      setPage: setTickerPage,
-    };
-
-    const newsListProps = {
-      news,
-      isEmpty: newsIsEmpty,
-      hasMore: newsHasMore,
-      loading: newsLoading,
-      page: newsPage,
-      setPage: setNewsPage,
-    };
-
-    const tabs = [
+    return [
       {
-        tab: renderTabTitle(t('All'), totalTickers + totalNews),
-        key: TAB_KEY.all,
+        tab: renderTabTitle(t('Tickers'), tickers?.length || 0),
+        key: TAB_KEY.ticker,
         children: (
-          <AllTab
-            tickerListProps={tickerListProps}
-            newsListProps={newsListProps}
-            onShowMoreTicker={() => setActiveKey(TAB_KEY.ticker)}
-            onShowMoreNews={() => setActiveKey(TAB_KEY.news)}
-          />
+          <>
+            {!isMobileView && <h3 className={cx('mb-16')}>{t('Tickers')}</h3>}
+            <TickerList
+              tickers={tickers}
+              isEmpty={tickerIsEmpty}
+              hasMore={tickerHasMore}
+              loading={tickerLoading}
+              page={tickerPage}
+              setPage={setTickerPage}
+            />
+          </>
         ),
       },
       {
-        tab: renderTabTitle(t('Tickers'), totalTickers),
-        key: TAB_KEY.ticker,
-        children: <TickerList {...tickerListProps} />,
-      },
-      {
-        tab: renderTabTitle(t('News'), totalNews),
+        tab: renderTabTitle(t('News'), news?.length || 0),
         key: TAB_KEY.news,
-        children: <InfiniteNewList {...newsListProps} />,
+        children: (
+          <>
+            {!isMobileView && <h3 className={cx('mb-16')}>{t('News')}</h3>}
+            <InfiniteNewList
+              news={news}
+              isEmpty={newsIsEmpty}
+              hasMore={newsHasMore}
+              loading={newsLoading}
+              page={newsPage}
+              setPage={setNewsPage}
+            />
+          </>
+        ),
       },
     ];
-
-    return tabs.map((tabPanes) => <Tabs.TabPane {...tabPanes} />);
+    // eslint-disable-next-line
   };
 
   return (
     <Spin spinning={tickerLoading || newsLoading}>
-      <div className={cx('section-md')}>
-        <h2 className={cx('mb-32')}>{t('SearchResult')}</h2>
-        <Tabs
-          className={cx('tab')}
-          activeKey={activeKey}
-          onTabClick={setActiveKey}
-        >
-          {renderTabContent()}
-        </Tabs>
-      </div>
+      <TabContent
+        title={t('SearchResult')}
+        defaultActiveKey={TAB_KEY.ticker}
+        tabPanes={getTabPanes()}
+      />
     </Spin>
   );
 };

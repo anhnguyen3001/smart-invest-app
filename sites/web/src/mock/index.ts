@@ -34,7 +34,7 @@ export const mockTicker: ITicker = {
 export const mockTickers: ITicker[] = Array.apply(0, new Array(12)).map(
   (_, index) => ({
     ...mockTicker,
-    companyId: Math.random(),
+    companyId: index + 1,
   }),
 );
 

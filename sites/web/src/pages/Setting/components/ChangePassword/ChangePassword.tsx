@@ -6,8 +6,12 @@ import {
 import { useForm } from 'antd/lib/form/Form';
 import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames/bind';
+import { StyleProps } from 'src/types';
 
-export const ChangePassword: React.FC = () => {
+const cx = classNames.bind({});
+
+export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
   const { t } = useTranslation();
 
   const [form] = useForm<ChangePasswordReq>();
@@ -62,7 +66,7 @@ export const ChangePassword: React.FC = () => {
   };
 
   return (
-    <Form layout="vertical" form={form}>
+    <Form className={className} layout="vertical" form={form}>
       <Form.Item
         name="oldPassword"
         label={t('OldPassword')}
@@ -91,7 +95,7 @@ export const ChangePassword: React.FC = () => {
       </Form.Item>
 
       <Form.Item
-        className="mb-24"
+        className={cx('mb-24')}
         name="confirmPassword"
         label={t('ConfirmPassword')}
         rules={rules.confirmPassword}
@@ -104,7 +108,7 @@ export const ChangePassword: React.FC = () => {
         />
       </Form.Item>
 
-      <Form.Item className="mb-0">
+      <Form.Item className={cx('mb-0')}>
         <Button type="primary" size="large" shape="round" htmlType="submit">
           {t('Save')}
         </Button>

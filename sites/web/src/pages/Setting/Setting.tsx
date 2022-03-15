@@ -4,6 +4,10 @@ import { SETTING_TAB_KEY } from 'src/constants';
 import { useQuery } from 'src/hooks';
 import { TabContent, TabPaneProps } from 'src/components';
 import { ChangePassword, UpdateProfile } from './components';
+import styles from './Setting.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 export const Setting: React.FC = () => {
   const { t } = useTranslation();
@@ -15,12 +19,12 @@ export const Setting: React.FC = () => {
     {
       tab: t('UpdateProfile'),
       key: SETTING_TAB_KEY.updateProfile,
-      children: <UpdateProfile />,
+      children: <UpdateProfile className={cx('content')} />,
     },
     {
       tab: t('ChangePassword'),
       key: SETTING_TAB_KEY.changePassword,
-      children: <ChangePassword />,
+      children: <ChangePassword className={cx('content')} />,
     },
   ];
 
