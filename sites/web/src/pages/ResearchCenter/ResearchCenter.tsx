@@ -11,18 +11,16 @@ import {
 import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
 import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
-import styles from './Search.module.scss';
+import styles from './ResearchCenter.module.scss';
 
 const cx = classNames.bind(styles);
 
 const TAB_KEY = {
-  ticker: 'ticker',
   news: 'news',
+  pricePredictation: 'pricePredictation',
 };
 
-interface SearchProps {}
-
-export const Search: React.FC<SearchProps> = () => {
+export const ResearchCenter: React.FC = () => {
   const { t } = useTranslation();
   const { isMobileView } = useWindowResize();
 
@@ -48,28 +46,38 @@ export const Search: React.FC<SearchProps> = () => {
   } = useInfiniteNews({ q });
 
   const getTabPanes = (): TabPaneProps[] => {
-    const renderTabTitle = (name: string, total?: number) => {
-      return (
-        <>
-          {name}
-          <Text
-            level={4}
-            block={false}
-            className={cx('total', 'px-8', 'py-4', 'ml-8')}
-          >
-            ({total})
-          </Text>
-        </>
-      );
-    };
-
     return [
       {
-        tab: renderTabTitle(t('Tickers'), tickers?.length || 0),
-        key: TAB_KEY.ticker,
+        tab: t('News'),
+        key: TAB_KEY.news,
         children: (
           <>
-            {!isMobileView && <h3 className={cx('mb-16')}>{t('Tickers')}</h3>}
+            {!isMobileView && <h3 className={cx('mb-16')}>{t('News')}</h3>}
+            <InfiniteNewList
+              infiniteListProps={{
+                className: cx('news'),
+                isEmpty: newsIsEmpty,
+                hasMore: newsHasMore,
+                loading: newsLoading,
+                page: newsPage,
+                setPage: setNewsPage,
+              }}
+              newListProps={{
+                size: 'large',
+                news,
+              }}
+            />
+          </>
+        ),
+      },
+      {
+        tab: t('PricePredictation'),
+        key: TAB_KEY.pricePredictation,
+        children: (
+          <>
+            {!isMobileView && (
+              <h3 className={cx('mb-16')}>{t('PricePredictation')}</h3>
+            )}
             <TickerList
               tickers={tickers}
               isEmpty={tickerIsEmpty}
@@ -81,27 +89,6 @@ export const Search: React.FC<SearchProps> = () => {
           </>
         ),
       },
-      {
-        tab: renderTabTitle(t('News'), news?.length || 0),
-        key: TAB_KEY.news,
-        children: (
-          <>
-            {!isMobileView && <h3 className={cx('mb-16')}>{t('News')}</h3>}
-            <InfiniteNewList
-              infiniteListProps={{
-                isEmpty: newsIsEmpty,
-                hasMore: newsHasMore,
-                loading: newsLoading,
-                page: newsPage,
-                setPage: setNewsPage,
-              }}
-              newListProps={{
-                news,
-              }}
-            />
-          </>
-        ),
-      },
     ];
     // eslint-disable-next-line
   };
@@ -109,8 +96,8 @@ export const Search: React.FC<SearchProps> = () => {
   return (
     <Spin spinning={tickerLoading || newsLoading}>
       <TabContent
-        title={t('SearchResult')}
-        defaultActiveKey={TAB_KEY.ticker}
+        title={t('ResearchCenter')}
+        defaultActiveKey={TAB_KEY.news}
         tabPanes={getTabPanes()}
       />
     </Spin>

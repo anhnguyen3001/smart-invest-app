@@ -1,20 +1,23 @@
 import { INews } from '@ah-ticker/common';
 import React from 'react';
 import { InfiniteList, InfiniteListProps } from 'src/components';
-import { NewsList } from '../NewsList';
+import { NewsList, NewsListProps } from '../NewsList';
 
-export interface InfiniteNewListProps
-  extends Omit<InfiniteListProps, 'dataLength'> {
-  news?: INews[];
+export interface InfiniteNewListProps {
+  newListProps: NewsListProps;
+  infiniteListProps: Omit<InfiniteListProps, 'dataLength'>;
 }
 
 export const InfiniteNewList: React.FC<InfiniteNewListProps> = ({
-  news,
-  ...rest
+  newListProps,
+  infiniteListProps,
 }) => {
   return (
-    <InfiniteList dataLength={news?.length || 0} {...rest}>
-      <NewsList news={news} />
+    <InfiniteList
+      dataLength={newListProps?.news?.length || 0}
+      {...infiniteListProps}
+    >
+      <NewsList {...newListProps} />
     </InfiniteList>
   );
 };

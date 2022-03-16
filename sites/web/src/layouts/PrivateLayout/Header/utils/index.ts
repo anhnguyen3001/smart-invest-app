@@ -1,5 +1,9 @@
-import React from "react";
-import { ANALYTICS_PATH, HOME_PATH, WATCH_LIST_PATH } from "src/constants";
+import React from 'react';
+import {
+  RESEARCH_CENTER_PATH,
+  HOME_PATH,
+  WATCH_LIST_PATH,
+} from 'src/constants';
 
 export interface MenuHeaderProps {
   activeMenuItem: string;
@@ -9,21 +13,21 @@ export interface MenuHeaderProps {
 }
 
 export const getNavbarLinks = (
-  t: any
+  t: any,
 ): {
   to: string;
   title: string;
 }[] => [
   {
     to: HOME_PATH,
-    title: t("Discovery"),
+    title: t('Discovery'),
   },
   {
-    to: ANALYTICS_PATH,
-    title: t("Analysis"),
+    to: RESEARCH_CENTER_PATH,
+    title: t('ResearchCenter'),
   },
   {
     to: WATCH_LIST_PATH,
-    title: t("Watchlist"),
+    title: t('Watchlist'),
   },
 ];

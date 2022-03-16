@@ -13,6 +13,7 @@ export const translations = {
 
   Signin: 'Sign in',
   Signup: 'Sign up',
+  ResearchCenter: 'Research center',
   ChangePassword: 'Change password',
 
   Reset: 'Reset',

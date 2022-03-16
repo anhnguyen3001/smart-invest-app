@@ -13,8 +13,11 @@ export const translations = {
 
   Signin: 'Đăng nhập',
   Signup: 'Đăng ký',
+  ResearchCenter: 'Trung tâm phân tích',
+  ChangePassword: 'Đổi mật khẩu',
 
   Reset: 'Đặt lại',
+  Save: 'Lưu',
 
   // Form Field
   Email: 'Email',
