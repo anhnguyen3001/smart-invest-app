@@ -3,14 +3,7 @@ import viVN from 'antd/lib/locale/vi_VN';
 import React from 'react';
 import usaIcon from 'src/assets/images/usa.svg';
 import vietnamIcon from 'src/assets/images/vietnam.svg';
-import { translations as enTrans } from 'src/locales/en';
-import { translations as viTrans } from 'src/locales/vi';
 import { IRegion } from 'src/types';
-
-export const LANG_RESOURCES = {
-  vi: { translation: viTrans },
-  en: { translation: enTrans },
-};
 
 export const DEFAULT_LANG = 'en';
 
