@@ -15,6 +15,10 @@ export const translations = {
   Signup: 'Đăng ký',
   ResearchCenter: 'Trung tâm phân tích',
   ChangePassword: 'Đổi mật khẩu',
+  VerifyUser: 'Xác thực người dùng',
+
+  NotReceiveMail: 'Không nhận được thư?',
+  Resend: 'Gửi lại.',
 
   Reset: 'Đặt lại',
   Save: 'Lưu',

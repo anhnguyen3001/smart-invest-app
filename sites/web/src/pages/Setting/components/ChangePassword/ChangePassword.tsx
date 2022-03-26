@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  ChangePassword as ChangePasswordReq,
-  PATTERN_VALIDATION,
-} from '@ah-ticker/common';
+import { ChangePasswordReq, PATTERN_VALIDATION } from '@ah-ticker/common';
 import { useForm } from 'antd/lib/form/Form';
 import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';

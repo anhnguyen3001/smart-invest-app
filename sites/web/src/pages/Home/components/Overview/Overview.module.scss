@@ -2,3 +2,14 @@
   padding: $align-64;
   background-color: $bg-primary-light;
 }
+
+.left {
+  padding-right: $align-64;
+}
+
+@include mobile {
+  .left {
+    padding-right: 0;
+    padding-bottom: $align-32;
+  }
+}

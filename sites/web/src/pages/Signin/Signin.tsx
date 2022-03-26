@@ -1,4 +1,4 @@
-import { PATTERN_VALIDATION } from '@ah-ticker/common';
+import { authApi, PATTERN_VALIDATION, LoginReq } from '@ah-ticker/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
@@ -6,19 +6,17 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { FORGOT_PASSWORD_PATH, SIGNUP_PATH } from 'src/constants';
-import { PublicLayout } from 'src/layouts';
+import { useApp, useAuth } from 'src/context';
+import { setLS } from 'src/helpers';
 
 const cx = classNames.bind({});
 
-interface SigninFormField {
-  email: string;
-  password: string;
-}
-
 export const Signin: React.FC = () => {
   const { t } = useTranslation();
+  const { setLoading } = useApp();
+  const { setAccessToken } = useAuth();
 
-  const [form] = useForm<SigninFormField>();
+  const [form] = useForm<LoginReq>();
 
   const rules = {
     email: [
@@ -55,12 +53,22 @@ export const Signin: React.FC = () => {
     ],
   };
 
-  const onFinish = (data: SigninFormField) => {
-    console.log('data ', data);
+  const onFinish = async (data: LoginReq) => {
+    setLoading(true);
+
+    try {
+      const res = await authApi.login(data);
+
+      setAccessToken(res.accessToken);
+      setLS('user', JSON.stringify(res));
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <PublicLayout>
+    <>
       <Form
         className={cx('w-100', 'm-auto')}
         form={form}
@@ -112,12 +120,12 @@ export const Signin: React.FC = () => {
         </div>
       </Form>
 
-      <div className={cx('text-500')}>
+      <div className={cx('text-500', 'text-center')}>
         {t('NotHaveAccount')}{' '}
         <NavLink to={SIGNUP_PATH} className={cx('text-500', 'primary-color')}>
           {t('SignupNow')}
         </NavLink>
       </div>
-    </PublicLayout>
+    </>
   );
 };

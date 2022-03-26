@@ -1,26 +1,22 @@
-import { PATTERN_VALIDATION } from '@ah-ticker/common';
+import { authApi, PATTERN_VALIDATION, SignupReq } from '@ah-ticker/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { SIGNIN_PATH } from 'src/constants';
-import { PublicLayout } from 'src/layouts';
+import { useApp } from 'src/context';
+import { SuccessContent } from './components';
 
 const cx = classNames.bind({});
 
-interface SignupFormField {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
 export const Signup: React.FC = () => {
   const { t } = useTranslation();
+  const { setLoading } = useApp();
+  const [isDoneSignUp, setIsDoneSignup] = useState(false);
 
-  const [form] = useForm<SignupFormField>();
+  const [form] = useForm<SignupReq>();
 
   const rules = {
     username: [
@@ -101,12 +97,28 @@ export const Signup: React.FC = () => {
     ],
   };
 
-  const onFinish = (data: SignupFormField) => {
-    console.log('data ', data);
+  const onFinish = async ({ username, email, ...rest }: SignupReq) => {
+    setLoading(true);
+
+    const submitData: SignupReq = {
+      username: username.trim(),
+      email: email.trim(),
+      ...rest,
+    };
+
+    try {
+      await authApi.signup(submitData);
+      setIsDoneSignup(true);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return (
-    <PublicLayout>
+  return isDoneSignUp ? (
+    <SuccessContent email={form.getFieldValue('email')?.trim()} />
+  ) : (
+    <>
       <Form
         className={cx('w-100', 'm-auto')}
         form={form}
@@ -116,7 +128,6 @@ export const Signup: React.FC = () => {
         <h2 className={cx('mb-32')}>{t('SignupToAHTicker')}</h2>
 
         <Form.Item
-          className={cx('mb-8')}
           name="username"
           label={t('Username')}
           rules={rules.username}
@@ -130,12 +141,7 @@ export const Signup: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item
-          className={cx('mb-8')}
-          name="email"
-          label={t('Email')}
-          rules={rules.email}
-        >
+        <Form.Item name="email" label={t('Email')} rules={rules.email}>
           <Input
             size="large"
             placeholder={t('EnterField', {
@@ -144,12 +150,7 @@ export const Signup: React.FC = () => {
           />
         </Form.Item>
 
-        <Form.Item
-          className={cx('mb-8')}
-          name="password"
-          label={t('Password')}
-          rules={rules.password}
-        >
+        <Form.Item name="password" label={t('Password')} rules={rules.password}>
           <Input.Password
             size="large"
             placeholder={t('EnterField', {
@@ -158,7 +159,7 @@ export const Signup: React.FC = () => {
           />
         </Form.Item>
         <Form.Item
-          className={cx('mb-8')}
+          className={cx('mb-24')}
           name="confirmPassword"
           label={t('ConfirmPassword')}
           rules={rules.confirmPassword}
@@ -178,12 +179,12 @@ export const Signup: React.FC = () => {
         </Form.Item>
       </Form>
 
-      <div className={cx('text-500')}>
+      <div className={cx('text-500', 'text-center')}>
         {t('HaveAccount')}{' '}
         <NavLink to={SIGNIN_PATH} className={cx('text-500', 'primary-color')}>
           {t('SigninNow')}
         </NavLink>
       </div>
-    </PublicLayout>
+    </>
   );
 };

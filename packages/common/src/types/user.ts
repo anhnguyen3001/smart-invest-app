@@ -21,8 +21,13 @@ export interface SetNewPassword {
   confirmPassword: string;
 }
 
-export interface ChangePassword {
+export interface ChangePasswordReq {
   oldPassword: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface UpdateInfoReq {
+  username: string;
+  avatar: string;
 }

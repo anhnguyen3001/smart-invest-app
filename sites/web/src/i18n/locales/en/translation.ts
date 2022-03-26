@@ -15,6 +15,10 @@ export const translations = {
   Signup: 'Sign up',
   ResearchCenter: 'Research center',
   ChangePassword: 'Change password',
+  VerifyUser: 'Verify user',
+
+  NotReceiveMail: 'Not receive mail?',
+  Resend: 'Resend.',
 
   Reset: 'Reset',
   Save: 'Save',

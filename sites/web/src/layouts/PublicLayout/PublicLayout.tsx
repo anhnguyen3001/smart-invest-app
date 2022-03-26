@@ -26,11 +26,11 @@ export const PublicLayout: React.FC = ({ children }) => {
           className={cx('menu', 'align-items-center', 'justify-content-end')}
           style={{ position: 'relative' }}
         >
-          <Menu.Item key="theme" className={cx('px-0')}>
-            <ThemeSwitcher />
-          </Menu.Item>
-          <Menu.Item key="locale" className={cx('pr-0', 'pl-16')}>
+          <Menu.Item key="locale" className={cx('px-0')}>
             <LocaleSelection />
+          </Menu.Item>
+          <Menu.Item key="theme" className={cx('pr-0', 'pl-16')}>
+            <ThemeSwitcher />
           </Menu.Item>
         </Menu>
 

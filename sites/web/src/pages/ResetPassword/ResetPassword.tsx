@@ -1,13 +1,14 @@
 import { PATTERN_VALIDATION, SetNewPassword } from '@ah-ticker/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from 'src/components/elements';
-import { PublicLayout } from 'src/layouts';
+import { Loading, Text } from 'src/components';
 
 export const ResetPassword: React.FC = () => {
   const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
 
   const [form] = useForm<SetNewPassword>();
 
@@ -58,7 +59,7 @@ export const ResetPassword: React.FC = () => {
   };
 
   return (
-    <PublicLayout>
+    <Loading loading={loading}>
       <Form
         className="m-auto w-100"
         form={form}
@@ -102,6 +103,6 @@ export const ResetPassword: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </PublicLayout>
+    </Loading>
   );
 };

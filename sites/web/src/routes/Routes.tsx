@@ -1,21 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { publicRoutes } from './constants';
-import { PrivateRoutes } from './PrivateRoutes';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { Loading } from 'src/components';
+import { HOME_PATH } from 'src/constants';
+import { useApp, useAuth } from 'src/context';
+import { privateRoutes, publicRoutes } from './constants';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const Routes: React.FC = () => {
-  return (
-    <Router>
-      <Switch>
-        {/* <PublicLayout>
-        
-        </PublicLayout> */}
-        {publicRoutes.map((route) => (
-          <Route key={route.path} {...route} />
-        ))}
+  const { loading } = useApp();
+  const { accessToken } = useAuth();
 
-        <Route path="/" component={PrivateRoutes} />
-      </Switch>
-    </Router>
+  return (
+    <Loading loading={loading}>
+      <Router>
+        <Switch>
+          {publicRoutes.map((route) => (
+            <PublicRoute
+              key={route.path}
+              isAuthenticated={!!accessToken}
+              {...route}
+            />
+          ))}
+          {privateRoutes.map((route) => (
+            <PrivateRoute
+              key={route.path}
+              isAuthenticated={!!accessToken}
+              {...route}
+            />
+          ))}
+          <Redirect to={HOME_PATH} />
+        </Switch>
+      </Router>
+    </Loading>
   );
 };

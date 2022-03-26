@@ -6,14 +6,14 @@ export interface IPagination {
   totalItems: number;
 }
 
-interface ResponseWithPagination {
+interface ResWithPagination {
   pagination: IPagination;
 }
 
-export interface SearchTickersResponse extends ResponseWithPagination {
+export interface SearchTickersResponse extends ResWithPagination {
   tickers: ITicker[];
 }
 
-export interface FinancialStatementsResponse extends ResponseWithPagination {
+export interface FinancialStatementsResponse extends ResWithPagination {
   financialStatements: IFinancialStatement[];
 }

@@ -4,8 +4,8 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
-import { UserAvatar } from 'src/components';
-import { CHANGE_PASSWORD_PATH, SIGNIN_PATH, SIGNUP_PATH } from 'src/constants';
+import { Text, UserAvatar } from 'src/components';
+import { CHANGE_PASSWORD_PATH } from 'src/constants';
 import { useAuth } from 'src/context';
 import { getNavbarLinks } from '../../utils';
 import { SearchForm } from '../SearchForm';
@@ -38,30 +38,6 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
 
   const footer = useMemo(() => {
     return (
-      <>
-        <NavLink to={SIGNIN_PATH} className={cx('flex-1')}>
-          <Button
-            className={cx('text-700', 'w-100')}
-            type="ghost"
-            shape="round"
-          >
-            {t('Signin')}
-          </Button>
-        </NavLink>
-        <strong className={cx('text-18')}>/</strong>
-        <NavLink to={SIGNUP_PATH} className={cx('flex-1')}>
-          <Button
-            className={cx('text-700', 'w-100')}
-            type="primary"
-            shape="round"
-          >
-            {t('Signup')}
-          </Button>
-        </NavLink>
-      </>
-    );
-
-    return (
       <div
         className={cx(
           'd-flex',
@@ -72,11 +48,14 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
       >
         <UserAvatar user={user} size={32} />
         <div className={cx('ml-16', 'flex-1')}>
-          <div className={cx('text-16--bold')}>{user?.username}</div>
-          <div className={cx('text-13--bold', 'text-secondary', 'text-line-1')}>
+          <Text level={2} fontWeight={500}>
+            {user?.username}
+          </Text>
+          <Text level={4} fontWeight={500} type="secondary" ellipsis>
             {user?.email}
-          </div>
+          </Text>
         </div>
+
         <Button
           type="text"
           size="large"
@@ -85,19 +64,19 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
       </div>
     );
     // eslint-disable-next-line
-  }, []);
+  }, [JSON.stringify(user)]);
 
   const authMenuItem = useMemo(() => {
     return (
       <>
         <Menu.Divider className={cx('mb-16')} />
-        <Menu.Item key="changePassword" className={cx('text-700')}>
+        <Menu.Item key="changePassword" className={cx('text-700', 'text-1')}>
           <NavLink to={CHANGE_PASSWORD_PATH}>{t('ChangePassword')}</NavLink>
         </Menu.Item>
       </>
     );
     // eslint-disable-next-line
-  }, []);
+  }, [JSON.stringify(user)]);
 
   return (
     <Drawer
@@ -109,6 +88,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
       onClose={() => setVisible(false)}
       title={<SearchForm />}
       footer={footer}
+      zIndex={1010}
     >
       <Menu className={cx('menu')} selectedKeys={[activeMenuItem]}>
         {navbarLinks.map(({ title, to }) => (

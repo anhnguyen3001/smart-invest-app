@@ -49,7 +49,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'auto',
+        endOfLine: 'crlf',
       },
     ],
     'react-hooks/rules-of-hooks': 'warn', // Checks rules of Hooks

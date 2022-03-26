@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,8 +7,6 @@ import { UserAvatar } from 'src/components';
 import {
   CHANGE_PASSWORD_PATH,
   HOME_PATH,
-  SIGNIN_PATH,
-  SIGNUP_PATH,
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
 import { useAuth } from 'src/context';
@@ -29,27 +27,8 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
   const navbarLinks = getNavbarLinks(t);
 
   const authMenuItem = useMemo(() => {
-    // Unauthorization
-    return (
-      <>
-        <Menu.Item key={SIGNIN_PATH} className={cx('pr-0')}>
-          <NavLink to={SIGNIN_PATH}>
-            <Button className={cx('text-700')} type="ghost" shape="round">
-              {t('Signin')}
-            </Button>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key={SIGNUP_PATH} className={cx('pr-0', 'pl-8')}>
-          <NavLink to={SIGNUP_PATH}>
-            <Button className={cx('text-700')} type="primary" shape="round">
-              {t('Signup')}
-            </Button>
-          </NavLink>
-        </Menu.Item>
-      </>
-    );
+    if (!user) return null;
 
-    // Authorization
     const userMenu = (
       <Menu>
         <Menu.Item key="profile" icon={<UserAvatar user={user} />}>
@@ -71,14 +50,14 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
       </Menu>
     );
     return (
-      <Menu.Item>
+      <Menu.Item key="user">
         <Dropdown overlay={userMenu}>
           <UserAvatar user={user} size={40} />
         </Dropdown>
       </Menu.Item>
     );
     // eslint-disable-next-line
-  }, []);
+  }, [JSON.stringify(user)]);
 
   return (
     <Menu

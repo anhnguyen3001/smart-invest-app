@@ -19,6 +19,7 @@ export const Home: React.FC = () => {
   return (
     <div>
       <OverView />
+
       <div className={cx('section-md')}>
         <WatchList />
       </div>
