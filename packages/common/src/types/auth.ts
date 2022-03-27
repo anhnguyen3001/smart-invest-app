@@ -29,6 +29,11 @@ export interface ForgetPasswordReq {
   email: string;
 }
 
+export interface ResetPasswordParams {
+  email: string;
+  token: string;
+}
+
 export interface ResetPasswordReq {
   oldPassword: string;
   newPassword: string;

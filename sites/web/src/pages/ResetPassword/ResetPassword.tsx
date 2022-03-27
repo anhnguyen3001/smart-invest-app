@@ -1,16 +1,29 @@
-import { PATTERN_VALIDATION, SetNewPassword } from '@ah-ticker/common';
-import { Button, Form, Input } from 'antd';
+import {
+  authApi,
+  PATTERN_VALIDATION,
+  ResetPasswordReq,
+} from '@ah-ticker/common';
+import { Button, Form, Input, notification } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loading, Text } from 'src/components';
+import { useHistory } from 'react-router-dom';
+import { SIGNIN_PATH } from 'src/constants';
+import { useApp } from 'src/context';
+import { useQuery } from 'src/hooks';
 
 export const ResetPassword: React.FC = () => {
   const { t } = useTranslation();
 
-  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  const [form] = useForm<SetNewPassword>();
+  const { setLoading } = useApp();
+
+  const query = useQuery();
+  const email = query.get('email');
+  const token = query.get('token');
+
+  const [form] = useForm<ResetPasswordReq>();
 
   const rules = {
     password: [
@@ -54,55 +67,70 @@ export const ResetPassword: React.FC = () => {
     ],
   };
 
-  const onFinish = (data: SetNewPassword) => {
-    console.log('submit ', data);
+  const onFinish = async (data: ResetPasswordReq) => {
+    setLoading(true);
+
+    try {
+      await authApi.resetPassword(
+        {
+          email,
+          token,
+        },
+        data,
+      );
+
+      notification.success({ message: t('ResetPasswordSuccess') });
+
+      setLoading(false);
+
+      history.push(SIGNIN_PATH);
+    } catch (e) {
+      setLoading(false);
+    }
   };
 
   return (
-    <Loading loading={loading}>
-      <Form
-        className="m-auto w-100"
-        form={form}
-        layout="vertical"
-        onFinish={onFinish}
+    <Form
+      className="m-auto w-100"
+      form={form}
+      layout="vertical"
+      onFinish={onFinish}
+      validateTrigger="onFinish"
+    >
+      <h2 className="mb-32">{t('ResetPassword')}</h2>
+
+      <Form.Item
+        className="mb-16"
+        name="password"
+        label={t('NewPassword')}
+        rules={rules.password}
       >
-        <h2 className="mb-32">{t('ForgotPassword')}</h2>
+        <Input.Password
+          size="large"
+          placeholder={t('EnterField', {
+            field: t('NewPassword').toLowerCase(),
+          })}
+        />
+      </Form.Item>
+      <Form.Item
+        className="mb-16"
+        name="confirmPassword"
+        label={t('ConfirmPassword')}
+        rules={rules.confirmPassword}
+      >
+        <Input.Password
+          size="large"
+          placeholder={t('EnterField', {
+            field: t('ConfirmPassword').toLowerCase(),
+          })}
+        />
+      </Form.Item>
 
-        <Text className="mb-16">{t('SendConfirmationMail')}</Text>
-
-        <Form.Item
-          className="mb-16"
-          name="password"
-          label={t('NewPassword')}
-          rules={rules.password}
-        >
-          <Input.Password
-            size="large"
-            placeholder={t('EnterField', {
-              field: t('NewPassword').toLowerCase(),
-            })}
-          />
-        </Form.Item>
-        <Form.Item
-          className="mb-16"
-          name="confirmPassword"
-          label={t('ConfirmPassword')}
-          rules={rules.confirmPassword}
-        >
-          <Input.Password
-            size="large"
-            placeholder={t('EnterField', {
-              field: t('ConfirmPassword').toLowerCase(),
-            })}
-          />
-        </Form.Item>
-
-        <Form.Item className="text-right mb-0">
-          <Button type="primary" size="large" shape="round" htmlType="submit">
-            {t('Reset')}
-          </Button>
-        </Form.Item>
-      </Form>
-    </Loading>
+      <Form.Item className="text-right mb-0">
+        <Button type="primary" size="large" shape="round" htmlType="submit">
+          {t('Reset')}
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };

@@ -16,11 +16,6 @@ export interface SendEmailForgotPassword {
   email: string;
 }
 
-export interface SetNewPassword {
-  password: string;
-  confirmPassword: string;
-}
-
 export interface ChangePasswordReq {
   oldPassword: string;
   newPassword: string;

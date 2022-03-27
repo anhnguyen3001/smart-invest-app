@@ -19,7 +19,7 @@ export const SuccessContent: React.FC<SuccessContentProps> = ({ email }) => {
   const onResendMail = async () => {
     setLoading(true);
     try {
-      await authApi.resendMail({ email, type: MailEnum.register });
+      await authApi.resendMail({ email, type: MailEnum.resetPassword });
       notification.success({ message: t('ResendMailSuccess') });
     } catch (e) {
     } finally {
@@ -31,8 +31,8 @@ export const SuccessContent: React.FC<SuccessContentProps> = ({ email }) => {
     <div
       className={cx('h-100', 'd-flex', 'justify-content-center', 'flex-column')}
     >
-      <h2 className={cx('mb-32', 'primary-color')}>{t('SignUpSuccess')}</h2>
-      <Text level={2}>{t('SendVerifyMail')}</Text>
+      <h2 className={cx('mb-32', 'primary-color')}>{t('SendMailSuccess')}</h2>
+      <Text level={2}>{t('SendResetPassMail')}</Text>
       <div className={cx('text-500', 'mt-24')}>
         {t('NotReceiveMail')}{' '}
         <Text

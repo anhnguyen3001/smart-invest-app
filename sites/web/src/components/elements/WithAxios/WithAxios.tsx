@@ -62,7 +62,7 @@ export const WithAxios: React.FC = ({ children }) => {
 
     const imageEndpoint: string = process.env.REACT_APP_IMAGE_ENDPOINT || '';
     initImageClient(imageEndpoint);
-    // eslint-diable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return <>{children}</>;

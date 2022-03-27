@@ -1,6 +1,7 @@
 import {
   forgotPasswordTranslation,
   homeTranslation,
+  resetPasswordTranslation,
   searchTranslation,
   settingTranslation,
   signinTranslation,
@@ -50,6 +51,7 @@ export const translations = {
   ...signinTranslation,
   ...signupTranslation,
   ...forgotPasswordTranslation,
+  ...resetPasswordTranslation,
   ...settingTranslation,
   ...searchTranslation,
 };
