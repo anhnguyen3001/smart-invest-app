@@ -2,12 +2,8 @@ import { Spin } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  InfiniteNewList,
-  TabContent,
-  TabPaneProps,
-  Text,
-} from 'src/components';
+import { InfiniteNewList, TabContent, TabPaneProps } from 'src/components';
+import { RESEARCH_CENTER_PATH } from 'src/constants';
 import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
 import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
@@ -99,6 +95,7 @@ export const ResearchCenter: React.FC = () => {
         title={t('ResearchCenter')}
         defaultActiveKey={TAB_KEY.news}
         tabPanes={getTabPanes()}
+        rootPath={RESEARCH_CENTER_PATH}
       />
     </Spin>
   );

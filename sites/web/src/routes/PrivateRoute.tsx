@@ -15,7 +15,6 @@ export const PrivateRoute: React.FC<RouteProps> = ({
 
   return (
     <Route
-      key={rest.path}
       {...rest}
       render={(props) => (
         <PrivateLayout>{React.createElement(component, props)}</PrivateLayout>

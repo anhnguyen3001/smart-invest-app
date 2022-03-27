@@ -11,7 +11,6 @@ export const BackTop: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log('test ', window.scrollY);
       if (window.scrollY > 100) {
         setVisibleBackTop(true);
       } else {

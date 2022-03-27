@@ -13,6 +13,7 @@ export const translations = {
 
   Signin: 'Đăng nhập',
   Signup: 'Đăng ký',
+  Logout: 'Đăng xuất',
   ResearchCenter: 'Trung tâm phân tích',
   ChangePassword: 'Đổi mật khẩu',
   VerifyUser: 'Xác thực người dùng',
@@ -40,6 +41,10 @@ export const translations = {
   ErrorPassword:
     'Mật khẩu cần có ít nhất 8 kí tự, 1 chữ hoa, 1 chữ thường và 1 số',
   PasswordNotMatch: 'Mật khẩu không khớp',
+
+  // Notification
+  CreateSuccess: 'Tạo mới thành công',
+  UpdateSuccess: 'Cập nhật thành công',
 
   ...homeTranslation,
   ...signinTranslation,

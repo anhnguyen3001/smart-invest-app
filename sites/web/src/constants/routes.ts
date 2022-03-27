@@ -14,6 +14,8 @@ export const UPDATE_PROFILE_PATH = `/setting?tab=${SETTING_TAB_KEY.updateProfile
 
 export const SIGNIN_PATH = '/signin';
 export const SIGNUP_PATH = '/signup';
-export const VERIFY_USER_PATH = '/verify'
+export const VERIFY_USER_PATH = '/verify';
 export const FORGOT_PASSWORD_PATH = '/forgot-password';
 export const RESET_PASSWORD_PATH = '/reset-password';
+
+export const TEST_PATH = '/404';

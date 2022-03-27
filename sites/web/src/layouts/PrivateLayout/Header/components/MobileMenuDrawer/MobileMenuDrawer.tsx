@@ -5,7 +5,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Text, UserAvatar } from 'src/components';
-import { CHANGE_PASSWORD_PATH } from 'src/constants';
+import { CHANGE_PASSWORD_PATH, UPDATE_PROFILE_PATH } from 'src/constants';
 import { useAuth } from 'src/context';
 import { getNavbarLinks } from '../../utils';
 import { SearchForm } from '../SearchForm';
@@ -27,7 +27,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
   const history = useHistory();
   const { t } = useTranslation();
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const navbarLinks = getNavbarLinks(t);
 
@@ -36,15 +36,20 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
     // eslint-disable-next-line
   }, [history.location]);
 
+  const onGoToUpdateInfo = () => {
+    history.push(UPDATE_PROFILE_PATH);
+  };
+
   const footer = useMemo(() => {
     return (
       <div
         className={cx(
           'd-flex',
           'align-items-center',
-          'cursor-pointer',
           'w-100',
+          'cursor-pointer',
         )}
+        onClick={onGoToUpdateInfo}
       >
         <UserAvatar user={user} size={32} />
         <div className={cx('ml-16', 'flex-1')}>
@@ -60,6 +65,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
           type="text"
           size="large"
           icon={<LogoutOutlined style={{ fontSize: 18 }} />}
+          onClick={logout}
         />
       </div>
     );
@@ -88,7 +94,6 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
       onClose={() => setVisible(false)}
       title={<SearchForm />}
       footer={footer}
-      zIndex={1010}
     >
       <Menu className={cx('menu')} selectedKeys={[activeMenuItem]}>
         {navbarLinks.map(({ title, to }) => (

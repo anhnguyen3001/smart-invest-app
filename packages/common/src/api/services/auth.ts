@@ -25,4 +25,10 @@ export const authApi = {
     const res = await axios.get('/auth/verify', { params });
     return res.data;
   },
+
+  logout: async () => {
+    const axios = getAxios();
+    const res = await axios.get('/auth/logout');
+    return res.data;
+  },
 };

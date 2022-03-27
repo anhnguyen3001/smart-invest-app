@@ -1,14 +1,18 @@
-import React from 'react';
-import { IUser, PATTERN_VALIDATION } from '@ah-ticker/common';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'antd/lib/form/Form';
-import { Button, Form, Input } from 'antd';
-import { useAuth } from 'src/context';
-import { UploadImage } from 'src/components';
+import {
+  IUser,
+  PATTERN_VALIDATION,
+  UpdateInfoReq,
+  userApi,
+} from '@ah-ticker/common';
+import { Button, Form, Input, notification } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import classNames from 'classnames/bind';
-import styles from './UpdateProfile.module.scss';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { UploadImage } from 'src/components';
+import { useApp, useAuth } from 'src/context';
 import { StyleProps } from 'src/types';
+import styles from './UpdateProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -18,24 +22,30 @@ type FormField = Omit<IUser, 'id' | 'avatar'> & {
 
 export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
   const { t } = useTranslation();
+
+  const { setLoading } = useApp();
+
   const { user } = useAuth();
-  const { avatar, email, gender, phoneNumber, username } = user || {};
+  const { avatar, email, username } = user || {};
 
-  const [form] = useForm<FormField>();
+  const [form] = Form.useForm<FormField>();
 
-  const initialValues: Partial<FormField> = {
-    avatar: avatar
-      ? [
-          {
-            url: avatar,
-          },
-        ]
-      : [],
-    email,
-    gender,
-    phoneNumber,
-    username,
-  };
+  useEffect(() => {
+    if (user) {
+      form.setFieldsValue({
+        avatar: avatar
+          ? [
+              {
+                url: avatar,
+              },
+            ]
+          : [],
+        email,
+        username,
+      });
+    }
+    // eslint-disable-next-line
+  }, [JSON.stringify(user)]);
 
   const rules = {
     username: [
@@ -63,21 +73,35 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
   };
 
   const normFile = (e: any) => {
-    console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
     return e && e.fileList;
   };
 
-  const onFinish = (data: FormField) => {};
+  const onFinish = async (inputValue: FormField) => {
+    setLoading(true);
+
+    const submitData: UpdateInfoReq = {
+      username: inputValue.username?.trim(),
+      avatar: inputValue.avatar[0]?.url || null,
+    };
+
+    try {
+      await userApi.updateInfo(submitData);
+
+      notification.success({ message: t('UpdateSuccess') });
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Form
       className={className}
       layout="vertical"
       form={form}
-      initialValues={initialValues}
       onFinish={onFinish}
     >
       <Form.Item

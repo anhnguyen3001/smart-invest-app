@@ -1,15 +1,22 @@
 import React from 'react';
-import { ChangePasswordReq, PATTERN_VALIDATION } from '@ah-ticker/common';
+import {
+  ChangePasswordReq,
+  PATTERN_VALIDATION,
+  userApi,
+} from '@ah-ticker/common';
 import { useForm } from 'antd/lib/form/Form';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
 import { StyleProps } from 'src/types';
+import { useApp } from 'src/context';
 
 const cx = classNames.bind({});
 
 export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
   const { t } = useTranslation();
+
+  const { setLoading } = useApp();
 
   const [form] = useForm<ChangePasswordReq>();
 
@@ -21,7 +28,7 @@ export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
         message: t('FieldRequired', { field: t('OldPassword').toLowerCase() }),
       },
     ],
-    password: [
+    newPassword: [
       {
         validator: async (_: any, value: string) => {
           value = value?.trim() || '';
@@ -51,7 +58,7 @@ export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
         validator: async (_: any, value: string) => {
           value = value?.trim() || '';
 
-          const password = form.getFieldValue('password')?.trim();
+          const password = form.getFieldValue('newPassword')?.trim();
           if (password !== value) {
             return Promise.reject(t('PasswordNotMatch'));
           }
@@ -62,8 +69,27 @@ export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
     ],
   };
 
+  const onFinish = async (inputValue: ChangePasswordReq) => {
+    setLoading(true);
+
+    try {
+      await userApi.changePassword(inputValue);
+      notification.success({ message: t('UpdateSuccess') });
+      form.resetFields();
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <Form className={className} layout="vertical" form={form}>
+    <Form
+      className={className}
+      layout="vertical"
+      form={form}
+      onFinish={onFinish}
+      validateTrigger="onSubmit"
+    >
       <Form.Item
         name="oldPassword"
         label={t('OldPassword')}
@@ -79,9 +105,9 @@ export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
       </Form.Item>
 
       <Form.Item
-        name="password"
+        name="newPassword"
         label={t('NewPassword')}
-        rules={rules.password}
+        rules={rules.newPassword}
       >
         <Input.Password
           size="large"

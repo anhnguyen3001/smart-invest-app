@@ -15,9 +15,9 @@ export const userApi = {
     return res.data;
   },
 
-  changePassword: async (params: ChangePasswordReq) => {
+  changePassword: async (data: ChangePasswordReq) => {
     const axios = getAxios();
-    const res = await axios.post('/user/change-password', { params });
+    const res = await axios.post('/user/change-password', data);
     return res.data;
   },
 };

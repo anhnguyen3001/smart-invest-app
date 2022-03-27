@@ -6,3 +6,4 @@ export * from './Typography';
 export * from './UploadImage';
 export * from './UserAvatar';
 export * from './Loading';
+export * from './WithAxios';

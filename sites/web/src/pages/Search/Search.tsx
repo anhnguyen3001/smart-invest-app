@@ -8,6 +8,7 @@ import {
   TabPaneProps,
   Text,
 } from 'src/components';
+import { SEARCH_PATH } from 'src/constants';
 import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
 import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
@@ -112,6 +113,7 @@ export const Search: React.FC<SearchProps> = () => {
         title={t('SearchResult')}
         defaultActiveKey={TAB_KEY.ticker}
         tabPanes={getTabPanes()}
+        rootPath={SEARCH_PATH}
       />
     </Spin>
   );

@@ -13,6 +13,7 @@ export const translations = {
 
   Signin: 'Sign in',
   Signup: 'Sign up',
+  Logout: 'Logout',
   ResearchCenter: 'Research center',
   ChangePassword: 'Change password',
   VerifyUser: 'Verify user',
@@ -40,6 +41,10 @@ export const translations = {
   ErrorPassword:
     'Password must have at least 8 characters, one uppercase letter, one lowercase letter and one number',
   PasswordNotMatch: 'Passwords do not match',
+
+  // Notification
+  CreateSuccess: 'Create successfully',
+  UpdateSuccess: 'Update successfully',
 
   ...homeTranslation,
   ...signinTranslation,

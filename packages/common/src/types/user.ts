@@ -23,11 +23,11 @@ export interface SetNewPassword {
 
 export interface ChangePasswordReq {
   oldPassword: string;
-  password: string;
+  newPassword: string;
   confirmPassword: string;
 }
 
 export interface UpdateInfoReq {
-  username: string;
-  avatar: string;
+  username?: string;
+  avatar?: string | null;
 }

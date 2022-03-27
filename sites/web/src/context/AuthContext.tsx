@@ -8,23 +8,23 @@ interface AuthState {
   setUser: (user: IUser) => void;
   accessToken?: string;
   setAccessToken: (token: string) => void;
+  logout: () => void;
 }
 
 const AuthStateContext = React.createContext<AuthState | null>(null);
+
+export interface User extends IUser {
+  accessToken: string;
+}
 
 export const AuthProvider: React.FC = ({ children }) => {
   const { setLoading } = useApp();
 
   const [user, setUser] = useState<IUser>();
-  const [accessToken, setAccessToken] = useState<string>();
-
-  useEffect(() => {
-    setAccessToken(getAccessToken());
-  }, []);
+  const [accessToken, setAccessToken] = useState<string>(getAccessToken());
 
   const getUser = async () => {
     setLoading(true);
-
     try {
       const res = await userApi.getMe();
       setUser(res);
@@ -35,29 +35,21 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
     if (accessToken) {
-      // userApi
-      //   .getMe()
-      //   .then((data: IUser) => {
-      //     setUser(data);
-      //     setLoading(false);
-      //   })
-      //   .catch(() => setLoading(false));
-      // console.log('get ');
       getUser();
-    } else {
-      if (user) {
-        setUser(undefined);
-      }
-      setLoading(false);
     }
     // eslint-disable-next-line
-  }, [accessToken]);
+  }, []);
+
+  const logout = async () => {
+    localStorage.removeItem('user');
+    setAccessToken('');
+    setUser(undefined);
+  };
 
   return (
     <AuthStateContext.Provider
-      value={{ user, setUser, accessToken, setAccessToken }}
+      value={{ user, setUser, accessToken, setAccessToken, logout }}
     >
       {children}
     </AuthStateContext.Provider>

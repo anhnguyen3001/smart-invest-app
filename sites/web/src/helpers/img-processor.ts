@@ -1,10 +1,17 @@
 import { notification, Upload } from 'antd';
 import { t } from 'i18next';
 
-export const getBase64 = (img: Blob, callback: (value: any) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
+export const getBase64 = (
+  img: Blob | undefined,
+  callback: (value: any) => void,
+) => {
+  if (img) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      callback(reader.result);
+    });
+    reader.readAsDataURL(img);
+  }
 };
 
 const ALLOWED_IMG_TYPES = ['png', 'jpg', 'jpeg'];

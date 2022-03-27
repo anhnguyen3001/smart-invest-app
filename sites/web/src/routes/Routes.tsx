@@ -29,7 +29,7 @@ export const Routes: React.FC = () => {
               {...route}
             />
           ))}
-          <Redirect to={HOME_PATH} />
+          <Redirect exact to={HOME_PATH} />
         </Switch>
       </Router>
     </Loading>
