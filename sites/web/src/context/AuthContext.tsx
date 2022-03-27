@@ -1,6 +1,6 @@
-import { IUser, userApi } from '@ah-ticker/common';
+import { IUser, Tokens, userApi } from '@ah-ticker/common';
 import React, { useContext, useEffect, useState } from 'react';
-import { getAccessToken } from 'src/helpers';
+import { getAccessToken, setLS } from 'src/helpers';
 import { useApp } from './AppContext';
 
 interface AuthState {
@@ -8,6 +8,7 @@ interface AuthState {
   setUser: (user: IUser) => void;
   accessToken?: string;
   setAccessToken: (token: string) => void;
+  updateToken: (tokens: Tokens) => void;
   logout: () => void;
 }
 
@@ -39,7 +40,12 @@ export const AuthProvider: React.FC = ({ children }) => {
       getUser();
     }
     // eslint-disable-next-line
-  }, []);
+  }, [accessToken]);
+
+  const updateToken = (tokens: Tokens) => {
+    setAccessToken(tokens.accessToken);
+    setLS('user', JSON.stringify(tokens));
+  };
 
   const logout = async () => {
     localStorage.removeItem('user');
@@ -49,7 +55,14 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthStateContext.Provider
-      value={{ user, setUser, accessToken, setAccessToken, logout }}
+      value={{
+        user,
+        setUser,
+        accessToken,
+        setAccessToken,
+        logout,
+        updateToken,
+      }}
     >
       {children}
     </AuthStateContext.Provider>

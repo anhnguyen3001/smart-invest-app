@@ -46,6 +46,7 @@ export const translations = {
   // Notification
   CreateSuccess: 'Tạo mới thành công',
   UpdateSuccess: 'Cập nhật thành công',
+  VerifySuccess: 'Xác thực thành công',
 
   ...homeTranslation,
   ...signinTranslation,

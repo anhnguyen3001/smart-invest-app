@@ -53,10 +53,12 @@ export const WithAxios: React.FC = ({ children }) => {
   useEffect(() => {
     const endpoint: string = process.env.REACT_APP_AUTH_ENDPOINT || '';
     initAxiosInstance(endpoint, {
-      requestInterceptors: { onFulfilled: requestInterceptor },
+      requestInterceptors: {
+        onFulfilled: (request) => requestInterceptor(request),
+      },
       responseInterceptors: {
-        onFulfilled: responseSuccessInterceptor,
-        onRejected: responseErrorInterceptor,
+        onFulfilled: (response) => responseSuccessInterceptor(response),
+        onRejected: (response) => responseErrorInterceptor(response),
       },
     });
 

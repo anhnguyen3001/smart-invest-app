@@ -3,6 +3,11 @@ export interface LoginReq {
   password: string;
 }
 
+export interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface SignupReq {
   email: string;
   password: string;

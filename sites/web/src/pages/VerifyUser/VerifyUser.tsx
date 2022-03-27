@@ -1,4 +1,5 @@
 import { authApi } from '@ah-ticker/common';
+import { notification } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
 import React, { useEffect } from 'react';
@@ -23,6 +24,7 @@ export const VerifyUser: React.FC = () => {
 
       try {
         await authApi.verifyUser({ email, token });
+        notification.success({ message: t('VerifySuccess') });
         history.push(SIGNIN_PATH);
       } catch (e) {
       } finally {

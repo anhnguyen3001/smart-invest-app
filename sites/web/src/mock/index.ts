@@ -8,6 +8,7 @@ import {
   IUser,
   IPagination,
   Gender,
+  LoginMethodEnum,
 } from '@ah-ticker/common';
 
 export const mockPrice: IPrice = {
@@ -57,6 +58,7 @@ export const mockUser: IUser = {
   username: `Anhnh`,
   email: 'nguyenhoanganh12000@gmail.com',
   gender: Gender.female,
+  method: LoginMethodEnum.local,
 };
 
 export const mockComments: IComment[] = Array.apply(0, new Array(10)).map(

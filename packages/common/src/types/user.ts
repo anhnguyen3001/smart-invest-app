@@ -3,6 +3,12 @@ export enum Gender {
   male = 'male',
 }
 
+export enum LoginMethodEnum {
+  local = 'local',
+  facebook = 'facebook',
+  google = 'google',
+}
+
 export interface IUser {
   id: number;
   username: string;
@@ -10,6 +16,7 @@ export interface IUser {
   email: string;
   gender: Gender;
   phoneNumber?: string;
+  method: LoginMethodEnum;
 }
 
 export interface SendEmailForgotPassword {

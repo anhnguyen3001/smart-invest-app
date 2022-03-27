@@ -46,6 +46,7 @@ export const translations = {
   // Notification
   CreateSuccess: 'Create successfully',
   UpdateSuccess: 'Update successfully',
+  VerifySuccess: 'Verify successfully',
 
   ...homeTranslation,
   ...signinTranslation,
