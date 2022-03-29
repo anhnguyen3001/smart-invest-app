@@ -56,4 +56,12 @@ export const authApi = {
     });
     return res.data;
   },
+
+  loginGoogle: async (accessToken: string): Promise<Tokens> => {
+    const axios = getAxios();
+    const res = await axios.get('/auth/google', {
+      params: { access_token: accessToken },
+    });
+    return res.data;
+  },
 };

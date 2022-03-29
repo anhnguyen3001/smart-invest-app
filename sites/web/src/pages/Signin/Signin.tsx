@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { FacebookButton } from 'src/components';
+import { FacebookButton, GoogleButton } from 'src/components';
 import { FORGOT_PASSWORD_PATH, SIGNUP_PATH } from 'src/constants';
 import { useApp, useAuth } from 'src/context';
 
@@ -117,8 +117,12 @@ export const Signin: React.FC = () => {
 
         <Divider plain>{t('Or')}</Divider>
 
-        <div className={cx('mx-auto')} style={{ width: 'fit-content' }}>
+        <div
+          className={cx('d-flex', 'flex-column', 'align-items-center')}
+          style={{ rowGap: 16 }}
+        >
           <FacebookButton />
+          <GoogleButton />
         </div>
       </div>
 

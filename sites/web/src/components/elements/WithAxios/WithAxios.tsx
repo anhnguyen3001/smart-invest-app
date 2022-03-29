@@ -51,6 +51,11 @@ export const WithAxios: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
+    const imageEndpoint: string = process.env.REACT_APP_IMAGE_ENDPOINT || '';
+    initImageClient(imageEndpoint);
+  }, []);
+
+  useEffect(() => {
     const endpoint: string = process.env.REACT_APP_AUTH_ENDPOINT || '';
     initAxiosInstance(endpoint, {
       requestInterceptors: {
@@ -61,11 +66,8 @@ export const WithAxios: React.FC = ({ children }) => {
         onRejected: (response) => responseErrorInterceptor(response),
       },
     });
-
-    const imageEndpoint: string = process.env.REACT_APP_IMAGE_ENDPOINT || '';
-    initImageClient(imageEndpoint);
     // eslint-disable-next-line
-  }, []);
+  }, [accessToken]);
 
   return <>{children}</>;
 };
