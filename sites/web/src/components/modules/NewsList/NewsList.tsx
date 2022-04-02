@@ -1,17 +1,23 @@
 import { INews, IPagination } from '@ah-ticker/common';
 import { Avatar, Button, List } from 'antd';
+import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, Paragraph } from 'src/components';
+import styles from './NewList.module.scss';
 
-interface NewsListProps {
+const cx = classNames.bind(styles);
+
+export interface NewsListProps {
   news?: INews[];
   pagination?: IPagination;
   onSeeMore?: () => void;
   showHeader?: boolean;
+  size?: 'large' | 'default';
 }
 
 export const NewsList: React.FC<NewsListProps> = ({
+  size = 'default',
   news,
   onSeeMore,
   showHeader = false,
@@ -54,16 +60,34 @@ export const NewsList: React.FC<NewsListProps> = ({
   };
 
   const renderItem = ({ id, title, link, description, image, date }: INews) => {
+    const itemProps: { titleRow: number; descriptionRow: number } =
+      size === 'default'
+        ? { titleRow: 1, descriptionRow: 2 }
+        : { titleRow: 3, descriptionRow: 3 };
+
     return (
-      <List.Item key={id} className="justify-content-start align-items-start">
-        <div>
-          <Avatar alt="paper image" shape="square" size={48} src={image} />
+      <List.Item
+        key={id}
+        className={cx('justify-content-start', 'align-items-start')}
+      >
+        <div className={cx('metaImage-wrapper')}>
+          <img alt="news image" src={image} />
         </div>
-        <div className="ml-32">
-          <Text level={2} fontWeight={700} onClick={() => onOpenPaper(link)}>
+        <div className={cx('ml-32')}>
+          <Paragraph
+            className={cx('mb-4')}
+            level={2}
+            fontWeight={700}
+            ellipsis={{ rows: itemProps.titleRow }}
+            onClick={() => onOpenPaper(link)}
+          >
             {title}
-          </Text>
-          <Paragraph ellipsis={{ rows: 3 }} type="secondary" className="mb-16">
+          </Paragraph>
+          <Paragraph
+            className={cx('mb-16')}
+            ellipsis={{ rows: itemProps.descriptionRow }}
+            type="secondary"
+          >
             {description}
           </Paragraph>
           <Text level={4} type="secondary">
@@ -76,8 +100,9 @@ export const NewsList: React.FC<NewsListProps> = ({
 
   return (
     <List
+      className={cx(`news--${size}`)}
       size="large"
-      bordered
+      {...(size === 'default' && { bordered: true })}
       header={showHeader ? renderHeader() : undefined}
       rowKey="id"
       dataSource={news}

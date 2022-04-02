@@ -1,0 +1,12 @@
+.button {
+  border: none;
+  display: flex;
+  align-items: center;
+  height: 45px;
+  padding: $align-8 $align-16 $align-8 $align-8;
+  border-radius: 4px;
+  background-color: #4267b2;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+}

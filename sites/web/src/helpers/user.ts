@@ -1,9 +1,17 @@
-// import { store } from "../store";
+import { getLS } from './localStorage';
 
 export const isAuthenticatedUser = () => {
-  // return store && store.getState().User?.authInfo?.accessToken;
+  return !!getAccessToken();
 };
 
 export const getAccessToken = () => {
-  // return store.getState().User.authInfo;
+  const user = getLS('user') || '{}';
+  const { accessToken } = JSON.parse(user);
+  return accessToken;
+};
+
+export const getRefreshToken = () => {
+  const user = getLS('user') || '{}';
+  const { refreshToken } = JSON.parse(user);
+  return refreshToken;
 };

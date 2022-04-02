@@ -1,7 +1,8 @@
 import { Tabs } from 'antd';
 import classNames from 'classnames/bind';
-import React, { useState } from 'react';
-import { useWindowResize } from 'src/hooks';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useQuery, useWindowResize } from 'src/hooks';
 import styles from './TabContent.module.scss';
 
 const cx = classNames.bind(styles);
@@ -16,14 +17,19 @@ interface TabContentProps {
   title: string;
   tabPanes: TabPaneProps[];
   defaultActiveKey: string;
+  rootPath: string;
 }
 
 export const TabContent: React.FC<TabContentProps> = ({
   title,
   tabPanes,
   defaultActiveKey,
+  rootPath,
 }) => {
-  const [activeKey, setActiveKey] = useState(defaultActiveKey);
+  const history = useHistory();
+
+  const query = useQuery();
+  const activeTab = query.get('tab') || defaultActiveKey;
 
   const { isMobileView } = useWindowResize();
 
@@ -39,8 +45,8 @@ export const TabContent: React.FC<TabContentProps> = ({
       <Tabs
         className={cx('tab', 'flex-1')}
         tabPosition={isMobileView ? 'top' : 'left'}
-        activeKey={activeKey}
-        onTabClick={setActiveKey}
+        defaultActiveKey={activeTab}
+        onTabClick={(key: string) => history.push(`${rootPath}?tab=${key}`)}
       >
         {renderTabContent()}
       </Tabs>

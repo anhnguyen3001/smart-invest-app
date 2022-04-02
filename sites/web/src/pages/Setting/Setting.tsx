@@ -1,19 +1,15 @@
+import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SETTING_TAB_KEY } from 'src/constants';
-import { useQuery } from 'src/hooks';
 import { TabContent, TabPaneProps } from 'src/components';
+import { SETTING_PATH, SETTING_TAB_KEY } from 'src/constants';
 import { ChangePassword, UpdateProfile } from './components';
 import styles from './Setting.module.scss';
-import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
 export const Setting: React.FC = () => {
   const { t } = useTranslation();
-
-  const query = useQuery();
-  const defaultActiveKey = query.get('tab') || SETTING_TAB_KEY.updateProfile;
 
   const tabPanes: TabPaneProps[] = [
     {
@@ -32,7 +28,8 @@ export const Setting: React.FC = () => {
     <TabContent
       title={t('Setting')}
       tabPanes={tabPanes}
-      defaultActiveKey={defaultActiveKey}
+      defaultActiveKey={SETTING_TAB_KEY.updateProfile}
+      rootPath={SETTING_PATH}
     />
   );
 };

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { NewsList } from 'src/components';
-import { ANALYTICS_PATH } from 'src/constants';
+import { RESEARCH_CENTER_PATH } from 'src/constants';
 import { mockNews } from 'src/mock';
 import { MarketTrend, OverView, WatchList } from './components';
 
@@ -19,6 +19,7 @@ export const Home: React.FC = () => {
   return (
     <div>
       <OverView />
+
       <div className={cx('section-md')}>
         <WatchList />
       </div>
@@ -31,13 +32,13 @@ export const Home: React.FC = () => {
         <Col md={12} xs={24}>
           <NewsList
             news={mockNews}
-            onSeeMore={() => onChangePage(ANALYTICS_PATH)}
+            onSeeMore={() => onChangePage(RESEARCH_CENTER_PATH)}
           />
         </Col>
         <Col md={12} xs={24}>
           <NewsList
             news={mockNews}
-            onSeeMore={() => onChangePage(ANALYTICS_PATH)}
+            onSeeMore={() => onChangePage(RESEARCH_CENTER_PATH)}
           />
         </Col>
       </Row>

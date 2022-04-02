@@ -1,9 +1,10 @@
-import { ConfigProvider, Spin } from 'antd';
+import { ConfigProvider } from 'antd';
 import React, { Suspense, useEffect } from 'react';
 import 'src/styles/theme.css';
 import './App.scss';
+import { Loading, WithAxios } from './components';
 import { LOCAL_STORAGE, REGIONS, THEME } from './constants';
-import { AuthProvider } from './context';
+import { AppProvider, AuthProvider } from './context';
 import { getLanguage, getLS } from './helpers';
 import { useTheme } from './hooks';
 import { Routes } from './routes';
@@ -18,11 +19,15 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Suspense fallback={<Spin className="app-spin" spinning={true} />}>
+    <Suspense fallback={<Loading loading={true} />}>
       <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
+        <AppProvider>
+          <AuthProvider>
+            <WithAxios>
+              <Routes />
+            </WithAxios>
+          </AuthProvider>
+        </AppProvider>
       </ConfigProvider>
     </Suspense>
   );

@@ -1,24 +1,69 @@
-import { IUser } from '@ah-ticker/common';
+import { IUser, Tokens, userApi } from '@ah-ticker/common';
 import React, { useContext, useEffect, useState } from 'react';
-import { mockUser } from 'src/mock';
+import { getAccessToken, setLS } from 'src/helpers';
+import { useApp } from './AppContext';
 
 interface AuthState {
   user?: IUser;
-  setUser?: (user: IUser) => void;
+  setUser: (user: IUser) => void;
+  accessToken?: string;
+  setAccessToken: (token: string) => void;
+  updateToken: (tokens: Tokens) => void;
+  logout: () => void;
 }
 
-const AuthStateContext = React.createContext<AuthState>({});
+const AuthStateContext = React.createContext<AuthState | null>(null);
+
+export interface User extends IUser {
+  accessToken: string;
+}
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const { setLoading } = useApp();
+
   const [user, setUser] = useState<IUser>();
+  const [accessToken, setAccessToken] = useState<string>(getAccessToken());
+
+  const getUser = async () => {
+    setLoading(true);
+    try {
+      const res = await userApi.getMe();
+      setUser(res);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Get user from local storage
-    setUser(mockUser);
-  }, []);
+    if (accessToken) {
+      getUser();
+    }
+    // eslint-disable-next-line
+  }, [accessToken]);
+
+  const updateToken = (tokens: Tokens) => {
+    setAccessToken(tokens.accessToken);
+    setLS('user', JSON.stringify(tokens));
+  };
+
+  const logout = async () => {
+    localStorage.removeItem('user');
+    setAccessToken('');
+    setUser(undefined);
+  };
 
   return (
-    <AuthStateContext.Provider value={{ user, setUser }}>
+    <AuthStateContext.Provider
+      value={{
+        user,
+        setUser,
+        accessToken,
+        setAccessToken,
+        logout,
+        updateToken,
+      }}
+    >
       {children}
     </AuthStateContext.Provider>
   );

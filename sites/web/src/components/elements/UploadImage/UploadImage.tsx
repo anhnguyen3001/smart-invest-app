@@ -1,10 +1,11 @@
+import { imageApi } from '@ah-ticker/common';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { Avatar, Upload, UploadProps } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
 import React, { useMemo } from 'react';
-import { beforeUploadImg } from 'src/helpers';
+import { beforeUploadImg, getBase64 } from 'src/helpers';
 import { Text } from '../Typography';
 import styles from './UploadImage.module.scss';
 
@@ -52,9 +53,27 @@ export const UploadImage: React.FC<UploadImageProps> = ({
     // eslint-disable-next-line
   }, [JSON.stringify(fileList)]);
 
+  const onUploadImage = async (options: any) => {
+    const { onSuccess, onError, file } = options;
+
+    getBase64(file, async (imageUrl) => {
+      // console.log(imageUrl);
+      try {
+        const res = await imageApi.upload(imageUrl);
+        console.log(res);
+        file.url = res.secure_url;
+        onSuccess(file);
+      } catch (e: any) {
+        console.log(e);
+        onError();
+      }
+    });
+    console.log('file ', file);
+  };
+
   return (
     <Upload
-      // customRequest={onUploadImage}
+      customRequest={onUploadImage}
       accept="image/png, image/jpeg, image/jpg"
       beforeUpload={beforeUploadImg}
       fileList={fileList}

@@ -2,8 +2,9 @@ import { Empty } from 'antd';
 import React, { useRef } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useIntersection } from 'src/hooks';
+import { StyleProps } from 'src/types';
 
-export interface InfiniteListProps {
+export interface InfiniteListProps extends StyleProps {
   dataLength: number;
   hasMore: boolean;
   isEmpty: boolean;
@@ -19,6 +20,7 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
   setPage,
   dataLength,
   children,
+  className,
   loading,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,7 +33,7 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
   if (isEmpty) return <Empty />;
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className={className}>
       <InfiniteScroll
         style={{ overflowX: 'hidden' }}
         dataLength={dataLength}

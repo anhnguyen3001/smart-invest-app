@@ -1,0 +1,34 @@
+.news {
+  &--large {
+    :global {
+      .ant-list {
+        &-items {
+          background-color: transparent !important;
+        }
+
+        &-item {
+          padding: $align-16 0 !important;
+        }
+      }
+    }
+
+    .metaImage-wrapper {
+      width: 20%;
+      // height:
+    }
+  }
+
+  &--default {
+    .metaImage-wrapper {
+      width: 64px;
+      // height:
+    }
+  }
+}
+
+.metaImage-wrapper {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}

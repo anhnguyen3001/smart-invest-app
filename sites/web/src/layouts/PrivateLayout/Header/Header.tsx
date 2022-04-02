@@ -3,7 +3,11 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { LocaleSelection, ThemeSwitcher } from 'src/components';
-import { ANALYTICS_PATH, HOME_PATH, WATCH_LIST_PATH } from 'src/constants';
+import {
+  RESEARCH_CENTER_PATH,
+  HOME_PATH,
+  WATCH_LIST_PATH,
+} from 'src/constants';
 import { useWindowResize } from 'src/hooks';
 import { DesktopMenu, MobileMenu } from './components';
 import style from './Header.module.scss';
@@ -18,12 +22,14 @@ export const Header: React.FC = () => {
       return path === location.pathname.toLowerCase();
     };
 
-    if (isMatchRoute(ANALYTICS_PATH)) {
-      setActiveMenuItem(ANALYTICS_PATH);
+    if (isMatchRoute(RESEARCH_CENTER_PATH)) {
+      setActiveMenuItem(RESEARCH_CENTER_PATH);
     } else if (isMatchRoute(WATCH_LIST_PATH)) {
       setActiveMenuItem(WATCH_LIST_PATH);
     } else if (isMatchRoute(HOME_PATH)) {
       setActiveMenuItem(HOME_PATH);
+    } else {
+      setActiveMenuItem('');
     }
   }, [location.pathname]);
 

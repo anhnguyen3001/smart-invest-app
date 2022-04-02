@@ -1,15 +1,24 @@
-import { PATTERN_VALIDATION, SendEmailForgotPassword } from '@ah-ticker/common';
+import {
+  authApi,
+  PATTERN_VALIDATION,
+  ForgetPasswordReq,
+} from '@ah-ticker/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from 'src/components/elements';
-import { PublicLayout } from 'src/layouts';
+import { Text } from 'src/components';
+import { useApp } from 'src/context';
+import { SuccessContent } from './components';
 
 export const ForgotPassword: React.FC = () => {
   const { t } = useTranslation();
 
-  const [form] = useForm<SendEmailForgotPassword>();
+  const { setLoading } = useApp();
+
+  const [isDone, setIsDone] = useState(false);
+
+  const [form] = useForm<ForgetPasswordReq>();
 
   const rules = {
     email: [
@@ -39,40 +48,48 @@ export const ForgotPassword: React.FC = () => {
     ],
   };
 
-  const onFinish = (data: SendEmailForgotPassword) => {
-    console.log('submit ', data);
+  const onFinish = async (inputValue: ForgetPasswordReq) => {
+    setLoading(true);
+
+    try {
+      await authApi.forgetPassword({ email: inputValue.email?.trim() });
+      setIsDone(true);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return (
-    <PublicLayout>
-      <Form
-        className="m-auto w-100"
-        form={form}
-        layout="vertical"
-        onFinish={onFinish}
+  return isDone ? (
+    <SuccessContent email={form.getFieldValue('email')} />
+  ) : (
+    <Form
+      className="m-auto w-100"
+      form={form}
+      layout="vertical"
+      onFinish={onFinish}
+    >
+      <h2 className="mb-32">{t('ForgotPassword')}</h2>
+
+      <Text className="mb-16">{t('SendConfirmationMail')}</Text>
+
+      <Form.Item
+        className="mb-16"
+        name="email"
+        label={t('Email')}
+        rules={rules.email}
       >
-        <h2 className="mb-32">{t('ForgotPassword')}</h2>
+        <Input
+          size="large"
+          placeholder={t('EnterField', { field: t('Email').toLowerCase() })}
+        />
+      </Form.Item>
 
-        <Text className="mb-16">{t('SendConfirmationMail')}</Text>
-
-        <Form.Item
-          className="mb-16"
-          name="email"
-          label={t('Email')}
-          rules={rules.email}
-        >
-          <Input
-            size="large"
-            placeholder={t('EnterField', { field: t('Email').toLowerCase() })}
-          />
-        </Form.Item>
-
-        <Form.Item className="text-right mb-0">
-          <Button type="primary" size="large" shape="round" htmlType="submit">
-            {t('SendMail')}
-          </Button>
-        </Form.Item>
-      </Form>
-    </PublicLayout>
+      <Form.Item className="text-right mb-0">
+        <Button type="primary" size="large" shape="round" htmlType="submit">
+          {t('SendMail')}
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };

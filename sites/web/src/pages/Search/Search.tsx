@@ -8,6 +8,7 @@ import {
   TabPaneProps,
   Text,
 } from 'src/components';
+import { SEARCH_PATH } from 'src/constants';
 import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
 import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
@@ -88,12 +89,16 @@ export const Search: React.FC<SearchProps> = () => {
           <>
             {!isMobileView && <h3 className={cx('mb-16')}>{t('News')}</h3>}
             <InfiniteNewList
-              news={news}
-              isEmpty={newsIsEmpty}
-              hasMore={newsHasMore}
-              loading={newsLoading}
-              page={newsPage}
-              setPage={setNewsPage}
+              infiniteListProps={{
+                isEmpty: newsIsEmpty,
+                hasMore: newsHasMore,
+                loading: newsLoading,
+                page: newsPage,
+                setPage: setNewsPage,
+              }}
+              newListProps={{
+                news,
+              }}
             />
           </>
         ),
@@ -108,6 +113,7 @@ export const Search: React.FC<SearchProps> = () => {
         title={t('SearchResult')}
         defaultActiveKey={TAB_KEY.ticker}
         tabPanes={getTabPanes()}
+        rootPath={SEARCH_PATH}
       />
     </Spin>
   );

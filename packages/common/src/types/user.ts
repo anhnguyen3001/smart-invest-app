@@ -3,6 +3,12 @@ export enum Gender {
   male = 'male',
 }
 
+export enum LoginMethodEnum {
+  local = 'local',
+  facebook = 'facebook',
+  google = 'google',
+}
+
 export interface IUser {
   id: number;
   username: string;
@@ -10,19 +16,20 @@ export interface IUser {
   email: string;
   gender: Gender;
   phoneNumber?: string;
+  method: LoginMethodEnum;
 }
 
 export interface SendEmailForgotPassword {
   email: string;
 }
 
-export interface SetNewPassword {
-  password: string;
+export interface ChangePasswordReq {
+  oldPassword: string;
+  newPassword: string;
   confirmPassword: string;
 }
 
-export interface ChangePassword {
-  oldPassword: string;
-  password: string;
-  confirmPassword: string;
+export interface UpdateInfoReq {
+  username?: string;
+  avatar?: string | null;
 }
