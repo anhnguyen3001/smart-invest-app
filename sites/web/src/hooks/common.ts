@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MOBILE_WIDTH, TABLET_WIDTH } from 'src/constants';
+import { DESKTOP_WIDTH, MOBILE_WIDTH, TABLET_WIDTH } from 'src/constants';
 
 export const useWindowResize = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -15,6 +15,7 @@ export const useWindowResize = () => {
   }, []);
 
   return {
+    isDesktopView: width <= DESKTOP_WIDTH,
     isTabletView: width <= TABLET_WIDTH,
     isMobileView: width <= MOBILE_WIDTH,
   };

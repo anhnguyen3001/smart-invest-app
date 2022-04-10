@@ -15,6 +15,11 @@ export interface SignupReq {
   username: string;
 }
 
+export interface VerifyUserReq {
+  email: string;
+  code: string;
+}
+
 export enum MailEnum {
   register = 'register',
   resetPassword = 'resetPassword',
@@ -23,11 +28,6 @@ export enum MailEnum {
 export interface ResendMailReq {
   type: MailEnum;
   email: string;
-}
-
-export interface VerifyUser {
-  email: string;
-  token: string;
 }
 
 export interface ForgetPasswordReq {

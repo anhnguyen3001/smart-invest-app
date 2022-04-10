@@ -37,15 +37,6 @@
   }
 }
 
-// Layout
-.ant-layout {
-  min-height: 100%;
-
-  &-content {
-    background: $bg-primary !important;
-  }
-}
-
 // Input
 .ant-input {
   &::placeholder {
@@ -53,27 +44,9 @@
     color: $text-color-secondary;
   }
 
-  &-lg {
-    padding: 8px 16px !important;
-  }
-
   &:read-only {
     cursor: not-allowed;
   }
-}
-
-// Input label
-.ant-form-vertical .ant-form-item-label,
-.ant-form-vertical .ant-form-item-label-required {
-  padding: 0 0 4px;
-  font-weight: 500;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-  color: $text-color;
 }
 
 // Result

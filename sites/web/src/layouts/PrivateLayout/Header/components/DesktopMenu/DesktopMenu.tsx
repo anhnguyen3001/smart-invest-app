@@ -48,7 +48,11 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
     );
     return (
       <Menu.Item key="user">
-        <Dropdown overlay={userMenu} placement="bottomRight">
+        <Dropdown
+          overlay={userMenu}
+          placement="bottomRight"
+          trigger={['click']}
+        >
           <UserAvatar user={user} size={40} />
         </Dropdown>
       </Menu.Item>
@@ -66,6 +70,7 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
         'justify-content-between',
       )}
       selectedKeys={[activeMenuItem]}
+      triggerSubMenuAction="click"
     >
       <Menu.Item key="brand" className={cx('pl-0', 'pr-16')}>
         <NavLink to={HOME_PATH}>

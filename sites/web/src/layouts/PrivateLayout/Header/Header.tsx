@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
     }
   }, [location.pathname]);
 
-  const { isTabletView } = useWindowResize();
+  const { isDesktopView } = useWindowResize();
 
   const themeMenuItem = (
     <Menu.Item key="theme">
@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
 
   return (
     <Layout.Header className={cx('wrapper', 'p-0')}>
-      {!isTabletView ? (
+      {!isDesktopView ? (
         <DesktopMenu
           activeMenuItem={activeMenuItem}
           themeMenuItem={themeMenuItem}

@@ -1,4 +1,4 @@
-import { MailEnum, authApi } from '@ah-ticker/common';
+import { MailEnum, authService } from '@ah-ticker/common';
 import { notification } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
@@ -19,7 +19,7 @@ export const SuccessContent: React.FC<SuccessContentProps> = ({ email }) => {
   const onResendMail = async () => {
     setLoading(true);
     try {
-      await authApi.resendMail({ email, type: MailEnum.resetPassword });
+      await authService.resendMail({ email, type: MailEnum.resetPassword });
       notification.success({ message: t('ResendMailSuccess') });
     } catch (e) {
     } finally {

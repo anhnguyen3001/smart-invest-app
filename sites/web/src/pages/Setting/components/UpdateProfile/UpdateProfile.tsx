@@ -2,7 +2,7 @@ import {
   IUser,
   PATTERN_VALIDATION,
   UpdateInfoReq,
-  userApi,
+  userService,
 } from '@ah-ticker/common';
 import { Button, Form, Input, notification } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
@@ -88,7 +88,7 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
     };
 
     try {
-      await userApi.updateInfo(submitData);
+      await userService.updateInfo(submitData);
 
       notification.success({ message: t('UpdateSuccess') });
     } catch (e) {

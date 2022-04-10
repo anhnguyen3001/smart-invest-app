@@ -1,20 +1,19 @@
-import { authApi, PATTERN_VALIDATION, SignupReq } from '@ah-ticker/common';
+import { authService, PATTERN_VALIDATION, SignupReq } from '@ah-ticker/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
-import { SIGNIN_PATH } from 'src/constants';
+import { NavLink, useHistory } from 'react-router-dom';
+import { SIGNIN_PATH, VERIFY_USER_PATH } from 'src/constants';
 import { useApp } from 'src/context';
-import { SuccessContent } from './components';
 
 const cx = classNames.bind({});
 
 export const Signup: React.FC = () => {
   const { t } = useTranslation();
   const { setLoading } = useApp();
-  const [isDoneSignUp, setIsDoneSignup] = useState(false);
+  const history = useHistory();
 
   const [form] = useForm<SignupReq>();
 
@@ -97,33 +96,42 @@ export const Signup: React.FC = () => {
     ],
   };
 
+  const onValuesChange = (changedValue: Partial<SignupReq>) => {
+    if (changedValue.password !== undefined) {
+      form.validateFields(['confirmPassword']);
+    } else if (changedValue.confirmPassword !== undefined) {
+      form.validateFields(['password']);
+    }
+  };
+
   const onFinish = async ({ username, email, ...rest }: SignupReq) => {
     setLoading(true);
 
+    const formattedEmail = email.trim();
+
     const submitData: SignupReq = {
       username: username.trim(),
-      email: email.trim(),
+      email: formattedEmail,
       ...rest,
     };
 
     try {
-      await authApi.signup(submitData);
-      setIsDoneSignup(true);
+      await authService.signup(submitData);
+      history.push(`${VERIFY_USER_PATH}?email=${formattedEmail}`);
     } catch (e) {
     } finally {
       setLoading(false);
     }
   };
 
-  return isDoneSignUp ? (
-    <SuccessContent email={form.getFieldValue('email')?.trim()} />
-  ) : (
+  return (
     <>
       <Form
         className={cx('w-100', 'm-auto')}
         form={form}
         layout="vertical"
         onFinish={onFinish}
+        onValuesChange={onValuesChange}
       >
         <h2 className={cx('mb-32')}>{t('SignupToAHTicker')}</h2>
 

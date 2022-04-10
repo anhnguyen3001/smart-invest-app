@@ -51,15 +51,15 @@ export const getAxios = () => {
   return axiosInstance;
 };
 
-let imageApi: AxiosInstance;
+let imageAxios: AxiosInstance;
 export const initImageClient = (baseURL: string) => {
-  imageApi = axios.create({ baseURL });
+  imageAxios = axios.create({ baseURL });
 };
 
 export const getImageAxios = () => {
-  if (!imageApi) {
+  if (!imageAxios) {
     throw new Error('Need initialize image axios instance');
   }
 
-  return imageApi;
+  return imageAxios;
 };

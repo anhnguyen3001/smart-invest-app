@@ -9,3 +9,7 @@ export * from './localization';
 export * from './localStorage';
 export * from './ticker';
 export * from './user';
+
+export const getEnv = (key: string) => {
+  return process.env[`REACT_APP_${key}`] || '';
+};

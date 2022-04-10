@@ -1,4 +1,4 @@
-import { imageApi } from '@ah-ticker/common';
+import { imageService } from '@ah-ticker/common';
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { Avatar, Upload, UploadProps } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
@@ -59,7 +59,7 @@ export const UploadImage: React.FC<UploadImageProps> = ({
     getBase64(file, async (imageUrl) => {
       // console.log(imageUrl);
       try {
-        const res = await imageApi.upload(imageUrl);
+        const res = await imageService.upload(imageUrl);
         console.log(res);
         file.url = res.secure_url;
         onSuccess(file);

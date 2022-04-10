@@ -1,5 +1,5 @@
 import {
-  authApi,
+  authService,
   PATTERN_VALIDATION,
   ResetPasswordReq,
 } from '@ah-ticker/common';
@@ -71,7 +71,7 @@ export const ResetPassword: React.FC = () => {
     setLoading(true);
 
     try {
-      await authApi.resetPassword(
+      await authService.resetPassword(
         {
           email,
           token,

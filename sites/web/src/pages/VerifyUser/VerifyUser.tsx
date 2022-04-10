@@ -1,9 +1,10 @@
-import { authApi } from '@ah-ticker/common';
-import { notification } from 'antd';
+import { authService, VerifyUserReq } from '@ah-ticker/common';
+import { Button, Form, Input, notification } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { Text } from 'src/components';
 import { SIGNIN_PATH, SIGNUP_PATH } from 'src/constants';
 import { useApp } from 'src/context';
 import { useQuery } from 'src/hooks';
@@ -11,33 +12,76 @@ import { useQuery } from 'src/hooks';
 const cx = classNames.bind({});
 
 export const VerifyUser: React.FC = () => {
-  const query = useQuery();
-  const history = useHistory();
   const { setLoading } = useApp();
 
-  useEffect(() => {
-    const onVerify = async () => {
-      const email = query.get('email');
-      const token = query.get('token');
+  const history = useHistory();
 
-      setLoading(true);
+  const query = useQuery();
+  const email = query.get('email') || '';
 
-      try {
-        await authApi.verifyUser({ email, token });
-        notification.success({ message: t('VerifySuccess') });
-        history.push(SIGNIN_PATH);
-      } catch (e) {
-      } finally {
-        setLoading(false);
-      }
+  const [form] = Form.useForm<VerifyUserReq>();
+
+  const rules = {
+    code: [
+      {
+        transform: (value: string) => value?.trim(),
+        required: true,
+        message: t('FieldRequired', { field: t('code').toLowerCase() }),
+      },
+      {
+        transform: (value: string) => value?.trim(),
+        maxLength: 6,
+        message: t('FieldMaxLength', { field: t('Code'), maxLength: 6 }),
+      },
+    ],
+  };
+
+  const onFinish = async ({ code }: VerifyUserReq) => {
+    setLoading(true);
+
+    const submitData: VerifyUserReq = {
+      code: code.trim(),
+      email: email.trim(),
     };
-    onVerify();
-    // eslint-disable-next-line
-  }, []);
+
+    try {
+      await authService.verifyUser(submitData);
+      notification.success({ message: t('VerifySuccess') });
+      history.push(SIGNIN_PATH);
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
-      <h2 className={cx('m-auto')}>{t('VerifyUser')}</h2>
+      <Form
+        className={cx('w-100', 'm-auto')}
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+      >
+        <h2 className={cx('mb-32')}>{t('VerifyUser')}</h2>
+        <Text level={2} className={cx('mb-16')}>
+          {t('SendVerifyMail')}
+        </Text>
+
+        <Form.Item name="code" rules={rules.code} required={false}>
+          <Input
+            size="large"
+            placeholder={t('EnterField', {
+              field: t('Code').toLowerCase(),
+            })}
+          />
+        </Form.Item>
+
+        <Form.Item className={cx('text-right', 'mb-0')}>
+          <Button type="primary" size="large" shape="round" htmlType="submit">
+            {t('Confirm')}
+          </Button>
+        </Form.Item>
+      </Form>
       <div className={cx('text-500', 'text-center')}>
         {t('NotHaveAccount')}{' '}
         <NavLink to={SIGNUP_PATH} className={cx('text-500', 'primary-color')}>

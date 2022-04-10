@@ -1,7 +1,7 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import { DEFAULT_LANG } from "src/constants";
-import { getLanguage } from "src/helpers";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import { DEFAULT_LANG } from 'src/constants';
+import { getLanguage } from 'src/helpers';
 import { translations as enTrans } from './locales/en';
 import { translations as viTrans } from './locales/vi';
 
@@ -21,5 +21,7 @@ i18n
       escapeValue: false,
     },
   });
+
+export const t = (text: string, options?: object) => i18n.t(text, options);
 
 export default i18n;

@@ -4,5 +4,7 @@ export const signupTranslation = {
   SigninNow: 'Sign in now',
   SignUpSuccess: 'Sign up successfully',
   SendVerifyMail:
-    'We have sent verification mail to your email address. Please check soon to finish sign up process.',
+    'We have sent verification code to your email address. Please check and enter code below.',
+  Code: 'Code',
+  Confirm: 'Confirm',
 };

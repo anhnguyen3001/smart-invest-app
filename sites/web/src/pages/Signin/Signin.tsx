@@ -1,4 +1,4 @@
-import { authApi, PATTERN_VALIDATION, LoginReq } from '@ah-ticker/common';
+import { authService, PATTERN_VALIDATION, LoginReq } from '@ah-ticker/common';
 import { Button, Divider, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
@@ -57,7 +57,7 @@ export const Signin: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await authApi.login(data);
+      const res = await authService.login(data);
 
       updateToken(res);
     } catch (e) {

@@ -1,4 +1,4 @@
-import { IUser, Tokens, userApi } from '@ah-ticker/common';
+import { IUser, Tokens, userService } from '@ah-ticker/common';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAccessToken, setLS } from 'src/helpers';
 import { useApp } from './AppContext';
@@ -27,7 +27,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const getUser = async () => {
     setLoading(true);
     try {
-      const res = await userApi.getMe();
+      const res = await userService.getMe();
       setUser(res);
     } catch (e) {
     } finally {

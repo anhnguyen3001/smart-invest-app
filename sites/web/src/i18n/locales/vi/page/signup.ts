@@ -4,5 +4,7 @@ export const signupTranslation = {
   SigninNow: 'Đăng nhập ngay',
   SignUpSuccess: 'Đăng ký thành công',
   SendVerifyMail:
-    'Chúng tôi đã gửi thư xác nhận đến địa chỉ email của bạn. Mong bạn kiểm tra để hoàn thành quá trình đăng ký.',
+    'Chúng tôi đã gửi mã xác nhận đến địa chỉ email của bạn. Bạn hãy kiểm tra và điền mã vào phía dưới.',
+  Code: 'Mã',
+  Confirm: 'Xác nhận',
 };

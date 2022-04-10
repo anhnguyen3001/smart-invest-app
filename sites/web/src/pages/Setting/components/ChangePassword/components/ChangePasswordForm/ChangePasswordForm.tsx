@@ -2,7 +2,7 @@ import React from 'react';
 import {
   ChangePasswordReq,
   PATTERN_VALIDATION,
-  userApi,
+  userService,
 } from '@ah-ticker/common';
 import { useForm } from 'antd/lib/form/Form';
 import { Button, Form, Input, notification } from 'antd';
@@ -73,7 +73,7 @@ export const ChangePasswordForm: React.FC<StyleProps> = ({ className }) => {
     setLoading(true);
 
     try {
-      await userApi.changePassword(inputValue);
+      await userService.changePassword(inputValue);
       notification.success({ message: t('UpdateSuccess') });
       form.resetFields();
     } catch (e) {

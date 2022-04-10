@@ -47,6 +47,7 @@ export const translations = {
   CreateSuccess: 'Create successfully',
   UpdateSuccess: 'Update successfully',
   VerifySuccess: 'Verify successfully',
+  SomethingWentWrong: 'Something went wrong',
 
   ...homeTranslation,
   ...signinTranslation,

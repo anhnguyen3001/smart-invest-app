@@ -3,6 +3,8 @@ import { notification } from 'antd';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import React, { useCallback, useEffect } from 'react';
 import { useAuth } from 'src/context';
+import { getEnv } from 'src/helpers';
+import { t } from 'src/i18n';
 
 export const WithAxios: React.FC = ({ children }) => {
   const { accessToken, logout } = useAuth();
@@ -23,8 +25,7 @@ export const WithAxios: React.FC = ({ children }) => {
           message = data?.details?.data?.message || data.message;
         }
         notification.error({
-          message,
-          // message: `${message || t('SomethingWentWrong')}`,
+          message: `${message || t('SomethingWentWrong')}`,
         });
         break;
     }
@@ -51,12 +52,12 @@ export const WithAxios: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
-    const imageEndpoint: string = process.env.REACT_APP_IMAGE_ENDPOINT || '';
+    const imageEndpoint = getEnv('IMAGE_ENDPOINT');
     initImageClient(imageEndpoint);
   }, []);
 
   useEffect(() => {
-    const endpoint: string = process.env.REACT_APP_AUTH_ENDPOINT || '';
+    const endpoint = getEnv('AUTH_ENDPOINT');
     initAxiosInstance(endpoint, {
       requestInterceptors: {
         onFulfilled: (request) => requestInterceptor(request),

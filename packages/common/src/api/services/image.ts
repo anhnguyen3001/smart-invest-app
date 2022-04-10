@@ -1,7 +1,7 @@
 import { UploadImaggeRes } from 'src/types';
 import { getImageAxios } from '../client';
 
-export const imageApi = {
+export const imageService = {
   upload: async (file: string): Promise<UploadImaggeRes> => {
     const axios = getImageAxios();
     const res = await axios.post('/image/upload', {

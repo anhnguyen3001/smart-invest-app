@@ -14,7 +14,7 @@ export const ChangePassword: React.FC<StyleProps> = ({ className }) => {
   return user?.method === LoginMethodEnum.local ? (
     <ChangePasswordForm className={className} />
   ) : (
-    <Text className={className} level={2} type="secondary">
+    <Text className={className} level={2}>
       {t('NotAvailableForLoginMethod')}
     </Text>
   );

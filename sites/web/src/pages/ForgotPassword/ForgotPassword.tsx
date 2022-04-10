@@ -1,5 +1,5 @@
 import {
-  authApi,
+  authService,
   PATTERN_VALIDATION,
   ForgetPasswordReq,
 } from '@ah-ticker/common';
@@ -52,7 +52,7 @@ export const ForgotPassword: React.FC = () => {
     setLoading(true);
 
     try {
-      await authApi.forgetPassword({ email: inputValue.email?.trim() });
+      await authService.forgetPassword({ email: inputValue.email?.trim() });
       setIsDone(true);
     } catch (e) {
     } finally {
