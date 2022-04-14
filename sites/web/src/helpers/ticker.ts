@@ -1,4 +1,4 @@
-import { ConvertedTicker, ITicker } from '@ah-ticker/common';
+import { ConvertedTicker, ITicker } from '@smart-invest/common';
 
 const round2Decimal = (value: number) => {
   return Math.floor(value * 100) / 100;

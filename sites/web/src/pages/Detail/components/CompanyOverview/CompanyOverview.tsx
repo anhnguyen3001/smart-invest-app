@@ -1,4 +1,4 @@
-import { ICompany } from '@ah-ticker/common';
+import { ICompany } from '@smart-invest/common';
 import { Col, Row } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 import classNames from 'classnames/bind';

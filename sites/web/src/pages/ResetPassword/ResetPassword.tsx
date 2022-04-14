@@ -1,15 +1,15 @@
 import {
   authService,
   PATTERN_VALIDATION,
-  ResetPasswordReq,
-} from '@ah-ticker/common';
+  ResetPasswordData,
+} from '@smart-invest/common';
 import { Button, Form, Input, notification } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { SIGNIN_PATH } from 'src/constants';
-import { useApp } from 'src/context';
+import { useApp } from 'src/contexts';
 import { useQuery } from 'src/hooks';
 
 export const ResetPassword: React.FC = () => {
@@ -20,10 +20,9 @@ export const ResetPassword: React.FC = () => {
   const { setLoading } = useApp();
 
   const query = useQuery();
-  const email = query.get('email');
-  const token = query.get('token');
+  const code = query.get('code') || '';
 
-  const [form] = useForm<ResetPasswordReq>();
+  const [form] = useForm<ResetPasswordData>();
 
   const rules = {
     password: [
@@ -67,17 +66,11 @@ export const ResetPassword: React.FC = () => {
     ],
   };
 
-  const onFinish = async (data: ResetPasswordReq) => {
+  const onFinish = async (data: ResetPasswordData) => {
     setLoading(true);
 
     try {
-      await authService.resetPassword(
-        {
-          email,
-          token,
-        },
-        data,
-      );
+      await authService.resetPassword(code, data);
 
       notification.success({ message: t('ResetPasswordSuccess') });
 

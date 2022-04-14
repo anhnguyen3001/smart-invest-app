@@ -1,4 +1,8 @@
-import { authService, PATTERN_VALIDATION, SignupReq } from '@ah-ticker/common';
+import {
+  authService,
+  PATTERN_VALIDATION,
+  SignupData,
+} from '@smart-invest/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
@@ -6,7 +10,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
 import { SIGNIN_PATH, VERIFY_USER_PATH } from 'src/constants';
-import { useApp } from 'src/context';
+import { useApp } from 'src/contexts';
 
 const cx = classNames.bind({});
 
@@ -15,7 +19,7 @@ export const Signup: React.FC = () => {
   const { setLoading } = useApp();
   const history = useHistory();
 
-  const [form] = useForm<SignupReq>();
+  const [form] = useForm<SignupData>();
 
   const rules = {
     username: [
@@ -96,7 +100,7 @@ export const Signup: React.FC = () => {
     ],
   };
 
-  const onValuesChange = (changedValue: Partial<SignupReq>) => {
+  const onValuesChange = (changedValue: Partial<SignupData>) => {
     if (changedValue.password !== undefined) {
       form.validateFields(['confirmPassword']);
     } else if (changedValue.confirmPassword !== undefined) {
@@ -104,12 +108,12 @@ export const Signup: React.FC = () => {
     }
   };
 
-  const onFinish = async ({ username, email, ...rest }: SignupReq) => {
+  const onFinish = async ({ username, email, ...rest }: SignupData) => {
     setLoading(true);
 
     const formattedEmail = email.trim();
 
-    const submitData: SignupReq = {
+    const submitData: SignupData = {
       username: username.trim(),
       email: formattedEmail,
       ...rest,

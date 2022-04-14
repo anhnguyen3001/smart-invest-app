@@ -1,4 +1,4 @@
-import { authService, VerifyUserReq } from '@ah-ticker/common';
+import { authService, VerifyUserData } from '@smart-invest/common';
 import { Button, Form, Input, notification } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
@@ -6,7 +6,7 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Text } from 'src/components';
 import { SIGNIN_PATH, SIGNUP_PATH } from 'src/constants';
-import { useApp } from 'src/context';
+import { useApp } from 'src/contexts';
 import { useQuery } from 'src/hooks';
 
 const cx = classNames.bind({});
@@ -19,7 +19,7 @@ export const VerifyUser: React.FC = () => {
   const query = useQuery();
   const email = query.get('email') || '';
 
-  const [form] = Form.useForm<VerifyUserReq>();
+  const [form] = Form.useForm<VerifyUserData>();
 
   const rules = {
     code: [
@@ -36,10 +36,10 @@ export const VerifyUser: React.FC = () => {
     ],
   };
 
-  const onFinish = async ({ code }: VerifyUserReq) => {
+  const onFinish = async ({ code }: VerifyUserData) => {
     setLoading(true);
 
-    const submitData: VerifyUserReq = {
+    const submitData: VerifyUserData = {
       code: code.trim(),
       email: email.trim(),
     };

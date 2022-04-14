@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
 import { thousandFormatter } from 'src/helpers';
-import { IPrice } from '@ah-ticker/common';
+import { IPrice } from '@smart-invest/common';
 
 interface TradingDataTableProps {
   prices?: IPrice[];

@@ -1,14 +1,14 @@
 import {
   authService,
   PATTERN_VALIDATION,
-  ForgetPasswordReq,
-} from '@ah-ticker/common';
+  ForgetPasswordData,
+} from '@smart-invest/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
-import { useApp } from 'src/context';
+import { useApp } from 'src/contexts';
 import { SuccessContent } from './components';
 
 export const ForgotPassword: React.FC = () => {
@@ -18,7 +18,7 @@ export const ForgotPassword: React.FC = () => {
 
   const [isDone, setIsDone] = useState(false);
 
-  const [form] = useForm<ForgetPasswordReq>();
+  const [form] = useForm<ForgetPasswordData>();
 
   const rules = {
     email: [
@@ -48,7 +48,7 @@ export const ForgotPassword: React.FC = () => {
     ],
   };
 
-  const onFinish = async (inputValue: ForgetPasswordReq) => {
+  const onFinish = async (inputValue: ForgetPasswordData) => {
     setLoading(true);
 
     try {

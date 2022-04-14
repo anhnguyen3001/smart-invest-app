@@ -1,4 +1,4 @@
-import { IPrice } from '@ah-ticker/common';
+import { IPrice } from '@smart-invest/common';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CandleStickChart, Text } from 'src/components';

@@ -1,22 +1,22 @@
 import {
-  IUser,
   PATTERN_VALIDATION,
-  UpdateInfoReq,
+  UpdateProfileData,
+  User,
   userService,
-} from '@ah-ticker/common';
+} from '@smart-invest/common';
 import { Button, Form, Input, notification } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import classNames from 'classnames/bind';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { UploadImage } from 'src/components';
-import { useApp, useAuth } from 'src/context';
+import { UploadAvatar } from 'src/components';
+import { useApp, useAuth } from 'src/contexts';
 import { StyleProps } from 'src/types';
 import styles from './UpdateProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
-type FormField = Omit<IUser, 'id' | 'avatar'> & {
+type FormField = Omit<User, 'id' | 'avatar'> & {
   avatar: Partial<UploadFile>[];
 };
 
@@ -25,7 +25,7 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
 
   const { setLoading } = useApp();
 
-  const { user } = useAuth();
+  const { user, getUserInfo } = useAuth();
   const { avatar, email, username } = user || {};
 
   const [form] = Form.useForm<FormField>();
@@ -82,17 +82,16 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
   const onFinish = async (inputValue: FormField) => {
     setLoading(true);
 
-    const submitData: UpdateInfoReq = {
+    const submitData: UpdateProfileData = {
       username: inputValue.username?.trim(),
       avatar: inputValue.avatar[0]?.url || null,
     };
 
     try {
-      await userService.updateInfo(submitData);
-
+      await userService.updateProfile(submitData);
+      await getUserInfo();
       notification.success({ message: t('UpdateSuccess') });
     } catch (e) {
-    } finally {
       setLoading(false);
     }
   };
@@ -110,7 +109,11 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
         valuePropName="fileList"
         getValueFromEvent={normFile}
       >
-        <UploadImage className={cx('avatar')} />
+        <UploadAvatar
+          className={cx('avatar')}
+          maxCount={1}
+          showUploadList={false}
+        />
       </Form.Item>
 
       <Form.Item

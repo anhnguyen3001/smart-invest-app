@@ -1,15 +1,15 @@
 import React from 'react';
 import {
-  ChangePasswordReq,
+  ChangePasswordData,
   PATTERN_VALIDATION,
   userService,
-} from '@ah-ticker/common';
+} from '@smart-invest/common';
 import { useForm } from 'antd/lib/form/Form';
 import { Button, Form, Input, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
 import { StyleProps } from 'src/types';
-import { useApp } from 'src/context';
+import { useApp } from 'src/contexts';
 
 const cx = classNames.bind({});
 
@@ -18,7 +18,7 @@ export const ChangePasswordForm: React.FC<StyleProps> = ({ className }) => {
 
   const { setLoading } = useApp();
 
-  const [form] = useForm<ChangePasswordReq>();
+  const [form] = useForm<ChangePasswordData>();
 
   const rules = {
     oldPassWord: [
@@ -69,7 +69,7 @@ export const ChangePasswordForm: React.FC<StyleProps> = ({ className }) => {
     ],
   };
 
-  const onFinish = async (inputValue: ChangePasswordReq) => {
+  const onFinish = async (inputValue: ChangePasswordData) => {
     setLoading(true);
 
     try {

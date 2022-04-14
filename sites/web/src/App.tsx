@@ -2,9 +2,9 @@ import { ConfigProvider } from 'antd';
 import React, { Suspense, useEffect } from 'react';
 import 'src/styles/theme.css';
 import './App.scss';
-import { Loading, WithAxios } from './components';
+import { Loading } from './components';
 import { LOCAL_STORAGE, REGIONS, THEME } from './constants';
-import { AppProvider, AuthProvider } from './context';
+import { AppProvider, AuthProvider } from './contexts';
 import { getLanguage, getLS } from './helpers';
 import { useTheme } from './hooks';
 import { Routes } from './routes';
@@ -23,9 +23,7 @@ const App: React.FC = () => {
       <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>
         <AppProvider>
           <AuthProvider>
-            <WithAxios>
-              <Routes />
-            </WithAxios>
+            <Routes />
           </AuthProvider>
         </AppProvider>
       </ConfigProvider>

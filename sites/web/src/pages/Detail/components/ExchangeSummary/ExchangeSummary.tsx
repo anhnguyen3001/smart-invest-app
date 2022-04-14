@@ -1,4 +1,4 @@
-import { ConvertedTicker } from '@ah-ticker/common';
+import { ConvertedTicker } from '@smart-invest/common';
 import { Card } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';

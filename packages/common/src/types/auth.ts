@@ -1,4 +1,4 @@
-export interface LoginReq {
+export interface LoginData {
   email: string;
   password: string;
 }
@@ -8,14 +8,14 @@ export interface Tokens {
   refreshToken: string;
 }
 
-export interface SignupReq {
+export interface SignupData {
   email: string;
   password: string;
   confirmPassword: string;
   username: string;
 }
 
-export interface VerifyUserReq {
+export interface VerifyUserData {
   email: string;
   code: string;
 }
@@ -25,21 +25,25 @@ export enum MailEnum {
   resetPassword = 'resetPassword',
 }
 
-export interface ResendMailReq {
+export interface ResendMailData {
   type: MailEnum;
   email: string;
 }
 
-export interface ForgetPasswordReq {
+export interface ForgetPasswordData {
   email: string;
 }
 
-export interface ResetPasswordParams {
+export interface VerifyOtpParams {
   email: string;
+  code: string;
+}
+
+export interface VerifyOtpResponse {
   token: string;
 }
 
-export interface ResetPasswordReq {
+export interface ResetPasswordData {
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;

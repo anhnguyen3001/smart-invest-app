@@ -2,14 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
 import { Loading } from 'src/components';
 import { HOME_PATH } from 'src/constants';
-import { useApp, useAuth } from 'src/context';
+import { useApp, useAuth } from 'src/contexts';
+import { useAxios } from 'src/hooks/useAxios';
 import { privateRoutes, publicRoutes } from './constants';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
 export const Routes: React.FC = () => {
   const { loading } = useApp();
-  const { accessToken } = useAuth();
+  const { accessToken, logout } = useAuth();
+  useAxios(accessToken, logout);
 
   return (
     <Loading loading={loading}>

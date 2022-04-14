@@ -48,6 +48,7 @@ export const translations = {
   UpdateSuccess: 'Update successfully',
   VerifySuccess: 'Verify successfully',
   SomethingWentWrong: 'Something went wrong',
+  YourSessionIsExpired: 'Your session is expired',
 
   ...homeTranslation,
   ...signinTranslation,

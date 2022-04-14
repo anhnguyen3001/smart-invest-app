@@ -1,5 +1,5 @@
-import { INews, IPagination } from '@ah-ticker/common';
-import { Avatar, Button, List } from 'antd';
+import { INews, IPagination } from '@smart-invest/common';
+import { Button, List } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -71,7 +71,7 @@ export const NewsList: React.FC<NewsListProps> = ({
         className={cx('justify-content-start', 'align-items-start')}
       >
         <div className={cx('metaImage-wrapper')}>
-          <img alt="news image" src={image} />
+          <img alt="news metaImage" src={image} />
         </div>
         <div className={cx('ml-32')}>
           <Paragraph
