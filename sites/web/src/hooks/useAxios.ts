@@ -1,19 +1,19 @@
-import { initAxiosInstance, initImageClient } from '@ah-ticker/common';
+import { initBffClient, initImageClient } from '@ah-ticker/common';
 import { notification } from 'antd';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import React, { useCallback, useEffect } from 'react';
-import { useAuth } from 'src/contexts';
+import { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getEnv } from 'src/helpers';
-import { t } from 'src/i18n';
 
-export const WithAxios: React.FC = ({ children }) => {
-  const { accessToken, logout } = useAuth();
+export const useAxios = (accessToken: string = '', logout: () => void) => {
+  const { t } = useTranslation();
 
   const handleResponseError = useCallback((error: AxiosError) => {
     const status = error && error.response && error.response.status;
     switch (status) {
       case 401:
         logout();
+        notification.error({ message: t('YourSessionIsExpired') });
         break;
       default:
         // Handle error message from API response
@@ -58,7 +58,7 @@ export const WithAxios: React.FC = ({ children }) => {
 
   useEffect(() => {
     const endpoint = getEnv('AUTH_ENDPOINT');
-    initAxiosInstance(endpoint, {
+    initBffClient(endpoint, {
       requestInterceptors: {
         onFulfilled: (request) => requestInterceptor(request),
       },
@@ -69,6 +69,4 @@ export const WithAxios: React.FC = ({ children }) => {
     });
     // eslint-disable-next-line
   }, [accessToken]);
-
-  return <>{children}</>;
 };

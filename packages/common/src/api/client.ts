@@ -5,7 +5,7 @@ import axios, {
   AxiosResponse,
 } from 'axios';
 
-let axiosInstance: AxiosInstance;
+let bffClient: AxiosInstance;
 
 interface CustomAxiosConfig {
   requestInterceptors?: {
@@ -18,48 +18,48 @@ interface CustomAxiosConfig {
   };
 }
 
-export const initAxiosInstance = (
+export const initBffClient = (
   baseURL: string,
   configs?: CustomAxiosConfig,
-) => {
-  axiosInstance = axios.create({
+): void => {
+  bffClient = axios.create({
     baseURL,
   });
 
   const { requestInterceptors, responseInterceptors } = configs || {};
 
   if (requestInterceptors) {
-    axiosInstance.interceptors.request.use(
+    bffClient.interceptors.request.use(
       requestInterceptors.onFulfilled,
       requestInterceptors.onRejected,
     );
   }
 
   if (responseInterceptors) {
-    axiosInstance.interceptors.response.use(
+    bffClient.interceptors.response.use(
       responseInterceptors.onFulfilled,
       responseInterceptors.onRejected,
     );
   }
 };
 
-export const getAxios = () => {
-  if (!axiosInstance) {
-    throw new Error('Need initialize axios instance');
+export const getBffClient = (): AxiosInstance => {
+  if (!bffClient) {
+    throw new Error('Need initialize bff client');
   }
 
-  return axiosInstance;
+  return bffClient;
 };
 
-let imageAxios: AxiosInstance;
-export const initImageClient = (baseURL: string) => {
-  imageAxios = axios.create({ baseURL });
+let imageClient: AxiosInstance;
+export const initImageClient = (baseURL: string): void => {
+  imageClient = axios.create({ baseURL });
 };
 
-export const getImageAxios = () => {
-  if (!imageAxios) {
+export const getImageClient = (): AxiosInstance => {
+  if (!imageClient) {
     throw new Error('Need initialize image axios instance');
   }
 
-  return imageAxios;
+  return imageClient;
 };

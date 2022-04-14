@@ -49,6 +49,11 @@
   }
 }
 
+// Avatar
+.ant-avatar img {
+  object-fit: contain !important;
+}
+
 // Result
 .ant-result {
   &.app-result-page {

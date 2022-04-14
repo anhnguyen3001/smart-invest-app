@@ -6,6 +6,7 @@ import { useApp } from './AppContext';
 interface AuthState {
   user?: User;
   setUser: (user: User) => void;
+  getUserInfo: () => Promise<void>;
   accessToken?: string;
   setAccessToken: (token: string) => void;
   updateToken: (tokens: Tokens) => void;
@@ -20,7 +21,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>();
   const [accessToken, setAccessToken] = useState<string>(getAccessToken());
 
-  const getUser = async () => {
+  const getUserInfo = async () => {
     setLoading(true);
     try {
       const res = await userService.getMe();
@@ -33,7 +34,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (accessToken) {
-      getUser();
+      getUserInfo();
     }
     // eslint-disable-next-line
   }, [accessToken]);
@@ -54,6 +55,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       value={{
         user,
         setUser,
+        getUserInfo,
         accessToken,
         setAccessToken,
         logout,

@@ -48,6 +48,7 @@ export const translations = {
   UpdateSuccess: 'Cập nhật thành công',
   VerifySuccess: 'Xác thực thành công',
   SomethingWentWrong: 'Xảy ra vấn đề',
+  YourSessionIsExpired: 'Phiên làm việc của bạn đã hết hạn',
 
   ...homeTranslation,
   ...signinTranslation,

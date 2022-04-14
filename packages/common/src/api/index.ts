@@ -1,2 +1,2 @@
-export { initAxiosInstance, initImageClient } from './client';
+export { initBffClient, initImageClient } from './client';
 export * from './services';
