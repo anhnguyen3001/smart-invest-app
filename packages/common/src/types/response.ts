@@ -1,5 +1,13 @@
 import { IFinancialStatement, ITicker } from './ticker';
 
+// Base response of User server
+export interface UserBaseReponse<T> {
+  code: string;
+  message: string;
+  data?: T;
+  details?: object;
+}
+
 export interface IPagination {
   currentPage: number;
   pageSize: number;

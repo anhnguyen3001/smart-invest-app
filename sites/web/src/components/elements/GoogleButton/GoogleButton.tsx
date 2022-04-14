@@ -2,7 +2,7 @@ import { authService } from '@ah-ticker/common';
 import React from 'react';
 import ReactGoogleLogin from 'react-google-login';
 import { useTranslation } from 'react-i18next';
-import { useApp, useAuth } from 'src/context';
+import { useApp, useAuth } from 'src/contexts';
 import { getEnv } from 'src/helpers';
 
 export const GoogleButton: React.FC = () => {

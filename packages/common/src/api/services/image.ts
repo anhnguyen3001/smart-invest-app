@@ -1,8 +1,8 @@
-import { UploadImaggeRes } from 'src/types';
+import { UploadImaggeResponse } from 'src/types';
 import { getImageAxios } from '../client';
 
 export const imageService = {
-  upload: async (file: string): Promise<UploadImaggeRes> => {
+  upload: async (file: string): Promise<UploadImaggeResponse> => {
     const axios = getImageAxios();
     const res = await axios.post('/image/upload', {
       file,

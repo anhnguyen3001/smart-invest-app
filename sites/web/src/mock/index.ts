@@ -5,7 +5,7 @@ import {
   INews,
   IPrice,
   ITicker,
-  IUser,
+  User,
   IPagination,
   Gender,
   LoginMethodEnum,
@@ -52,8 +52,7 @@ export const mockNews: INews[] = Array.apply(0, new Array(5)).map(
   (_, index) => ({ ...news, id: index + 1 }),
 );
 
-export const mockUser: IUser = {
-  id: 1,
+export const mockUser: User = {
   avatar: 'https://joeschmoe.io/api/v1/random',
   username: `Anhnh`,
   email: 'nguyenhoanganh12000@gmail.com',

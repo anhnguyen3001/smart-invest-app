@@ -1,21 +1,24 @@
-import { ChangePasswordReq, IUser, UpdateInfoReq } from 'src/types';
+import {
+  ChangePasswordData,
+  GetUserInfoResponse,
+  UpdateProfileData,
+} from 'src/types';
 import { getAxios } from '../client';
 
 export const userService = {
-  getMe: async (): Promise<IUser> => {
+  getMe: async (): Promise<GetUserInfoResponse> => {
     const axios = getAxios();
     const res = await axios.get('/user/me');
     return res.data.data;
   },
 
-  updateInfo: async (data: UpdateInfoReq): Promise<IUser> => {
+  updateProfile: async (data: UpdateProfileData): Promise<void> => {
     const axios = getAxios();
-    const res = await axios.patch('/user/me', data);
-    return res.data.data;
+    await axios.patch('/user/me', data);
   },
 
-  changePassword: async (data: ChangePasswordReq): Promise<void> => {
+  changePassword: async (data: ChangePasswordData): Promise<void> => {
     const axios = getAxios();
-    axios.post('/user/change-password', data);
+    await axios.post('/user/change-password', data);
   },
 };

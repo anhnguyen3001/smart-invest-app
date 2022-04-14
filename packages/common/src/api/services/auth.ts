@@ -1,32 +1,34 @@
 import {
-  ForgetPasswordReq,
-  LoginReq,
-  ResendMailReq,
-  ResetPasswordReq,
-  SignupReq,
+  ForgetPasswordData,
+  LoginData,
+  ResendMailData,
+  ResetPasswordData,
+  SignupData,
   Tokens,
-  VerifyUserReq,
+  VerifyOtpParams,
+  VerifyOtpResponse,
+  VerifyUserData,
 } from 'src/types';
 import { getAxios } from '../client';
 
 export const authService = {
-  login: async (data: LoginReq): Promise<Tokens> => {
+  login: async (data: LoginData): Promise<Tokens> => {
     const axios = getAxios();
     const res = await axios.post('/auth/login', data);
     return res.data.data;
   },
 
-  signup: async (data: SignupReq): Promise<void> => {
+  signup: async (data: SignupData): Promise<void> => {
     const axios = getAxios();
     await axios.post('/auth/signup', data);
   },
 
-  resendMail: async (params: ResendMailReq): Promise<void> => {
+  resendMail: async (params: ResendMailData): Promise<void> => {
     const axios = getAxios();
     await axios.get('/auth/resend-mail', { params });
   },
 
-  verifyUser: async (params: VerifyUserReq): Promise<void> => {
+  verifyUser: async (params: VerifyUserData): Promise<void> => {
     const axios = getAxios();
     await axios.get('/auth/verify', { params });
   },
@@ -36,17 +38,25 @@ export const authService = {
     await axios.get('/auth/logout');
   },
 
-  forgetPassword: async (data: ForgetPasswordReq): Promise<void> => {
+  forgetPassword: async (data: ForgetPasswordData): Promise<void> => {
     const axios = getAxios();
-    await axios.post('/auth/forget-password', data);
+    await axios.post('/auth/recover/init', data);
+  },
+
+  verifyOtp: async (params: VerifyOtpParams): Promise<VerifyOtpResponse> => {
+    const axios = getAxios();
+    const res = await axios.get('/auth/recover/code', { params });
+    return res.data.data;
   },
 
   resetPassword: async (
-    params: ResetPasswordReq,
-    data: ResetPasswordReq,
+    token: string,
+    data: ResetPasswordData,
   ): Promise<void> => {
     const axios = getAxios();
-    await axios.post('/auth/reset-password', data, { params });
+    await axios.post('/auth/recover/password', data, {
+      headers: { Authorization: token },
+    });
   },
 
   loginFB: async (accessToken: string): Promise<Tokens> => {

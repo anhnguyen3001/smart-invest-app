@@ -1,11 +1,11 @@
-import { Gender, IUser } from '@ah-ticker/common';
+import { Gender, User } from '@ah-ticker/common';
 import { Avatar, AvatarProps } from 'antd';
 import React from 'react';
 import defaultFemale from 'src/assets/images/default_female_ava.jpg';
 import defaultMale from 'src/assets/images/default_male_ava.png';
 
 interface UserAvatarProps extends AvatarProps {
-  user?: IUser;
+  user?: User;
 }
 
 export const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...rest }) => {

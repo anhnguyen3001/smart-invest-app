@@ -9,7 +9,7 @@ import {
   HOME_PATH,
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
-import { useAuth } from 'src/context';
+import { useAuth } from 'src/contexts';
 import { getNavbarLinks, MenuHeaderProps } from '../../utils';
 import { SearchForm } from '../SearchForm';
 import style from './DesktopMenu.module.scss';

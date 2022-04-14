@@ -1,7 +1,7 @@
 import {
-  IUser,
+  User,
   PATTERN_VALIDATION,
-  UpdateInfoReq,
+  UpdateProfileData,
   userService,
 } from '@ah-ticker/common';
 import { Button, Form, Input, notification } from 'antd';
@@ -10,13 +10,13 @@ import classNames from 'classnames/bind';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UploadImage } from 'src/components';
-import { useApp, useAuth } from 'src/context';
+import { useApp, useAuth } from 'src/contexts';
 import { StyleProps } from 'src/types';
 import styles from './UpdateProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
-type FormField = Omit<IUser, 'id' | 'avatar'> & {
+type FormField = Omit<User, 'id' | 'avatar'> & {
   avatar: Partial<UploadFile>[];
 };
 
@@ -82,13 +82,13 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
   const onFinish = async (inputValue: FormField) => {
     setLoading(true);
 
-    const submitData: UpdateInfoReq = {
+    const submitData: UpdateProfileData = {
       username: inputValue.username?.trim(),
       avatar: inputValue.avatar[0]?.url || null,
     };
 
     try {
-      await userService.updateInfo(submitData);
+      await userService.updateProfile(submitData);
 
       notification.success({ message: t('UpdateSuccess') });
     } catch (e) {

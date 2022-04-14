@@ -2,7 +2,7 @@ import { LoginMethodEnum } from '@ah-ticker/common';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
-import { useAuth } from 'src/context';
+import { useAuth } from 'src/contexts';
 import { StyleProps } from 'src/types';
 import { ChangePasswordForm } from './components';
 

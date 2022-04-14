@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
 import { Loading } from 'src/components';
 import { HOME_PATH } from 'src/constants';
-import { useApp, useAuth } from 'src/context';
+import { useApp, useAuth } from 'src/contexts';
 import { privateRoutes, publicRoutes } from './constants';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';

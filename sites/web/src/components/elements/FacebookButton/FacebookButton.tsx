@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import ReactFacebookLogin from 'react-facebook-login';
 import { useTranslation } from 'react-i18next';
-import { useApp, useAuth } from 'src/context';
+import { useApp, useAuth } from 'src/contexts';
 import { getEnv } from 'src/helpers';
 import { StyleProps } from 'src/types';
 import styles from './FacebookButton.module.scss';

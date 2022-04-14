@@ -1,4 +1,4 @@
-import { IUser } from './user';
+import { User } from './user';
 
 export interface IPrice {
   closePrice: number;
@@ -64,6 +64,6 @@ export interface INews {
 export interface IComment {
   id: number;
   content: string;
-  user: IUser;
+  user: User;
   date: string;
 }

@@ -2,7 +2,7 @@ import { initAxiosInstance, initImageClient } from '@ah-ticker/common';
 import { notification } from 'antd';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import React, { useCallback, useEffect } from 'react';
-import { useAuth } from 'src/context';
+import { useAuth } from 'src/contexts';
 import { getEnv } from 'src/helpers';
 import { t } from 'src/i18n';
 

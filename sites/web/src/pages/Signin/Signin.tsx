@@ -1,4 +1,4 @@
-import { authService, PATTERN_VALIDATION, LoginReq } from '@ah-ticker/common';
+import { authService, PATTERN_VALIDATION, LoginData } from '@ah-ticker/common';
 import { Button, Divider, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { FacebookButton, GoogleButton } from 'src/components';
 import { FORGOT_PASSWORD_PATH, SIGNUP_PATH } from 'src/constants';
-import { useApp, useAuth } from 'src/context';
+import { useApp, useAuth } from 'src/contexts';
 
 const cx = classNames.bind({});
 
@@ -16,7 +16,7 @@ export const Signin: React.FC = () => {
   const { setLoading } = useApp();
   const { updateToken } = useAuth();
 
-  const [form] = useForm<LoginReq>();
+  const [form] = useForm<LoginData>();
 
   const rules = {
     email: [
@@ -53,7 +53,7 @@ export const Signin: React.FC = () => {
     ],
   };
 
-  const onFinish = async (data: LoginReq) => {
+  const onFinish = async (data: LoginData) => {
     setLoading(true);
 
     try {

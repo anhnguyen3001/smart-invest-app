@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Text, UserAvatar } from 'src/components';
 import { CHANGE_PASSWORD_PATH, UPDATE_PROFILE_PATH } from 'src/constants';
-import { useAuth } from 'src/context';
+import { useAuth } from 'src/contexts';
 import { getNavbarLinks } from '../../utils';
 import { SearchForm } from '../SearchForm';
 import styles from './MobileMenuDrawer.module.scss';

@@ -4,7 +4,7 @@ import 'src/styles/theme.css';
 import './App.scss';
 import { Loading, WithAxios } from './components';
 import { LOCAL_STORAGE, REGIONS, THEME } from './constants';
-import { AppProvider, AuthProvider } from './context';
+import { AppProvider, AuthProvider } from './contexts';
 import { getLanguage, getLS } from './helpers';
 import { useTheme } from './hooks';
 import { Routes } from './routes';

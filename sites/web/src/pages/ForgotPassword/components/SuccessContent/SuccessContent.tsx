@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
-import { useApp } from 'src/context';
+import { useApp } from 'src/contexts';
 
 const cx = classNames.bind({});
 

@@ -9,8 +9,7 @@ export enum LoginMethodEnum {
   google = 'google',
 }
 
-export interface IUser {
-  id: number;
+export interface User {
   username: string;
   avatar: string;
   email: string;
@@ -19,17 +18,21 @@ export interface IUser {
   method: LoginMethodEnum;
 }
 
-export interface SendEmailForgotPassword {
+export interface GetUserInfoResponse {
+  user: User;
+}
+
+export interface SendEmailForgotPasswordData {
   email: string;
 }
 
-export interface ChangePasswordReq {
+export interface ChangePasswordData {
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;
 }
 
-export interface UpdateInfoReq {
+export interface UpdateProfileData {
   username?: string;
   avatar?: string | null;
 }

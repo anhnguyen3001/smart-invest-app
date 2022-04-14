@@ -1,11 +1,11 @@
-import { IUser, Tokens, userService } from '@ah-ticker/common';
+import { User, Tokens, userService } from '@ah-ticker/common';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAccessToken, setLS } from 'src/helpers';
 import { useApp } from './AppContext';
 
 interface AuthState {
-  user?: IUser;
-  setUser: (user: IUser) => void;
+  user?: User;
+  setUser: (user: User) => void;
   accessToken?: string;
   setAccessToken: (token: string) => void;
   updateToken: (tokens: Tokens) => void;
@@ -14,21 +14,17 @@ interface AuthState {
 
 const AuthStateContext = React.createContext<AuthState | null>(null);
 
-export interface User extends IUser {
-  accessToken: string;
-}
-
 export const AuthProvider: React.FC = ({ children }) => {
   const { setLoading } = useApp();
 
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<User>();
   const [accessToken, setAccessToken] = useState<string>(getAccessToken());
 
   const getUser = async () => {
     setLoading(true);
     try {
       const res = await userService.getMe();
-      setUser(res);
+      setUser(res.user);
     } catch (e) {
     } finally {
       setLoading(false);
