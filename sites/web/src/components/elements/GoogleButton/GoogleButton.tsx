@@ -1,4 +1,4 @@
-import { authService } from '@ah-ticker/common';
+import { authService } from '@smart-invest/common';
 import React from 'react';
 import ReactGoogleLogin from 'react-google-login';
 import { useTranslation } from 'react-i18next';

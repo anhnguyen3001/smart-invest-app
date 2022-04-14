@@ -1,4 +1,4 @@
-import { User } from '@ah-ticker/common';
+import { User } from '@smart-invest/common';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, AvatarProps } from 'antd';
 import React from 'react';

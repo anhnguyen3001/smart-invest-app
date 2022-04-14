@@ -1,4 +1,4 @@
-import { authService } from '@ah-ticker/common';
+import { authService } from '@smart-invest/common';
 import { FacebookFilled } from '@ant-design/icons';
 import classNames from 'classnames/bind';
 import React from 'react';

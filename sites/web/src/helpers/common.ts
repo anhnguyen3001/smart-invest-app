@@ -1,4 +1,4 @@
-import { IPagination } from '@ah-ticker/common';
+import { IPagination } from '@smart-invest/common';
 import { PaginationProps } from 'antd';
 
 export const getWindowDimensions = () => {

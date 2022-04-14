@@ -1,4 +1,4 @@
-import { ITicker } from '@ah-ticker/common';
+import { ITicker } from '@smart-invest/common';
 import { Avatar, Card, Tag } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';

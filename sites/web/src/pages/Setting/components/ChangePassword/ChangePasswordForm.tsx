@@ -3,7 +3,7 @@ import {
   ChangePasswordData,
   PATTERN_VALIDATION,
   userService,
-} from '@ah-ticker/common';
+} from '@smart-invest/common';
 import { useForm } from 'antd/lib/form/Form';
 import { Button, Form, Input, notification } from 'antd';
 import { useTranslation } from 'react-i18next';

@@ -1,4 +1,4 @@
-import { MailEnum, authService } from '@ah-ticker/common';
+import { MailEnum, authService } from '@smart-invest/common';
 import { notification } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';

@@ -9,7 +9,7 @@ import {
   IPagination,
   Gender,
   LoginMethodEnum,
-} from '@ah-ticker/common';
+} from '@smart-invest/common';
 
 export const mockPrice: IPrice = {
   date: new Date().toLocaleString(),

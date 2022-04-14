@@ -1,4 +1,4 @@
-import { authService, VerifyUserData } from '@ah-ticker/common';
+import { authService, VerifyUserData } from '@smart-invest/common';
 import { Button, Form, Input, notification } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';

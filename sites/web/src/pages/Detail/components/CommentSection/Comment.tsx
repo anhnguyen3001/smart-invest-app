@@ -1,4 +1,4 @@
-import { IComment } from '@ah-ticker/common';
+import { IComment } from '@smart-invest/common';
 import { Card, Comment, List } from 'antd';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';

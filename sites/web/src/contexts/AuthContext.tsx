@@ -1,4 +1,4 @@
-import { User, Tokens, userService } from '@ah-ticker/common';
+import { User, Tokens, userService } from '@smart-invest/common';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAccessToken, setLS } from 'src/helpers';
 import { useApp } from './AppContext';

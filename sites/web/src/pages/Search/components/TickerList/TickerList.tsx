@@ -1,4 +1,4 @@
-import { ITicker } from '@ah-ticker/common';
+import { ITicker } from '@smart-invest/common';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { InfiniteList, InfiniteListProps, TickerCard } from 'src/components';

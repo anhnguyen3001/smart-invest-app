@@ -2,7 +2,7 @@ import {
   authService,
   PATTERN_VALIDATION,
   ForgetPasswordData,
-} from '@ah-ticker/common';
+} from '@smart-invest/common';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import React, { useState } from 'react';

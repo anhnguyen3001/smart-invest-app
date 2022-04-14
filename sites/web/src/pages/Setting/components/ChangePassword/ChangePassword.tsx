@@ -1,4 +1,4 @@
-import { LoginMethodEnum } from '@ah-ticker/common';
+import { LoginMethodEnum } from '@smart-invest/common';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';

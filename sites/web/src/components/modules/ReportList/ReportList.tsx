@@ -1,4 +1,4 @@
-import { IFinancialStatement } from '@ah-ticker/common';
+import { IFinancialStatement } from '@smart-invest/common';
 import { FilePdfTwoTone } from '@ant-design/icons';
 import { Button, Card, Table, TableColumnProps } from 'antd';
 import React from 'react';

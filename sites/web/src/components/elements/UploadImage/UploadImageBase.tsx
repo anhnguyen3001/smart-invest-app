@@ -1,4 +1,4 @@
-import { imageService } from '@ah-ticker/common';
+import { imageService } from '@smart-invest/common';
 import { Upload, UploadProps } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React from 'react';

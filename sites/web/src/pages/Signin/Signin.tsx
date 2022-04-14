@@ -1,4 +1,8 @@
-import { authService, PATTERN_VALIDATION, LoginData } from '@ah-ticker/common';
+import {
+  authService,
+  PATTERN_VALIDATION,
+  LoginData,
+} from '@smart-invest/common';
 import { Button, Divider, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';

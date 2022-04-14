@@ -1,4 +1,4 @@
-import { initBffClient, initImageClient } from '@ah-ticker/common';
+import { initBffClient, initImageClient } from '@smart-invest/common';
 import { notification } from 'antd';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useCallback, useEffect } from 'react';

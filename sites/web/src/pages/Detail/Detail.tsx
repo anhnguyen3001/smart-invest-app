@@ -1,4 +1,4 @@
-import { ITicker } from '@ah-ticker/common';
+import { ITicker } from '@smart-invest/common';
 import { Col, Row, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';

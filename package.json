@@ -13,12 +13,12 @@
   "scripts": {
     "postinstall": "lerna bootstrap --use-workspaces",
     "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore --quiet .",
-    "test:packages": "lerna exec --ignore @ah-ticker/* -- yarn test",
-    "dev:web": "lerna exec --scope @ah-ticker-app/web yarn start",
-    "build:web": "lerna exec --scope @ah-ticker-app/web -- yarn build",
-    "test:web": "lerna exec --scope @ah-ticker-app/web -- yarn test",
-    "build:common": "lerna exec --scope @ah-ticker/common -- yarn build",
-    "build:packages": "lerna exec --ignore @ah-ticker-app/* -- yarn build",
+    "test:packages": "lerna exec --ignore @smart-invest/* -- yarn test",
+    "dev:web": "lerna exec --scope @smart-invest-app/web yarn start",
+    "build:web": "lerna exec --scope @smart-invest-app/web -- yarn build",
+    "test:web": "lerna exec --scope @smart-invest-app/web -- yarn test",
+    "build:common": "lerna exec --scope @smart-invest/common -- yarn build",
+    "build:packages": "lerna exec --ignore @smart-invest-app/* -- yarn build",
     "test": "jest",
     "prepare": "husky install"
   },

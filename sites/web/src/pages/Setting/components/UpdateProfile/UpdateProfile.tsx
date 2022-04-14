@@ -3,7 +3,7 @@ import {
   UpdateProfileData,
   User,
   userService,
-} from '@ah-ticker/common';
+} from '@smart-invest/common';
 import { Button, Form, Input, notification } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import classNames from 'classnames/bind';
