@@ -1,4 +1,4 @@
-import { ConvertedTicker } from '@smart-invest/common';
+import { ConvertedTickerPrice } from '@smart-invest/common';
 import { Card } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
@@ -10,11 +10,11 @@ import styles from './ExchangeSummary.module.scss';
 const cx = classNames.bind(styles);
 
 interface ExchangeSummaryProps {
-  ticker?: ConvertedTicker;
+  tickerPrice?: ConvertedTickerPrice;
 }
 
 export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
-  ticker = {},
+  tickerPrice = {},
 }) => {
   const { t } = useTranslation();
 
@@ -26,7 +26,7 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
     minPrice,
     maxPrice,
     totalValue,
-  } = ticker;
+  } = tickerPrice;
 
   const handleGetColor = (price?: number) => {
     return getPriceColor({ price, openPrice, ceilingPrice, floorPrice });

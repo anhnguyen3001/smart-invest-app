@@ -17,8 +17,9 @@ export interface IRoute {
   component: React.LazyExoticComponent<React.FC>;
 }
 
-export interface ITheme {
+export interface Theme {
   bgComponent: string;
+  textPrimary: string;
   textSecondary: string;
   primaryColor: string;
   successColor: string;

@@ -1,12 +1,11 @@
-import { ITicker } from '@smart-invest/common';
+import { Company, companyService } from '@smart-invest/common';
 import { Col, Row, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { convertTicker } from 'src/helpers';
-import { mockCompany, mockTicker } from 'src/mock';
-import useSWR from 'swr';
+import { useApp } from 'src/contexts';
+import { convertPrice } from 'src/helpers';
 import {
   CompanyOverview,
   ExchangeSummary,
@@ -18,13 +17,23 @@ import {
 } from './components';
 import styles from './Detail.module.scss';
 
+// const TickerAnalysis = React.lazy(() =>
+//   import('./components/TickerAnalysis').then((mod) => ({
+//     default: mod.TickerAnalysis,
+//   })),
+// );
+
+// const TradingData = React.lazy(() =>
+//   import('./components/TradingData').then((mod) => ({
+//     default: mod.TradingData,
+//   })),
+// );
+
 const cx = classNames.bind(styles);
 
 interface DetailParams {
-  stockCode: string;
+  companyId: string;
 }
-
-const stockExchangePercent = 7;
 
 const CONTENT_TAB_KEY = {
   overview: 'overview',
@@ -32,16 +41,30 @@ const CONTENT_TAB_KEY = {
   analysis: 'analysis',
 };
 
-export const Detail: React.FC = ({}) => {
-  const { stockCode } = useParams<DetailParams>();
-  const { data: tickerData } = useSWR([stockCode], async () => {
-    return mockTicker;
-  });
-  const ticker = convertTicker(tickerData as ITicker, stockExchangePercent);
+export const Detail: React.FC = () => {
+  const { setLoading } = useApp();
+  const { companyId } = useParams<DetailParams>();
 
-  const { data: companyData } = useSWR(['company', stockCode], async () => {
-    return mockCompany;
-  });
+  const [company, setCompany] = useState<Company>();
+  useEffect(() => {
+    const fetchCompany = async () => {
+      setLoading(true);
+
+      try {
+        const res = await companyService.getCompany(parseInt(companyId) || 0);
+        setCompany(res);
+      } catch (e) {
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompany();
+    // eslint-disable-next-line
+  }, [companyId]);
+
+  const { companyId: id, exchange, price, symbol } = (company || {}) as Company;
+  const tickerPrice = convertPrice(exchange, price);
 
   const [activeTab, setActiveTab] = useState(CONTENT_TAB_KEY.overview);
   const onGoToAnalysisTab = useCallback(() => {
@@ -59,12 +82,12 @@ export const Detail: React.FC = ({}) => {
       {
         tab: t('TradingData'),
         key: CONTENT_TAB_KEY.tradingData,
-        children: <TradingData id={stockCode} />,
+        children: <TradingData symbol={symbol} />,
       },
       {
         tab: t('Analysis'),
         key: CONTENT_TAB_KEY.analysis,
-        children: <TickerAnalysis id={stockCode} />,
+        children: <TickerAnalysis companyId={id} />,
       },
     ];
 
@@ -73,7 +96,7 @@ export const Detail: React.FC = ({}) => {
 
   return (
     <>
-      <TickerInfo ticker={ticker} />
+      <TickerInfo className={cx('section')} company={company} />
 
       <Row
         justify="space-between"
@@ -81,16 +104,16 @@ export const Detail: React.FC = ({}) => {
         gutter={[32, 16]}
         className={cx('section')}
       >
-        <Col md={16} xs={24}>
-          <PriceChart name={stockCode} />
+        <Col lg={16} md={12} xs={24}>
+          <PriceChart symbol={symbol} />
         </Col>
-        <Col md={8} xs={24}>
-          <ExchangeSummary ticker={ticker} />
+        <Col lg={8} md={12} xs={24}>
+          <ExchangeSummary tickerPrice={tickerPrice} />
         </Col>
       </Row>
 
-      <div className={cx('section')}>
-        <CompanyOverview company={companyData} />
+      <div className={cx('section', 'pb-0')}>
+        <CompanyOverview company={company} />
       </div>
 
       <Tabs

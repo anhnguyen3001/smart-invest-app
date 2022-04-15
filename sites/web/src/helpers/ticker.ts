@@ -1,25 +1,29 @@
-import { ConvertedTicker, ITicker } from '@smart-invest/common';
+import {
+  ConvertedTickerPrice,
+  getExchangePercent,
+  TickerPrice,
+} from '@smart-invest/common';
 
 const round2Decimal = (value: number) => {
   return Math.floor(value * 100) / 100;
 };
 
-export const convertTicker = (
-  ticker: ITicker,
-  stockExchangePercent: number,
-): ConvertedTicker | undefined => {
-  if (!ticker) return undefined;
-  const { openPrice } = ticker;
+export const convertPrice = (
+  exchange?: string,
+  price?: TickerPrice,
+): ConvertedTickerPrice | undefined => {
+  if (!price || !exchange) return price;
+
+  const exchangePercent = getExchangePercent(exchange);
+  const { openPrice } = price;
 
   const ceilingPrice = round2Decimal(
-    (openPrice / 100) * (100 + stockExchangePercent),
+    (openPrice / 100) * (100 + exchangePercent),
   );
-  const floorPrice = round2Decimal(
-    (openPrice / 100) * (100 + stockExchangePercent),
-  );
+  const floorPrice = round2Decimal((openPrice / 100) * (100 + exchangePercent));
 
   return {
-    ...ticker,
+    ...price,
     ceilingPrice,
     floorPrice,
   };

@@ -1,4 +1,4 @@
-import { IPagination } from '@smart-invest/common';
+import { Pagination } from '@smart-invest/common';
 import { PaginationProps } from 'antd';
 
 export const getWindowDimensions = () => {
@@ -14,7 +14,7 @@ export const isScrollEnded = (event: React.UIEvent<HTMLDivElement>) => {
 };
 
 export const convertPagination = (
-  pagination?: IPagination,
+  pagination?: Pagination,
 ): PaginationProps | false => {
   if (!pagination) return false;
 
@@ -25,7 +25,7 @@ export const convertPagination = (
   };
 };
 
-export const hasMoreData = (pagination?: IPagination): boolean => {
+export const hasMoreData = (pagination?: Pagination): boolean => {
   if (!pagination) return false;
 
   const { currentPage, pageSize, totalItems } = pagination;

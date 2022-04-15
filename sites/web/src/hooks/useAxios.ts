@@ -1,4 +1,5 @@
 import { initBffClient, initImageClient } from '@smart-invest/common';
+import { initCoreClient } from '@smart-invest/common/dist/api/client';
 import { notification } from 'antd';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useCallback, useEffect } from 'react';
@@ -9,7 +10,8 @@ export const useAxios = (accessToken: string = '', logout: () => void) => {
   const { t } = useTranslation();
 
   const handleResponseError = useCallback((error: AxiosError) => {
-    const status = error && error.response && error.response.status;
+    const response = error.response;
+    const status = response?.status;
     switch (status) {
       case 401:
         logout();
@@ -17,7 +19,7 @@ export const useAxios = (accessToken: string = '', logout: () => void) => {
         break;
       default:
         // Handle error message from API response
-        const code = error.response?.data?.code;
+        const code = response?.data?.code;
         let message = null;
 
         if (error.response && error.response.data) {
@@ -26,6 +28,7 @@ export const useAxios = (accessToken: string = '', logout: () => void) => {
         }
         notification.error({
           message: `${message || t('SomethingWentWrong')}`,
+          duration: 3,
         });
         break;
     }
@@ -54,6 +57,9 @@ export const useAxios = (accessToken: string = '', logout: () => void) => {
   useEffect(() => {
     const imageEndpoint = getEnv('IMAGE_ENDPOINT');
     initImageClient(imageEndpoint);
+
+    const coreEndpoint = getEnv('CORE_ENDPOINT');
+    initCoreClient(coreEndpoint);
   }, []);
 
   useEffect(() => {

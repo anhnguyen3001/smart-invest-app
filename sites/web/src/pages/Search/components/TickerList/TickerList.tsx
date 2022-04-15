@@ -1,10 +1,10 @@
-import { ITicker } from '@smart-invest/common';
+import { Ticker } from '@smart-invest/common';
 import { Col, Row } from 'antd';
 import React from 'react';
 import { InfiniteList, InfiniteListProps, TickerCard } from 'src/components';
 
 export interface TickerListProps extends Omit<InfiniteListProps, 'dataLength'> {
-  tickers?: ITicker[];
+  tickers?: Ticker[];
 }
 
 export const TickerList: React.FC<TickerListProps> = ({ tickers, ...rest }) => {

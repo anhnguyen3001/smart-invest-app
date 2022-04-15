@@ -2,26 +2,26 @@ import { Table } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
-import { ITicker } from '@smart-invest/common';
+import { Ticker } from '@smart-invest/common';
 import classNames from 'classnames/bind';
 import { ColumnsType } from 'antd/lib/table';
 
 const cx = classNames.bind({});
 
 interface RankingTableProps {
-  tickers?: ITicker[];
+  tickers?: Ticker[];
 }
 
 export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
   const { t } = useTranslation();
   if (!tickers?.length) return null;
 
-  const columns: ColumnsType<ITicker> = [
+  const columns: ColumnsType<Ticker> = [
     {
       title: t('Ticker'),
       dataIndex: 'name',
       key: 'name',
-      render: (name: string, { companyName }: ITicker) => {
+      render: (name: string, { companyName }: Ticker) => {
         return (
           <>
             <Text level={2}>{name}</Text>
@@ -35,19 +35,19 @@ export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
       dataIndex: 'openPrice',
       key: 'openPrice',
       align: 'center',
-      render: (openPrice: number, { percentChange }: ITicker) => {
+      render: (openPrice: number, { lastPercentChange }: Ticker) => {
         return (
           <>
             {openPrice} (
             <span
               className={cx([
                 {
-                  'success-color': percentChange > 0,
-                  'error-color': percentChange < 0,
+                  'success-color': lastPercentChange > 0,
+                  'error-color': lastPercentChange < 0,
                 },
               ])}
             >
-              {percentChange}%
+              {lastPercentChange}%
             </span>
             )
           </>

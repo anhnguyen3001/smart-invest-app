@@ -1,18 +1,21 @@
-import { IFinancialStatement } from '@smart-invest/common';
+import { FinancialStatement, Pagination } from '@smart-invest/common';
 import { FilePdfTwoTone } from '@ant-design/icons';
 import { Button, Card, Table, TableColumnProps } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, Paragraph } from 'src/components';
+import { convertPagination } from 'src/helpers';
 
-interface ReportListProps {
-  reports: IFinancialStatement[];
+interface FinStatementTableProps {
+  financialStatements?: FinancialStatement[];
   onSeeMore?: () => void;
+  pagination?: Pagination;
 }
 
-export const ReportList: React.FC<ReportListProps> = ({
-  reports,
+export const FinStatementTable: React.FC<FinStatementTableProps> = ({
+  financialStatements,
   onSeeMore,
+  pagination,
 }) => {
   const { t } = useTranslation();
 
@@ -44,7 +47,7 @@ export const ReportList: React.FC<ReportListProps> = ({
     return title;
   };
 
-  const columns: TableColumnProps<IFinancialStatement>[] = [
+  const columns: TableColumnProps<FinancialStatement>[] = [
     {
       title: t('Name'),
       dataIndex: 'name',
@@ -64,7 +67,7 @@ export const ReportList: React.FC<ReportListProps> = ({
       align: 'center' as const,
     },
     {
-      title: t('Download'),
+      title: t('View'),
       dataIndex: 'path',
       key: 'path',
       align: 'center' as const,
@@ -82,9 +85,10 @@ export const ReportList: React.FC<ReportListProps> = ({
     <Card title={renderTitle()}>
       <Table
         rowKey="id"
-        dataSource={reports}
+        dataSource={financialStatements}
         columns={columns}
         {...(onSeeMore && { pagination: false })}
+        pagination={convertPagination(pagination)}
       />
     </Card>
   );

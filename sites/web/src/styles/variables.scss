@@ -102,6 +102,7 @@ $align-4: 4px;
 // Responsive
 $mobile-width: 576px;
 $tablet-width: 768px;
+$lg-width: 992px;
 
 @mixin mobile {
   @media screen and (max-width: #{$mobile-width}) {
@@ -111,6 +112,12 @@ $tablet-width: 768px;
 
 @mixin tablet {
   @media screen and (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (max-width: #{$lg-width}) {
     @content;
   }
 }

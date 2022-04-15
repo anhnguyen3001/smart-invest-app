@@ -1,5 +1,5 @@
 export const signinTranslation = {
-  LoginToAHTicker: 'Đăng nhập AHTicker',
+  LoginToSmartInvest: 'Đăng nhập vào Smart Invest',
   ForgotPassword: 'Quên mật khẩu?',
   NotHaveAccount: 'Bạn chưa có tài khoản?',
   SignupNow: 'Đăng ký ngay',

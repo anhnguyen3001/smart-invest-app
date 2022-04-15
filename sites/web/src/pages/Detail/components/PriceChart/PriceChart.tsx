@@ -1,51 +1,34 @@
 import { Button, Spin } from 'antd';
 import classNames from 'classnames/bind';
-import React, { useMemo, useState } from 'react';
-import { LineChart, LineChartData } from 'src/components';
-import { tradingPrices } from 'src/mock';
-import useSWR from 'swr';
+import { t } from 'i18next';
+import React, { useMemo } from 'react';
+import { LineChart, LineChartData, Text } from 'src/components';
+import { useTickerPrices } from '../../hooks';
 import styles from './PriceChart.module.scss';
 
 const cx = classNames.bind(styles);
 
 interface PriceChartProps {
-  name: string;
+  symbol?: string;
 }
 
-export const PriceChart: React.FC<PriceChartProps> = ({ name }) => {
-  const rangeTimes = ['15D', '1M', '3M'];
-  const [selectedTime, setSelectedTime] = useState<string>(rangeTimes[0]);
-  // const durationOptions: LabeledValue[] = [
-  //   { label: t('15days'), value: '15D' },
-  //   { label: t('1month'), value: '1M' },
-  //   { label: t('3months'), value: '3M' },
-  // ];
+export const PriceChart: React.FC<PriceChartProps> = ({ symbol }) => {
+  const { periodOptions, period, setPeriod, isLoading, prices } =
+    useTickerPrices('chartPrices', symbol);
 
-  const { data: prices, error } = useSWR(
-    ['prices', name, selectedTime],
-    async () => {
-      return tradingPrices;
-    },
-  );
-  const isLoading = !prices && !error;
-
-  const onChangeRangeTime = (time: string) => {
-    setSelectedTime(time);
-  };
-
-  const renderRangeTimes = () => {
-    return rangeTimes.map((time, index) => {
+  const renderPeriodOptions = () => {
+    return periodOptions.map((duration, index) => {
       return (
         <Button
           key={index}
           shape="round"
           className="ml-8 text-700"
-          onClick={() => onChangeRangeTime(time)}
-          {...(selectedTime === time && {
+          onClick={() => setPeriod(duration)}
+          {...(period === duration && {
             type: 'primary',
           })}
         >
-          {time}
+          {duration}
         </Button>
       );
     });
@@ -64,30 +47,19 @@ export const PriceChart: React.FC<PriceChartProps> = ({ name }) => {
 
     return res;
     // eslint-disable-next-line
-  }, [JSON.stringify(prices)]);
+  }, [JSON.stringify(prices), period]);
 
   return (
-    <Spin spinning={isLoading}>
-      <div className="d-flex justify-content-end mb-16">
-        {renderRangeTimes()}
+    <Spin spinning={isLoading} className={cx('container')}>
+      <div className={cx('d-flex', 'justify-content-between')}>
+        <Text level={1} fontWeight={500}>
+          {t('PriceChart')}
+        </Text>
+        <div className={cx('d-flex', 'justify-content-end', 'mb-16')}>
+          {renderPeriodOptions()}
+        </div>
       </div>
-      {/* <div
-        className={cx(
-          "d-flex",
-          "justify-content-between",
-          "align-items-center",
-          "mb-16"
-        )}
-      >
-        <div className={cx("text-16--bold")}>{t("PriceChart")}</div>
-        <Select
-          size="large"
-          style={{ width: 100 }}
-          placeholder={t("Duration")}
-          options={durationOptions}
-          defaultValue={durationOptions[0].value}
-        />
-      </div> */}
+
       <LineChart showDescription {...chartProps} />
     </Spin>
   );

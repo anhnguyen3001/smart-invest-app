@@ -1,17 +1,17 @@
 import {
   IComment,
   ICompany,
-  IFinancialStatement,
+  FinancialStatement,
   INews,
-  IPrice,
-  ITicker,
+  TickerPrice,
+  Ticker,
   User,
-  IPagination,
+  Pagination,
   Gender,
   LoginMethodEnum,
 } from '@smart-invest/common';
 
-export const mockPrice: IPrice = {
+export const mockPrice: TickerPrice = {
   date: new Date().toLocaleString(),
   adjPrice: -12000,
   openPrice: 27000,
@@ -24,15 +24,17 @@ export const mockPrice: IPrice = {
   totalValue: 20000,
 };
 
-export const mockTicker: ITicker = {
+export const mockTicker: Ticker = {
   companyId: 1,
   companyName: 'FPT',
   symbol: 'FPT',
   exchange: 'HOSE',
-  ...mockPrice,
+  lastPriceChange: 12000,
+  lastClosePrice: 150000,
+  lastPercentChange: 5,
 };
 
-export const mockTickers: ITicker[] = Array.apply(0, new Array(12)).map(
+export const mockTickers: Ticker[] = Array.apply(0, new Array(12)).map(
   (_, index) => ({
     ...mockTicker,
     companyId: index + 1,
@@ -69,7 +71,7 @@ export const mockComments: IComment[] = Array.apply(0, new Array(10)).map(
   }),
 );
 
-export const tradingPrices: IPrice[] = [
+export const tradingPrices: TickerPrice[] = [
   {
     date: new Date('2/2/2022').toISOString(),
     adjPrice: -12000,
@@ -144,16 +146,6 @@ export const tradingPrices: IPrice[] = [
   },
 ];
 
-export const mockReports: IFinancialStatement[] = Array.apply(
-  0,
-  new Array(10),
-).map((_, index) => ({
-  id: index + 1,
-  name: 'Báo cáo tài chính công ty mẹ quý 4 năm 2021',
-  period: 'Q4/2021',
-  path: 'http://images1.cafef.vn/Images/Uploaded/DuLieuDownload/2021/CTG_21Q4_BCTC_M.pdf',
-}));
-
 export const mockCompany: ICompany = {
   companyId: 1,
   companyName: 'FPT',
@@ -166,7 +158,7 @@ export const mockCompany: ICompany = {
     'Công ty Cổ phần Đầu tư và Phát triển Đức Quân (FTM) có tiền thân là Công ty TNHH Dệt Đại Cường Thái Bình, được thành lập vào năm 2006. Công ty hoạt động chính trong lĩnh vực sản xuất và kinh doanh các loại sợi. Bên cạnh đó, Công ty còn kinh doanh thương mại nguyên phụ liệu ngành dệt may phục vụ các doanh nghiệp trong nước. FTM hiện đang quản lý và khai thác 03 nhà máy sợi với năng lực sản xuất lên đến 18.000 tấn sợi/năm. FTM được niêm yết và giao dịch trên Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh (HOSE) từ đầu năm 2017.',
 };
 
-export const mockPagination: IPagination = {
+export const mockPagination: Pagination = {
   currentPage: 1,
   pageSize: 20,
   totalItems: 40,
