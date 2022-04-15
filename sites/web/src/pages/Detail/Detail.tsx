@@ -17,18 +17,6 @@ import {
 } from './components';
 import styles from './Detail.module.scss';
 
-// const TickerAnalysis = React.lazy(() =>
-//   import('./components/TickerAnalysis').then((mod) => ({
-//     default: mod.TickerAnalysis,
-//   })),
-// );
-
-// const TradingData = React.lazy(() =>
-//   import('./components/TradingData').then((mod) => ({
-//     default: mod.TradingData,
-//   })),
-// );
-
 const cx = classNames.bind(styles);
 
 interface DetailParams {
