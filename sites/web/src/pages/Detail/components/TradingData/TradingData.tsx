@@ -1,34 +1,55 @@
-import { IPrice } from '@smart-invest/common';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { CandleStickChart, Text } from 'src/components';
-import { tradingPrices } from 'src/mock';
-import useSWR from 'swr';
-import { TradingDataTable } from './TradingDataTable';
+import { Button, Spin } from 'antd';
+import React, { useMemo } from 'react';
+import { CandleStickChart } from 'src/components';
+import { useTickerPrices } from '../../hooks';
 
 interface TradingDataProps {
-  id: string;
+  symbol: string;
 }
 
-// Format: [time, o, h, l, c]
-const data: Array<any> = [
-  [1538856000000, 6593.34, 6600, 6582.63, 6600],
-  [1538856900000, 6595.16, 6604.76, 6590.73, 6593.86],
-];
+export const TradingData: React.FC<TradingDataProps> = ({ symbol }) => {
+  const { prices, isLoading, period, setPeriod, periodOptions } =
+    useTickerPrices('candlePrices', symbol);
 
-export const TradingData: React.FC<TradingDataProps> = ({ id }) => {
-  const { t } = useTranslation();
-  const { data: priceData } = useSWR(['prices', id], async () => {
-    return tradingPrices;
-  });
+  // Format: [time, o, h, l, c][]
+  const chartPricedata = useMemo(() => {
+    return prices?.map(
+      ({ date, openPrice, maxPrice, minPrice, closePrice }) => [
+        new Date(date).getTime(),
+        openPrice,
+        maxPrice,
+        minPrice,
+        closePrice,
+      ],
+    );
+    // eslint-disable-next-line
+  }, [period, symbol]);
+
+  const renderPeriodOptions = () => {
+    return periodOptions.map((duration, index) => {
+      return (
+        <Button
+          key={index}
+          shape="round"
+          className="ml-8 text-700"
+          onClick={() => setPeriod(duration)}
+          {...(period === duration && {
+            type: 'primary',
+          })}
+        >
+          {duration}
+        </Button>
+      );
+    });
+  };
 
   return (
     <>
-      <CandleStickChart data={data} />
-      <Text level={1} fontWeight={700} className="my-16">
-        {t('TradingData')}
-      </Text>
-      <TradingDataTable prices={priceData as IPrice[]} />
+      <div className="d-flex justify-content-end">{renderPeriodOptions()}</div>
+
+      <Spin spinning={isLoading}>
+        <CandleStickChart data={chartPricedata} />
+      </Spin>
     </>
   );
 };

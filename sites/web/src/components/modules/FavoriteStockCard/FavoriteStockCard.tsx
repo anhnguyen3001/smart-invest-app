@@ -1,14 +1,14 @@
-import { ITicker } from '@smart-invest/common';
+import { Ticker } from '@smart-invest/common';
 import { Card } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { STOCKS_PATH } from 'src/constants';
+import { TICKERS_PATH } from 'src/constants';
 
 const cx = classNames.bind({});
 
 interface FavoriteStockCardProps {
-  ticker?: ITicker;
+  ticker?: Ticker;
   style?: React.CSSProperties;
 }
 
@@ -21,7 +21,7 @@ export const FavoriteStockCard: React.FC<FavoriteStockCardProps> = ({
 
   return (
     <Card style={style}>
-      <h3 onClick={() => histtory.push(`${STOCKS_PATH}/abc`)}>{symbol}</h3>
+      <h3 onClick={() => histtory.push(`${TICKERS_PATH}/abc`)}>{symbol}</h3>
       <div className={cx('mb-16')}>
         {/* <Text level={2} className={cx("d-inline", "mr-8")}>
           {openPrice}

@@ -1,16 +1,24 @@
-import React from "react";
-import Chart from "react-apexcharts";
+import React from 'react';
+import Chart from 'react-apexcharts';
+import { useThemeSwitcher } from 'react-css-theme-switcher';
+import { useTranslation } from 'react-i18next';
+import { COLOR_THEME, DEFAULT_THEME } from 'src/constants';
 
 interface CandleStickChartProps {
   // Format: [time, o, h, l, c]
-  data: number[];
+  data?: any[];
   className?: string;
+  noDataText?: string;
 }
 
 export const CandleStickChart: React.FC<CandleStickChartProps> = ({
-  data,
+  data = [],
+  noDataText,
   ...rest
 }) => {
+  const { t } = useTranslation();
+  const { currentTheme = DEFAULT_THEME } = useThemeSwitcher();
+
   return (
     <Chart
       height={350}
@@ -22,10 +30,17 @@ export const CandleStickChart: React.FC<CandleStickChartProps> = ({
       ]}
       options={{
         chart: {
-          id: "trading-candle-stick",
+          id: 'trading-candle-stick',
         },
         xaxis: {
-          type: "datetime",
+          type: 'datetime',
+        },
+        noData: {
+          text: noDataText || t('NoDataToDisplay'),
+          style: {
+            color: COLOR_THEME[currentTheme].textPrimary,
+            fontSize: '16px',
+          },
         },
       }}
       {...rest}

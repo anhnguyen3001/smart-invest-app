@@ -1,4 +1,4 @@
-import { ITheme } from 'src/types';
+import { Theme } from 'src/types';
 
 export const THEME = {
   DARK: 'dark',
@@ -7,20 +7,22 @@ export const THEME = {
 export const DEFAULT_THEME = THEME.DARK;
 
 export const COLOR_THEME: {
-  [key: string]: ITheme;
+  [key: string]: Theme;
 } = {
   [THEME.DARK]: {
-    bgComponent: '#5858731f',
-    textSecondary: '#ebebf599',
-    primaryColor: '#5E5CE6',
+    bgComponent: '#24262e',
+    textPrimary: '#ebeced',
+    textSecondary: '#757a8b',
+    primaryColor: '#dc3a61',
     successColor: '#539067',
     errorColor: '#f46868',
     borderColor: '#3d3c41',
   },
   [THEME.LIGHT]: {
-    bgComponent: '#5858731f',
-    textSecondary: '#ebebf599',
-    primaryColor: '#5E5CE6',
+    bgComponent: '#f2f2f7',
+    textPrimary: '#11263c',
+    textSecondary: '#393d56',
+    primaryColor: '#dc3a61',
     successColor: '#539067',
     errorColor: '#f46868',
     borderColor: '#3d3c41',

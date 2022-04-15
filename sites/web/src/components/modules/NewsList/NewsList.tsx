@@ -1,4 +1,4 @@
-import { INews, IPagination } from '@smart-invest/common';
+import { INews, Pagination } from '@smart-invest/common';
 import { Button, List } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 export interface NewsListProps {
   news?: INews[];
-  pagination?: IPagination;
+  pagination?: Pagination;
   onSeeMore?: () => void;
   showHeader?: boolean;
   size?: 'large' | 'default';

@@ -1,9 +1,10 @@
-import classNames from "classnames/bind";
-import React from "react";
-import Chart from "react-apexcharts";
-import { useThemeSwitcher } from "react-css-theme-switcher";
-import { COLOR_THEME, DEFAULT_THEME } from "src/constants";
-import styles from "./LineChart.module.scss";
+import classNames from 'classnames/bind';
+import React from 'react';
+import Chart from 'react-apexcharts';
+import { useThemeSwitcher } from 'react-css-theme-switcher';
+import { useTranslation } from 'react-i18next';
+import { COLOR_THEME, DEFAULT_THEME } from 'src/constants';
+import styles from './LineChart.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -11,6 +12,7 @@ export interface LineChartData {
   series: { name: string; data: number[] }[];
   categories: (string | number)[];
   customColors?: string[];
+  noDataText?: string;
 }
 
 interface LineChartProps extends LineChartData {
@@ -22,7 +24,9 @@ export const LineChart: React.FC<LineChartProps> = ({
   categories,
   showDescription = false,
   customColors,
+  noDataText,
 }) => {
+  const { t } = useTranslation();
   const { currentTheme = DEFAULT_THEME } = useThemeSwitcher();
 
   const getLabelStyles = () => {
@@ -40,7 +44,7 @@ export const LineChart: React.FC<LineChartProps> = ({
     <Chart
       series={series}
       options={{
-        chart: { fontFamily: "Roboto, sans-serif" },
+        chart: { fontFamily: 'Roboto, sans-serif' },
         colors: customColors || [COLOR_THEME[currentTheme].primaryColor],
         xaxis: {
           categories: categories,
@@ -60,10 +64,10 @@ export const LineChart: React.FC<LineChartProps> = ({
           ...(showDescription
             ? {
                 custom: ({ dataPointIndex, series, seriesIndex, w }) => `<div>
-            <div class="${cx("tooltip-title")}">${
+            <div class="${cx('tooltip-title')}">${
                   w.globals.categoryLabels[dataPointIndex]
                 }</div>
-            <div class="${cx("tooltip-content")}">${
+            <div class="${cx('tooltip-content')}">${
                   series[seriesIndex][dataPointIndex]
                 }</div>
           </div>`,
@@ -77,6 +81,13 @@ export const LineChart: React.FC<LineChartProps> = ({
                 borderColor: COLOR_THEME[currentTheme].borderColor,
               }
             : { show: false }),
+        },
+        noData: {
+          text: noDataText || t('NoDataToDisplay'),
+          style: {
+            color: COLOR_THEME[currentTheme].textPrimary,
+            fontSize: '16px',
+          },
         },
       }}
     />

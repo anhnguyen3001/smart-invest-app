@@ -5,8 +5,6 @@ import axios, {
   AxiosResponse,
 } from 'axios';
 
-let bffClient: AxiosInstance;
-
 interface CustomAxiosConfig {
   requestInterceptors?: {
     onFulfilled?: (request: AxiosRequestConfig) => AxiosRequestConfig;
@@ -18,6 +16,7 @@ interface CustomAxiosConfig {
   };
 }
 
+let bffClient: AxiosInstance;
 export const initBffClient = (
   baseURL: string,
   configs?: CustomAxiosConfig,
@@ -62,4 +61,17 @@ export const getImageClient = (): AxiosInstance => {
   }
 
   return imageClient;
+};
+
+let coreClient: AxiosInstance;
+export const initCoreClient = (baseURL: string): void => {
+  coreClient = axios.create({ baseURL });
+};
+
+export const getCoreClient = (): AxiosInstance => {
+  if (!coreClient) {
+    throw new Error('Need initialize core axios instance');
+  }
+
+  return coreClient;
 };

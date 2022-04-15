@@ -74,7 +74,7 @@ export const Signin: React.FC = () => {
     <>
       <div className={cx('w-100', 'm-auto')}>
         <Form form={form} layout="vertical" onFinish={onFinish}>
-          <h2 className={cx('mb-32')}>{t('SigninToAHTicker')}</h2>
+          <h2 className={cx('mb-32')}>{t('LoginToSmartInvest')}</h2>
 
           <Form.Item
             className={cx('mb-16')}

@@ -1,4 +1,3 @@
-import { INews } from '@smart-invest/common';
 import React from 'react';
 import { InfiniteList, InfiniteListProps } from 'src/components';
 import { NewsList, NewsListProps } from '../NewsList';

@@ -4,8 +4,8 @@ export const HOME_PATH = '/home';
 export const SEARCH_PATH = '/search';
 export const RESEARCH_CENTER_PATH = '/research-center';
 
-export const DETAIL_PATH = '/stocks/:stockCode';
-export const STOCKS_PATH = '/stocks';
+export const DETAIL_PATH = '/tickers/:companyId';
+export const TICKERS_PATH = '/tickers';
 
 export const WATCH_LIST_PATH = '/watch-list';
 export const SETTING_PATH = '/setting';

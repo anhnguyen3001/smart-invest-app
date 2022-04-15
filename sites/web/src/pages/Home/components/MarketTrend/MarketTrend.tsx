@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { mockTickers } from 'src/mock';
-import { ITicker } from '@smart-invest/common';
+import { Ticker } from '@smart-invest/common';
 import useSWR from 'swr';
 import { RankingTable } from '../RankingTable';
 import styles from './MarketTrend.module.scss';
@@ -29,7 +29,7 @@ export const MarketTrend: React.FC<MarketTrendProps> = () => {
   });
 
   const tabContent = useMemo(() => {
-    const tabPanes: { tabKey: string; tab: string; tickers?: ITicker[] }[] = [
+    const tabPanes: { tabKey: string; tab: string; tickers?: Ticker[] }[] = [
       {
         tabKey: TAB_KEYS.gainers,
         tab: t('Gainers'),

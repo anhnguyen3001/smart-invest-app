@@ -1,22 +1,32 @@
-import { ITicker } from '@smart-invest/common';
+import { Ticker } from '@smart-invest/common';
 import { Avatar, Card, Tag } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Text } from 'src/components';
-import { STOCKS_PATH } from 'src/constants';
+import { TICKERS_PATH } from 'src/constants';
 
 const cx = classNames.bind({});
 
 interface TickerCardProps {
-  ticker?: ITicker;
+  ticker?: Ticker;
 }
 
-export const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
+export const TickerCard: React.FC<TickerCardProps> = ({ ticker = {} }) => {
   const history = useHistory();
 
+  const {
+    companyId,
+    companyName,
+    symbol,
+    exchange,
+    lastClosePrice,
+    lastPercentChange,
+    lastPriceChange,
+  } = ticker as Ticker;
+
   const onGoToDetailTicker = () => {
-    history.push(`${STOCKS_PATH}/${ticker?.companyId}`);
+    history.push(`${TICKERS_PATH}/${ticker?.companyId}`);
   };
 
   return (
@@ -36,10 +46,10 @@ export const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
             )}
           >
             <Text level={2} fontWeight={700}>
-              {ticker?.symbol}
+              {symbol}
             </Text>
             <Tag color="warning" className={cx('text-500', 'text-4')}>
-              {ticker?.exchange}
+              {exchange}
             </Tag>
           </div>
 
@@ -49,14 +59,14 @@ export const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
 
           <div className={cx('mt-8', 'pt-8', 'border-top')}>
             <Text level={1} fontWeight={700} block={false}>
-              {ticker?.openPrice}
+              {lastClosePrice}
             </Text>
             <Text
-              type={(ticker?.percentChange || 0) > 0 ? 'success' : 'success'}
+              type={(lastPercentChange || 0) > 0 ? 'success' : 'success'}
               block={false}
               className={cx('ml-8')}
             >
-              {ticker?.priceChange} ({ticker?.percentChange}%)
+              {lastPriceChange} ({lastPercentChange}%)
             </Text>
           </div>
         </div>

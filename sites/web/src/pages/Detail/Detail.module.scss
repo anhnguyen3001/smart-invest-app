@@ -1,15 +1,11 @@
 .section {
-  padding: $align-32 $align-96 $align-16;
+  padding-left: $align-96;
+  padding-right: $align-96;
 }
 
-@include tablet {
+@include lg {
   .section {
-    padding: $align-32;
-  }
-}
-
-@include mobile {
-  .section {
-    padding: $align-16;
+    padding-left: $align-16;
+    padding-right: $align-16;
   }
 }

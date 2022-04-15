@@ -1,19 +1,20 @@
 .wrapper {
-  padding: $align-64 $align-96;
+  padding-top: $align-64;
+  padding-bottom: $align-32;
+}
+
+.tag {
+  display: inline-block !important;
+  background-color: $bg-primary-light;
+  border-radius: $border-radius-round;
 }
 
 .stock-price {
   margin-top: $align-32;
 }
 
-@include tablet {
+@include lg {
   .wrapper {
-    padding: $align-64;
-  }
-}
-
-@include mobile {
-  .wrapper {
-    padding: $align-16;
+    padding-top: $align-32;
   }
 }

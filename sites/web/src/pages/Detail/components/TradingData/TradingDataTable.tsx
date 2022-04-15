@@ -3,10 +3,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'src/components';
 import { thousandFormatter } from 'src/helpers';
-import { IPrice } from '@smart-invest/common';
+import { TickerPrice } from '@smart-invest/common';
 
 interface TradingDataTableProps {
-  prices?: IPrice[];
+  prices?: TickerPrice[];
 }
 
 export const TradingDataTable: React.FC<TradingDataTableProps> = ({
@@ -27,7 +27,7 @@ export const TradingDataTable: React.FC<TradingDataTableProps> = ({
       title: t('Change'),
       dataIndex: 'priceChange',
       key: 'priceChange',
-      render: (priceChange: number, record: IPrice, index: number) => {
+      render: (priceChange: number, record: TickerPrice) => {
         return (
           <div>
             {thousandFormatter(priceChange)} ({record.percentChange}%)
