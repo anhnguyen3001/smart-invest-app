@@ -1,5 +1,5 @@
-import { formatNumber, Company } from '@smart-invest/common';
-import { Col, Divider, Row } from 'antd';
+import { Company, formatNumber } from '@smart-invest/common';
+import { Col, Row } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 import classNames from 'classnames/bind';
 import React, { useMemo } from 'react';
@@ -57,7 +57,7 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
         value: formatNumber(eps),
       },
       { title: t('DilutedEps'), value: formatNumber(dilutedEps) },
-      { title: t('P/E'), value: formatNumber(pe) },
+      { title: t('PE'), value: formatNumber(pe) },
       { title: t('Bvps'), value: formatNumber(bvps) },
     ];
 

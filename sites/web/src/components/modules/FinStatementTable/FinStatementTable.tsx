@@ -1,29 +1,65 @@
-import { FinancialStatement, Pagination } from '@smart-invest/common';
+import {
+  FinancialStatement,
+  financialStatementService,
+  GetFinancialStatementsReponse,
+} from '@smart-invest/common';
 import { FilePdfTwoTone } from '@ant-design/icons';
-import { Button, Card, Table, TableColumnProps } from 'antd';
-import React from 'react';
+import { Button, Card, Select, Spin, Table, TableColumnProps } from 'antd';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, Paragraph } from 'src/components';
 import { convertPagination } from 'src/helpers';
+import useSWR from 'swr';
+
+const startYear = 2017;
+const totalYears = new Date().getFullYear() - startYear + 1;
+const yearOptions: number[] = Array.apply(0, new Array(totalYears)).map(
+  (_: any, index: number) => startYear + index,
+);
 
 interface FinStatementTableProps {
-  financialStatements?: FinancialStatement[];
+  companyId?: number;
   onSeeMore?: () => void;
-  pagination?: Pagination;
 }
 
 export const FinStatementTable: React.FC<FinStatementTableProps> = ({
-  financialStatements,
+  companyId,
   onSeeMore,
-  pagination,
 }) => {
   const { t } = useTranslation();
 
+  const [year, setYear] = useState<number>();
+
+  const { data, error } = useSWR<GetFinancialStatementsReponse>(
+    ['financial-statements', companyId, year],
+    async () => {
+      if (!companyId) return;
+
+      const res = await financialStatementService.getList({
+        companyId,
+        year,
+      });
+      return res;
+    },
+  );
+  const isLoadingFinancialStaments = !data && !error;
+
   const renderTitle = () => {
     const title = (
-      <Text level={1} fontWeight={700}>
-        {t('FinancialStatements')}
-      </Text>
+      <div className="d-flex justify-content-between align-items-center">
+        <Text level={1} fontWeight={700}>
+          {t('FinancialStatements')}
+        </Text>
+
+        <Select
+          placeholder={t('SelectYear')}
+          style={{ minWidth: 130 }}
+          allowClear
+          defaultValue={year}
+          options={yearOptions.map((year) => ({ label: year, value: year }))}
+          onChange={setYear}
+        />
+      </div>
     );
 
     if (onSeeMore) {
@@ -82,15 +118,17 @@ export const FinStatementTable: React.FC<FinStatementTableProps> = ({
   ];
 
   return (
-    <Card title={renderTitle()}>
-      <Table
-        rowKey="id"
-        dataSource={financialStatements}
-        columns={columns}
-        {...(onSeeMore && { pagination: false })}
-        pagination={convertPagination(pagination)}
-      />
-    </Card>
+    <Spin spinning={isLoadingFinancialStaments}>
+      <Card title={renderTitle()}>
+        <Table
+          rowKey="id"
+          dataSource={data?.financialStatements}
+          columns={columns}
+          {...(onSeeMore && { pagination: false })}
+          pagination={convertPagination(data?.pagination)}
+        />
+      </Card>
+    </Spin>
   );
   // const tableProps: TableProps<FinancialInfoRecord> = useMemo(() => {
   //   const { date } = financialInfo;
