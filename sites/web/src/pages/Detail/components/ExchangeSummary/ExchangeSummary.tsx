@@ -74,7 +74,7 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
     <Card
       className={cx('h-100')}
       bodyStyle={{
-        padding: '16px 32px',
+        padding: '1.14rem 2.3rem',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -88,7 +88,7 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
             'd-flex',
             'justify-content-between',
             'align-items-center',
-            { 'mb-16': index !== displayTexts.length - 1 },
+            { 'mb-8': index !== displayTexts.length - 1 },
           )}
         >
           <Text level={2} fontWeight={500}>

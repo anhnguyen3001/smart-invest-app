@@ -8,7 +8,7 @@
 @component-background: @background-color-light;
 
 // card
-@card-padding-base: 16px;
+@card-padding-base: 1.14rem;
 
 // Tabs
 @tabs-title-font-size: 1.14rem;
@@ -44,6 +44,7 @@ h3 {
 // Layout
 .ant-layout {
   min-height: 100vh;
+  overflow-x: hidden;
 
   &-content {
     background: @background-color-base;
@@ -56,9 +57,4 @@ h3 {
 .ant-spin-nested-loading {
   width: 100%;
   min-height: 100%;
-}
-
-.ant-row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }

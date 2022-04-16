@@ -54,6 +54,11 @@
   object-fit: contain !important;
 }
 
+// Menu
+.ant-dropdown-menu-item-active {
+  color: $primary-color !important;
+}
+
 // Result
 .ant-result {
   &.app-result-page {
@@ -157,9 +162,7 @@
   transition: $transition-base;
 }
 
-.ant-dropdown-menu-item-active {
-  color: $primary-color;
-}
+
 
 .anticon {
   vertical-align: 0 !important;
