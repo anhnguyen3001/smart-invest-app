@@ -58,7 +58,7 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
       },
       { title: t('DilutedEps'), value: formatNumber(dilutedEps) },
       { title: t('PE'), value: formatNumber(pe) },
-      { title: t('Bvps'), value: formatNumber(bvps) },
+      { title: t('BookValuePerShare'), value: formatNumber(bvps) },
     ];
 
     return (
@@ -68,7 +68,7 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
             <Text className={cx('mb-4')} fontWeight={500} type="secondary">
               {title}
             </Text>
-            <Text level={2} fontWeight={700}>
+            <Text ellipsis level={2} fontWeight={700}>
               {value}
             </Text>
           </Col>
@@ -80,11 +80,11 @@ export const CompanyOverview: React.FC<CompanyOverviewProps> = ({
 
   return (
     <>
-      <h2 className={cx('mb-32', 'pb-16', 'border-bottom', 'primary-color')}>
+      <h2 className={cx('mb-16', 'pb-16', 'border-bottom', 'primary-color')}>
         {t('About')} {name}
       </h2>
       <Paragraph
-        className={cx('mb-32')}
+        className={cx('mb-16')}
         ellipsis={{
           rows: 2,
           expandable: true,

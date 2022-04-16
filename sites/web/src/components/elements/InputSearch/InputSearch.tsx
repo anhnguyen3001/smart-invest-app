@@ -14,7 +14,7 @@ export const InputSearch: React.FC<InputSearchProps> = ({
 }) => {
   return (
     <Input
-      className={cx('search', className, 'px-16')}
+      className={cx('input', className, 'px-16')}
       size="large"
       prefix={<SearchOutlined />}
       {...rest}

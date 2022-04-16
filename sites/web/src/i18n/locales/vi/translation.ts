@@ -11,10 +11,10 @@ import {
 
 export const translations = {
   BackToHome: 'Về trang chủ',
-  WelcomeText: 'Look for tickers and make an investigation plan for future',
+  WelcomeText: 'Xem thông tin cổ phiếu để lập kế hoạch đầu tư cho tương lai',
 
-  Signin: 'Đăng nhập',
-  Signup: 'Đăng ký',
+  Login: 'Đăng nhập',
+  Register: 'Đăng ký',
   Logout: 'Đăng xuất',
   ResearchCenter: 'Trung tâm phân tích',
   ChangePassword: 'Đổi mật khẩu',

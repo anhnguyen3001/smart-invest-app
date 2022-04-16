@@ -85,16 +85,16 @@ export interface IComment {
   date: string;
 }
 
-export enum TickerSort {
+export enum TickerSortBy {
   percentChange = 'percent_change',
   totalVolume = 'totalVolume',
 }
 export interface GetTickersParams {
   page?: number;
   pageSize?: number;
-  search?: number;
+  search?: string;
   sort?: Sort;
-  sortBy?: TickerSort;
+  sortBy?: TickerSortBy;
 }
 
 export interface GetTickersReponse extends PaginationResponse {
