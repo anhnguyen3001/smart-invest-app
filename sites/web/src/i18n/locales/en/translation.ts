@@ -13,8 +13,8 @@ export const translations = {
   BackToHome: 'Back to Home',
   WelcomeText: 'Look for tickers and make an investigation plan for future',
 
-  Signin: 'Sign in',
-  Signup: 'Sign up',
+  Login: 'Login in',
+  Register: 'Register',
   Logout: 'Logout',
   ResearchCenter: 'Research center',
   ChangePassword: 'Change password',

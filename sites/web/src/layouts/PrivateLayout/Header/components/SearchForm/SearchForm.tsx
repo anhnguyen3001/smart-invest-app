@@ -50,7 +50,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
       onFinish={onSubmit}
     >
       <Form.Item noStyle name="q">
-        <InputSearch placeholder={t('SearchStockHere')} />
+        <InputSearch placeholder={t('SearchTickerHere')} />
       </Form.Item>
     </Form>
   );
