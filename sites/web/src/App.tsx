@@ -1,6 +1,5 @@
 import { ConfigProvider } from 'antd';
 import React, { Suspense, useEffect } from 'react';
-import 'src/styles/theme.css';
 import './App.scss';
 import { Loading } from './components';
 import { LOCAL_STORAGE, REGIONS, THEME } from './constants';

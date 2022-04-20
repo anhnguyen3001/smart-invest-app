@@ -97,7 +97,7 @@ export const MobileMenuDrawer: React.FC<MobileMenuDrawerProps> = ({
     >
       <Menu className={cx('menu')} selectedKeys={[activeMenuItem]}>
         {navbarLinks.map(({ title, to }) => (
-          <Menu.Item key={to} className={cx('text-700', 'text-1')}>
+          <Menu.Item key={to} className={cx('text-700', 'text-2')}>
             <NavLink to={to}>{title}</NavLink>
           </Menu.Item>
         ))}

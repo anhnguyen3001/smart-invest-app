@@ -1,4 +1,4 @@
-import { PaginationResponse } from './api';
+import { BaseParams, PaginationResponse } from './api';
 
 export interface FinancialStatement {
   name: 'string';
@@ -6,9 +6,7 @@ export interface FinancialStatement {
   path: 'string';
 }
 
-export interface GetFinancialStatementsParams {
-  page?: number;
-  pageSize?: number;
+export interface GetFinancialStatementsParams extends BaseParams {
   companyId: number;
   year?: number;
 }

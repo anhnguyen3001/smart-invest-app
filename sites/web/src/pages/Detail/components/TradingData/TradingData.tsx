@@ -23,7 +23,7 @@ export const TradingData: React.FC<TradingDataProps> = ({ symbol }) => {
       ],
     );
     // eslint-disable-next-line
-  }, [period, symbol]);
+  }, [JSON.stringify(prices)]);
 
   const renderPeriodOptions = () => {
     return periodOptions.map((duration, index) => {

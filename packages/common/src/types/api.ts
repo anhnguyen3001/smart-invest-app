@@ -4,6 +4,11 @@ export enum Sort {
   desc = 'desc',
 }
 
+export interface BaseParams {
+  page?: number;
+  pageSize?: number;
+}
+
 // Response
 export interface BaseReponse<T> {
   code: string;

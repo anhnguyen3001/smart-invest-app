@@ -1,5 +1,4 @@
-import { PaginationResponse, Sort } from './api';
-import { User } from './user';
+import { BaseParams, PaginationResponse, Sort } from './api';
 
 export interface TickerPrice {
   date: string;
@@ -57,18 +56,6 @@ export interface Company {
   price?: TickerPrice;
 }
 
-export interface ICompany {
-  companyId: number;
-  companyName: string;
-  // Stock code
-  symbol: string;
-  exchange: string;
-  introduction: string;
-  firstTradingDate: number;
-  firstClosePrice: number;
-  firstSharesQuantity: number;
-}
-
 export interface INews {
   id: number;
   title: string;
@@ -78,20 +65,11 @@ export interface INews {
   link: string;
 }
 
-export interface IComment {
-  id: number;
-  content: string;
-  user: User;
-  date: string;
-}
-
 export enum TickerSortBy {
   percentChange = 'percent_change',
   totalVolume = 'totalVolume',
 }
-export interface GetTickersParams {
-  page?: number;
-  pageSize?: number;
+export interface GetTickersParams extends BaseParams {
   search?: string;
   sort?: Sort;
   sortBy?: TickerSortBy;

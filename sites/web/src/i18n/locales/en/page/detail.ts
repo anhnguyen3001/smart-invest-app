@@ -27,4 +27,8 @@ export const detailTranslation = {
   Name: 'Name',
   Period: 'Period',
   View: 'View',
+  Comments: 'Comments',
+  Loading: 'Loading...',
+  NoMoreComments: 'No more comments',
+  YouWantToShareSomething: 'You want to share something?',
 };

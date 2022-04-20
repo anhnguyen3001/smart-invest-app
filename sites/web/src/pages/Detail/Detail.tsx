@@ -1,5 +1,6 @@
+import { CommentOutlined } from '@ant-design/icons';
 import { Company, companyService } from '@smart-invest/common';
-import { Col, Row, Tabs } from 'antd';
+import { Button, Col, Row, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -7,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useApp } from 'src/contexts';
 import { convertPrice } from 'src/helpers';
 import {
+  CommentSection,
   CompanyOverview,
   ExchangeSummary,
   PriceChart,
@@ -32,6 +34,8 @@ const CONTENT_TAB_KEY = {
 export const Detail: React.FC = () => {
   const { setLoading } = useApp();
   const { companyId } = useParams<DetailParams>();
+
+  const [visibleComment, setVisibleComment] = useState<boolean>(false);
 
   const [company, setCompany] = useState<Company>();
   useEffect(() => {
@@ -92,10 +96,10 @@ export const Detail: React.FC = () => {
         gutter={32}
         className={cx('section')}
       >
-        <Col lg={16} md={12} xs={24}>
+        <Col lg={16} xs={24}>
           <PriceChart symbol={symbol} />
         </Col>
-        <Col lg={8} md={12} xs={24}>
+        <Col lg={8} xs={24}>
           <ExchangeSummary tickerPrice={tickerPrice} />
         </Col>
       </Row>
@@ -114,6 +118,8 @@ export const Detail: React.FC = () => {
       >
         {renderTabContent()}
       </Tabs>
+
+      <CommentSection companyId={id} />
     </>
   );
 };

@@ -25,6 +25,17 @@ export const convertPagination = (
   };
 };
 
+export const getObjFromQueryString = (
+  str: string,
+): { [key: string]: string } => {
+  const urlParams = new URLSearchParams(str);
+  const result: { [key: string]: string } = {};
+  for (const pair of urlParams.entries()) {
+    result[pair[0]] = pair[1];
+  }
+  return result;
+};
+
 export const hasMoreData = (pagination?: Pagination): boolean => {
   if (!pagination) return false;
 
