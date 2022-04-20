@@ -24,20 +24,20 @@ export const BackTop: React.FC = () => {
     };
   }, []);
 
+  if (!visibleBackTop) return null;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0 });
   };
 
   return (
-    <div className={cx('wrapper')}>
-      {visibleBackTop && (
-        <Button
-          shape="circle"
-          type="primary"
-          icon={<ArrowUpOutlined style={{ fontSize: 18 }} />}
-          onClick={scrollToTop}
-        />
-      )}
-    </div>
+    <Button
+      className={cx('button')}
+      size="large"
+      shape="circle"
+      type="primary"
+      icon={<ArrowUpOutlined style={{ fontSize: 18 }} />}
+      onClick={scrollToTop}
+    />
   );
 };

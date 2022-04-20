@@ -1,14 +1,10 @@
 import {
-  IComment,
-  ICompany,
-  FinancialStatement,
-  INews,
-  TickerPrice,
-  Ticker,
-  User,
-  Pagination,
   Gender,
+  INews,
   LoginMethodEnum,
+  Ticker,
+  TickerPrice,
+  User,
 } from '@smart-invest/common';
 
 export const mockPrice: TickerPrice = {
@@ -61,15 +57,6 @@ export const mockUser: User = {
   gender: Gender.female,
   method: LoginMethodEnum.local,
 };
-
-export const mockComments: IComment[] = Array.apply(0, new Array(10)).map(
-  (_, index) => ({
-    id: index + 1,
-    content: 'Comment 1',
-    date: new Date().toISOString(),
-    user: mockUser,
-  }),
-);
 
 export const tradingPrices: TickerPrice[] = [
   {
@@ -145,21 +132,3 @@ export const tradingPrices: TickerPrice[] = [
     totalValue: 20000,
   },
 ];
-
-export const mockCompany: ICompany = {
-  companyId: 1,
-  companyName: 'FPT',
-  symbol: 'FPT',
-  exchange: '1000',
-  firstTradingDate: 10000,
-  firstClosePrice: 1000000,
-  firstSharesQuantity: 1000,
-  introduction:
-    'Công ty Cổ phần Đầu tư và Phát triển Đức Quân (FTM) có tiền thân là Công ty TNHH Dệt Đại Cường Thái Bình, được thành lập vào năm 2006. Công ty hoạt động chính trong lĩnh vực sản xuất và kinh doanh các loại sợi. Bên cạnh đó, Công ty còn kinh doanh thương mại nguyên phụ liệu ngành dệt may phục vụ các doanh nghiệp trong nước. FTM hiện đang quản lý và khai thác 03 nhà máy sợi với năng lực sản xuất lên đến 18.000 tấn sợi/năm. FTM được niêm yết và giao dịch trên Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh (HOSE) từ đầu năm 2017.',
-};
-
-export const mockPagination: Pagination = {
-  currentPage: 1,
-  pageSize: 20,
-  totalItems: 40,
-};

@@ -27,4 +27,8 @@ export const detailTranslation = {
   Name: 'Loại báo cáo',
   Period: 'Thời gian',
   View: 'Xem',
+  Comments: 'Bình luận',
+  Loading: 'Đang tải...',
+  NoMoreComments: 'Không còn bình luận',
+  YouWantToShareSomething: 'Bạn có muốn chia sẻ gì đó?',
 };

@@ -1,0 +1,26 @@
+.toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  transform: translateY(-100%);
+}
+
+.drawer {
+  :global {
+    .ant-drawer-content-wrapper {
+      width: 40% !important;
+
+      @include lg {
+        width: 50% !important;
+      }
+
+      @include tablet {
+        width: 60% !important;
+      }
+
+      @include mobile {
+        width: 100% !important;
+      }
+    }
+  }
+}

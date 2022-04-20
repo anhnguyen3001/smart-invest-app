@@ -11,9 +11,7 @@ export const useTickerPrices = (key: string, symbol?: string) => {
     (period) => period,
   );
 
-  const [period, setPeriod] = useState<TickerPricePeriod>(
-    TickerPricePeriod['1m'],
-  );
+  const [period, setPeriod] = useState(TickerPricePeriod['1m']);
 
   const { data: prices, error } = useSWR<TickerPrice[]>(
     [key, symbol, period],
@@ -21,6 +19,9 @@ export const useTickerPrices = (key: string, symbol?: string) => {
       if (!symbol) return;
       const res = await tickerService.getTickerPrice({ symbol, period });
       return res?.tickerPrices;
+    },
+    {
+      revalidateOnFocus: false,
     },
   );
 

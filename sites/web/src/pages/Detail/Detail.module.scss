@@ -1,3 +1,10 @@
+.toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  transform: translateY(-100%);
+}
+
 .section {
   padding-left: $align-96;
   padding-right: $align-96;
