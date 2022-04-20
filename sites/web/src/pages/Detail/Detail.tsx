@@ -1,12 +1,9 @@
-import { CommentOutlined } from '@ant-design/icons';
-import { Company, companyService } from '@smart-invest/common';
-import { Button, Col, Row, Tabs } from 'antd';
+import { Company } from '@smart-invest/common';
+import { Col, Row, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'i18next';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useApp } from 'src/contexts';
-import { convertPrice } from 'src/helpers';
 import {
   CommentSection,
   CompanyOverview,
@@ -18,6 +15,7 @@ import {
   TradingData,
 } from './components';
 import styles from './Detail.module.scss';
+import { useCompany } from './hooks';
 
 const cx = classNames.bind(styles);
 
@@ -32,31 +30,10 @@ const CONTENT_TAB_KEY = {
 };
 
 export const Detail: React.FC = () => {
-  const { setLoading } = useApp();
   const { companyId } = useParams<DetailParams>();
 
-  const [visibleComment, setVisibleComment] = useState<boolean>(false);
-
-  const [company, setCompany] = useState<Company>();
-  useEffect(() => {
-    const fetchCompany = async () => {
-      setLoading(true);
-
-      try {
-        const res = await companyService.getCompany(parseInt(companyId) || 0);
-        setCompany(res);
-      } catch (e) {
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCompany();
-    // eslint-disable-next-line
-  }, [companyId]);
-
-  const { companyId: id, exchange, price, symbol } = (company || {}) as Company;
-  const tickerPrice = convertPrice(exchange, price);
+  const { company, tickerPrice } = useCompany(companyId);
+  const { companyId: id, symbol } = (company || {}) as Company;
 
   const [activeTab, setActiveTab] = useState(CONTENT_TAB_KEY.overview);
   const onGoToAnalysisTab = useCallback(() => {
