@@ -1,0 +1,243 @@
+/**
+ * Common styles for application
+ */
+
+// Margin
+$aligns: (
+  '96' $align-96,
+  '64' $align-64,
+  '32' $align-32,
+  '24' $align-24,
+  '16' $align-16,
+  '8' $align-8,
+  '4' $align-4,
+  0 0,
+  auto auto
+);
+@each $kvp in $aligns {
+  $key: nth($kvp, 1);
+  $value: nth($kvp, 2);
+
+  // Margin
+  .m-#{$key} {
+    margin: $value !important;
+  }
+  .my-#{$key} {
+    margin-top: $value !important;
+    margin-bottom: $value !important;
+  }
+  .mx-#{$key} {
+    margin-left: $value !important;
+    margin-right: $value !important;
+  }
+  .mt-#{$key} {
+    margin-top: $value !important;
+  }
+  .mr-#{$key} {
+    margin-right: $value !important;
+  }
+  .mb-#{$key} {
+    margin-bottom: $value !important;
+  }
+  .ml-#{$key} {
+    margin-left: $value !important;
+  }
+
+  // Padding
+  .p-#{$key} {
+    padding: $value !important;
+  }
+  .py-#{$key} {
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+  .px-#{$key} {
+    padding-left: $value !important;
+    padding-right: $value !important;
+  }
+  .pt-#{$key} {
+    padding-top: $value !important;
+  }
+  .pr-#{$key} {
+    padding-right: $value !important;
+  }
+  .pb-#{$key} {
+    padding-bottom: $value !important;
+  }
+  .pl-#{$key} {
+    padding-left: $value !important;
+  }
+}
+
+// Spacing
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+// Typography
+// Colors
+$colors: (
+  'primary' $primary-color,
+  'secondary' $text-color-secondary,
+  'warning' $warning-color,
+  'success' $green-color,
+  'danger' $red-color,
+  'ceil' $ceil-color,
+  'floor' $floor-color,
+  'link' $link-color
+);
+@each $kvp in $colors {
+  $key: nth($kvp, 1);
+  $value: nth($kvp, 2);
+
+  .#{$key}-color {
+    color: $value !important;
+  }
+}
+
+.inherit-color {
+  color: inherit;
+}
+
+// Font-weight
+$fontWeight: (
+  '500' $font-weight-500,
+  '700' $font-weight-700,
+  '900' $font-weight-900
+);
+@each $kvp in $fontWeight {
+  $key: nth($kvp, 1);
+  $value: nth($kvp, 2);
+  .text-#{$key} {
+    font-weight: $value !important;
+  }
+}
+
+// Line
+$lines: (1, 2, 3);
+@each $kvp in $lines {
+  $value: nth($kvp, 1);
+  .text-line-#{$value} {
+    @include line-ellipsis($value);
+  }
+}
+
+// Alignment
+$textAligns: (left, right, center, justify);
+@include mapValueToClass($textAligns, 'text', text-align);
+
+// Transformation
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-italic {
+  font-style: italic;
+}
+
+// Display
+$display: (flex, block, none, inline, inline-block, inline-flex);
+@include mapValueToClass($display, 'd', display);
+
+// Flexbox
+$flexLayouts: (column, column-reverse);
+@include mapValueToClass($flexLayouts, 'flex', flex-direction);
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+// Flex position
+.align-items-start {
+  align-items: flex-start !important;
+}
+.align-items-end {
+  align-items: flex-end !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+.justify-content-start {
+  justify-content: flex-start !important;
+}
+.justify-content-end {
+  justify-content: flex-end !important;
+}
+.justify-content-center {
+  justify-content: center !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.align-self-end {
+  align-self: flex-end !important;
+}
+
+// Border
+$lines: ('-bottom', '-top', '');
+
+@each $kvp in $lines {
+  $value: nth($kvp, 1);
+  .border#{$value} {
+    border#{$value}: 1px solid $border-color;
+  }
+}
+
+// Button
+.primary-button {
+  @include filled-button($text-color, $primary-color);
+}
+.ghost-default-button {
+  @include ghost-button($text-color);
+}
+.link-button {
+  @include filled-button($text-color, $link-color);
+}
+.ghost-link-button {
+  @include ghost-button($link-color);
+}
+
+// Pointer
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Layout
+.section-md {
+  margin: $align-64;
+}
+
+@include tablet {
+  .section-md {
+    margin: $align-32;
+  }
+}
+
+@include mobile {
+  .section-md {
+    margin: $align-32 $align-16;
+  }
+}
+
+.p-relative {
+  position: relative;
+}
+
+.container {
+  padding: $align-64 $align-64 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  @include tablet {
+    padding: $align-32 $align-32 0;
+  }
+
+  @include mobile {
+    padding: $align-32 $align-16 0;
+  }
+}
