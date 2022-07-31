@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { DEFAULT_PAGE_SIZE } from 'src/constants';
-import { mockNews } from 'src/mock';
 import { InfiniteSearchQueryParams } from 'src/types';
 import useSWRInfinite from 'swr/infinite';
 
@@ -13,7 +12,7 @@ export const useInfiniteNews = (params?: InfiniteSearchQueryParams) => {
       `search/news?q=${q}&page=${index}&pageSize=${pageSize}`,
     ],
     async () => {
-      return mockNews;
+      return [];
     },
   );
 

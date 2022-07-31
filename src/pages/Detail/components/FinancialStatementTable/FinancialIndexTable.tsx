@@ -2,12 +2,10 @@ import { FilePdfTwoTone } from '@ant-design/icons';
 import { Button, Card, Select, Spin, Table, TableColumnProps } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { financialStatementService } from 'src/api';
-import { Text, Paragraph } from 'src/components';
+import { Paragraph, Text } from 'src/components';
 import { convertPagination } from 'src/helpers';
-import { mockFinancialStatements } from 'src/mock';
-import { FinancialStatement, GetFinancialStatementsReponse } from 'src/types';
-import useSWR from 'swr';
+import { FinancialStatement, GetFinancialStatementParams } from 'src/types';
+import { useFinancialStatements } from '../../hooks/useFinancialStatements';
 
 const startYear = 2017;
 const totalYears = new Date().getFullYear() - startYear + 1;
@@ -25,21 +23,13 @@ export const FinancialStatementTable: React.FC<
 > = ({ companyId, onSeeMore }) => {
   const { t } = useTranslation();
 
-  const [year, setYear] = useState<number>();
+  const [params, setParams] = useState<GetFinancialStatementParams>({
+    companyId: companyId || 0,
+    page: 1,
+  });
 
-  const { data, error } = useSWR<GetFinancialStatementsReponse | undefined>(
-    ['financial-statements', companyId, year],
-    async () => {
-      if (!companyId) return;
-
-      const res = await financialStatementService.getList({
-        companyId,
-        year,
-      });
-      return res;
-    },
-  );
-  const isLoadingFinancialStaments = !data && !error;
+  const { financialStatements, loading, pagination } =
+    useFinancialStatements(params);
 
   const renderTitle = () => {
     const title = (
@@ -52,9 +42,8 @@ export const FinancialStatementTable: React.FC<
           placeholder={t('SelectYear')}
           style={{ minWidth: 130 }}
           allowClear
-          defaultValue={year}
           options={yearOptions.map((year) => ({ label: year, value: year }))}
-          onChange={setYear}
+          onChange={(year) => setParams((prev) => ({ ...prev, year }))}
         />
       </div>
     );
@@ -115,54 +104,16 @@ export const FinancialStatementTable: React.FC<
   ];
 
   return (
-    <Spin spinning={isLoadingFinancialStaments}>
+    <Spin spinning={loading}>
       <Card title={renderTitle()}>
         <Table
           rowKey="id"
-          dataSource={mockFinancialStatements}
+          dataSource={financialStatements}
           columns={columns}
           {...(onSeeMore && { pagination: false })}
-          pagination={convertPagination(data?.pagination)}
+          pagination={convertPagination(pagination)}
         />
       </Card>
     </Spin>
   );
-  // const tableProps: TableProps<FinancialInfoRecord> = useMemo(() => {
-  //   const { date } = financialInfo;
-  //   const convertedInfo = getFinancialInfoRecords(financialInfo);
-
-  //   return {
-  //     columns: [
-  //       { key: "name", dataIndex: "name" },
-  //       ...date.map((value: string, index) => {
-  //         return {
-  //           key: value,
-  //           title: value,
-  //           dataIndex: "",
-  //         };
-  //       }),
-  //     ],
-  //     dataSource: convertedInfo,
-  //   };
-  // }, [JSON.stringify(financialInfo)]);
-
-  // return <Table rowKey="name" {...tableProps} />;
 };
-
-// interface FinancialInfoRecord {
-//   name: string;
-//   data: number[];
-// }
-
-// const getFinancialInfoRecords = (
-//   info: IFinancialInfo
-// ): FinancialInfoRecord[] => {
-//   const { date, ...restInfo } = info;
-//   const res: FinancialInfoRecord[] = [];
-
-//   Object.entries(restInfo).forEach(([name, data]) => {
-//     res.push({ name, data: data as number[] });
-//   });
-
-//   return res;
-// };

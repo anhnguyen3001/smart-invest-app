@@ -66,7 +66,6 @@ export const Signin: React.FC = () => {
 
     try {
       const res = await authService.login(data);
-
       updateToken(res);
       history.push(HOME_PATH);
     } catch (e) {

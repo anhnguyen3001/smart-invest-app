@@ -1,7 +1,5 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import { NewsList } from 'src/components';
-import { mockNews } from 'src/mock';
 
 interface TickerOverviewProps {
   onGoToAnalysisTab: () => void;
@@ -17,7 +15,7 @@ export const TickerOverview: React.FC<TickerOverviewProps> = ({
           {/* <ReportList reports={mockReports} onSeeMore={onGoToAnalysisTab} /> */}
         </Col>
         <Col md={9} xs={24}>
-          <NewsList news={mockNews} onSeeMore={onGoToAnalysisTab} />
+          {/* <NewsList news={mockNews} onSeeMore={onGoToAnalysisTab} /> */}
         </Col>
       </Row>
     </>

@@ -4,13 +4,15 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { NewsList } from 'src/components';
 import { RESEARCH_CENTER_PATH } from 'src/constants';
-import { mockNews } from 'src/mock';
+import { useNews } from 'src/hooks';
 import { MarketTrend, WatchList } from './components';
 
 const cx = classNames.bind({});
 
 export const Home: React.FC = () => {
   const history = useHistory();
+
+  const { news, loading } = useNews();
 
   const onChangePage = (link: string) => {
     history.push(link);
@@ -24,13 +26,14 @@ export const Home: React.FC = () => {
 
       <div className={cx('section-md')}>
         <Row gutter={[16, 16]}>
-          <Col md={16} xs={24}>
+          <Col md={14} xs={24}>
             <MarketTrend />
           </Col>
-          <Col md={8} xs={24}>
+          <Col md={10} xs={24}>
             <NewsList
+              loading={loading}
               showHeader
-              news={mockNews}
+              news={news}
               onSeeMore={() => onChangePage(RESEARCH_CENTER_PATH)}
             />
           </Col>

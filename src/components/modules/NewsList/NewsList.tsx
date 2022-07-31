@@ -11,17 +11,21 @@ const cx = classNames.bind(styles);
 export interface NewsListProps {
   news?: News[];
   pagination?: Pagination;
+  loading?: boolean;
   onSeeMore?: () => void;
   showHeader?: boolean;
   size?: 'large' | 'default';
+  onChangePagination?: (page: number, pageSize: number) => void;
 }
 
 export const NewsList: React.FC<NewsListProps> = ({
   size = 'default',
   news,
+  loading,
   onSeeMore,
   showHeader = false,
   pagination,
+  onChangePagination,
 }) => {
   const { t } = useTranslation();
 
@@ -42,16 +46,9 @@ export const NewsList: React.FC<NewsListProps> = ({
       return (
         <div className="d-flex justify-content-between align-items-center">
           {title}
-          {onSeeMore && (
-            <Button
-              className="pr-0"
-              type="link"
-              onClick={onSeeMore}
-              size="small"
-            >
-              {t('ViewMore')}
-            </Button>
-          )}
+          <Button className="pr-0" type="link" onClick={onSeeMore} size="small">
+            {t('ViewMore')}
+          </Button>
         </div>
       );
     }
@@ -59,18 +56,17 @@ export const NewsList: React.FC<NewsListProps> = ({
     return title;
   };
 
-  const renderItem = ({ id, title, path, time }: News) => {
+  const renderItem = ({ newsId, title, path, time }: News) => {
     return (
       <List.Item
-        key={id}
+        key={newsId}
         className={cx('justify-content-space-between', 'align-items-center')}
       >
-        <Text type="secondary">{new Date(time).toLocaleDateString()}</Text>
+        <Text type="secondary">{new Date(time).toLocaleDateString('vi')}</Text>
 
         <div style={{ width: '80%' }}>
           <Paragraph
             className={cx('mb-4', 'ms-1')}
-            // level={2}
             fontWeight={500}
             ellipsis={{ rows: 2 }}
             onClick={() => onOpenNews(path)}
@@ -84,11 +80,12 @@ export const NewsList: React.FC<NewsListProps> = ({
 
   return (
     <List
+      loading={loading}
       className={cx(`news--${size}`)}
       size="large"
       {...(size === 'default' && { bordered: true })}
       header={showHeader ? renderHeader() : undefined}
-      rowKey="id"
+      rowKey="newsId"
       dataSource={news}
       renderItem={renderItem}
       {...(pagination && {
@@ -96,6 +93,7 @@ export const NewsList: React.FC<NewsListProps> = ({
           current: pagination?.currentPage,
           pageSize: pagination?.pageSize,
           total: pagination?.totalItems,
+          onChange: onChangePagination,
         },
       })}
     />

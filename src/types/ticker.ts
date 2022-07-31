@@ -67,15 +67,6 @@ export interface Company {
   price?: TickerPrice;
 }
 
-export interface News {
-  id: number;
-  title: string;
-  description?: string;
-  image?: string;
-  time: string;
-  path: string;
-}
-
 export enum TickerSortBy {
   percentChange = 'percent_change',
   totalVolume = 'total_volume',

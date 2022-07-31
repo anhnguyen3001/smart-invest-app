@@ -469,12 +469,6 @@ const dataNews = [
   },
 ];
 
-export const mockNews: News[] = dataNews.map((value, index) => ({
-  id: index,
-  ...value,
-  path: 'http://s.cafef.vn/a32-477779/a32-tai-lieu-hop-dai-hoi-dong-co-dong.chn',
-}));
-
 export const mockPagination: Pagination = {
   currentPage: 1,
   pageSize: 10,

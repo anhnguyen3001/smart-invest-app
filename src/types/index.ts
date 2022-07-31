@@ -7,3 +7,4 @@ export * from './image';
 export * from './user';
 export * from './auth';
 export * from './favoriteList';
+export * from './news';

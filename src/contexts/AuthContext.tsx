@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { userService } from 'src/api';
 import { getAccessToken, setLS } from 'src/helpers';
 import { Tokens, User } from 'src/types';
@@ -18,8 +17,6 @@ interface AuthState {
 const AuthStateContext = React.createContext<AuthState | null>(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const { t } = useTranslation();
-
   const { setLoading } = useApp();
 
   const [user, setUser] = useState<User>();
