@@ -1,24 +1,19 @@
 import { Spin } from 'antd';
-import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { InfiniteNewList, TabContent, TabPaneProps } from 'src/components';
-import { RESEARCH_CENTER_PATH } from 'src/constants';
+import { NEWS_PATH } from 'src/constants';
 import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
 import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
-import styles from './ResearchCenter.module.scss';
-
-const cx = classNames.bind(styles);
 
 const TAB_KEY = {
-  news: 'news',
-  pricePredictation: 'pricePredictation',
+  all: 'all',
+  favoriteList: 'favoriteList',
 };
 
-export const ResearchCenter: React.FC = () => {
+export const News: React.FC = () => {
   const { t } = useTranslation();
-  const { isMobileView } = useWindowResize();
 
   const query = useQuery();
   const q = query.get('q') || undefined;
@@ -39,18 +34,17 @@ export const ResearchCenter: React.FC = () => {
     isEmpty: newsIsEmpty,
     page: newsPage,
     setPage: setNewsPage,
-  } = useInfiniteNews({ q });
+  } = useInfiniteNews({ pageSize: 20 });
 
   const getTabPanes = (): TabPaneProps[] => {
     return [
       {
         tab: t('All'),
-        key: TAB_KEY.news,
+        key: TAB_KEY.all,
         children: (
           <>
             <InfiniteNewList
               infiniteListProps={{
-                className: cx('news'),
                 isEmpty: newsIsEmpty,
                 hasMore: newsHasMore,
                 loading: newsLoading,
@@ -67,12 +61,9 @@ export const ResearchCenter: React.FC = () => {
       },
       {
         tab: t('FavoriteList'),
-        key: TAB_KEY.pricePredictation,
+        key: TAB_KEY.favoriteList,
         children: (
           <>
-            {!isMobileView && (
-              <h3 className={cx('mb-16')}>{t('PricePredictation')}</h3>
-            )}
             <TickerList
               tickers={tickers}
               isEmpty={tickerIsEmpty}
@@ -92,9 +83,9 @@ export const ResearchCenter: React.FC = () => {
     <Spin spinning={tickerLoading || newsLoading}>
       <TabContent
         title={t('News')}
-        defaultActiveKey={TAB_KEY.news}
+        defaultActiveKey={TAB_KEY.all}
         tabPanes={getTabPanes()}
-        rootPath={RESEARCH_CENTER_PATH}
+        rootPath={NEWS_PATH}
       />
     </Spin>
   );

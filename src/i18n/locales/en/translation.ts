@@ -16,7 +16,6 @@ export const translations = {
   Login: 'Login',
   Register: 'Register',
   Logout: 'Logout',
-  ResearchCenter: 'Research center',
   ChangePassword: 'Change password',
   VerifyUser: 'Verify user',
 

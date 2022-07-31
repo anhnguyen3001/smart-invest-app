@@ -1,30 +1,23 @@
 import { Col, Row } from 'antd';
-import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { NewsList } from 'src/components';
-import { RESEARCH_CENTER_PATH } from 'src/constants';
+import { NEWS_PATH } from 'src/constants';
 import { useNews } from 'src/hooks';
 import { MarketTrend, WatchList } from './components';
-
-const cx = classNames.bind({});
 
 export const Home: React.FC = () => {
   const history = useHistory();
 
   const { news, loading } = useNews();
 
-  const onChangePage = (link: string) => {
-    history.push(link);
-  };
-
   return (
     <div>
-      <div className={cx('section-md')}>
+      <div className="section-md">
         <WatchList />
       </div>
 
-      <div className={cx('section-md')}>
+      <div className="section-md">
         <Row gutter={[16, 16]}>
           <Col md={14} xs={24}>
             <MarketTrend />
@@ -34,7 +27,7 @@ export const Home: React.FC = () => {
               loading={loading}
               showHeader
               news={news}
-              onSeeMore={() => onChangePage(RESEARCH_CENTER_PATH)}
+              onSeeMore={() => history.push(NEWS_PATH)}
             />
           </Col>
         </Row>

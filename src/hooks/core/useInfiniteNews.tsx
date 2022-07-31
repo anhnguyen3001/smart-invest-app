@@ -1,18 +1,20 @@
 import { useMemo } from 'react';
+import { newsService } from 'src/api/services/news';
 import { DEFAULT_PAGE_SIZE } from 'src/constants';
+import { getObjFromQueryString } from 'src/helpers';
 import { InfiniteSearchQueryParams } from 'src/types';
 import useSWRInfinite from 'swr/infinite';
 
 export const useInfiniteNews = (params?: InfiniteSearchQueryParams) => {
   const pageSize = params?.pageSize || DEFAULT_PAGE_SIZE;
-  const q = params?.q?.trim() || '';
 
   const { data, size, setSize, error } = useSWRInfinite(
-    (index: number) => [
-      `search/news?q=${q}&page=${index}&pageSize=${pageSize}`,
-    ],
-    async () => {
-      return [];
+    (index: number = 1) => ['news', `page=${index || 1}&pageSize=${pageSize}`],
+    (_, params: string) => {
+      return newsService.getNews(getObjFromQueryString(params)) as any;
+    },
+    {
+      revalidateOnFocus: false,
     },
   );
 
@@ -25,7 +27,7 @@ export const useInfiniteNews = (params?: InfiniteSearchQueryParams) => {
   const news = useMemo(() => {
     return (
       data?.reduce((acc, curr) => {
-        return [...acc, ...curr];
+        return [...acc, ...curr.news];
       }, []) || []
     );
     // eslint-disable-next-line

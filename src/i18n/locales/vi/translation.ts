@@ -17,7 +17,7 @@ export const translations = {
   Login: 'Đăng nhập',
   Register: 'Đăng ký',
   Logout: 'Đăng xuất',
-  ResearchCenter: 'Tin tức',
+  News: 'Tin tức',
   ChangePassword: 'Đổi mật khẩu',
   VerifyUser: 'Xác thực người dùng',
 

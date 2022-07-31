@@ -3,7 +3,6 @@ export const homeTranslation = {
   Gainers: 'Thắng',
   Losers: 'Thua',
   WatchMarketMove: 'Thị trường',
-  News: 'Tin tức',
   'Financial Reports': 'Financial reports',
   ViewMore: 'Xem thêm',
   PriceChange: 'Giá thay đổi',

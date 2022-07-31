@@ -2,7 +2,7 @@ import { SETTING_TAB_KEY } from './common';
 
 export const HOME_PATH = '/';
 export const SEARCH_PATH = '/search';
-export const RESEARCH_CENTER_PATH = '/news';
+export const NEWS_PATH = '/news';
 
 export const DETAIL_PATH = '/tickers/:companyId';
 export const TICKERS_PATH = '/tickers';

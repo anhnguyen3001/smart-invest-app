@@ -32,6 +32,5 @@ export const detailTranslation = {
   NoMoreComments: 'Không còn bình luận',
   YouWantToShareSomething: 'Bạn có muốn chia sẻ gì đó?',
   ShowMore: 'Xem thêm',
-  News: 'Tin tức',
   NoComments: 'Chưa có bình luận',
 };

@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import {
   DETAIL_PATH,
   HOME_PATH,
-  RESEARCH_CENTER_PATH,
+  NEWS_PATH,
   SEARCH_PATH,
   SETTING_PATH,
   WATCH_LIST_PATH,
@@ -13,9 +13,9 @@ import { IRoute } from 'src/types';
 const Home = lazy(() =>
   import('src/pages/Home').then((mod) => ({ default: mod.Home })),
 );
-const ResearchCenter = lazy(() =>
-  import('src/pages/ResearchCenter').then((mod) => ({
-    default: mod.ResearchCenter,
+const News = lazy(() =>
+  import('src/pages/News').then((mod) => ({
+    default: mod.News,
   })),
 );
 const Detail = lazy(() =>
@@ -40,8 +40,8 @@ export const privateRoutes: IRoute[] = [
   },
   {
     exact: true,
-    path: RESEARCH_CENTER_PATH,
-    component: ResearchCenter,
+    path: NEWS_PATH,
+    component: News,
   },
   {
     exact: true,
