@@ -1,13 +1,14 @@
-import {  ForgetPasswordData } from 'src/types';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from 'src/components';
-import { useApp } from 'src/contexts';
-import { SuccessContent } from './components';
-import { PATTERN_VALIDATION } from 'src/constants';
+import { NavLink } from 'react-router-dom';
 import { authService } from 'src/api';
+import { Text } from 'src/components';
+import { PATTERN_VALIDATION, SIGNIN_PATH } from 'src/constants';
+import { useApp } from 'src/contexts';
+import { ForgetPasswordData } from 'src/types';
+import { ResetPasswordForm } from './components';
 
 export const ForgotPassword: React.FC = () => {
   const { t } = useTranslation();
@@ -58,15 +59,57 @@ export const ForgotPassword: React.FC = () => {
     }
   };
 
+  return (
+    <>
+      <div className="m-auto w-100">
+        {isDone ? (
+          <ResetPasswordForm email={form.getFieldValue('email')} />
+        ) : (
+          <Form form={form} layout="vertical" onFinish={onFinish}>
+            <h2 className="mb-32">{t('ForgotPassword')}</h2>
+
+            <Text className="mb-16">{t('SendConfirmationMail')}</Text>
+
+            <Form.Item
+              className="mb-16"
+              name="email"
+              label={t('Email')}
+              rules={rules.email}
+            >
+              <Input
+                size="large"
+                placeholder={t('EnterField', {
+                  field: t('Email').toLowerCase(),
+                })}
+              />
+            </Form.Item>
+
+            <Form.Item className="text-right mb-0">
+              <Button
+                type="primary"
+                size="large"
+                shape="round"
+                htmlType="submit"
+              >
+                {t('SendMail')}
+              </Button>
+            </Form.Item>
+          </Form>
+        )}
+      </div>
+      <Text fontWeight={500} className="text-center">
+        {t('HaveAccount')}{' '}
+        <NavLink to={SIGNIN_PATH} className="primary-color">
+          {t('SigninNow')}
+        </NavLink>
+      </Text>
+    </>
+  );
+
   return isDone ? (
-    <SuccessContent email={form.getFieldValue('email')} />
+    <ResetPasswordForm email={form.getFieldValue('email')} />
   ) : (
-    <Form
-      className="m-auto w-100"
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-    >
+    <Form form={form} layout="vertical" onFinish={onFinish}>
       <h2 className="mb-32">{t('ForgotPassword')}</h2>
 
       <Text className="mb-16">{t('SendConfirmationMail')}</Text>

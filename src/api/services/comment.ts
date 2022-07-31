@@ -3,19 +3,17 @@ import {
   GetCommentsParams,
   GetCommentsResponse,
 } from 'src/types';
-import { getCoreClient } from '../client';
+import { coreClient } from '../client';
 
 export const commentService = {
   getComments: async (
     params: GetCommentsParams,
   ): Promise<GetCommentsResponse> => {
-    const axios = getCoreClient();
-    const res = await axios.get('/comments', { params });
+    const res = await coreClient.get('/comments', { params });
     return res.data.data;
   },
 
   createComment: async (data: CreateComment): Promise<void> => {
-    const axios = getCoreClient();
-    await axios.post('/comments', { ...data, userId: 1 });
+    await coreClient.post('/comments', { ...data, userId: 1 });
   },
 };

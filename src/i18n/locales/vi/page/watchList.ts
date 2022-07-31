@@ -1,7 +1,7 @@
 export const watchListTranslation = {
   MyLibrary: 'Thư viện',
-  MyFavoriteList: 'Danh sách yêu thích',
-  FollowedList: 'Danh sách theo dõi',
+  MyFavoriteList: 'Danh mục đầu tư',
+  FollowedList: 'Danh mục theo dõi',
   By: 'Bởi',
-  CreateFavoriteList: 'Tạo danh sách yêu thích',
+  CreateFavoriteList: 'Tạo danh mục đầu tư',
 };

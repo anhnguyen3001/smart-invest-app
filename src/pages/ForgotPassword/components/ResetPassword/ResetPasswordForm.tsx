@@ -1,28 +1,38 @@
-import { ResetPasswordData } from 'src/types';
 import { Button, Form, Input, notification } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { authService } from 'src/api';
+import { CodeInput, Text } from 'src/components';
 import { PATTERN_VALIDATION, SIGNIN_PATH } from 'src/constants';
 import { useApp } from 'src/contexts';
-import { useQuery } from 'src/hooks';
-import { authService } from 'src/api';
+import { ResetPasswordData } from 'src/types';
 
-export const ResetPassword: React.FC = () => {
+interface ResetPasswordFormProps {
+  email: string;
+}
+
+export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
+  email,
+}) => {
   const { t } = useTranslation();
 
   const history = useHistory();
 
   const { setLoading } = useApp();
 
-  const query = useQuery();
-  const code = query.get('code') || '';
-
   const [form] = useForm<ResetPasswordData>();
 
   const rules = {
-    password: [
+    code: [
+      {
+        transform: (value: string) => value?.trim(),
+        required: true,
+        message: t('FieldRequired', { field: t('Code').toLowerCase() }),
+      },
+    ],
+    newPassword: [
       {
         validator: async (_: any, value: string) => {
           value = value?.trim() || '';
@@ -67,7 +77,7 @@ export const ResetPassword: React.FC = () => {
     setLoading(true);
 
     try {
-      // await authService.resetPassword(code, data);
+      await authService.resetPassword(data);
 
       notification.success({ message: t('ResetPasswordSuccess') });
 
@@ -80,20 +90,24 @@ export const ResetPassword: React.FC = () => {
   };
 
   return (
-    <Form
-      className="m-auto w-100"
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-      validateTrigger="onFinish"
-    >
+    <Form form={form} layout="vertical" onFinish={onFinish}>
       <h2 className="mb-32">{t('ResetPassword')}</h2>
+      <Text level={2} className="mb-24">
+        {t('SendResetPassMail')}
+      </Text>
+      <CodeInput
+        email={email}
+        formItemProps={{
+          name: 'code',
+          rules: rules.code,
+        }}
+      />
 
       <Form.Item
         className="mb-16"
-        name="password"
+        name="newPassword"
         label={t('NewPassword')}
-        rules={rules.password}
+        rules={rules.newPassword}
       >
         <Input.Password
           size="large"
@@ -115,7 +129,6 @@ export const ResetPassword: React.FC = () => {
           })}
         />
       </Form.Item>
-
       <Form.Item className="text-right mb-0">
         <Button type="primary" size="large" shape="round" htmlType="submit">
           {t('Reset')}

@@ -13,7 +13,7 @@ export const FavoriteLists: React.FC<FavoriteListsProps> = ({
   return (
     <Row gutter={[16, 16]}>
       {favoriteLists.map((favoriteList) => (
-        <Col key={favoriteList.id} lg={6} md={8} sm={12}>
+        <Col key={favoriteList.id} xl={4} lg={6} md={8} sm={12}>
           <FavoriteListCard favoriteList={favoriteList} />
         </Col>
       ))}

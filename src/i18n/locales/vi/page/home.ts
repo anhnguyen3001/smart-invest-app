@@ -9,7 +9,7 @@ export const homeTranslation = {
   PriceChange: 'Giá thay đổi',
   PercentChange: 'Phần trăm thay đổi',
   Ticker: 'Mã cổ phiếu',
-  FavoriteList: 'Danh sách yêu thích',
+  FavoriteList: 'Danh mục đầu tư',
   All: 'Tất cả',
   FavoriteMost: 'Yêu thích nhất',
 };

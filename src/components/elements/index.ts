@@ -8,3 +8,4 @@ export * from './ThemeSwitcher';
 export * from './Typography';
 export * from './UploadImage';
 export * from './UserAvatar';
+export * from './CodeInput';

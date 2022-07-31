@@ -1,37 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Loading } from 'src/components';
-import { HOME_PATH } from 'src/constants';
-import { useApp, useAuth } from 'src/contexts';
+import { useApp } from 'src/contexts';
 import { useAxios } from 'src/hooks/useAxios';
-import { privateRoutes, publicRoutes } from './constants';
-import { PrivateRoute } from './PrivateRoute';
+import { publicRoutes } from './constants';
+import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoute } from './PublicRoute';
 
 export const Routes: React.FC = () => {
   const { loading } = useApp();
-  const { accessToken, logout } = useAuth();
-  useAxios(accessToken, logout);
+  useAxios();
 
   return (
     <Loading loading={loading}>
       <Router>
         <Switch>
           {publicRoutes.map((route) => (
-            <PublicRoute
-              key={route.path}
-              isAuthenticated={!!accessToken}
-              {...route}
-            />
+            <PublicRoute key={route.path} {...route} />
           ))}
-          {privateRoutes.map((route) => (
-            <PrivateRoute
-              key={route.path}
-              isAuthenticated={!!accessToken}
-              {...route}
-            />
-          ))}
-          <Redirect exact to={HOME_PATH} />
+          <PrivateRoutes />
         </Switch>
       </Router>
     </Loading>

@@ -18,19 +18,6 @@
   line-height: 1.38em;
 }
 
-// Font weight
-.text {
-  &-500 {
-    font-weight: $font-weight-500;
-  }
-  &-700 {
-    font-weight: $font-weight-700;
-  }
-  &-900 {
-    font-weight: $font-weight-900;
-  }
-}
-
 .text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
