@@ -44,7 +44,7 @@ export interface VerifyOtpResponse {
 }
 
 export interface ResetPasswordData {
-  oldPassword: string;
+  code: string;
   newPassword: string;
   confirmPassword: string;
 }

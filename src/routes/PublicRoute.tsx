@@ -1,16 +1,14 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { HOME_PATH } from 'src/constants';
+import { useAuth } from 'src/contexts';
 import { PublicLayout } from 'src/layouts';
-import { RouteProps } from './common';
+import { IRoute } from 'src/types';
 
-export const PublicRoute: React.FC<RouteProps> = ({
-  isAuthenticated,
-  component,
-  ...rest
-}) => {
-  console.log('public');
-  if (isAuthenticated) {
+export const PublicRoute: React.FC<IRoute> = ({ component, ...rest }) => {
+  const { accessToken } = useAuth();
+
+  if (accessToken) {
     return <Redirect to={HOME_PATH} />;
   }
 

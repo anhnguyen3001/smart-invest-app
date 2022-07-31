@@ -22,7 +22,7 @@ export const translations = {
   VerifyUser: 'Xác thực người dùng',
 
   NotReceiveMail: 'Không nhận được thư?',
-  Resend: 'Gửi lại.',
+  Resend: 'Gửi lại',
 
   Reset: 'Đặt lại',
   Save: 'Lưu',
@@ -53,7 +53,7 @@ export const translations = {
   YourSessionIsExpired: 'Phiên làm việc của bạn đã hết hạn',
 
   Discovery: 'Trang chủ',
-  Watchlist: 'Danh sách yêu thích',
+  Watchlist: 'Danh mục đầu tư',
 
   ...homeTranslation,
   ...signinTranslation,

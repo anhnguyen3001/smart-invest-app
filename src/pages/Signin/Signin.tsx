@@ -102,7 +102,11 @@ export const Signin: React.FC = () => {
                 )}
               >
                 {t('Password')}
-                <NavLink to={FORGOT_PASSWORD_PATH} className={cx('text-500')}>
+                <NavLink
+                  to={FORGOT_PASSWORD_PATH}
+                  className={cx('text-500')}
+                  tabIndex={-1}
+                >
                   {t('ForgotPassword')}
                 </NavLink>
               </div>

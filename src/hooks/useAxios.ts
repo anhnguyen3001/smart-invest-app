@@ -1,13 +1,13 @@
 import { notification } from 'antd';
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { initBffClient, initImageClient } from 'src/api';
-import { initCoreClient } from 'src/api/client';
-import { getEnv } from 'src/helpers';
+import { bffClient } from 'src/api/client';
+import { useAuth } from 'src/contexts';
 
-export const useAxios = (accessToken: string = '', logout: () => void) => {
+export const useAxios = () => {
   const { t } = useTranslation();
+  const { accessToken, logout } = useAuth();
 
   const handleResponseError = useCallback((error: AxiosError) => {
     const response = error.response;
@@ -42,37 +42,14 @@ export const useAxios = (accessToken: string = '', logout: () => void) => {
     return request;
   };
 
-  const responseSuccessInterceptor = (response: AxiosResponse) => {
-    // Do something with response data
-    return response;
-  };
-
-  // Any status codes that falls outside the range of 2xx cause this function to trigger
   const responseErrorInterceptor = (error: AxiosError) => {
-    // Do something with response error
     handleResponseError(error);
     return Promise.reject(error);
   };
 
   useEffect(() => {
-    const imageEndpoint = getEnv('IMAGE_ENDPOINT');
-    initImageClient(imageEndpoint);
-
-    const coreEndpoint = getEnv('CORE_ENDPOINT');
-    initCoreClient(coreEndpoint);
-  }, []);
-
-  useEffect(() => {
-    const endpoint = getEnv('AUTH_ENDPOINT');
-    initBffClient(endpoint, {
-      requestInterceptors: {
-        onFulfilled: (request) => requestInterceptor(request),
-      },
-      responseInterceptors: {
-        onFulfilled: (response) => responseSuccessInterceptor(response),
-        onRejected: (response) => responseErrorInterceptor(response),
-      },
-    });
+    bffClient.interceptors.request.use(requestInterceptor);
+    bffClient.interceptors.response.use(undefined, responseErrorInterceptor);
     // eslint-disable-next-line
   }, [accessToken]);
 };

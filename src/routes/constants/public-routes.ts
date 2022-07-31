@@ -4,7 +4,6 @@ import {
   RESET_PASSWORD_PATH,
   SIGNIN_PATH,
   SIGNUP_PATH,
-  VERIFY_USER_PATH,
 } from 'src/constants';
 import { IRoute } from 'src/types';
 
@@ -13,9 +12,6 @@ const Signin = lazy(() =>
 );
 const Signup = lazy(() =>
   import('src/pages/Signup').then((mod) => ({ default: mod.Signup })),
-);
-const VerifyUser = lazy(() =>
-  import('src/pages/VerifyUser').then((mod) => ({ default: mod.VerifyUser })),
 );
 const ForgotPassword = lazy(() =>
   import('src/pages/ForgotPassword').then((mod) => ({
@@ -49,10 +45,5 @@ export const publicRoutes: IRoute[] = [
     exact: true,
     path: RESET_PASSWORD_PATH,
     component: ResetPassword,
-  },
-  {
-    exact: true,
-    path: VERIFY_USER_PATH,
-    component: VerifyUser,
   },
 ];

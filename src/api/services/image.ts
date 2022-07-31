@@ -1,10 +1,9 @@
 import { UploadImaggeResponse } from 'src/types';
-import { getImageClient } from '../client';
+import { imageClient } from '../client';
 
 export const imageService = {
   upload: async (file: string): Promise<UploadImaggeResponse> => {
-    const axios = getImageClient();
-    const res = await axios.post('/image/upload', {
+    const res = await imageClient.post('/image/upload', {
       file,
       upload_preset: 'ah_ticker',
     });

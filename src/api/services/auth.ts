@@ -9,67 +9,52 @@ import {
   VerifyOtpResponse,
   VerifyUserData,
 } from '../../types';
-import { getBffClient } from '../client';
+import { bffClient } from '../client';
 
 export const authService = {
   login: async (data: LoginData): Promise<Tokens> => {
-    const axios = getBffClient();
-    const res = await axios.post('/auth/login', data);
+    const res = await bffClient.post('/auth/login', data);
     return res.data.data;
   },
 
   signup: async (data: SignupData): Promise<void> => {
-    const axios = getBffClient();
-    await axios.post('/auth/signup', data);
+    await bffClient.post('/auth/signup', data);
   },
 
   resendMail: async (params: ResendMailData): Promise<void> => {
-    const axios = getBffClient();
-    await axios.get('/auth/resend-mail', { params });
+    await bffClient.get('/auth/resend-mail', { params });
   },
 
   verifyUser: async (params: VerifyUserData): Promise<void> => {
-    const axios = getBffClient();
-    await axios.get('/auth/verify', { params });
+    await bffClient.get('/auth/verify', { params });
   },
 
   logout: async (): Promise<void> => {
-    const axios = getBffClient();
-    await axios.get('/auth/logout');
+    await bffClient.get('/auth/logout');
   },
 
-  forgetPassword: async (data: ForgetPasswordData): Promise<void> => {
-    const axios = getBffClient();
-    await axios.post('/auth/recover/init', data);
+  forgetPassword: async (params: ForgetPasswordData): Promise<void> => {
+    await bffClient.get('/auth/recover/init', { params });
   },
 
   verifyOtp: async (params: VerifyOtpParams): Promise<VerifyOtpResponse> => {
-    const axios = getBffClient();
-    const res = await axios.get('/auth/recover/code', { params });
+    const res = await bffClient.get('/auth/recover/code', { params });
     return res.data.data;
   },
 
-  resetPassword: async (
-    token: string,
-    data: ResetPasswordData,
-  ): Promise<void> => {
-    const axios = getBffClient();
-    await axios.post('/auth/recover/password', data, {
-      headers: { Authorization: token },
-    });
+  resetPassword: async (data: ResetPasswordData): Promise<void> => {
+    await bffClient.post('/auth/recover/password', data);
   },
 
   loginFB: async (accessToken: string): Promise<Tokens> => {
-    const axios = getBffClient();
-    const res = await axios.get('/auth/facebook', {
+    const res = await bffClient.get('/auth/facebook', {
       params: { access_token: accessToken },
     });
     return res.data.data;
   },
 
   loginGoogle: async (accessToken: string): Promise<Tokens> => {
-    const axios = getBffClient();
-    const res = await axios.get('/auth/google', {
+    const res = await bffClient.get('/auth/google', {
       params: { access_token: accessToken },
     });
     return res.data.data;
