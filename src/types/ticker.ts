@@ -1,5 +1,11 @@
 import { BaseParams, PaginationResponse, Sort } from './api';
 
+export enum ExchangeEnum {
+  upcom = 'UPCOM',
+  hsx = 'HSX',
+  hnx = 'HNX',
+}
+
 export interface InfiniteSearchQueryParams {
   pageSize?: number;
   q?: string;
@@ -72,12 +78,13 @@ export interface News {
 
 export enum TickerSortBy {
   percentChange = 'percent_change',
-  totalVolume = 'totalVolume',
+  totalVolume = 'total_volume',
 }
 export interface GetTickersParams extends BaseParams {
   search?: string;
   sort?: Sort;
   sortBy?: TickerSortBy;
+  exchange?: ExchangeEnum;
 }
 
 export interface GetTickersReponse extends PaginationResponse {

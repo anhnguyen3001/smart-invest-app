@@ -63,14 +63,17 @@ export const LineChart: React.FC<LineChartProps> = ({
         tooltip: {
           ...(showDescription
             ? {
-                custom: ({ dataPointIndex, series, seriesIndex, w }) => `<div>
-            <div class="${cx('tooltip-title')}">${
-                  w.globals.categoryLabels[dataPointIndex]
-                }</div>
-            <div class="${cx('tooltip-content')}">${
-                  series[seriesIndex][dataPointIndex]
-                }</div>
-          </div>`,
+                custom: ({ dataPointIndex, series, seriesIndex, w }) => {
+                  console.log(series[seriesIndex][dataPointIndex]);
+                  return `<div>
+                <div class="${cx('tooltip-title')}">${
+                    w.globals.categoryLabels[dataPointIndex]
+                  }</div>
+                <div class="${cx('tooltip-content')}">${
+                    series[seriesIndex][dataPointIndex]
+                  }</div>
+              </div>`;
+                },
               }
             : { enabled: false }),
         },

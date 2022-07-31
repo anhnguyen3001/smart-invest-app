@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { COLOR_THEME, DEFAULT_THEME } from 'src/constants';
 
 interface CandleStickChartProps {
-  // Format: [time, o, h, l, c]
   data?: any[];
   className?: string;
   noDataText?: string;

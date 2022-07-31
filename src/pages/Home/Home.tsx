@@ -11,7 +11,7 @@ const cx = classNames.bind({});
 
 export const Home: React.FC = () => {
   const history = useHistory();
-  console.log('home');
+
   const onChangePage = (link: string) => {
     history.push(link);
   };

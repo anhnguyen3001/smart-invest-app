@@ -11,17 +11,13 @@ export const TradingData: React.FC<TradingDataProps> = ({ symbol }) => {
   const { prices, isLoading, period, setPeriod, periodOptions } =
     useTickerPrices('candlePrices', symbol);
 
-  // Format: [time, o, h, l, c][]
+  // Format: {x:time, y: [o, h, l, c]}[]
   const chartPricedata = useMemo(() => {
     return prices?.map(
-      ({ date, openPrice, maxPrice, minPrice, closePrice }) => [
-        new Date(date).getTime(),
-        // date,
-        openPrice,
-        maxPrice,
-        minPrice,
-        closePrice,
-      ],
+      ({ date, openPrice, maxPrice, minPrice, closePrice }) => ({
+        x: new Date(date).toLocaleDateString(),
+        y: [openPrice, maxPrice, minPrice, closePrice],
+      }),
     );
     // eslint-disable-next-line
   }, [JSON.stringify(prices)]);

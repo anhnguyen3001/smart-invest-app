@@ -42,9 +42,8 @@ export const PriceChart: React.FC<PriceChartProps> = ({ symbol }) => {
     };
 
     prices?.forEach(({ date, closePrice }) => {
-      // res.categories.push(new Date(date).toLocaleDateString());
-      res.categories.unshift(date);
-      res.series[0].data.unshift(closePrice);
+      res.categories.push(new Date(date).toLocaleDateString());
+      res.series[0].data.push(closePrice);
     });
 
     return res;

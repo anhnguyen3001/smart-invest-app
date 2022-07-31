@@ -37,7 +37,6 @@ export const FinancialStatementTable: React.FC<
         year,
       });
       return res;
-      // return res;
     },
   );
   const isLoadingFinancialStaments = !data && !error;

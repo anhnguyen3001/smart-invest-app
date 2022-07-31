@@ -1,12 +1,12 @@
-import { ConvertedTickerPrice, TickerPrice } from 'src/types';
+import { ConvertedTickerPrice, ExchangeEnum, TickerPrice } from 'src/types';
 
 export const getExchangePercent = (exchange: string): number => {
   switch (exchange) {
-    case 'UPCOM':
+    case ExchangeEnum.upcom:
       return 5;
-    case 'HSX':
+    case ExchangeEnum.hsx:
       return 6;
-    case 'HNX':
+    case ExchangeEnum.hnx:
       return 7;
     default:
       return 0;

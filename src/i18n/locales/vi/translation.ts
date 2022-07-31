@@ -55,6 +55,9 @@ export const translations = {
   Discovery: 'Trang chủ',
   Watchlist: 'Danh mục đầu tư',
 
+  Asc: 'Tăng dần',
+  Desc: 'Giảm dần',
+
   ...homeTranslation,
   ...signinTranslation,
   ...signupTranslation,
