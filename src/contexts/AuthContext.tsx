@@ -1,9 +1,9 @@
-import { userService } from 'src/api';
 import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { userService } from 'src/api';
 import { getAccessToken, setLS } from 'src/helpers';
-import { useApp } from './AppContext';
 import { Tokens, User } from 'src/types';
-import { mockUser } from 'src/mock';
+import { useApp } from './AppContext';
 
 interface AuthState {
   user?: User;
@@ -18,15 +18,14 @@ interface AuthState {
 const AuthStateContext = React.createContext<AuthState | null>(null);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const { t } = useTranslation();
+
   const { setLoading } = useApp();
 
   const [user, setUser] = useState<User>();
   const [accessToken, setAccessToken] = useState<string>(getAccessToken());
 
   const getUserInfo = async () => {
-    setUser(mockUser);
-    console.log(mockUser);
-    return;
     setLoading(true);
     try {
       const res = await userService.getMe();
@@ -38,8 +37,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
-    getUserInfo();
-
     if (accessToken) {
       getUserInfo();
     }

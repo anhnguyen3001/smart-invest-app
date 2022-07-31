@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
   }, [location.pathname]);
 
   const { isDesktopView } = useWindowResize();
-  console.log('desktop');
+
   const themeMenuItem = (
     <Menu.Item key="theme">
       <ThemeSwitcher />

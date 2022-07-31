@@ -4,10 +4,11 @@ import { useForm } from 'antd/lib/form/Form';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { FacebookButton, GoogleButton } from 'src/components';
 import {
   FORGOT_PASSWORD_PATH,
+  HOME_PATH,
   PATTERN_VALIDATION,
   SIGNUP_PATH,
 } from 'src/constants';
@@ -17,6 +18,8 @@ import { authService } from 'src/api';
 const cx = classNames.bind({});
 
 export const Signin: React.FC = () => {
+  const history = useHistory();
+
   const { t } = useTranslation();
   const { setLoading } = useApp();
   const { updateToken } = useAuth();
@@ -65,6 +68,7 @@ export const Signin: React.FC = () => {
       const res = await authService.login(data);
 
       updateToken(res);
+      history.push(HOME_PATH);
     } catch (e) {
     } finally {
       setLoading(false);

@@ -16,7 +16,7 @@ const App: React.FC = () => {
     changeTheme(defaultTheme);
     // eslint-disable-next-line
   }, []);
-  console.log('home');
+
   return (
     <Suspense fallback={<Loading loading={true} />}>
       <ConfigProvider locale={REGIONS[getLanguage()].antdLocale}>

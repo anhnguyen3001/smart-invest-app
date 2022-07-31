@@ -12,20 +12,10 @@ export const PrivateRoutes: React.FC = () => {
     return <Redirect to={SIGNIN_PATH} />;
   }
 
-  // useEffect(() => {
-  //   const isAuthenticated = isAuthenticatedUser();
-
-  //   if (!isAuthenticated) {
-  //     history.push(SIGNIN_PATH);
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
-
   return (
     <Switch>
       <PrivateLayout>
         {privateRoutes.map(({ component, ...rest }) => (
-          // <PrivateLayout>
           <Route
             key={rest.path}
             {...rest}
