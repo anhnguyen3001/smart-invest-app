@@ -24,7 +24,7 @@ export const detailTranslation = {
   Analysis: 'Phân tích',
   FinancialStatements: 'Báo cáo tài chính',
   SelectYear: 'Chọn năm',
-  Name: 'Loại báo cáo',
+  TypeStatment: 'Loại báo cáo',
   Period: 'Thời gian',
   View: 'Xem',
   Comments: 'Bình luận',

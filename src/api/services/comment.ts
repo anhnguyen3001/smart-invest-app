@@ -3,17 +3,17 @@ import {
   GetCommentsParams,
   GetCommentsResponse,
 } from 'src/types';
-import { coreClient } from '../client';
+import { bffClient } from '../client';
 
 export const commentService = {
   getComments: async (
     params: GetCommentsParams,
   ): Promise<GetCommentsResponse> => {
-    const res = await coreClient.get('/comments', { params });
+    const res = await bffClient.get('/comments', { params });
     return res.data.data;
   },
 
   createComment: async (data: CreateComment): Promise<void> => {
-    await coreClient.post('/comments', { ...data, userId: 1 });
+    await bffClient.post('/comments', { ...data, userId: 1 });
   },
 };

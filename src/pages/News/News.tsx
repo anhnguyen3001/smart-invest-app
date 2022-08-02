@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { InfiniteNewList, TabContent, TabPaneProps } from 'src/components';
 import { NEWS_PATH } from 'src/constants';
+import { useApp } from 'src/contexts';
 import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
 import { TickerList } from './components';
 import { useInfiniteTickers } from './hooks';
@@ -14,6 +15,7 @@ const TAB_KEY = {
 
 export const News: React.FC = () => {
   const { t } = useTranslation();
+  const { loading: appLoading } = useApp();
 
   const query = useQuery();
   const q = query.get('q') || undefined;
@@ -80,7 +82,7 @@ export const News: React.FC = () => {
   };
 
   return (
-    <Spin spinning={tickerLoading || newsLoading}>
+    <Spin spinning={!appLoading && (tickerLoading || newsLoading)}>
       <TabContent
         title={t('News')}
         defaultActiveKey={TAB_KEY.all}

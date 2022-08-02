@@ -1,9 +1,9 @@
 import { Company } from 'src/types';
-import { coreClient } from '../client';
+import { bffClient } from '../client';
 
 export const companyService = {
   getCompany: async (companyId: number): Promise<Company> => {
-    const res = await coreClient.get(`/companies/${companyId}`);
+    const res = await bffClient.get(`/companies/${companyId}`);
     return res.data.data;
   },
 };

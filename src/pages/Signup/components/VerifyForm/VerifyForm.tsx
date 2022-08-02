@@ -7,7 +7,7 @@ import { authService } from 'src/api';
 import { CodeInput, Text } from 'src/components';
 import { SIGNIN_PATH } from 'src/constants';
 import { useApp } from 'src/contexts';
-import { VerifyUserData } from 'src/types';
+import { MailEnum, VerifyUserData } from 'src/types';
 
 const cx = classNames.bind({});
 
@@ -70,6 +70,7 @@ export const VerifyForm: React.FC<VerifyFormProps> = ({ email }) => {
       <CodeInput
         email={email}
         formItemProps={{ name: 'code', rules: rules.code }}
+        type={MailEnum.verifyUser}
       />
 
       <Form.Item className={cx('text-right', 'mb-0')}>

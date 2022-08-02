@@ -26,7 +26,7 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
   const { avatar, email, username } = user || {};
 
   const [form] = Form.useForm<FormField>();
-
+  console.log(user);
   useEffect(() => {
     if (user) {
       form.setFieldsValue({

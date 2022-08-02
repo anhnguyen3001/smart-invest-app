@@ -7,7 +7,9 @@ import { authService } from 'src/api';
 import { CodeInput, Text } from 'src/components';
 import { PATTERN_VALIDATION, SIGNIN_PATH } from 'src/constants';
 import { useApp } from 'src/contexts';
-import { ResetPasswordData } from 'src/types';
+import { MailEnum, ResetPasswordData } from 'src/types';
+
+type FormProps = Omit<ResetPasswordData, 'email'>;
 
 interface ResetPasswordFormProps {
   email: string;
@@ -22,7 +24,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
   const { setLoading } = useApp();
 
-  const [form] = useForm<ResetPasswordData>();
+  const [form] = useForm<FormProps>();
 
   const rules = {
     code: [
@@ -32,7 +34,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         message: t('FieldRequired', { field: t('Code').toLowerCase() }),
       },
     ],
-    newPassword: [
+    password: [
       {
         validator: async (_: any, value: string) => {
           value = value?.trim() || '';
@@ -73,11 +75,11 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     ],
   };
 
-  const onFinish = async (data: ResetPasswordData) => {
+  const onFinish = async (data: FormProps) => {
     setLoading(true);
 
     try {
-      await authService.resetPassword(data);
+      await authService.resetPassword({ ...data, email });
 
       notification.success({ message: t('ResetPasswordSuccess') });
 
@@ -96,6 +98,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         {t('SendResetPassMail')}
       </Text>
       <CodeInput
+        type={MailEnum.resetPassword}
         email={email}
         formItemProps={{
           name: 'code',
@@ -105,14 +108,14 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
       <Form.Item
         className="mb-16"
-        name="newPassword"
+        name="password"
         label={t('NewPassword')}
-        rules={rules.newPassword}
+        rules={rules.password}
       >
         <Input.Password
           size="large"
           placeholder={t('EnterField', {
-            field: t('NewPassword').toLowerCase(),
+            field: t('password').toLowerCase(),
           })}
         />
       </Form.Item>

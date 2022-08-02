@@ -7,11 +7,13 @@ import { MailEnum } from 'src/types';
 interface CodeInputProps {
   email: string;
   formItemProps: FormItemProps;
+  type: MailEnum;
 }
 
 export const CodeInput: React.FC<CodeInputProps> = ({
   formItemProps,
   email,
+  type,
 }) => {
   const { t } = useTranslation();
 
@@ -21,7 +23,11 @@ export const CodeInput: React.FC<CodeInputProps> = ({
     setLoading(true);
 
     try {
-      await authService.resendMail({ email, type: MailEnum.resetPassword });
+      if (type === MailEnum.verifyUser) {
+        await authService.resendVerify({ email });
+      } else {
+        await authService.resendResetPassword({ email });
+      }
       notification.success({ message: t('ResendMailSuccess') });
     } catch (e) {
     } finally {

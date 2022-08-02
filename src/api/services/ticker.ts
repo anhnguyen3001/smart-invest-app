@@ -5,22 +5,22 @@ import {
   GetTickersParams,
   GetTickersReponse,
 } from 'src/types';
-import { coreClient } from '../client';
+import { bffClient } from '../client';
 
 export const tickerService = {
   getTickers: async (params: GetTickersParams): Promise<GetTickersReponse> => {
-    const res = await coreClient.get('/tickers', { params });
+    const res = await bffClient.get('/tickers', { params });
     return res.data.data;
   },
 
   getTickerPrice: async (
     params: GetTickerPriceParams,
   ): Promise<GetTickerPriceResponse> => {
-    const res = await coreClient.get('/tickers/price', { params });
+    const res = await bffClient.get('/tickers/price', { params });
     return res.data.data;
   },
 
   getPredicted: async (params: GetPredictedPriceParams): Promise<void> => {
-    await coreClient.get('/tickers/predicted-price', { params });
+    await bffClient.get('/tickers/predicted-price', { params });
   },
 };

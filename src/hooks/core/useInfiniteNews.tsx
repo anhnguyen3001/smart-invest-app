@@ -9,7 +9,7 @@ export const useInfiniteNews = (params?: InfiniteSearchQueryParams) => {
   const pageSize = params?.pageSize || DEFAULT_PAGE_SIZE;
 
   const { data, size, setSize, error } = useSWRInfinite(
-    (index: number = 1) => ['news', `page=${index || 1}&pageSize=${pageSize}`],
+    (index: number) => ['news', `page=${index + 1}&pageSize=${pageSize}`],
     (_, params: string) => {
       return newsService.getNews(getObjFromQueryString(params)) as any;
     },
@@ -17,6 +17,7 @@ export const useInfiniteNews = (params?: InfiniteSearchQueryParams) => {
       revalidateOnFocus: false,
     },
   );
+  console.log(size);
 
   const isLoading = !data && !error;
   const isEmpty = data?.[0]?.length === 0;

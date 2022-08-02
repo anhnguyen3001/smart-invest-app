@@ -21,8 +21,12 @@ export const authService = {
     await bffClient.post('/auth/signup', data);
   },
 
-  resendMail: async (params: ResendMailData): Promise<void> => {
-    await bffClient.get('/auth/resend-mail', { params });
+  resendResetPassword: async (params: ResendMailData): Promise<void> => {
+    await bffClient.get('/auth/resend/reset-password', { params });
+  },
+
+  resendVerify: async (params: ResendMailData): Promise<void> => {
+    await bffClient.get('/auth/resend/verify', { params });
   },
 
   verifyUser: async (params: VerifyUserData): Promise<void> => {

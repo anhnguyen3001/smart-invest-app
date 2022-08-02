@@ -7,6 +7,7 @@ import { Text, Paragraph } from 'src/components';
 import styles from './NewList.module.scss';
 import { COLOR_THEME, THEME } from 'src/constants';
 import { convertPagination } from 'src/helpers';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -62,13 +63,16 @@ export const NewsList: React.FC<NewsListProps> = ({
     return (
       <List.Item
         key={newsId}
-        className={cx('justify-content-space-between', 'align-items-center')}
+        className={cx(
+          'justify-content-space-between',
+          'align-items-center px-8',
+        )}
       >
         <Text type="secondary">{new Date(time).toLocaleDateString('vi')}</Text>
 
         <div style={{ width: '80%' }}>
           <Paragraph
-            className={cx('mb-4', 'ms-1')}
+            className={cx('mb-4', 'ms-1', 'cursor-pointer')}
             fontWeight={500}
             ellipsis={{ rows: 2 }}
             onClick={() => onOpenNews(path)}

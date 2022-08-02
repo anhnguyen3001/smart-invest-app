@@ -21,12 +21,11 @@ export interface VerifyUserData {
 }
 
 export enum MailEnum {
-  register = 'register',
+  verifyUser = 'verifyUser',
   resetPassword = 'resetPassword',
 }
 
 export interface ResendMailData {
-  type: MailEnum;
   email: string;
 }
 
@@ -44,7 +43,8 @@ export interface VerifyOtpResponse {
 }
 
 export interface ResetPasswordData {
+  email: string;
   code: string;
-  newPassword: string;
+  password: string;
   confirmPassword: string;
 }

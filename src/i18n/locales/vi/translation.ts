@@ -57,6 +57,11 @@ export const translations = {
 
   Asc: 'Tăng dần',
   Desc: 'Giảm dần',
+  Name: 'Tên',
+
+  Personal: 'Cá nhân',
+  Library: 'Thư viện',
+  NotFoundFavoriteList: 'Chưa có danh mục đầu tư',
 
   ...homeTranslation,
   ...signinTranslation,

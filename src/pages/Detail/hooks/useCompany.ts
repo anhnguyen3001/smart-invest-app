@@ -16,6 +16,7 @@ export const useCompany = (companyId?: string) => {
 
       return await companyService.getCompany(parseInt(companyId));
     },
+    { revalidateOnFocus: false },
   );
 
   const { exchange, price = mockTickerPrice } = (company || {}) as Company;
