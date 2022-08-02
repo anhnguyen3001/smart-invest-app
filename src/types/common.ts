@@ -25,6 +25,7 @@ export interface Theme {
   successColor: string;
   errorColor: string;
   borderColor: string;
+  lightBg: string;
 }
 
 export interface StyleProps {

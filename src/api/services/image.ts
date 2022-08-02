@@ -5,7 +5,7 @@ export const imageService = {
   upload: async (file: string): Promise<UploadImaggeResponse> => {
     const res = await imageClient.post('/image/upload', {
       file,
-      upload_preset: 'ah_ticker',
+      upload_preset: 'smart_invest',
     });
 
     return res.data;

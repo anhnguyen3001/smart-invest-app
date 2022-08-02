@@ -72,7 +72,7 @@ export const Detail: React.FC = () => {
       <Row
         justify="space-between"
         align="stretch"
-        gutter={32}
+        gutter={[32, 32]}
         className={cx('section')}
       >
         <Col lg={16} xs={24}>

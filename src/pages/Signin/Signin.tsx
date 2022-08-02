@@ -1,25 +1,19 @@
-import { LoginData } from 'src/types';
 import { Button, Divider, Form, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useHistory } from 'react-router-dom';
-import { FacebookButton, GoogleButton } from 'src/components';
+import { NavLink } from 'react-router-dom';
+import { authService } from 'src/api';
+import { FacebookButton, GoogleButton, Text } from 'src/components';
 import {
   FORGOT_PASSWORD_PATH,
-  HOME_PATH,
   PATTERN_VALIDATION,
   SIGNUP_PATH,
 } from 'src/constants';
 import { useApp, useAuth } from 'src/contexts';
-import { authService } from 'src/api';
-
-const cx = classNames.bind({});
+import { LoginData } from 'src/types';
 
 export const Signin: React.FC = () => {
-  const history = useHistory();
-
   const { t } = useTranslation();
   const { setLoading } = useApp();
   const { updateToken } = useAuth();
@@ -67,7 +61,6 @@ export const Signin: React.FC = () => {
     try {
       const res = await authService.login(data);
       updateToken(res);
-      history.push(HOME_PATH);
     } catch (e) {
     } finally {
       setLoading(false);
@@ -76,12 +69,12 @@ export const Signin: React.FC = () => {
 
   return (
     <>
-      <div className={cx('w-100', 'm-auto')}>
+      <div className="w-100 m-auto">
         <Form form={form} layout="vertical" onFinish={onFinish}>
-          <h2 className={cx('mb-32')}>{t('WelcomeLogin')}</h2>
+          <h2 className="mb-32">{t('WelcomeLogin')}</h2>
 
           <Form.Item
-            className={cx('mb-16')}
+            className="mb-16"
             name="email"
             label={t('Email')}
             rules={rules.email}
@@ -94,20 +87,14 @@ export const Signin: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            className={cx('mb-16')}
+            className="mb-16"
             name="password"
             label={
-              <div
-                className={cx(
-                  'd-flex',
-                  'justify-content-between',
-                  'align-items-center',
-                )}
-              >
+              <div className="d-flex justify-content-between align-items-center">
                 {t('Password')}
                 <NavLink
                   to={FORGOT_PASSWORD_PATH}
-                  className={cx('text-500')}
+                  className="text-500"
                   tabIndex={-1}
                 >
                   {t('ForgotPassword')}
@@ -125,7 +112,7 @@ export const Signin: React.FC = () => {
             />
           </Form.Item>
           <Button
-            className={cx('ml-auto', 'd-block')}
+            className={'ml-auto d-block'}
             type="primary"
             size="large"
             shape="round"
@@ -138,7 +125,7 @@ export const Signin: React.FC = () => {
         <Divider plain>{t('Or')}</Divider>
 
         <div
-          className={cx('d-flex', 'flex-column', 'align-items-center')}
+          className="d-flex flex-column align-items-center"
           style={{ rowGap: 16 }}
         >
           <FacebookButton />
@@ -146,12 +133,12 @@ export const Signin: React.FC = () => {
         </div>
       </div>
 
-      <div className={cx('text-500', 'text-center')}>
+      <Text fontWeight={500} className="text-center">
         {t('NotHaveAccount')}{' '}
-        <NavLink to={SIGNUP_PATH} className={cx('text-500', 'primary-color')}>
+        <NavLink to={SIGNUP_PATH} className="primary-color">
           {t('SignupNow')}
         </NavLink>
-      </div>
+      </Text>
     </>
   );
 };

@@ -5,6 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, Paragraph } from 'src/components';
 import styles from './NewList.module.scss';
+import { COLOR_THEME, THEME } from 'src/constants';
 
 const cx = classNames.bind(styles);
 
@@ -80,6 +81,7 @@ export const NewsList: React.FC<NewsListProps> = ({
 
   return (
     <List
+      style={{ backgroundColor: COLOR_THEME[THEME.DARK].bgComponent }}
       loading={loading}
       className={cx(`news--${size}`)}
       size="large"

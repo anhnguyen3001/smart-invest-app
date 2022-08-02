@@ -1,98 +1,78 @@
-import classNames from 'classnames/bind';
+import Chart from '@qognicafinance/react-lightweight-charts';
 import React from 'react';
-import Chart from 'react-apexcharts';
 import { useThemeSwitcher } from 'react-css-theme-switcher';
 import { useTranslation } from 'react-i18next';
-import { COLOR_THEME, DEFAULT_THEME } from 'src/constants';
-import styles from './LineChart.module.scss';
-
-const cx = classNames.bind(styles);
+import { Text } from 'src/components/elements';
+import { COLOR_THEME, DEFAULT_THEME, THEME } from 'src/constants';
+import { TickerPrice } from 'src/types';
 
 export interface LineChartData {
-  series: { name: string; data: number[] }[];
-  categories: (string | number)[];
-  customColors?: string[];
   noDataText?: string;
+  prices?: TickerPrice[];
+  loading?: boolean;
 }
 
-interface LineChartProps extends LineChartData {
-  showDescription?: boolean;
-}
+interface LineChartProps extends LineChartData {}
 
-export const LineChart: React.FC<LineChartProps> = ({
-  series,
-  categories,
-  showDescription = false,
-  customColors,
-  noDataText,
-}) => {
-  const { t } = useTranslation();
-  const { currentTheme = DEFAULT_THEME } = useThemeSwitcher();
+export const LineChart: React.FC<LineChartProps> = React.memo(
+  ({ noDataText, prices = [], loading }) => {
+    const { t } = useTranslation();
+    const { currentTheme = DEFAULT_THEME } = useThemeSwitcher();
 
-  const getLabelStyles = () => {
-    if (showDescription) {
-      return {
-        style: {
-          colors: COLOR_THEME[currentTheme].textSecondary,
-        },
-      };
+    const totalData = prices.length;
+
+    const containerStyle = { maxHeight: 400, minHeight: 300 };
+
+    if (!loading && !totalData) {
+      return (
+        <div
+          style={{
+            ...containerStyle,
+            backgroundColor: COLOR_THEME[currentTheme].lightBg,
+            borderRadius: 4,
+          }}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <Text type="secondary" fontWeight={700}>
+            {noDataText || t('NoDataToDisplay')}
+          </Text>
+        </div>
+      );
     }
-    return { show: false };
-  };
 
-  return (
-    <Chart
-      series={series}
-      options={{
-        chart: { fontFamily: 'Roboto, sans-serif' },
-        colors: customColors || [COLOR_THEME[currentTheme].primaryColor],
-        xaxis: {
-          categories: categories,
-          tooltip: {
-            enabled: false,
-          },
-          labels: getLabelStyles(),
-          ...(!showDescription && {
-            axisTicks: { show: false },
-            axisBorder: { show: false },
-          }),
-        },
-        yaxis: {
-          labels: getLabelStyles(),
-        },
-        tooltip: {
-          ...(showDescription
-            ? {
-                custom: ({ dataPointIndex, series, seriesIndex, w }) => {
-                  console.log(series[seriesIndex][dataPointIndex]);
-                  return `<div>
-                <div class="${cx('tooltip-title')}">${
-                    w.globals.categoryLabels[dataPointIndex]
-                  }</div>
-                <div class="${cx('tooltip-content')}">${
-                    series[seriesIndex][dataPointIndex]
-                  }</div>
-              </div>`;
-                },
-              }
-            : { enabled: false }),
-        },
-        dataLabels: { enabled: false },
-        grid: {
-          ...(showDescription
-            ? {
-                borderColor: COLOR_THEME[currentTheme].borderColor,
-              }
-            : { show: false }),
-        },
-        noData: {
-          text: noDataText || t('NoDataToDisplay'),
-          style: {
-            color: COLOR_THEME[currentTheme].textPrimary,
-            fontSize: '16px',
-          },
-        },
-      }}
-    />
-  );
-};
+    return (
+      <div style={containerStyle}>
+        <Chart
+          autoHeight
+          autoWidth
+          darkTheme={currentTheme === THEME.DARK}
+          options={{
+            localization: { locale: 'vi-VI' },
+            layout: {
+              backgroundColor: COLOR_THEME[currentTheme].lightBg,
+              fontFamily: 'Roboto, sans-serif',
+              textColor: COLOR_THEME[currentTheme].textPrimary,
+              fontSize: 12,
+            },
+          }}
+          lineSeries={[
+            {
+              data: prices?.map(({ closePrice, date }) => ({
+                value: closePrice,
+                time: date,
+              })),
+              options: {
+                noDataText: noDataText || 'Không có dữ liệu',
+                color:
+                  prices?.[totalData - 1]?.closePrice >
+                  prices?.[totalData - 2]?.closePrice
+                    ? COLOR_THEME[currentTheme].successColor
+                    : COLOR_THEME[currentTheme].errorColor,
+              },
+            },
+          ]}
+        />
+      </div>
+    );
+  },
+);

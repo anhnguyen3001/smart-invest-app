@@ -1,7 +1,7 @@
 import { Button, Spin } from 'antd';
 import classNames from 'classnames/bind';
-import React, { useMemo } from 'react';
-import { LineChart, LineChartData, Text } from 'src/components';
+import React from 'react';
+import { LineChart, Text } from 'src/components';
 import { useTickerPrices } from '../../hooks';
 import styles from './PriceChart.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -35,21 +35,6 @@ export const PriceChart: React.FC<PriceChartProps> = ({ symbol }) => {
     });
   };
 
-  const chartProps: LineChartData = useMemo(() => {
-    const res: LineChartData = {
-      categories: [],
-      series: [{ name: 'price', data: [] }],
-    };
-
-    prices?.forEach(({ date, closePrice }) => {
-      res.categories.push(new Date(date).toLocaleDateString());
-      res.series[0].data.push(closePrice);
-    });
-
-    return res;
-    // eslint-disable-next-line
-  }, [JSON.stringify(prices), period]);
-
   return (
     <Spin spinning={isLoading} className={cx('container')}>
       <div className={cx('d-flex', 'justify-content-between')}>
@@ -61,7 +46,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({ symbol }) => {
         </div>
       </div>
 
-      <LineChart showDescription {...chartProps} />
+      <LineChart loading={isLoading} prices={prices} />
     </Spin>
   );
 };

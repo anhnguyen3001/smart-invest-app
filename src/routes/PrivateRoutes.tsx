@@ -5,7 +5,7 @@ import { useAuth } from 'src/contexts';
 import { PrivateLayout } from 'src/layouts';
 import { privateRoutes } from './constants';
 
-export const PrivateRoutes: React.FC = () => {
+export const PrivateRoutes: React.FC = React.memo(() => {
   const { accessToken } = useAuth();
 
   if (!accessToken) {
@@ -27,4 +27,4 @@ export const PrivateRoutes: React.FC = () => {
       <Redirect to={HOME_PATH} />
     </Switch>
   );
-};
+});

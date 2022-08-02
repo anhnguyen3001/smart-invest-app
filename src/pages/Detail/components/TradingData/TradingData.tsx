@@ -42,10 +42,16 @@ export const TradingData: React.FC<TradingDataProps> = ({ symbol }) => {
 
   return (
     <>
-      <div className="d-flex justify-content-end">{renderPeriodOptions()}</div>
+      <div className="d-flex justify-content-end mb-16">
+        {renderPeriodOptions()}
+      </div>
 
       <Spin spinning={isLoading}>
-        <CandleStickChart data={chartPricedata} />
+        <CandleStickChart
+          loading={isLoading}
+          prices={prices}
+          data={chartPricedata}
+        />
       </Spin>
     </>
   );

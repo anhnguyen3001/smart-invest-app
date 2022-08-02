@@ -17,6 +17,7 @@ export const COLOR_THEME: {
     successColor: '#539067',
     errorColor: '#f46868',
     borderColor: '#3d3c41',
+    lightBg: '#24262e',
   },
   [THEME.LIGHT]: {
     bgComponent: '#f2f2f7',
@@ -26,5 +27,6 @@ export const COLOR_THEME: {
     successColor: '#539067',
     errorColor: '#f46868',
     borderColor: '#3d3c41',
+    lightBg: '#f2f2f7',
   },
 };

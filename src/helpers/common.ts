@@ -50,3 +50,7 @@ export const formatNumber = (val: number): string => {
 export const getDateFromTime = (time: number): string => {
   return new Date(time * 1000).toLocaleString();
 };
+
+export const removeTimeFromDate = (date: string): string => {
+  return new Date(date).toISOString().split('T')[0];
+};
