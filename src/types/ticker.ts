@@ -39,14 +39,6 @@ export interface ConvertedTickerPrice extends TickerPrice {
   floorPrice?: number;
 }
 
-export interface IOHLC {
-  openPrice: number;
-  highPrice: number;
-  lowPrice: number;
-  closePrice: number;
-  date: string;
-}
-
 export interface Company {
   companyId: number;
   name: string;

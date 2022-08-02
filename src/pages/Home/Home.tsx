@@ -3,6 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { NewsList } from 'src/components';
 import { NEWS_PATH } from 'src/constants';
+import { useApp } from 'src/contexts';
 import { useNews } from 'src/hooks';
 import { MarketTrend, WatchList } from './components';
 
@@ -10,6 +11,7 @@ export const Home: React.FC = () => {
   const history = useHistory();
 
   const { news, loading } = useNews();
+  const { loading: appLoading } = useApp();
 
   return (
     <div>
@@ -24,7 +26,7 @@ export const Home: React.FC = () => {
           </Col>
           <Col md={10} xs={24}>
             <NewsList
-              loading={loading}
+              loading={!appLoading && loading}
               showHeader
               news={news}
               onSeeMore={() => history.push(NEWS_PATH)}

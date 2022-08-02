@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TabContent, TabPaneProps } from 'src/components';
-import { SETTING_PATH, PERSONAL_TAB_KEY } from 'src/constants';
+import { LIBRARY_PATH, PERSONAL_TAB_KEY } from 'src/constants';
 import { ChangePassword, Library, UpdateProfile } from './components';
 import styles from './Setting.module.scss';
 
@@ -34,7 +34,7 @@ export const Setting: React.FC = () => {
       title={t('Personal')}
       tabPanes={tabPanes}
       defaultActiveKey={PERSONAL_TAB_KEY.updateProfile}
-      rootPath={SETTING_PATH}
+      rootPath={LIBRARY_PATH}
     />
   );
 };

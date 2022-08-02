@@ -1,5 +1,5 @@
 import { News, Pagination } from 'src/types';
-import { Button, List } from 'antd';
+import { Button, List, Spin } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ export const NewsList: React.FC<NewsListProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  if (!news?.length) return null;
+  if (!news?.length && !loading) return null;
 
   const onOpenNews = (link: string) => {
     window.open(link);
@@ -85,22 +85,23 @@ export const NewsList: React.FC<NewsListProps> = ({
   };
 
   return (
-    <List
-      style={{ backgroundColor: COLOR_THEME[THEME.DARK].bgComponent }}
-      loading={loading}
-      className={cx(`news--${size}`)}
-      size="large"
-      {...(size === 'default' && { bordered: true })}
-      header={showHeader ? renderHeader() : undefined}
-      rowKey="newsId"
-      dataSource={news}
-      renderItem={renderItem}
-      {...(pagination && {
-        pagination: {
-          ...convertPagination(pagination),
-          onChange: onChangePagination,
-        },
-      })}
-    />
+    <Spin spinning={loading}>
+      <List
+        style={{ backgroundColor: COLOR_THEME[THEME.DARK].bgComponent }}
+        className={cx(`news--${size}`)}
+        size="large"
+        {...(size === 'default' && { bordered: true })}
+        header={showHeader ? renderHeader() : undefined}
+        rowKey="newsId"
+        dataSource={news}
+        renderItem={renderItem}
+        {...(pagination && {
+          pagination: {
+            ...convertPagination(pagination),
+            onChange: onChangePagination,
+          },
+        })}
+      />
+    </Spin>
   );
 };

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { LocaleSelection, ThemeSwitcher } from 'src/components';
-import { NEWS_PATH, HOME_PATH, WATCH_LIST_PATH } from 'src/constants';
+import { NEWS_PATH, HOME_PATH, LIBRARY_PATH } from 'src/constants';
 import { useWindowResize } from 'src/hooks';
 import { DesktopMenu, MobileMenu } from './components';
 import style from './Header.module.scss';
@@ -20,8 +20,8 @@ export const Header: React.FC = () => {
 
     if (isMatchRoute(NEWS_PATH)) {
       setActiveMenuItem(NEWS_PATH);
-    } else if (isMatchRoute(WATCH_LIST_PATH)) {
-      setActiveMenuItem(WATCH_LIST_PATH);
+    } else if (isMatchRoute(LIBRARY_PATH)) {
+      setActiveMenuItem(LIBRARY_PATH);
     } else if (isMatchRoute(HOME_PATH)) {
       setActiveMenuItem(HOME_PATH);
     } else {

@@ -4,8 +4,7 @@ import {
   HOME_PATH,
   NEWS_PATH,
   SEARCH_PATH,
-  SETTING_PATH,
-  WATCH_LIST_PATH,
+  LIBRARY_PATH,
 } from 'src/constants';
 import { IRoute } from 'src/types';
 
@@ -26,9 +25,6 @@ const Search = lazy(() =>
 );
 const Setting = lazy(() =>
   import('src/pages/Setting').then((mod) => ({ default: mod.Setting })),
-);
-const WatchList = lazy(() =>
-  import('src/pages/WatchList').then((mod) => ({ default: mod.WatchList })),
 );
 
 export const privateRoutes: IRoute[] = [
@@ -55,12 +51,7 @@ export const privateRoutes: IRoute[] = [
   },
   {
     exact: true,
-    path: SETTING_PATH,
+    path: LIBRARY_PATH,
     component: Setting,
-  },
-  {
-    exact: true,
-    path: WATCH_LIST_PATH,
-    component: WatchList,
   },
 ];

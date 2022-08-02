@@ -17,10 +17,14 @@ export interface GetFavoriteListsResponse extends PaginationResponse {
   favoriteLists: FavoriteList[];
 }
 
-export interface UpsertFavoriteListRequest {
-  name: string;
+export interface GetFavoriteListResponse {
+  favoriteList: FavoriteList;
 }
 
-export interface UpsertFavoriteListResponse {
-  id: number;
+export interface AddFavoriteTickerResponse {
+
+}
+
+export interface UpsertFavoriteListRequest {
+  name: string;
 }

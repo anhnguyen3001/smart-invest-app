@@ -35,3 +35,7 @@ export interface StyleProps {
 export interface BaseEntity {
   createdAt?: string;
 }
+
+export interface UpsertResponse {
+  id: number;
+}

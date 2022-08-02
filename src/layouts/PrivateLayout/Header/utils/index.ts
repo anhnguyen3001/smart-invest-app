@@ -1,5 +1,5 @@
 import React from 'react';
-import { NEWS_PATH, HOME_PATH, WATCH_LIST_PATH } from 'src/constants';
+import { NEWS_PATH, HOME_PATH, LIBRARY_PATH } from 'src/constants';
 
 export interface MenuHeaderProps {
   activeMenuItem: string;
@@ -23,7 +23,7 @@ export const getNavbarLinks = (
     title: t('News'),
   },
   {
-    to: WATCH_LIST_PATH,
+    to: LIBRARY_PATH,
     title: t('Watchlist'),
   },
 ];

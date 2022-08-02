@@ -7,10 +7,9 @@ export const NEWS_PATH = '/news';
 export const DETAIL_PATH = '/tickers/:companyId';
 export const TICKERS_PATH = '/tickers';
 
-export const WATCH_LIST_PATH = '/library';
-export const SETTING_PATH = '/setting';
-export const CHANGE_PASSWORD_PATH = `/setting?tab=${PERSONAL_TAB_KEY.changePassword}`;
-export const UPDATE_PROFILE_PATH = `/setting?tab=${PERSONAL_TAB_KEY.updateProfile}`;
+export const LIBRARY_PATH = '/library';
+export const CHANGE_PASSWORD_PATH = `${LIBRARY_PATH}?tab=${PERSONAL_TAB_KEY.changePassword}`;
+export const UPDATE_PROFILE_PATH = `${LIBRARY_PATH}?tab=${PERSONAL_TAB_KEY.updateProfile}`;
 
 export const SIGNIN_PATH = '/signin';
 export const SIGNUP_PATH = '/signup';
