@@ -2,7 +2,7 @@ import { Company } from 'src/types';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import classNames from 'classnames/bind';
 import React from 'react';
-import { Text } from 'src/components';
+import { Tag, Text } from 'src/components';
 import { getPriceColor } from 'src/helpers';
 import styles from './TickerInfo.module.scss';
 
@@ -46,12 +46,14 @@ export const TickerInfo: React.FC<TickerInfoProps> = ({
       <div className={cx('d-flex', 'flex-wrap', 'mb-24')}>
         {/* <TagItem text={major} type="secondary" />
         <TagItem text={exchange} type="secondary" /> */}
-        <Text fontWeight={500} className={cx('tag', 'mr-16', 'py-8', 'px-16')}>
+        <Tag className="mr-16" text={major} />
+        <Tag text={exchange} />
+        {/* <Text fontWeight={500} className={cx('tag', 'mr-16', 'py-8', 'px-16')}>
           {major}
         </Text>
         <Text fontWeight={500} className={cx('tag', 'py-8', 'px-16')}>
           {exchange}
-        </Text>
+        </Text> */}
       </div>
 
       <h1 className={cx('mb-8', 'primary-color')}>{symbol}</h1>

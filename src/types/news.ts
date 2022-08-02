@@ -6,6 +6,7 @@ export interface News {
   time: string;
   path: string;
   symbol: string;
+  content?: string;
 }
 
 export interface GetNewsParams extends BaseParams {

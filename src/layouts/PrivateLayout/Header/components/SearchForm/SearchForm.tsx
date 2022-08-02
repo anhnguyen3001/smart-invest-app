@@ -36,7 +36,6 @@ export const SearchForm: React.FC<SearchFormProps> = ({
 
   const onSubmit = (values: SearchFormFields) => {
     const q = values.q?.trim();
-    console.log('q ', q);
     if (q) {
       history.push(`${SEARCH_PATH}?q=${q}`);
     }

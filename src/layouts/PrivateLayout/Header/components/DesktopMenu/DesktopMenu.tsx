@@ -7,6 +7,7 @@ import { UserAvatar } from 'src/components';
 import {
   CHANGE_PASSWORD_PATH,
   HOME_PATH,
+  LIBRARY_PATH,
   UPDATE_PROFILE_PATH,
 } from 'src/constants';
 import { useAuth } from 'src/contexts';
@@ -37,8 +38,8 @@ export const DesktopMenu: React.FC<MenuHeaderProps> = ({
           </NavLink>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="changePassword">
-          <NavLink to={CHANGE_PASSWORD_PATH}>{t('ChangePassword')}</NavLink>
+        <Menu.Item key="library">
+          <NavLink to={LIBRARY_PATH}>{t('Personal')}</NavLink>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout" onClick={logout}>

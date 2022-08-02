@@ -42,7 +42,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const updateToken = (tokens: Tokens) => {
     setAccessToken(tokens.accessToken);
-    console.log(tokens.accessToken)
     setLS('user', JSON.stringify(tokens));
   };
 

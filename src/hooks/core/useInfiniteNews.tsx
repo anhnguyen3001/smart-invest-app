@@ -17,7 +17,6 @@ export const useInfiniteNews = (params?: InfiniteSearchQueryParams) => {
       revalidateOnFocus: false,
     },
   );
-  console.log(size);
 
   const isLoading = !data && !error;
   const isEmpty = data?.[0]?.length === 0;

@@ -22,8 +22,4 @@ export const getNavbarLinks = (
     to: NEWS_PATH,
     title: t('News'),
   },
-  {
-    to: LIBRARY_PATH,
-    title: t('Watchlist'),
-  },
 ];

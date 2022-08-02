@@ -33,7 +33,7 @@ export const Setting: React.FC = () => {
     <TabContent
       title={t('Personal')}
       tabPanes={tabPanes}
-      defaultActiveKey={PERSONAL_TAB_KEY.updateProfile}
+      defaultActiveKey={PERSONAL_TAB_KEY.library}
       rootPath={LIBRARY_PATH}
     />
   );

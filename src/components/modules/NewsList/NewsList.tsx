@@ -1,13 +1,14 @@
 import { News, Pagination } from 'src/types';
 import { Button, List, Spin } from 'antd';
 import classNames from 'classnames/bind';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, Paragraph } from 'src/components';
 import styles from './NewList.module.scss';
 import { COLOR_THEME, THEME } from 'src/constants';
 import { convertPagination } from 'src/helpers';
 import { Link } from 'react-router-dom';
+import { NewsModal } from '../NewsModal';
 
 const cx = classNames.bind(styles);
 
@@ -30,12 +31,15 @@ export const NewsList: React.FC<NewsListProps> = ({
   pagination,
   onChangePagination,
 }) => {
+  const [selectedNews, setSelectedNews] = useState<News>();
   const { t } = useTranslation();
 
   if (!news?.length && !loading) return null;
 
-  const onOpenNews = (link: string) => {
-    window.open(link);
+  const onOpenNews = (news: News) => {
+    if (!news.content) {
+      setSelectedNews(news);
+    } else window.open(news.path);
   };
 
   const renderHeader = () => {
@@ -59,49 +63,56 @@ export const NewsList: React.FC<NewsListProps> = ({
     return title;
   };
 
-  const renderItem = ({ newsId, title, path, time }: News) => {
+  const renderItem = (news: News) => {
+    const { newsId, title, time } = news;
     return (
       <List.Item
         key={newsId}
-        className={cx(
-          'justify-content-space-between',
-          'align-items-center px-8',
-        )}
+        className={cx('align-items-start', 'px-8', 'item')}
       >
         <Text type="secondary">{new Date(time).toLocaleDateString('vi')}</Text>
 
-        <div style={{ width: '80%' }}>
-          <Paragraph
-            className={cx('mb-4', 'ms-1', 'cursor-pointer')}
-            fontWeight={500}
-            ellipsis={{ rows: 2 }}
-            onClick={() => onOpenNews(path)}
-          >
-            {title}
-          </Paragraph>
-        </div>
+        <Paragraph
+          className="mb-0 cursor-pointer"
+          style={{ width: '80%' }}
+          fontWeight={500}
+          ellipsis={{ rows: 2 }}
+          onClick={() => onOpenNews(news)}
+        >
+          {title}
+        </Paragraph>
       </List.Item>
     );
   };
 
   return (
-    <Spin spinning={loading}>
-      <List
-        style={{ backgroundColor: COLOR_THEME[THEME.DARK].bgComponent }}
-        className={cx(`news--${size}`)}
-        size="large"
-        {...(size === 'default' && { bordered: true })}
-        header={showHeader ? renderHeader() : undefined}
-        rowKey="newsId"
-        dataSource={news}
-        renderItem={renderItem}
-        {...(pagination && {
-          pagination: {
-            ...convertPagination(pagination),
-            onChange: onChangePagination,
-          },
-        })}
+    <>
+      <Spin spinning={!!loading}>
+        <List
+          style={{
+            backgroundColor: COLOR_THEME[THEME.DARK].bgComponent,
+            borderRadius: 8,
+          }}
+          className={cx(`news--${size}`)}
+          size="large"
+          {...(size === 'default' && { bordered: true })}
+          header={showHeader ? renderHeader() : undefined}
+          rowKey="newsId"
+          dataSource={news}
+          renderItem={renderItem}
+          {...(pagination && {
+            pagination: {
+              ...convertPagination(pagination),
+              onChange: onChangePagination,
+            },
+          })}
+        />
+      </Spin>
+      <NewsModal
+        news={selectedNews}
+        visible={!!selectedNews}
+        onClose={() => setSelectedNews(undefined)}
       />
-    </Spin>
+    </>
   );
 };

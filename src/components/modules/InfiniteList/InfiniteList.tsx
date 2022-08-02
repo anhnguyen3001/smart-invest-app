@@ -31,7 +31,6 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
   };
 
   if (isEmpty) return <Empty />;
-
   return (
     <div ref={ref} className={className}>
       <InfiniteScroll

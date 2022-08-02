@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { InfiniteNewList, TabContent, TabPaneProps } from 'src/components';
 import { NEWS_PATH } from 'src/constants';
 import { useApp } from 'src/contexts';
-import { useInfiniteNews, useQuery, useInfiniteTickers } from 'src/hooks';
-import { TickerList } from './components';
+import { useInfiniteNews, useQuery } from 'src/hooks';
+import { ReadLayout } from './components';
 
 const TAB_KEY = {
   all: 'all',
@@ -18,15 +18,6 @@ export const News: React.FC = () => {
 
   const query = useQuery();
   const q = query.get('q') || undefined;
-
-  const {
-    tickers,
-    isLoading: tickerLoading,
-    hasMore: tickerHasMore,
-    isEmpty: tickerIsEmpty,
-    page: tickerPage,
-    setPage: setTickerPage,
-  } = useInfiniteTickers({ q, pageSize: 12 });
 
   const {
     news,
@@ -53,7 +44,6 @@ export const News: React.FC = () => {
                 setPage: setNewsPage,
               }}
               newListProps={{
-                size: 'large',
                 news,
               }}
             />
@@ -65,14 +55,7 @@ export const News: React.FC = () => {
         key: TAB_KEY.favoriteList,
         children: (
           <>
-            <TickerList
-              tickers={tickers}
-              isEmpty={tickerIsEmpty}
-              hasMore={tickerHasMore}
-              loading={tickerLoading}
-              page={tickerPage}
-              setPage={setTickerPage}
-            />
+            <div></div>
           </>
         ),
       },
@@ -81,7 +64,7 @@ export const News: React.FC = () => {
   };
 
   return (
-    <Spin spinning={!appLoading && (tickerLoading || newsLoading)}>
+    <Spin spinning={!appLoading && newsLoading}>
       <TabContent
         title={t('News')}
         defaultActiveKey={TAB_KEY.all}
