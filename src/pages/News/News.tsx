@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { InfiniteNewList, TabContent, TabPaneProps } from 'src/components';
 import { NEWS_PATH } from 'src/constants';
 import { useApp } from 'src/contexts';
-import { useInfiniteNews, useQuery, useWindowResize } from 'src/hooks';
+import { useInfiniteNews, useQuery, useInfiniteTickers } from 'src/hooks';
 import { TickerList } from './components';
-import { useInfiniteTickers } from './hooks';
 
 const TAB_KEY = {
   all: 'all',
