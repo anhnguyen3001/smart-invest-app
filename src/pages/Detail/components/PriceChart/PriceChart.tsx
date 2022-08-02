@@ -1,12 +1,8 @@
 import { Button, Spin } from 'antd';
-import classNames from 'classnames/bind';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { LineChart, Text } from 'src/components';
 import { useTickerPrices } from '../../hooks';
-import styles from './PriceChart.module.scss';
-import { useTranslation } from 'react-i18next';
-
-const cx = classNames.bind(styles);
 
 interface PriceChartProps {
   symbol?: string;
@@ -36,12 +32,12 @@ export const PriceChart: React.FC<PriceChartProps> = ({ symbol }) => {
   };
 
   return (
-    <Spin spinning={isLoading} className={cx('container')}>
-      <div className={cx('d-flex', 'justify-content-between')}>
+    <Spin spinning={isLoading}>
+      <div className="d-flex justify-content-between">
         <Text level={1} fontWeight={500}>
           {t('PriceChart')}
         </Text>
-        <div className={cx('d-flex', 'justify-content-end', 'mb-16')}>
+        <div className="d-flex justify-content-end mb-16">
           {renderPeriodOptions()}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import { AxiosError, AxiosRequestConfig } from 'axios';
+import { AxiosError } from 'axios';
 import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { bffClient } from 'src/api/client';
@@ -35,21 +35,17 @@ export const useAxios = () => {
     // eslint-disable-next-line
   }, []);
 
-  const requestInterceptor = (request: AxiosRequestConfig) => {
-    if (request.headers && accessToken) {
-      request.headers.authorization = `Bearer ${accessToken}`;
-    }
-    return request;
-  };
-
-  const responseErrorInterceptor = (error: AxiosError) => {
-    handleResponseError(error);
-    return Promise.reject(error);
-  };
-
   useEffect(() => {
-    bffClient.interceptors.request.use(requestInterceptor);
-    bffClient.interceptors.response.use(undefined, responseErrorInterceptor);
+    bffClient.interceptors.request.use((request) => {
+      if (request.headers && accessToken) {
+        request.headers.authorization = `Bearer ${accessToken}`;
+      }
+      return request;
+    });
+    bffClient.interceptors.response.use(undefined, (error) => {
+      handleResponseError(error);
+      return Promise.reject(error);
+    });
     // eslint-disable-next-line
   }, [accessToken]);
 };

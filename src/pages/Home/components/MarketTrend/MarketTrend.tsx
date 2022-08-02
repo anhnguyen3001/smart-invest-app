@@ -2,10 +2,8 @@ import { Select, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { tickerService } from 'src/api';
-import { mockTickers } from 'src/mock';
-import { ExchangeEnum, Sort, Ticker } from 'src/types';
-import useSWR from 'swr';
+import { useTickers } from 'src/hooks';
+import { ExchangeEnum, Sort, TickerSortBy } from 'src/types';
 import { RankingTable } from '../RankingTable';
 import styles from './MarketTrend.module.scss';
 
@@ -27,23 +25,10 @@ export const MarketTrend: React.FC = () => {
   const [sort, setSort] = useState(Sort.desc);
   const [exchange, setExchange] = useState(ExchangeEnum.upcom);
 
-  const { data: tickerData, error: tickerLoading } = useSWR(
-    ['tickers', sort, exchange],
-    async () => {
-      const res = await tickerService.getTickers({
-        sort,
-        exchange,
-      });
-      return res;
-    },
-    { revalidateOnFocus: false },
-  );
-
-  const { data } = useSWR(['ranking'], async () => {
-    return {
-      tickerGainers: mockTickers,
-      tickerLosers: mockTickers,
-    };
+  const { tickers, isLoading } = useTickers({
+    exchange,
+    sortBy: TickerSortBy.percentChange,
+    sort,
   });
 
   const tabContent = useMemo(() => {
@@ -72,15 +57,15 @@ export const MarketTrend: React.FC = () => {
               onChange={setExchange}
             />
           </div>
-          <RankingTable tickers={data?.tickerGainers} />
+          <RankingTable tickers={tickers} />
         </TabPane>
         <TabPane key={TAB_KEYS.favorite} tab={t('FavoriteMost')}>
-          <RankingTable tickers={data?.tickerGainers} />
+          <RankingTable tickers={tickers} />
         </TabPane>
       </>
     );
     // eslint-disable-next-line
-  }, [JSON.stringify(data)]);
+  }, [JSON.stringify(tickers)]);
 
   return (
     <>

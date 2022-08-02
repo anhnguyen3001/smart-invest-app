@@ -2,16 +2,13 @@ import { tickerService } from 'src/api';
 import { GetTickersParams, Pagination, Ticker } from 'src/types';
 import useSWR from 'swr';
 
-export const useTickers = (
-  params: GetTickersParams,
-  isAllowFetchData: boolean = true,
-) => {
+export const useTickers = (params: GetTickersParams) => {
   const { data, error } = useSWR(
     ['tickers', JSON.stringify(params)],
     async () => {
-      if (!isAllowFetchData) return;
       return await tickerService.getTickers(params);
     },
+    { revalidateOnFocus: false },
   );
 
   const isLoading = !data && !error;

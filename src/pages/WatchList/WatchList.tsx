@@ -1,32 +1,28 @@
 import { Button, Spin } from 'antd';
-import classNames from 'classnames/bind';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { mockFavoriteLists } from 'src/mock';
+import { GetFavoriteListsParams } from 'src/types';
 import { FavoriteLists } from './components';
-
-const cx = classNames.bind({});
+import { useFavoriteLists } from './hooks';
 
 export const WatchList: React.FC = () => {
   const { t } = useTranslation();
+  const [params, setParams] = useState<GetFavoriteListsParams>({
+    page: 1,
+    pageSize: 20,
+  });
+  const { favoriteLists, pagination, loading } = useFavoriteLists(params);
 
   return (
-    <Spin spinning={false}>
-      <div className={cx('container')}>
-        <div
-          className={cx(
-            'mb-32',
-            'd-flex',
-            'justify-content-between',
-            'align-items-center',
-          )}
-        >
-          <h2>{t('MyLibrary')}</h2>
+    <Spin spinning={loading}>
+      <div className="container">
+        <div className="mb-32 d-flex justify-content-end">
           <Button size="large" type="primary">
             {t('CreateFavoriteList')}
           </Button>
         </div>
-        <FavoriteLists favoriteLists={mockFavoriteLists} />
+        <FavoriteLists favoriteLists={favoriteLists} pagination={pagination} />
       </div>
     </Spin>
   );

@@ -1,16 +1,12 @@
-.container {
-  padding: $align-64 $align-64 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-}
-
 .tab {
   :global {
     .ant-tabs {
       &-nav {
         flex: 1 !important;
+
+        @include mobile {
+          flex: unset !important;
+        }
       }
 
       &-content-holder {
@@ -34,30 +30,8 @@
       &-tabpane {
         padding-left: $align-32 !important;
         padding-bottom: $align-32;
-      }
-    }
-  }
-}
 
-@include tablet {
-  .container {
-    padding: $align-32 $align-32 0;
-  }
-}
-
-@include mobile {
-  .container {
-    padding: $align-32 $align-16 0;
-  }
-
-  .tab {
-    :global {
-      .ant-tabs {
-        &-nav {
-          flex: unset !important;
-        }
-
-        &-tabpane {
+        @include mobile {
           padding-left: 0 !important;
           padding-bottom: 0;
         }

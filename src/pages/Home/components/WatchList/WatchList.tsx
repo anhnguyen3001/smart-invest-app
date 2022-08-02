@@ -5,16 +5,12 @@ import {
 } from '@ant-design/icons';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { Button } from 'antd';
-import classNames from 'classnames/bind';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { TickerCard } from 'src/components';
 import { WATCH_LIST_PATH } from 'src/constants';
 import { mockTickers } from 'src/mock';
-import styles from './WatchList.module.scss';
-
-const cx = classNames.bind(styles);
 
 export const WatchList: React.FC = () => {
   const tickers = mockTickers;
@@ -23,10 +19,10 @@ export const WatchList: React.FC = () => {
 
   return (
     <>
-      <div className={cx('d-flex', 'justify-content-between', 'mb-16')}>
-        <div className={cx('d-flex', 'align-items-center')}>
+      <div className="d-flex justify-content-between mb-16">
+        <div className="d-flex align-items-center">
           <h3>{t('YourWatchList')}</h3>
-          <NavLink to={WATCH_LIST_PATH} className={cx('ml-8', 'd-flex')}>
+          <NavLink to={WATCH_LIST_PATH} className="ml-8 d-flex">
             <RightOutlined />
           </NavLink>
         </div>

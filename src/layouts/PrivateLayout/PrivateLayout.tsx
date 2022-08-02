@@ -9,7 +9,7 @@ export const PrivateLayout: React.FC = ({ children }) => {
   return (
     <Layout>
       <Header />
-      <Content className="p-relative">{children}</Content>
+      <Content className="p-relative d-flex flex-column">{children}</Content>
       <BackTop />
     </Layout>
   );

@@ -28,7 +28,7 @@ export const TickerList: React.FC<TickerListProps> = ({
 
   const renderItems = () => {
     return tickers?.map((ticker, index) => (
-      <Col key={index} xxl={6} lg={8} xs={24}>
+      <Col key={index} xxl={6} md={8} sm={12} xs={24}>
         <TickerCard ticker={ticker} />
       </Col>
     ));
@@ -40,7 +40,7 @@ export const TickerList: React.FC<TickerListProps> = ({
         {renderItems()}
       </Row>
       <Pagination
-        className="ml-auto"
+        className="ml-auto mt-auto"
         style={{ width: 'fit-content' }}
         {...convertPagination(pagination)}
         onChange={onChangePagination}

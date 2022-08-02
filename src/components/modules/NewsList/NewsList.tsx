@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, Paragraph } from 'src/components';
 import styles from './NewList.module.scss';
 import { COLOR_THEME, THEME } from 'src/constants';
+import { convertPagination } from 'src/helpers';
 
 const cx = classNames.bind(styles);
 
@@ -92,9 +93,7 @@ export const NewsList: React.FC<NewsListProps> = ({
       renderItem={renderItem}
       {...(pagination && {
         pagination: {
-          current: pagination?.currentPage,
-          pageSize: pagination?.pageSize,
-          total: pagination?.totalItems,
+          ...convertPagination(pagination),
           onChange: onChangePagination,
         },
       })}

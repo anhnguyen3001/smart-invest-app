@@ -227,17 +227,18 @@ $lines: ('-bottom', '-top', '');
 }
 
 .container {
-  padding: $align-64 $align-64 0;
+  padding: $align-64;
 
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
 
   @include tablet {
-    padding: $align-32 $align-32 0;
+    padding: $align-32;
   }
 
   @include mobile {
-    padding: $align-32 $align-16 0;
+    padding: $align-32 $align-16;
   }
 }
