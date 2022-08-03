@@ -8,7 +8,7 @@ import { TickerPrice } from 'src/types';
 
 export interface LineChartData {
   noDataText?: string;
-  prices?: TickerPrice[];
+  prices?: { time?: string; value: number }[];
   loading?: boolean;
 }
 
@@ -57,15 +57,12 @@ export const LineChart: React.FC<LineChartProps> = React.memo(
           }}
           lineSeries={[
             {
-              data: prices?.map(({ closePrice, date }) => ({
-                value: closePrice,
-                time: date,
-              })),
+              data: prices,
               options: {
                 noDataText: noDataText || 'Không có dữ liệu',
                 color:
-                  prices?.[totalData - 1]?.closePrice >
-                  prices?.[totalData - 2]?.closePrice
+                  prices?.[totalData - 1]?.value >
+                  prices?.[totalData - 2]?.value
                     ? COLOR_THEME[currentTheme].successColor
                     : COLOR_THEME[currentTheme].errorColor,
               },

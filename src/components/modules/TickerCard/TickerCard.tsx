@@ -1,20 +1,22 @@
 import { Ticker } from 'src/types';
-import { Card, Divider, Tag } from 'antd';
+import { Button, Card, Divider, Tag } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Text, Paragraph } from 'src/components';
 import { TICKERS_PATH } from 'src/constants';
+import {} from '@ant-design/icons';
 
 const cx = classNames.bind({});
 
 interface TickerCardProps {
   ticker?: Ticker;
   onAdd?: (id: number) => void;
+  onDelete?: (id: number) => void;
 }
 
 export const TickerCard: React.FC<TickerCardProps> = React.memo(
-  ({ ticker = {}, onAdd }) => {
+  ({ ticker = {}, onAdd, onDelete }) => {
     const history = useHistory();
 
     const {
@@ -26,6 +28,27 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
       lastPercentChange,
       lastPriceChange,
     } = ticker as Ticker;
+
+    const renderTitle = () => {
+      return (
+        <div
+          className={cx(
+            'd-flex',
+            'justify-content-between',
+            'align-items-center',
+            'mb-8',
+          )}
+        >
+          <Text ellipsis level={2} fontWeight={700}>
+            {symbol}
+          </Text>
+          {/* {onDelete ? <Button></Button>} */}
+          <Tag color="pink" className={cx('text-500', 'text-4', 'mr-0')}>
+            {exchange}
+          </Tag>
+        </div>
+      );
+    };
 
     const renderPriceInfo = () => {
       const isNumberLastClosePrice = typeof lastClosePrice === 'number';
@@ -69,7 +92,7 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
       <Card
         style={{ minHeight: '100%' }}
         className={cx('cursor-pointer')}
-        onClick={onAdd ? onGoToDetailTicker : undefined}
+        onClick={!onAdd && !onDelete ? onGoToDetailTicker : undefined}
       >
         <div
           className={cx(

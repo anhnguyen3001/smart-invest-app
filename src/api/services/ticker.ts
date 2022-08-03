@@ -1,5 +1,6 @@
 import {
   GetPredictedPriceParams,
+  GetPredictedPriceResponse,
   GetTickerPriceParams,
   GetTickerPriceResponse,
   GetTickersNotFavoriteParams,
@@ -31,7 +32,10 @@ export const tickerService = {
     return res.data.data;
   },
 
-  getPredicted: async (params: GetPredictedPriceParams): Promise<void> => {
-    await bffClient.get('/tickers/predicted-price', { params });
+  getPredicted: async (
+    params: GetPredictedPriceParams,
+  ): Promise<GetPredictedPriceResponse> => {
+    const res = await bffClient.get('/tickers/predicted-price', { params });
+    return res.data.data;
   },
 };

@@ -42,7 +42,13 @@ export const PriceChart: React.FC<PriceChartProps> = ({ symbol }) => {
         </div>
       </div>
 
-      <LineChart loading={isLoading} prices={prices} />
+      <LineChart
+        loading={isLoading}
+        prices={prices?.map(({ closePrice, date }) => ({
+          value: closePrice,
+          time: date,
+        }))}
+      />
     </Spin>
   );
 };

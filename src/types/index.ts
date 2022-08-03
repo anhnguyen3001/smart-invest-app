@@ -8,3 +8,4 @@ export * from './user';
 export * from './auth';
 export * from './favoriteList';
 export * from './news';
+export * from './financialIndex';

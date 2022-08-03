@@ -92,6 +92,10 @@ export interface GetTickerPriceResponse {
   tickerPrices: TickerPrice[];
 }
 
+export interface GetPredictedPriceResponse {
+  tickerPrices: number[];
+}
+
 export interface GetPredictedPriceParams {
   symbol: string;
 }

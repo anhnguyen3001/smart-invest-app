@@ -1,10 +1,13 @@
 import { Company } from 'src/types';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import classNames from 'classnames/bind';
-import React from 'react';
+import React, { useState } from 'react';
 import { Tag, Text } from 'src/components';
 import { getPriceColor } from 'src/helpers';
 import styles from './TickerInfo.module.scss';
+import { Button, Col, Row } from 'antd';
+import { t } from 'i18next';
+import { PredictedModal } from '../PredictedModal/PredictedModal';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +20,8 @@ export const TickerInfo: React.FC<TickerInfoProps> = ({
   company,
   className,
 }) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+
   if (!company) return null;
   const {
     name,
@@ -56,8 +61,22 @@ export const TickerInfo: React.FC<TickerInfoProps> = ({
         </Text> */}
       </div>
 
-      <h1 className={cx('mb-8', 'primary-color')}>{symbol}</h1>
-      <h3 className={cx('mb-16', 'secondary-color')}>{name}</h3>
+      <Row justify="space-between">
+        <Col>
+          <h1 className={cx('mb-8', 'primary-color')}>{symbol}</h1>
+          <h3 className={cx('mb-16', 'secondary-color')}>{name}</h3>
+        </Col>
+        <Col>
+          <Button type="primary" onClick={() => setVisibleModal(true)}>
+            {t('GetPredictedPrice')}
+          </Button>
+        </Col>
+      </Row>
+      <PredictedModal
+        symbol={symbol}
+        visible={visibleModal}
+        onClose={() => setVisibleModal(false)}
+      />
 
       {/* <div
         className={cx(
