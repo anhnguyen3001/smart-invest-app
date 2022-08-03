@@ -5,7 +5,7 @@ import { useFavoriteTickers } from 'src/hooks';
 import { TickerList } from 'src/pages/Search/components';
 import { FavoriteList } from 'src/types';
 import { GetFavoriteTickersParams } from 'src/types/favoriteTicker';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
 
 interface DetailFavoriteListModalProps {
   favoriteList?: FavoriteList;
@@ -27,11 +27,11 @@ export const DetailFavoriteListModal: React.FC<
   });
 
   const debounceSearch = useCallback(
-    debounce(
-      (nextValue: string) =>
-        setParams((prev) => ({ ...prev, search: nextValue })),
-      500,
-    ),
+    // debounce(
+    (nextValue: string) =>
+      setParams((prev) => ({ ...prev, search: nextValue })),
+    //   500,
+    // ),
     [],
   );
 

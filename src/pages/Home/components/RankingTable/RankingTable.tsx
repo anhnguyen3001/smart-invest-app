@@ -5,6 +5,8 @@ import { Text } from 'src/components';
 import { Ticker } from 'src/types';
 import classNames from 'classnames/bind';
 import { ColumnsType } from 'antd/lib/table';
+import { useHistory } from 'react-router-dom';
+import { DETAIL_PATH } from 'src/constants';
 
 const cx = classNames.bind({});
 
@@ -13,6 +15,7 @@ interface RankingTableProps {
 }
 
 export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
+  const history = useHistory();
   const { t } = useTranslation();
   if (!tickers?.length) return null;
 
@@ -47,7 +50,7 @@ export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
             className={cx([
               {
                 'success-color': lastPercentChange > 0,
-                'error-color': lastPercentChange < 0,
+                'danger-color': lastPercentChange < 0,
               },
             ])}
           >
@@ -67,7 +70,7 @@ export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
             className={cx([
               {
                 'success-color': lastPriceChange > 0,
-                'error-color': lastPriceChange < 0,
+                'danger-color': lastPriceChange < 0,
               },
             ])}
           >
@@ -84,6 +87,11 @@ export const RankingTable: React.FC<RankingTableProps> = ({ tickers }) => {
       dataSource={tickers}
       columns={columns}
       pagination={false}
+      onRow={(row) => ({
+        className: 'cursor-pointer',
+        onClick: () =>
+          history.push(DETAIL_PATH.replace(':companyId', `${row.companyId}`)),
+      })}
     />
   );
 };

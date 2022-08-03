@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { newsService } from 'src/api/services/news';
 import { DEFAULT_PAGE_SIZE } from 'src/constants';
 import { getObjFromQueryString } from 'src/helpers';
-import { GetFavoriteNewsParams, InfiniteSearchQueryParams } from 'src/types';
+import { GetFavoriteNewsParams } from 'src/types';
 import useSWRInfinite from 'swr/infinite';
 
 export const useInfiniteFavoriteNews = (params?: GetFavoriteNewsParams) => {

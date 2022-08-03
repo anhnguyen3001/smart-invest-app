@@ -21,7 +21,6 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
   dataLength,
   children,
   className,
-  loading,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isVisible = useIntersection(ref);
@@ -37,7 +36,8 @@ export const InfiniteList: React.FC<InfiniteListProps> = ({
         style={{ overflowX: 'hidden' }}
         dataLength={dataLength}
         hasMore={isVisible && hasMore}
-        loader={page > 1 && <h4>Loading...</h4>}
+        loader={page > 1 && hasMore && <h4>Loading...</h4>}
+        scrollThreshold={0.7}
         // loader={
         //   <Spin
         //     style={{

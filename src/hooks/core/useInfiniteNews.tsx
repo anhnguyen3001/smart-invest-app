@@ -5,25 +5,35 @@ import { getObjFromQueryString } from 'src/helpers';
 import { GetNewsParams } from 'src/types';
 import useSWRInfinite from 'swr/infinite';
 
-export const useInfiniteNews = (params?: GetNewsParams) => {
+export const useInfiniteNews = (
+  params?: GetNewsParams,
+  allowFetchData: boolean = true,
+) => {
   const pageSize = params?.pageSize || DEFAULT_PAGE_SIZE;
 
   const { data, size, setSize, error } = useSWRInfinite(
-    (index: number) => ['news', `page=${index + 1}&pageSize=${pageSize}`],
+    (index: number) => {
+      console.log('new ', index);
+      return ['news', `page=${index + 1}&pageSize=${pageSize}`, allowFetchData];
+    },
     (_, params: string) => {
+      if (!allowFetchData) return;
+      console.log('fetch ', params);
       return newsService.getNews(getObjFromQueryString(params)) as any;
     },
     {
       revalidateOnFocus: false,
+      revalidateFirstPage: false,
+      revalidateAll: false,
     },
   );
 
   const isLoading = !data && !error;
   const isEmpty = data?.[0]?.length === 0;
   const hasMore = !(
-    isEmpty || (data?.[data?.length - 1]?.length || pageSize) < pageSize
+    isEmpty || (data?.[data?.length - 1]?.news?.length || pageSize) < pageSize
   );
-
+  console.log(data);
   const news = useMemo(() => {
     return (
       data?.reduce((acc, curr) => {
