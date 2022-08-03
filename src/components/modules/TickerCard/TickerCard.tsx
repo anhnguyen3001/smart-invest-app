@@ -10,10 +10,11 @@ const cx = classNames.bind({});
 
 interface TickerCardProps {
   ticker?: Ticker;
+  onAdd?: (id: number) => void;
 }
 
 export const TickerCard: React.FC<TickerCardProps> = React.memo(
-  ({ ticker = {} }) => {
+  ({ ticker = {}, onAdd }) => {
     const history = useHistory();
 
     const {
@@ -49,7 +50,7 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
           )}
           {isNumberLastPercentChange && isNumberLastPriceChange && (
             <Text
-              type={(lastPercentChange || 0) > 0 ? 'success' : 'success'}
+              type={(lastPercentChange || 0) > 0 ? 'success' : 'danger'}
               block={false}
               className={cx('ml-8')}
             >
@@ -68,7 +69,7 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
       <Card
         style={{ minHeight: '100%' }}
         className={cx('cursor-pointer')}
-        onClick={onGoToDetailTicker}
+        onClick={onAdd ? onGoToDetailTicker : undefined}
       >
         <div
           className={cx(

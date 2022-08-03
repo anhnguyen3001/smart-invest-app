@@ -5,6 +5,7 @@ import { CustomLoading, Text } from 'src/components';
 import { useApp } from 'src/contexts';
 import { FavoriteList, GetFavoriteListsParams, StyleProps } from 'src/types';
 import { useFavoriteLists } from '../../hooks';
+import { AddTickerModal } from '../AddTickerModal';
 import { FavoriteListForm } from '../FavoriteListForm';
 import { FavoriteLists } from '../FavoriteLists';
 
