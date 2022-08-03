@@ -9,8 +9,14 @@
         }
       }
 
-      &-content-holder {
-        flex: 3 !important;
+      &-content {
+        &-left {
+          min-height: 100%;
+        }
+
+        &-holder {
+          flex: 3 !important;
+        }
       }
 
       &-tab {
@@ -34,6 +40,10 @@
         @include mobile {
           padding-left: 0 !important;
           padding-bottom: 0;
+        }
+
+        &-active {
+          min-height: 100%;
         }
       }
     }

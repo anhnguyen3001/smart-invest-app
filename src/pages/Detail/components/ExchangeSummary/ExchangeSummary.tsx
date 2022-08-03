@@ -14,7 +14,7 @@ interface ExchangeSummaryProps {
 }
 
 export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
-  tickerPrice = {},
+  tickerPrice,
 }) => {
   const { t } = useTranslation();
 
@@ -26,10 +26,15 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
     minPrice,
     maxPrice,
     totalValue,
-  } = tickerPrice;
-
+  } = tickerPrice || {};
+  console.log(ceilingPrice == floorPrice);
   const handleGetColor = (price?: number) => {
-    return getPriceColor({ price, openPrice, ceilingPrice, floorPrice });
+    return `${getPriceColor({
+      price,
+      openPrice,
+      ceilingPrice,
+      floorPrice,
+    })}-color`;
   };
 
   const displayTexts: { title: string; value?: number; colorClass?: string }[] =
@@ -41,12 +46,12 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
       {
         title: t('CeilingPrice'),
         value: ceilingPrice,
-        colorClass: 'ceil-color',
+        colorClass: handleGetColor(ceilingPrice),
       },
       {
         title: t('FloorPrice'),
         value: floorPrice,
-        colorClass: 'floor-color',
+        colorClass: handleGetColor(floorPrice),
       },
       {
         title: t('OpenPrice'),

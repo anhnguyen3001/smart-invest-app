@@ -1,9 +1,12 @@
-import { Spin } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { InfiniteNewList, TabContent, TabPaneProps } from 'src/components';
+import {
+  CustomLoading,
+  InfiniteNewList,
+  TabContent,
+  TabPaneProps,
+} from 'src/components';
 import { NEWS_PATH } from 'src/constants';
-import { useApp } from 'src/contexts';
 import { useInfiniteNews } from 'src/hooks';
 import { useInfiniteFavoriteNews } from './hooks';
 
@@ -14,7 +17,6 @@ const TAB_KEY = {
 
 export const News: React.FC = () => {
   const { t } = useTranslation();
-  const { loading: appLoading } = useApp();
 
   const {
     news,
@@ -77,13 +79,13 @@ export const News: React.FC = () => {
   };
 
   return (
-    <Spin spinning={!appLoading && newsLoading}>
+    <CustomLoading loading={newsLoading}>
       <TabContent
         title={t('News')}
         defaultActiveKey={TAB_KEY.all}
         tabPanes={getTabPanes()}
         rootPath={NEWS_PATH}
       />
-    </Spin>
+    </CustomLoading>
   );
 };

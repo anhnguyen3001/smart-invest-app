@@ -52,21 +52,6 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
         message: t('FieldRequired', { field: t('OldPassword').toLowerCase() }),
       },
     ],
-    phoneNumber: [
-      {
-        validator: async (_: any, value: string) => {
-          value = value?.trim() || '';
-
-          if (value && !PATTERN_VALIDATION.phone.test(value)) {
-            return Promise.reject(
-              t('ErrorFormat', { field: t('PhoneNumber') }),
-            );
-          }
-
-          return Promise.resolve(value);
-        },
-      },
-    ],
   };
 
   const normFile = (e: any) => {
@@ -129,20 +114,6 @@ export const UpdateProfile: React.FC<StyleProps> = ({ className }) => {
 
       <Form.Item name="email" label={t('Email')}>
         <Input size="large" readOnly />
-      </Form.Item>
-
-      <Form.Item
-        className={cx('mb-24')}
-        name="phoneNumber"
-        label={t('PhoneNumber')}
-        rules={rules.phoneNumber}
-      >
-        <Input
-          size="large"
-          placeholder={t('EnterField', {
-            field: t('PhoneNumber').toLowerCase(),
-          })}
-        />
       </Form.Item>
 
       <Button

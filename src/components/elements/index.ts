@@ -10,3 +10,4 @@ export * from './UploadImage';
 export * from './UserAvatar';
 export * from './CodeInput';
 export * from './Tag';
+export * from './CustomLoading';

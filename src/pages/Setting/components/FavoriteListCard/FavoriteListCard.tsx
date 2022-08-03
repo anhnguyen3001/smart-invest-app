@@ -1,29 +1,45 @@
 import { FavoriteList } from 'src/types';
-import { Card } from 'antd';
+import { Button, Card, Tooltip } from 'antd';
 import { Text } from 'src/components';
 import { useTranslation } from 'react-i18next';
+import { EditOutlined } from '@ant-design/icons';
 
 interface FavoriteListCardProps {
   favoriteList: FavoriteList;
-  onClick: (favoriteList: FavoriteList) => void;
+  onView: (favoriteList: FavoriteList) => void;
+  onEdit: (favoriteList: FavoriteList) => void;
 }
 
 export const FavoriteListCard: React.FC<FavoriteListCardProps> = ({
   favoriteList,
-  onClick,
+  onView,
+  onEdit,
 }) => {
   const { t } = useTranslation();
-  const { id, name } = favoriteList;
+  const { name } = favoriteList;
 
   return (
     <Card
       className="cursor-pointer"
       size="small"
-      onClick={() => onClick(favoriteList)}
+      onClick={() => onView(favoriteList)}
     >
-      <Text ellipsis level={1} fontWeight={700}>
-        {name}
-      </Text>
+      <div className="d-flex align-items-center justify-content-between">
+        <Text ellipsis level={2} fontWeight={700}>
+          {name}
+        </Text>
+        <Button
+          type="text"
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit(favoriteList);
+          }}
+        >
+          <Tooltip title={t('Edit')}>
+            <EditOutlined />
+          </Tooltip>
+        </Button>
+      </div>
     </Card>
   );
 };

@@ -1,8 +1,8 @@
-import { Select, Spin, Tabs } from 'antd';
+import { Select, Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useApp } from 'src/contexts';
+import { CustomLoading } from 'src/components';
 import { useTickers } from 'src/hooks';
 import { ExchangeEnum, Sort, TickerSortBy } from 'src/types';
 import { RankingTable } from '../RankingTable';
@@ -17,8 +17,6 @@ const TAB_KEYS = {
 };
 
 export const MarketTrend: React.FC = () => {
-  const { loading: appLoading } = useApp();
-
   const { t } = useTranslation();
   const SORT_MAPPING = {
     [Sort.asc]: t('Asc'),
@@ -73,9 +71,9 @@ export const MarketTrend: React.FC = () => {
   return (
     <>
       <h2 className={cx('mb-16')}>{t('WatchMarketMove')}</h2>
-      <Spin spinning={!appLoading && isLoading}>
+      <CustomLoading loading={isLoading}>
         <Tabs defaultActiveKey={TAB_KEYS.all}>{tabContent}</Tabs>
-      </Spin>
+      </CustomLoading>
     </>
   );
 };

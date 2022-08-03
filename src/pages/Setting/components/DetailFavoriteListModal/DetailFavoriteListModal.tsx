@@ -1,11 +1,12 @@
-import { Button, Col, Input, Modal, Row } from 'antd';
+import { Button, Col, Form, Input, Modal, Row } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Text } from 'src/components';
 import { useFavoriteTickers } from 'src/hooks';
 import { TickerList } from 'src/pages/Search/components';
 import { FavoriteList } from 'src/types';
 import { GetFavoriteTickersParams } from 'src/types/favoriteTicker';
-// import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 
 interface DetailFavoriteListModalProps {
   favoriteList?: FavoriteList;
@@ -27,11 +28,11 @@ export const DetailFavoriteListModal: React.FC<
   });
 
   const debounceSearch = useCallback(
-    // debounce(
-    (nextValue: string) =>
-      setParams((prev) => ({ ...prev, search: nextValue })),
-    //   500,
-    // ),
+    debounce(
+      (nextValue: string) =>
+        setParams((prev) => ({ ...prev, search: nextValue })),
+      500,
+    ),
     [],
   );
 
@@ -50,11 +51,21 @@ export const DetailFavoriteListModal: React.FC<
       visible={visible}
       onCancel={onClose}
       closable={false}
-      title={name}
       footer={null}
+      destroyOnClose
     >
-      <Row className="mb-16">
-        <Col md={6} xs={12}>
+      <Row className="mb-16" align="middle" gutter={[16, 16]}>
+        <Col md={12} xs={24}>
+          <Text level={1} fontWeight={700} ellipsis>
+            {t('List')}: {name}
+          </Text>
+        </Col>
+        <Col md={12} xs={24} className="text-right">
+          <Button size="large" type="primary">
+            {t('AddTicker')}
+          </Button>
+        </Col>
+        <Col md={6} xs={24}>
           <Input
             size="large"
             placeholder={t('SearchInFavoriteList')}
@@ -62,12 +73,8 @@ export const DetailFavoriteListModal: React.FC<
             onChange={onChange}
           />
         </Col>
-        <Col md={18} xs={12}>
-          <Button size="large" type="primary" className="d-block ml-auto">
-            {t('AddTicker')}
-          </Button>
-        </Col>
       </Row>
+
       <TickerList
         {...data}
         onChangePagination={(page, pageSize) =>

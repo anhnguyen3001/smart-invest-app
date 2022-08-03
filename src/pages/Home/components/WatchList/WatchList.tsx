@@ -8,14 +8,13 @@ import { Button, Spin } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { TickerCard } from 'src/components';
+import { CustomLoading, TickerCard } from 'src/components';
 import { LIBRARY_PATH } from 'src/constants';
 import { useApp } from 'src/contexts';
 import { useFavoriteTickers } from 'src/hooks';
 
 export const WatchList: React.FC = () => {
   const { t } = useTranslation();
-  const { loading: appLoading } = useApp();
   const { tickers, loading } = useFavoriteTickers();
   const isEmpty = !loading && !tickers?.length;
 
@@ -45,7 +44,7 @@ export const WatchList: React.FC = () => {
           </div>
         )}
       </div>
-      <Spin spinning={!appLoading && loading}>
+      <CustomLoading loading={loading}>
         <Splide
           key="watchlist-swiper"
           options={{
@@ -76,7 +75,7 @@ export const WatchList: React.FC = () => {
             </SplideSlide>
           ))}
         </Splide>
-      </Spin>
+      </CustomLoading>
     </>
   );
 };

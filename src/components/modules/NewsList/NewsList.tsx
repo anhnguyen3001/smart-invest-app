@@ -3,7 +3,7 @@ import { Button, List, Spin } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, Paragraph } from 'src/components';
+import { Text, Paragraph, CustomLoading } from 'src/components';
 import styles from './NewList.module.scss';
 import { COLOR_THEME, THEME } from 'src/constants';
 import { convertPagination } from 'src/helpers';
@@ -87,7 +87,7 @@ export const NewsList: React.FC<NewsListProps> = ({
 
   return (
     <>
-      <Spin spinning={!!loading}>
+      <CustomLoading loading={loading}>
         <List
           style={{
             backgroundColor: COLOR_THEME[THEME.DARK].bgComponent,
@@ -107,7 +107,7 @@ export const NewsList: React.FC<NewsListProps> = ({
             },
           })}
         />
-      </Spin>
+      </CustomLoading>
       <NewsModal
         news={selectedNews}
         visible={!!selectedNews}

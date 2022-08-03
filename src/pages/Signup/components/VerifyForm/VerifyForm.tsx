@@ -47,7 +47,7 @@ export const VerifyForm: React.FC<VerifyFormProps> = ({ email }) => {
 
     try {
       await authService.verifyUser(submitData);
-      notification.success({ message: t('VerifySuccess') });
+      notification.success({ message: t('VerifySuccessfully') });
       history.push(SIGNIN_PATH);
     } catch (e) {
     } finally {

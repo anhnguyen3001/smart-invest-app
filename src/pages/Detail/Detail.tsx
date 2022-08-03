@@ -37,19 +37,10 @@ export const Detail: React.FC = () => {
   const { company, tickerPrice } = useCompany(companyId);
   const { companyId: id, symbol } = (company || {}) as Company;
 
-  const [activeTab, setActiveTab] = useState(CONTENT_TAB_KEY.overview);
-  const onGoToAnalysisTab = useCallback(() => {
-    setActiveTab(CONTENT_TAB_KEY.analysis);
-    // eslint-disable-next-line
-  }, []);
+  const [activeTab, setActiveTab] = useState(CONTENT_TAB_KEY.tradingData);
 
   const renderTabContent = () => {
     const tabs = [
-      {
-        tab: t('Overview'),
-        key: CONTENT_TAB_KEY.overview,
-        children: <TickerOverview onGoToAnalysisTab={onGoToAnalysisTab} />,
-      },
       {
         tab: t('TradingData'),
         key: CONTENT_TAB_KEY.tradingData,

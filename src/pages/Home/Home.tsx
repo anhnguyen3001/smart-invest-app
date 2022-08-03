@@ -11,7 +11,6 @@ export const Home: React.FC = () => {
   const history = useHistory();
 
   const { news, loading } = useNews();
-  const { loading: appLoading } = useApp();
 
   return (
     <div>
@@ -26,7 +25,7 @@ export const Home: React.FC = () => {
           </Col>
           <Col md={10} xs={24}>
             <NewsList
-              loading={!appLoading && loading}
+              loading={loading}
               showHeader
               news={news}
               onSeeMore={() => history.push(NEWS_PATH)}

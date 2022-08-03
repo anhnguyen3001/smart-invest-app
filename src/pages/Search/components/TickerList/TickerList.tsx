@@ -1,5 +1,5 @@
 import { Pagination as PaginationInterface, Ticker } from 'src/types';
-import { Col, Empty, Pagination, Row } from 'antd';
+import { Col, Empty, Pagination, Row, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { TickerCard } from 'src/components';
@@ -22,10 +22,6 @@ export const TickerList: React.FC<TickerListProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  if (!tickers?.length && !loading) {
-    return <Empty description={t('NotFoundTickers')} />;
-  }
-
   const renderItems = () => {
     return tickers?.map((ticker, index) => (
       <Col key={index} xxl={6} md={8} sm={12} xs={24}>
@@ -35,17 +31,27 @@ export const TickerList: React.FC<TickerListProps> = ({
   };
 
   return (
-    <>
-      <Row gutter={[16, 16]} className="mb-16">
-        {renderItems()}
-      </Row>
-      <Pagination
-        className="ml-auto mt-auto"
-        style={{ width: 'fit-content' }}
-        {...convertPagination(pagination)}
-        onChange={onChangePagination}
-        pageSizeOptions={pageSizeOptions}
-      />
-    </>
+    <Spin spinning={loading}>
+      {!tickers?.length && !loading ? (
+        <Empty
+          style={{ minHeight: 200 }}
+          className="d-flex flex-column justify-content-center"
+          description={t('NotFoundTickers')}
+        />
+      ) : (
+        <>
+          <Row gutter={[16, 16]} className="mb-16">
+            {renderItems()}
+          </Row>
+          <Pagination
+            className="ml-auto mt-auto"
+            style={{ width: 'fit-content' }}
+            {...convertPagination(pagination)}
+            onChange={onChangePagination}
+            pageSizeOptions={pageSizeOptions}
+          />
+        </>
+      )}
+    </Spin>
   );
 };

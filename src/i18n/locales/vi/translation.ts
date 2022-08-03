@@ -46,9 +46,9 @@ export const translations = {
   PasswordNotMatch: 'Mật khẩu không khớp',
 
   // Notification
-  CreateSuccess: 'Tạo mới thành công',
-  UpdateSuccess: 'Cập nhật thành công',
-  VerifySuccess: 'Xác thực thành công',
+  CreateSuccessfully: 'Tạo mới thành công',
+  UpdateSuccessfully: 'Cập nhật thành công',
+  VerifySuccessfully: 'Xác thực thành công',
   SomethingWentWrong: 'Xảy ra vấn đề',
   YourSessionIsExpired: 'Phiên làm việc của bạn đã hết hạn',
 
@@ -64,6 +64,11 @@ export const translations = {
   NotFoundFavoriteList: 'Chưa có danh mục đầu tư',
   AddTicker: 'Thêm mã cổ phiếu',
   SearchInFavoriteList: 'Tìm trong danh mục',
+
+  Tickers: 'Danh sách mã cổ phiếu',
+  List: 'Danh mục',
+  Edit: 'Chỉnh sửa',
+  EditFavoriteList: 'Chỉnh sửa danh mục đầu tư',
 
   ...homeTranslation,
   ...signinTranslation,
