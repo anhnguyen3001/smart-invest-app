@@ -2,6 +2,7 @@ import {
   GetPredictedPriceParams,
   GetTickerPriceParams,
   GetTickerPriceResponse,
+  GetTickersNotFavoriteParams,
   GetTickersParams,
   GetTickersReponse,
 } from 'src/types';
@@ -10,6 +11,16 @@ import { bffClient } from '../client';
 export const tickerService = {
   getTickers: async (params: GetTickersParams): Promise<GetTickersReponse> => {
     const res = await bffClient.get('/tickers', { params });
+    return res.data.data;
+  },
+
+  getTickersNotFavorite: async (
+    listId: number,
+    params: GetTickersNotFavoriteParams,
+  ): Promise<GetTickersReponse> => {
+    const res = await bffClient.get('/tickers/new-favorite-tickers', {
+      params: { listId, ...params },
+    });
     return res.data.data;
   },
 

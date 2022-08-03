@@ -1,10 +1,9 @@
 import React from 'react';
-import Chart from 'react-apexcharts';
 import { useThemeSwitcher } from 'react-css-theme-switcher';
 import { useTranslation } from 'react-i18next';
 import { COLOR_THEME, DEFAULT_THEME, THEME } from 'src/constants';
 import { TickerPrice } from 'src/types';
-import TradingChart from '@qognicafinance/react-lightweight-charts';
+import Chart from '@qognicafinance/react-lightweight-charts';
 import { Text } from 'src/components/elements';
 
 interface CandleStickChartProps {
@@ -48,7 +47,7 @@ export const CandleStickChart: React.FC<CandleStickChartProps> = ({
 
   return (
     <div style={containerStyle}>
-      <TradingChart
+      <Chart
         autoHeight
         autoWidth
         darkTheme={currentTheme === THEME.DARK}
@@ -76,33 +75,5 @@ export const CandleStickChart: React.FC<CandleStickChartProps> = ({
         ]}
       />
     </div>
-  );
-
-  return (
-    <Chart
-      height={350}
-      type="candlestick"
-      series={[
-        {
-          data,
-        },
-      ]}
-      options={{
-        chart: {
-          id: 'trading-candle-stick',
-        },
-        xaxis: {
-          type: 'datetime',
-        },
-        noData: {
-          text: noDataText || t('NoDataToDisplay'),
-          style: {
-            color: COLOR_THEME[currentTheme].textPrimary,
-            fontSize: '16px',
-          },
-        },
-      }}
-      {...rest}
-    />
   );
 };

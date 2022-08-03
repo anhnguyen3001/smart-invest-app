@@ -1,12 +1,8 @@
 import { BaseParams, PaginationResponse } from './api';
-import { BaseEntity } from './common';
-import { User } from './user';
 
-export interface FavoriteList extends BaseEntity {
+export interface FavoriteList {
   id: number;
   name: string;
-  imageUrl?: string;
-  user: User;
 }
 
 export interface GetFavoriteListsParams extends BaseParams {
@@ -21,9 +17,7 @@ export interface GetFavoriteListResponse {
   favoriteList: FavoriteList;
 }
 
-export interface AddFavoriteTickerResponse {
-
-}
+export interface AddFavoriteTickerResponse {}
 
 export interface UpsertFavoriteListRequest {
   name: string;

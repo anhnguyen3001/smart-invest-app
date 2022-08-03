@@ -62,6 +62,8 @@ export const translations = {
   Personal: 'Cá nhân',
   Library: 'Thư viện',
   NotFoundFavoriteList: 'Chưa có danh mục đầu tư',
+  AddTicker: 'Thêm mã cổ phiếu',
+  SearchInFavoriteList: 'Tìm trong danh mục',
 
   ...homeTranslation,
   ...signinTranslation,

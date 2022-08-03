@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { newsService } from 'src/api/services/news';
 import { DEFAULT_PAGE_SIZE } from 'src/constants';
 import { getObjFromQueryString } from 'src/helpers';
-import { GetNewsParams } from 'src/types';
+import { GetFavoriteNewsParams, InfiniteSearchQueryParams } from 'src/types';
 import useSWRInfinite from 'swr/infinite';
 
-export const useInfiniteNews = (params?: GetNewsParams) => {
+export const useInfiniteFavoriteNews = (params?: GetFavoriteNewsParams) => {
   const pageSize = params?.pageSize || DEFAULT_PAGE_SIZE;
 
   const { data, size, setSize, error } = useSWRInfinite(
-    (index: number) => ['news', `page=${index + 1}&pageSize=${pageSize}`],
+    (index: number) => ['favorite-news', `page=${index + 1}&pageSize=${pageSize}`],
     (_, params: string) => {
-      return newsService.getNews(getObjFromQueryString(params)) as any;
+      return newsService.getFavoriteNews(getObjFromQueryString(params)) as any;
     },
     {
       revalidateOnFocus: false,

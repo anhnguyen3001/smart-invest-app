@@ -13,6 +13,8 @@ export interface GetNewsParams extends BaseParams {
   companyId?: number;
 }
 
+export interface GetFavoriteNewsParams extends BaseParams {}
+
 export interface GetNewsResponse extends PaginationResponse {
   news: News[];
 }

@@ -10,6 +10,7 @@ export const useFavoriteTickers = (params: GetFavoriteTickersParams = {}) => {
         page: 1,
         pageSize: 10,
         ...params,
+        search: params.search || undefined,
       });
     },
   );

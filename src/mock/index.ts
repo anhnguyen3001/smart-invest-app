@@ -488,25 +488,13 @@ export const mockFavoriteLists: FavoriteList[] = [
   {
     id: 1,
     name: 'HA',
-    imageUrl:
-      'https://d2w83rm0evh3ie.cloudfront.net/input/nft-image/9916/1631266679133.png',
-    user: mockUser,
-    createdAt: new Date().toLocaleString(),
   },
   {
     id: 2,
     name: 'Technology',
-    user: mockUser,
-    imageUrl:
-      'https://d2w83rm0evh3ie.cloudfront.net/output/user-collective/70/39799/1632296860223.jpeg',
-    createdAt: new Date('03/04/2022').toLocaleString(),
   },
   {
     id: 3,
     name: 'Bank',
-    imageUrl:
-      'https://d2w83rm0evh3ie.cloudfront.net/input/nft-image/6518/1616101863360.jpeg',
-    user: mockUser,
-    createdAt: new Date('03/03/2022').toLocaleString(),
   },
 ];

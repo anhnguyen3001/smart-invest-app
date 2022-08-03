@@ -1,16 +1,17 @@
 import { Button, Spin } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useApp } from 'src/contexts';
 import { FavoriteList, GetFavoriteListsParams, StyleProps } from 'src/types';
 import { useFavoriteLists } from '../../hooks';
 import { FavoriteListForm } from '../FavoriteListForm';
 import { FavoriteLists } from '../FavoriteLists';
 
 export const Library: React.FC<StyleProps> = ({ className }) => {
+  const { loading: appLoading } = useApp();
   const { t } = useTranslation();
 
   const [visibleModal, setVisibleModal] = useState(false);
-  const [edittedList, setEditedList] = useState<FavoriteList>();
 
   const [params, setParams] = useState<GetFavoriteListsParams>({
     page: 1,
@@ -21,14 +22,13 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
 
   return (
     <>
-      <Spin spinning={loading} className={className}>
+      <Spin spinning={!appLoading && loading} className={className}>
         <div className="mb-32 d-flex justify-content-between">
           <h3>{t('FavoriteList')}</h3>
           <Button
             size="large"
             type="primary"
             onClick={() => {
-              setEditedList(undefined);
               setVisibleModal(true);
             }}
           >
@@ -36,10 +36,6 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
           </Button>
         </div>
         <FavoriteLists
-          setEdittedList={(list) => {
-            setEditedList(list);
-            setVisibleModal(true);
-          }}
           favoriteLists={favoriteLists}
           pagination={pagination}
           onChangePagination={(page, pageSize) =>
@@ -48,10 +44,9 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
         />
       </Spin>
       <FavoriteListForm
-        title={edittedList ? t('EditFavoriteList') : t('CreateFavoriteList')}
+        title={t('CreateFavoriteList')}
         visible={visibleModal}
         setVisible={setVisibleModal}
-        favoriteList={edittedList}
         loading={loading}
         onAfterClose={mutate}
       />

@@ -74,6 +74,10 @@ export interface GetTickersReponse extends PaginationResponse {
   tickers: Ticker[];
 }
 
+export interface GetTickersNotFavoriteParams extends BaseParams {
+  search?: string;
+}
+
 export enum TickerPricePeriod {
   '1m' = '1m',
   '1y' = '1y',

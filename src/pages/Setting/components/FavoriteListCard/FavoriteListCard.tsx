@@ -5,31 +5,25 @@ import { useTranslation } from 'react-i18next';
 
 interface FavoriteListCardProps {
   favoriteList: FavoriteList;
+  onClick: (favoriteList: FavoriteList) => void;
 }
 
 export const FavoriteListCard: React.FC<FavoriteListCardProps> = ({
   favoriteList,
+  onClick,
 }) => {
   const { t } = useTranslation();
-  const { imageUrl, name, user, createdAt } = favoriteList;
+  const { id, name } = favoriteList;
+
   return (
     <Card
+      className="cursor-pointer"
       size="small"
-      cover={
-        <img
-          style={{ height: 180, objectFit: 'cover' }}
-          src={imageUrl}
-          alt="favorite list ava"
-        />
-      }
+      onClick={() => onClick(favoriteList)}
     >
-      <Text block ellipsis level={1} fontWeight={500} className="mt-8">
+      <Text ellipsis level={1} fontWeight={700}>
         {name}
       </Text>
-      <Text className="mb-8">
-        {t('By')} {user.username}
-      </Text>
-      <Text type="secondary">{createdAt}</Text>
     </Card>
   );
 };

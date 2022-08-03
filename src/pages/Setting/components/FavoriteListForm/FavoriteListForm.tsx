@@ -1,9 +1,8 @@
-import { Form, Input, Modal, notification, Spin } from 'antd';
-import { UploadFile } from 'antd/lib/upload/interface';
-import classnames from 'classnames/bind';
-import React, { useEffect, useState } from 'react';
+import { Form, Input, Modal, notification } from 'antd';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { favoriteListService } from 'src/api/services/favoriteList';
+import { useApp } from 'src/contexts';
 import { FavoriteList, UpsertFavoriteListRequest } from 'src/types';
 
 export interface FavoriteListFormProps {
@@ -24,7 +23,8 @@ export const FavoriteListForm: React.FC<FavoriteListFormProps> = ({
   title,
 }: FavoriteListFormProps) => {
   const { t } = useTranslation();
-  const [loadingInternal, setLoadingInternal] = useState(false);
+  const { loading: appLoading, setLoading: setAppLoading } = useApp();
+
   const [form] = Form.useForm<UpsertFavoriteListRequest>();
 
   const handleSubmitForm = async (values: UpsertFavoriteListRequest) => {
@@ -33,7 +33,7 @@ export const FavoriteListForm: React.FC<FavoriteListFormProps> = ({
       name: values?.name?.trim(),
     };
     try {
-      setLoadingInternal(true);
+      setAppLoading(true);
       if (favoriteList?.id) {
         await favoriteListService.updateList(favoriteList.id, body);
         notification.success({ message: t('UpdateSuccessfully') });
@@ -45,7 +45,7 @@ export const FavoriteListForm: React.FC<FavoriteListFormProps> = ({
       form.resetFields();
       if (onAfterClose) onAfterClose();
     } finally {
-      setLoadingInternal(false);
+      setAppLoading(false);
     }
   };
 
@@ -75,20 +75,18 @@ export const FavoriteListForm: React.FC<FavoriteListFormProps> = ({
       onCancel={() => setVisible(false)}
       onOk={() => form.submit()}
       destroyOnClose
-      okButtonProps={{ loading: loadingInternal, disabled: loading }}
+      okButtonProps={{ loading: appLoading, disabled: loading }}
     >
-      <Spin spinning={loading || loadingInternal}>
-        <Form form={form} layout="vertical" onFinish={handleSubmitForm}>
-          <Form.Item
-            label={t('Name')}
-            name="name"
-            rules={rules.name}
-            className="mb-0"
-          >
-            <Input size="large" placeholder={t('Name')} />
-          </Form.Item>
-        </Form>
-      </Spin>
+      <Form form={form} layout="vertical" onFinish={handleSubmitForm}>
+        <Form.Item
+          label={t('Name')}
+          name="name"
+          rules={rules.name}
+          className="mb-0"
+        >
+          <Input size="large" placeholder={t('Name')} />
+        </Form.Item>
+      </Form>
     </Modal>
   );
 };
