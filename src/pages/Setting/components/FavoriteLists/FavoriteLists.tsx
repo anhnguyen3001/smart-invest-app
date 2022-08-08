@@ -13,6 +13,7 @@ interface FavoriteListsProps {
   onChangePagination?: (page: number, pageSize: number) => void;
   loading?: boolean;
   setEditList: (list: FavoriteList) => void;
+  onDelete: (id: number) => void;
 }
 
 export const FavoriteLists: React.FC<FavoriteListsProps> = ({
@@ -21,6 +22,7 @@ export const FavoriteLists: React.FC<FavoriteListsProps> = ({
   onChangePagination,
   loading,
   setEditList,
+  onDelete,
 }) => {
   const { t } = useTranslation();
 
@@ -37,6 +39,7 @@ export const FavoriteLists: React.FC<FavoriteListsProps> = ({
               favoriteList={favoriteList}
               onView={setDetailList}
               onEdit={setEditList}
+              onDelete={onDelete}
             />
           </Col>
         ))}

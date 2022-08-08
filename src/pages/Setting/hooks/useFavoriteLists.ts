@@ -1,7 +1,6 @@
 import useSWR from 'swr';
 import { GetFavoriteListsParams } from 'src/types';
 import { favoriteListService } from 'src/api/services/favoriteList';
-import { mockPagination } from 'src/mock';
 
 export const useFavoriteLists = (params: GetFavoriteListsParams) => {
   const { data, error, mutate } = useSWR(

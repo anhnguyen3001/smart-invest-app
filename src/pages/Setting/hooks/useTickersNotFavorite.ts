@@ -6,12 +6,12 @@ export const useTickersNotFavorite = (
   listId: number,
   params: GetTickersNotFavoriteParams,
 ) => {
-  const { data, error } = useSWR(
+  const { data, error, mutate } = useSWR(
     listId ? ['new-ticker-favorite', listId, JSON.stringify(params)] : null,
     () => {
       return tickerService.getTickersNotFavorite(listId, params);
     },
   );
 
-  return { ...data, loading: !data && !error };
+  return { ...data, loading: !data && !error, mutate };
 };

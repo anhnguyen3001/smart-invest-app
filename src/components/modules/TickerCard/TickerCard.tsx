@@ -1,23 +1,25 @@
 import { Ticker } from 'src/types';
-import { Button, Card, Divider, Tag } from 'antd';
+import { Button, Card, Divider, Tag, Tooltip } from 'antd';
 import classNames from 'classnames/bind';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Text, Paragraph } from 'src/components';
 import { TICKERS_PATH } from 'src/constants';
-import {} from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const cx = classNames.bind({});
 
-interface TickerCardProps {
+export interface TickerCardProps {
   ticker?: Ticker;
-  onAdd?: (id: number) => void;
-  onDelete?: (id: number) => void;
+  onAdd?: (id?: number) => void;
+  onDelete?: (id?: number) => void;
 }
 
 export const TickerCard: React.FC<TickerCardProps> = React.memo(
   ({ ticker = {}, onAdd, onDelete }) => {
     const history = useHistory();
+    const { t } = useTranslation();
 
     const {
       companyId,
@@ -30,6 +32,35 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
     } = ticker as Ticker;
 
     const renderTitle = () => {
+      if (onAdd || onDelete) {
+        return (
+          <>
+            <div
+              className={cx(
+                'd-flex',
+                'justify-content-between',
+                'align-items-center',
+                'mb-8',
+              )}
+            >
+              <Tag color="pink" className={cx('text-500', 'text-4', 'mr-0')}>
+                {exchange}
+              </Tag>
+              <Button
+                type="text"
+                onClick={() => {
+                  onAdd?.(companyId) || onDelete?.(companyId);
+                }}
+              >
+                {onAdd ? <PlusOutlined /> : <DeleteOutlined />}
+              </Button>
+            </div>
+            <Text ellipsis level={2} fontWeight={700}>
+              {symbol}
+            </Text>
+          </>
+        );
+      }
       return (
         <div
           className={cx(
@@ -42,7 +73,6 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
           <Text ellipsis level={2} fontWeight={700}>
             {symbol}
           </Text>
-          {/* {onDelete ? <Button></Button>} */}
           <Tag color="pink" className={cx('text-500', 'text-4', 'mr-0')}>
             {exchange}
           </Tag>
@@ -94,21 +124,7 @@ export const TickerCard: React.FC<TickerCardProps> = React.memo(
         className={cx('cursor-pointer')}
         onClick={!onAdd && !onDelete ? onGoToDetailTicker : undefined}
       >
-        <div
-          className={cx(
-            'd-flex',
-            'justify-content-between',
-            'align-items-center',
-            'mb-8',
-          )}
-        >
-          <Text ellipsis level={2} fontWeight={700}>
-            {symbol}
-          </Text>
-          <Tag color="pink" className={cx('text-500', 'text-4', 'mr-0')}>
-            {exchange}
-          </Tag>
-        </div>
+        {renderTitle()}
 
         <Paragraph
           ellipsis={{ tooltip: companyName }}

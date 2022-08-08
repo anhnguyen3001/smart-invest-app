@@ -29,6 +29,9 @@ export const favoriteListService = {
     const res = await bffClient.patch(`/favorite-lists/${id}`, data);
     return res.data.data;
   },
+  deleteList: async (id: number): Promise<void> => {
+    await bffClient.delete(`/favorite-lists/${id}`);
+  },
   deleteFavoriteTicker: async (
     listId: number,
     companyId: number,

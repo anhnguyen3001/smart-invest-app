@@ -5,7 +5,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Text, UserAvatar } from 'src/components';
-import { mockUser } from 'src/mock';
 import styles from './CommentList.module.scss';
 import { getDateFromTime } from 'src/helpers';
 
@@ -22,23 +21,21 @@ export const CommentList: React.FC<CommentListProps> = React.memo(
   ({ comments, hasMore, page, fetchNextPage }) => {
     const { t } = useTranslation();
     if (!comments?.length) {
-      return <Empty description={t('NoComments')} />;
+      return <Empty className="m-auto" description={t('NoComments')} />;
     }
 
     const renderList = () => {
-      return comments.map(
-        ({ commentId, user = mockUser, content, createdAt }) => {
-          return (
-            <Comment
-              key={commentId}
-              author={user.username}
-              avatar={<UserAvatar shape="circle" user={user} />}
-              content={<div dangerouslySetInnerHTML={{ __html: content }} />}
-              datetime={getDateFromTime(createdAt)}
-            />
-          );
-        },
-      );
+      return comments.map(({ commentId, user, content, createdAt }) => {
+        return (
+          <Comment
+            key={commentId}
+            author={user.username}
+            avatar={<UserAvatar shape="circle" user={user} />}
+            content={<div dangerouslySetInnerHTML={{ __html: content }} />}
+            datetime={getDateFromTime(createdAt)}
+          />
+        );
+      });
     };
 
     return (

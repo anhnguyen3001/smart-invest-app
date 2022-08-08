@@ -1,6 +1,7 @@
-import { Button, Spin } from 'antd';
+import { Button, notification, Spin } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { favoriteListService } from 'src/api/services/favoriteList';
 import { CustomLoading, Text } from 'src/components';
 import { useApp } from 'src/contexts';
 import { FavoriteList, GetFavoriteListsParams, StyleProps } from 'src/types';
@@ -21,6 +22,13 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
   });
   const { favoriteLists, pagination, loading, mutate } =
     useFavoriteLists(params);
+
+  const onDelete = async (id: number) => {
+    try {
+      await favoriteListService.deleteList(id);
+      notification.success({ message: t('DeleteSuccessfully') });
+    } catch (e) {}
+  };
 
   return (
     <>
@@ -49,6 +57,7 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
             setEdittedList(favoriteList);
             setVisibleModal(true);
           }}
+          onDelete={onDelete}
         />
       </CustomLoading>
       <FavoriteListForm

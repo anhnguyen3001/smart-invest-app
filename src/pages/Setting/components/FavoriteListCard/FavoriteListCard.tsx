@@ -1,22 +1,24 @@
 import { FavoriteList } from 'src/types';
-import { Button, Card, Tooltip } from 'antd';
+import { Button, Card, Dropdown, Menu, Tooltip } from 'antd';
 import { Text } from 'src/components';
 import { useTranslation } from 'react-i18next';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, MoreOutlined } from '@ant-design/icons';
 
 interface FavoriteListCardProps {
   favoriteList: FavoriteList;
   onView: (favoriteList: FavoriteList) => void;
   onEdit: (favoriteList: FavoriteList) => void;
+  onDelete: (id: number) => void;
 }
 
 export const FavoriteListCard: React.FC<FavoriteListCardProps> = ({
   favoriteList,
   onView,
   onEdit,
+  onDelete,
 }) => {
   const { t } = useTranslation();
-  const { name } = favoriteList;
+  const { id, name } = favoriteList;
 
   return (
     <Card
@@ -28,17 +30,27 @@ export const FavoriteListCard: React.FC<FavoriteListCardProps> = ({
         <Text ellipsis level={2} fontWeight={700}>
           {name}
         </Text>
-        <Button
-          type="text"
-          onClick={(e) => {
-            e.stopPropagation();
-            onEdit(favoriteList);
-          }}
+        <Dropdown
+          trigger={['click']}
+          overlay={
+            <Menu onClick={(e) => e.domEvent.stopPropagation()}>
+              <Menu.Item key="edit" onClick={() => onEdit(favoriteList)}>
+                {t('Edit')}
+              </Menu.Item>
+              <Menu.Item
+                className="danger-color"
+                key="delete"
+                onClick={() => onDelete(id)}
+              >
+                Xóa
+              </Menu.Item>
+            </Menu>
+          }
         >
-          <Tooltip title={t('Edit')}>
-            <EditOutlined />
-          </Tooltip>
-        </Button>
+          <Button type="text" onClick={(e) => e.stopPropagation()}>
+            <MoreOutlined />
+          </Button>
+        </Dropdown>
       </div>
     </Card>
   );

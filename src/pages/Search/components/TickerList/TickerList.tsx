@@ -2,12 +2,13 @@ import { Pagination as PaginationInterface, Ticker } from 'src/types';
 import { Col, Empty, Pagination, Row, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
-import { TickerCard } from 'src/components';
+import { TickerCard, TickerCardProps } from 'src/components';
 import { convertPagination } from 'src/helpers';
 
 const pageSizeOptions = [10, 20, 50];
 
-export interface TickerListProps {
+export interface TickerListProps
+  extends Pick<TickerCardProps, 'onAdd' | 'onDelete'> {
   tickers?: Ticker[];
   pagination?: PaginationInterface;
   onChangePagination?: (page: number, pageSize: number) => void;
@@ -19,13 +20,14 @@ export const TickerList: React.FC<TickerListProps> = ({
   pagination,
   onChangePagination,
   loading,
+  ...rest
 }) => {
   const { t } = useTranslation();
 
   const renderItems = () => {
     return tickers?.map((ticker, index) => (
       <Col key={index} xxl={6} md={8} sm={12} xs={24}>
-        <TickerCard ticker={ticker} />
+        <TickerCard ticker={ticker} {...rest} />
       </Col>
     ));
   };

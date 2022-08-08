@@ -10,12 +10,14 @@ interface AddTickerModalProps {
   listId?: number;
   visible: boolean;
   onClose: () => void;
+  onAdd: (tickerId?: number) => Promise<any>;
 }
 
 export const AddTickerModal: React.FC<AddTickerModalProps> = ({
   listId = 0,
   visible,
   onClose,
+  onAdd,
 }) => {
   const { t } = useTranslation();
 
@@ -24,7 +26,7 @@ export const AddTickerModal: React.FC<AddTickerModalProps> = ({
     search,
   });
 
-  const data = useTickersNotFavorite(listId, params);
+  const { mutate, ...data } = useTickersNotFavorite(listId, params);
 
   const debounceSearch = useCallback(
     debounce(
@@ -41,9 +43,17 @@ export const AddTickerModal: React.FC<AddTickerModalProps> = ({
     debounceSearch(value);
   };
 
+  const onAddTicker = async (tickerId?: number) => {
+    const error = await onAdd(tickerId);
+    if (!error) {
+      mutate();
+    }
+  };
+
   return (
     <Modal
       width="90%"
+      style={{ maxHeight: '90%' }}
       centered
       visible={visible}
       onCancel={onClose}
@@ -64,6 +74,7 @@ export const AddTickerModal: React.FC<AddTickerModalProps> = ({
         onChangePagination={(page, pageSize) =>
           setParams((prev) => ({ ...prev, page, pageSize }))
         }
+        onAdd={onAddTicker}
       />
     </Modal>
   );

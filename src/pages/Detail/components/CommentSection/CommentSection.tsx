@@ -3,7 +3,6 @@ import { Button, Drawer, Spin } from 'antd';
 import classNames from 'classnames/bind';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { mockComments } from 'src/mock';
 import { useComments } from '../../hooks';
 import { CommentForm } from './CommentForm';
 import { CommentList } from './CommentList';
@@ -20,7 +19,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const { page, fetchNextPage, hasMore, isLoading, refreshData } =
+  const { comments, page, fetchNextPage, hasMore, isLoading, refreshData } =
     useComments(companyId);
 
   const [visible, setVisible] = useState<boolean>(false);
@@ -52,7 +51,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
           }}
         >
           <CommentList
-            comments={mockComments}
+            comments={comments}
             page={page}
             fetchNextPage={fetchNextPage}
             hasMore={hasMore}
