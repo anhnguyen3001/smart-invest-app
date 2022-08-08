@@ -34,7 +34,7 @@ export interface Ticker {
   lastClosePrice: number;
 }
 
-export interface ConvertedTickerPrice extends TickerPrice {
+export interface ConvertedTickerPrice extends Partial<TickerPrice> {
   ceilingPrice?: number;
   floorPrice?: number;
 }
@@ -56,7 +56,13 @@ export interface Company {
   listedShares: number;
   outstandingShares: number;
   marketCap: number;
-  price?: TickerPrice;
+  lastPercentChange: number;
+  lastPriceChange: number;
+  lastClosePrice: number;
+  lastOpenPrice: number;
+  lastMinPrice: number;
+  lastMaxPrice: number;
+  lastDate: string;
 }
 
 export enum TickerSortBy {
@@ -76,6 +82,7 @@ export interface GetTickersReponse extends PaginationResponse {
 
 export interface GetTickersNotFavoriteParams extends BaseParams {
   search?: string;
+  listId?: number;
 }
 
 export enum TickerPricePeriod {

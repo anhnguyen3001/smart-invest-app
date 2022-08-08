@@ -34,8 +34,8 @@ export const useComments = (companyId?: number, pageSize: number = 10) => {
   const hasMore = !(
     (data?.[data?.length - 1]?.comments?.length || 0) < pageSize
   );
-
-  const comments = data?.reduce((acc, curr) => [...acc, ...curr]) || [];
+  const comments =
+    data?.reduce((acc, curr) => [...acc, ...curr.comments], []) || [];
 
   const fetchNextPage = () => {
     setSize((prevState) => {

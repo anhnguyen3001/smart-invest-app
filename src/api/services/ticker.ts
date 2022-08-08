@@ -16,11 +16,10 @@ export const tickerService = {
   },
 
   getTickersNotFavorite: async (
-    listId: number,
     params: GetTickersNotFavoriteParams,
   ): Promise<GetTickersReponse> => {
     const res = await bffClient.get('/tickers/new-favorite-tickers', {
-      params: { listId, ...params },
+      params,
     });
     return res.data.data;
   },

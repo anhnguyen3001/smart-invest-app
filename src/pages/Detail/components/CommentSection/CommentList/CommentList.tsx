@@ -15,17 +15,18 @@ interface CommentListProps {
   page: number;
   fetchNextPage: () => void;
   hasMore: boolean;
+  loading: boolean;
 }
 
 export const CommentList: React.FC<CommentListProps> = React.memo(
-  ({ comments, hasMore, page, fetchNextPage }) => {
+  ({ comments, hasMore, page, fetchNextPage, loading }) => {
     const { t } = useTranslation();
-    if (!comments?.length) {
+    if (!comments?.length && !loading) {
       return <Empty className="m-auto" description={t('NoComments')} />;
     }
 
     const renderList = () => {
-      return comments.map(({ commentId, user, content, createdAt }) => {
+      return comments?.map(({ commentId, user, content, createdAt }) => {
         return (
           <Comment
             key={commentId}

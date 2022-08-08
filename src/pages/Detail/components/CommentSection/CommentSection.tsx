@@ -55,6 +55,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
             page={page}
             fetchNextPage={fetchNextPage}
             hasMore={hasMore}
+            loading={isLoading}
           />
 
           <CommentForm companyId={companyId} afterSubmit={refreshData} />

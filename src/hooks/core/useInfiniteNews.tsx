@@ -13,12 +13,10 @@ export const useInfiniteNews = (
 
   const { data, size, setSize, error } = useSWRInfinite(
     (index: number) => {
-      console.log('new ', index);
       return ['news', `page=${index + 1}&pageSize=${pageSize}`, allowFetchData];
     },
     (_, params: string) => {
       if (!allowFetchData) return;
-      console.log('fetch ', params);
       return newsService.getNews(getObjFromQueryString(params)) as any;
     },
     {
@@ -33,7 +31,6 @@ export const useInfiniteNews = (
   const hasMore = !(
     isEmpty || (data?.[data?.length - 1]?.news?.length || pageSize) < pageSize
   );
-  console.log(data);
   const news = useMemo(() => {
     return (
       data?.reduce((acc, curr) => {

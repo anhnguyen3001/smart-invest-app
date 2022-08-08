@@ -48,6 +48,7 @@ export const translations = {
   // Notification
   CreateSuccessfully: 'Tạo mới thành công',
   AddSuccessfully: 'Thêm thành công',
+  DeleteSuccessfully: 'Xóa thành công',
   UpdateSuccessfully: 'Cập nhật thành công',
   VerifySuccessfully: 'Xác thực thành công',
   SomethingWentWrong: 'Xảy ra vấn đề',
@@ -102,6 +103,9 @@ export const translations = {
   capital_and_reserves: 'Vốn và các quỹ',
   FinancialIndexes: 'Chỉ số kĩ thuật',
   GetPredictedPrice: 'Lấy giá dự đoán',
+  PredictedPrice: 'Giá dự đoán',
+  LastUpdatedAt: 'Cập nhật lần cuối',
+  NotHaveTickerYet: 'Chưa có mã cổ phiếu',
 
   ...homeTranslation,
   ...signinTranslation,

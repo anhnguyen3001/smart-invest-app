@@ -1,4 +1,9 @@
-import { ConvertedTickerPrice, ExchangeEnum, TickerPrice } from 'src/types';
+import {
+  Company,
+  ConvertedTickerPrice,
+  ExchangeEnum,
+  TickerPrice,
+} from 'src/types';
 
 export const getExchangePercent = (exchange: string): number => {
   switch (exchange) {
@@ -18,23 +23,35 @@ const round2Decimal = (value: number) => {
 };
 
 export const convertPrice = (
-  exchange?: string,
-  price?: TickerPrice,
+  company?: Company,
 ): ConvertedTickerPrice | undefined => {
-  if (!price || !exchange) return price;
+  if (!company) return;
 
+  const {
+    lastClosePrice,
+    lastMaxPrice,
+    lastMinPrice,
+    lastOpenPrice,
+    exchange,
+    lastDate,
+  } = company;
   const exchangePercent = getExchangePercent(exchange);
-  const { openPrice } = price;
 
   const ceilingPrice = round2Decimal(
-    (openPrice / 100) * (100 + exchangePercent),
+    (lastOpenPrice / 100) * (100 + exchangePercent),
   );
-  const floorPrice = round2Decimal((openPrice / 100) * (100 + exchangePercent));
+  const floorPrice = round2Decimal(
+    (lastOpenPrice / 100) * (100 + exchangePercent),
+  );
 
   return {
-    ...price,
+    closePrice: lastClosePrice,
+    openPrice: lastOpenPrice,
+    minPrice: lastMinPrice,
+    maxPrice: lastMaxPrice,
     ceilingPrice,
     floorPrice,
+    date: lastDate,
   };
 };
 

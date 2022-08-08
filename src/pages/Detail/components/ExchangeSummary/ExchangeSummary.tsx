@@ -25,9 +25,8 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
     floorPrice,
     minPrice,
     maxPrice,
-    totalValue,
+    date,
   } = tickerPrice || {};
-  console.log(ceilingPrice == floorPrice);
   const handleGetColor = (price?: number) => {
     return `${getPriceColor({
       price,
@@ -39,10 +38,6 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
 
   const displayTexts: { title: string; value?: number; colorClass?: string }[] =
     [
-      {
-        title: t('TotalValue'),
-        value: totalValue,
-      },
       {
         title: t('CeilingPrice'),
         value: ceilingPrice,
@@ -104,6 +99,11 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
           </Text>
         </div>
       ))}
+      {date && (
+        <Text type="secondary" className="text-right" italic level={3}>
+          {t('LastUpdatedAt')}: {new Date(date).toLocaleString('vi')}
+        </Text>
+      )}
     </Card>
   );
 };

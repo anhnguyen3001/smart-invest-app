@@ -1,23 +1,26 @@
-import { Modal, Input } from 'antd';
+import { Modal, Input, notification } from 'antd';
 import React, { useCallback, useState } from 'react';
 import { GetTickersNotFavoriteParams } from 'src/types';
 import debounce from 'lodash.debounce';
 import { TickerList } from 'src/pages/Search/components';
 import { useTranslation } from 'react-i18next';
 import { useTickersNotFavorite } from '../../hooks';
+import { favoriteTickerService } from 'src/api/services/favoriteTicker';
 
 interface AddTickerModalProps {
   listId?: number;
   visible: boolean;
   onClose: () => void;
-  onAdd: (tickerId?: number) => Promise<any>;
+  mutate: () => void;
+  setLoading: (loading: boolean) => void;
 }
 
 export const AddTickerModal: React.FC<AddTickerModalProps> = ({
   listId = 0,
   visible,
   onClose,
-  onAdd,
+  mutate: currentListMutate,
+  setLoading,
 }) => {
   const { t } = useTranslation();
 
@@ -26,7 +29,10 @@ export const AddTickerModal: React.FC<AddTickerModalProps> = ({
     search,
   });
 
-  const { mutate, ...data } = useTickersNotFavorite(listId, params);
+  const { mutate, ...data } = useTickersNotFavorite(
+    { ...params, listId },
+    visible,
+  );
 
   const debounceSearch = useCallback(
     debounce(
@@ -43,10 +49,20 @@ export const AddTickerModal: React.FC<AddTickerModalProps> = ({
     debounceSearch(value);
   };
 
-  const onAddTicker = async (tickerId?: number) => {
-    const error = await onAdd(tickerId);
-    if (!error) {
+  const onAddTicker = async (tickerId: number = 0) => {
+    setLoading(true);
+    try {
+      await favoriteTickerService.addTicker(tickerId, listId);
+      notification.success({
+        message: t('AddSuccessfully'),
+      });
+      currentListMutate();
       mutate();
+    } catch (e) {
+      console.error(e);
+      return e;
+    } finally {
+      setLoading(false);
     }
   };
 

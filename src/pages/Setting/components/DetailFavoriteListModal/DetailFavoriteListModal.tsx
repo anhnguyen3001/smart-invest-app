@@ -1,5 +1,5 @@
 import { Button, Col, Form, Input, Modal, notification, Row } from 'antd';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CustomLoading, Text } from 'src/components';
 import { useFavoriteTickers } from 'src/hooks';
@@ -28,10 +28,15 @@ export const DetailFavoriteListModal: React.FC<
   const { id, name } = favoriteList || {};
 
   const [search, setSearch] = useState('');
-  const [params, setParams] = useState<GetFavoriteTickersParams>({
-    listId: id,
-    search,
-  });
+  const [params, setParams] = useState<GetFavoriteTickersParams>();
+
+  const { mutate, ...data } = useFavoriteTickers(params, visible);
+
+  useEffect(() => {
+    if (visible) {
+      setParams((prev) => ({ ...prev, listId: id }));
+    }
+  }, [visible]);
 
   const debounceSearch = useCallback(
     debounce(
@@ -47,20 +52,6 @@ export const DetailFavoriteListModal: React.FC<
     setSearch(value);
     debounceSearch(value);
   };
-  const { mutate, ...data } = useFavoriteTickers(params);
-
-  const onAddTicker = async (tickerId: number = 0) => {
-    setLoading(true);
-    try {
-      await favoriteTickerService.addTicker(tickerId, id || 0);
-      notification.success(t('AddSuccessfully'));
-    } catch (e) {
-      console.error(e);
-      return e;
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const onDeleteTicker = async (tickerId: number = 0) => {
     setLoading(true);
@@ -68,7 +59,7 @@ export const DetailFavoriteListModal: React.FC<
     try {
       await favoriteListService.deleteFavoriteTicker(id || 0, tickerId);
       mutate();
-      notification.success(t('DeleteSuccessfully'));
+      notification.success({ message: t('DeleteSuccessfully') });
     } catch (e) {
       console.error(e);
     } finally {
@@ -120,13 +111,15 @@ export const DetailFavoriteListModal: React.FC<
             onChangePagination={(page, pageSize) =>
               setParams((prev) => ({ ...prev, page, pageSize }))
             }
+            emptyMessage={t('NotHaveTickerYet')}
           />
         </Modal>
         <AddTickerModal
           listId={id}
           visible={visibleAddModal}
           onClose={() => setVisibleAddModal(false)}
-          onAdd={onAddTicker}
+          mutate={mutate}
+          setLoading={setLoading}
         />
       </CustomLoading>
     </>

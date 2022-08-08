@@ -3,13 +3,15 @@ import { GetTickersNotFavoriteParams } from 'src/types';
 import useSWR from 'swr';
 
 export const useTickersNotFavorite = (
-  listId: number,
   params: GetTickersNotFavoriteParams,
+  shouldFetch = true,
 ) => {
   const { data, error, mutate } = useSWR(
-    listId ? ['new-ticker-favorite', listId, JSON.stringify(params)] : null,
+    params?.listId && shouldFetch
+      ? ['new-ticker-favorite', JSON.stringify(params)]
+      : null,
     () => {
-      return tickerService.getTickersNotFavorite(listId, params);
+      return tickerService.getTickersNotFavorite(params);
     },
   );
 

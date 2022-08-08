@@ -13,6 +13,7 @@ export interface TickerListProps
   pagination?: PaginationInterface;
   onChangePagination?: (page: number, pageSize: number) => void;
   loading?: boolean;
+  emptyMessage?: string;
 }
 
 export const TickerList: React.FC<TickerListProps> = ({
@@ -20,6 +21,7 @@ export const TickerList: React.FC<TickerListProps> = ({
   pagination,
   onChangePagination,
   loading,
+  emptyMessage,
   ...rest
 }) => {
   const { t } = useTranslation();
@@ -38,7 +40,7 @@ export const TickerList: React.FC<TickerListProps> = ({
         <Empty
           style={{ minHeight: 200 }}
           className="d-flex flex-column justify-content-center"
-          description={t('NotFoundTickers')}
+          description={emptyMessage || t('NotFoundTickers')}
         />
       ) : (
         <>

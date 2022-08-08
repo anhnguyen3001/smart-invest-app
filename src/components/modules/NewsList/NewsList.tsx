@@ -37,7 +37,7 @@ export const NewsList: React.FC<NewsListProps> = ({
   if (!news?.length && !loading) return null;
 
   const onOpenNews = (news: News) => {
-    if (!news.content) {
+    if (news.content) {
       setSelectedNews(news);
     } else window.open(news.path);
   };

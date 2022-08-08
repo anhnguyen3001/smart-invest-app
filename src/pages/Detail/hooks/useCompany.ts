@@ -18,8 +18,7 @@ export const useCompany = (companyId?: string) => {
     { revalidateOnFocus: false },
   );
 
-  const { exchange, price } = (company || {}) as Company;
-  const tickerPrice = convertPrice(exchange, price);
+  const tickerPrice = convertPrice(company);
 
   useEffect(() => {
     setLoading(!company && !error);

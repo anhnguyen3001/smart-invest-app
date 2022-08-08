@@ -1,12 +1,10 @@
-import { Button, notification, Spin } from 'antd';
+import { Button, notification } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { favoriteListService } from 'src/api/services/favoriteList';
-import { CustomLoading, Text } from 'src/components';
-import { useApp } from 'src/contexts';
+import { CustomLoading } from 'src/components';
 import { FavoriteList, GetFavoriteListsParams, StyleProps } from 'src/types';
 import { useFavoriteLists } from '../../hooks';
-import { AddTickerModal } from '../AddTickerModal';
 import { FavoriteListForm } from '../FavoriteListForm';
 import { FavoriteLists } from '../FavoriteLists';
 
@@ -16,23 +14,37 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [edittedList, setEdittedList] = useState<FavoriteList>();
 
+  const [loading, setLoading] = useState(false);
+
   const [params, setParams] = useState<GetFavoriteListsParams>({
     page: 1,
     pageSize: 20,
   });
-  const { favoriteLists, pagination, loading, mutate } =
-    useFavoriteLists(params);
+  const {
+    favoriteLists,
+    pagination,
+    loading: favoriteListLoading,
+    mutate,
+  } = useFavoriteLists(params);
 
   const onDelete = async (id: number) => {
+    setLoading(true);
     try {
       await favoriteListService.deleteList(id);
       notification.success({ message: t('DeleteSuccessfully') });
-    } catch (e) {}
+      mutate();
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <CustomLoading loading={loading} className={className}>
+      <CustomLoading
+        loading={loading || favoriteListLoading}
+        className={className}
+      >
         <div className="mb-32 d-flex justify-content-between">
           <h3>{t('FavoriteList')}</h3>
           <Button
@@ -49,7 +61,7 @@ export const Library: React.FC<StyleProps> = ({ className }) => {
         <FavoriteLists
           favoriteLists={favoriteLists}
           pagination={pagination}
-          loading={loading}
+          loading={favoriteListLoading}
           onChangePagination={(page, pageSize) =>
             setParams((prev) => ({ ...prev, page, pageSize }))
           }
