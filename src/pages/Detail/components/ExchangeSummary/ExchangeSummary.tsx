@@ -95,7 +95,7 @@ export const ExchangeSummary: React.FC<ExchangeSummaryProps> = ({
             {title}
           </Text>
           <Text className={colorClass} level={1} fontWeight={700}>
-            {value || 'N/A'}
+            {value ?? 'N/A'}
           </Text>
         </div>
       ))}
