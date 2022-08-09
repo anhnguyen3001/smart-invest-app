@@ -89,6 +89,7 @@ export const Signin: React.FC = () => {
           <Form.Item
             className="mb-16"
             name="password"
+            labelCol={{ span: 24 }}
             label={
               <div className="d-flex justify-content-between align-items-center">
                 {t('Password')}
