@@ -1,5 +1,5 @@
 import { Button, Spin } from 'antd';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { CandleStickChart } from 'src/components';
 import { useTickerPrices } from '../../hooks';
 
@@ -10,17 +10,6 @@ interface TradingDataProps {
 export const TradingData: React.FC<TradingDataProps> = ({ symbol }) => {
   const { prices, isLoading, period, setPeriod, periodOptions } =
     useTickerPrices('candlePrices', symbol);
-
-  // Format: {x:time, y: [o, h, l, c]}[]
-  const chartPricedata = useMemo(() => {
-    return prices?.map(
-      ({ date, openPrice, maxPrice, minPrice, closePrice }) => ({
-        x: new Date(date).toLocaleDateString(),
-        y: [openPrice, maxPrice, minPrice, closePrice],
-      }),
-    );
-    // eslint-disable-next-line
-  }, [JSON.stringify(prices)]);
 
   const renderPeriodOptions = () => {
     return periodOptions.map((duration, index) => {
@@ -47,11 +36,7 @@ export const TradingData: React.FC<TradingDataProps> = ({ symbol }) => {
       </div>
 
       <Spin spinning={isLoading}>
-        <CandleStickChart
-          loading={isLoading}
-          prices={prices}
-          data={chartPricedata}
-        />
+        <CandleStickChart prices={prices} />
       </Spin>
     </>
   );

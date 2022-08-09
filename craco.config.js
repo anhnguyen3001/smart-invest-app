@@ -9,18 +9,26 @@ module.exports = {
       );
       webpackConfig.resolve.plugins.splice(scopePluginIndex, 1);
 
-      webpackConfig.module.rules.push({
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              // Provide path to the file with resources
-              resources: './src/styles/variables.scss',
+      webpackConfig.module.rules.push(
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                // Provide path to the file with resources
+                resources: './src/styles/variables.scss',
+              },
             },
+          ],
+        },
+        {
+          test: /\.m?js/,
+          resolve: {
+            fullySpecified: false,
           },
-        ],
-      });
+        },
+      );
 
       return webpackConfig;
     },
